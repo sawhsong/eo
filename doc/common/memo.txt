@@ -1,6 +1,4 @@
 /**
- * 2018.09.03
+ * 2018.12.04
  */
-@ Local Oracle XE
-	# user
-		* sys as sysdba / Password_10 (Office)
+@ Entity Online

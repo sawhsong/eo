@@ -89,7 +89,7 @@ public class DtoGeneratorBizImpl extends BaseBiz implements DtoGeneratorBiz {
 	}
 
 	public ParamEntity getGeneratorInfo(ParamEntity paramEntity) throws Exception {
-		String compilePath = "/target/alpaca";
+		String compilePath = "/target/entityonline";
 		String rootPath = CommonUtil.remove((String)MemoryBean.get("applicationRealPath"), compilePath);
 		String dbVendor = CommonUtil.lowerCase(ConfigUtil.getProperty("db.vendor"));
 

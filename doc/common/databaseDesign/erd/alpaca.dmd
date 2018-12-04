@@ -1,8 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="alpaca" id="1C973F35-2F07-F826-C197-D2EF825D98A4" version="3.5">
-<createdBy>dsa</createdBy>
-<createdTime>2018-10-05 01:59:42 UTC</createdTime>
-<ownerDesignName>alpaca</ownerDesignName>
-<capitalNames>false</capitalNames>
-<designId>1C973F35-2F07-F826-C197-D2EF825D98A4</designId>
-</OSDM_Design>
