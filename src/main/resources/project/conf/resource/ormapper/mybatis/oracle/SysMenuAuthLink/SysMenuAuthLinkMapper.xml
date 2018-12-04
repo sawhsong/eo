@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--/*
+ * Framework Generated MyBatis DTO Mapper XML Source
+ * - SYS_MENU_AUTH_LINK - Menu - Authority group mapping
+ */-->
+<mapper namespace="project.conf.resource.ormapper.mybatis.oracle.SysMenuAuthLink.SysMenuAuthLinkMapper">
+	<resultMap id="hashmap" type="java.util.HashMap"></resultMap>
+
+	<select id="selectAll" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT GROUP_ID,
+		       MENU_ID,
+		       TO_CHAR(INSERT_DATE, 'yyyymmddhh24miss') AS INSERT_DATE,
+		       INSERT_USER_ID,
+		       TO_CHAR(UPDATE_DATE, 'yyyymmddhh24miss') AS UPDATE_DATE,
+		       UPDATE_USER_ID
+		  FROM SYS_MENU_AUTH_LINK
+		 WHERE 1 = 1
+		 ${auto_fill}
+		 ${frameworkGeneratedWhere}
+		 ${frameworkGeneratedOrderBy}
+		 FOR UPDATE
+	]]>
+	</select>
+
+	<insert id="insert" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO SYS_MENU_AUTH_LINK (
+		       GROUP_ID,
+		       MENU_ID,
+		       INSERT_DATE,
+		       INSERT_USER_ID,
+		       UPDATE_DATE,
+		       UPDATE_USER_ID
+		       )
+		VALUES (
+		       ${GROUP_ID},
+		       ${MENU_ID},
+		       ${INSERT_DATE},
+		       ${INSERT_USER_ID},
+		       ${UPDATE_DATE},
+		       ${UPDATE_USER_ID}
+		       )
+	]]>
+	</insert>
+
+	<insert id="insertWithDto" parameterType="project.conf.resource.ormapper.dto.oracle.SysMenuAuthLink">
+	<![CDATA[
+		INSERT INTO SYS_MENU_AUTH_LINK (
+		       GROUP_ID,
+		       MENU_ID,
+		       INSERT_DATE,
+		       INSERT_USER_ID,
+		       UPDATE_DATE,
+		       UPDATE_USER_ID
+		       )
+		VALUES (
+		       #{groupId,jdbcType=VARCHAR},
+		       #{menuId,jdbcType=VARCHAR},
+		       #{insertDate,jdbcType=TIME},
+		       #{insertUserId,jdbcType=VARCHAR},
+		       #{updateDate,jdbcType=TIME},
+		       #{updateUserId,jdbcType=VARCHAR}
+		       )
+	]]>
+	</insert>
+
+	<update id="update" parameterType="hashmap">
+		UPDATE SYS_MENU_AUTH_LINK
+		   SET INSERT_DATE = ${INSERT_DATE},
+		       INSERT_USER_ID = ${INSERT_USER_ID},
+		       UPDATE_DATE = ${UPDATE_DATE},
+		       UPDATE_USER_ID = ${UPDATE_USER_ID}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	</update>
+
+	<update id="updateWithDto" parameterType="project.conf.resource.ormapper.dto.oracle.SysMenuAuthLink">
+		UPDATE SYS_MENU_AUTH_LINK
+		   SET INSERT_DATE = #{insertDate,jdbcType=TIME},
+		       INSERT_USER_ID = #{insertUserId,jdbcType=VARCHAR},
+		       UPDATE_DATE = #{updateDate,jdbcType=TIME},
+		       UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR}
+		 WHERE 1 = 1
+		 ${additionalAttributesForUpdateWithDto}
+	</update>
+
+	<update id="updateColumns" parameterType="project.conf.resource.ormapper.dto.oracle.SysMenuAuthLink">
+		UPDATE SYS_MENU_AUTH_LINK
+		   SET ${frameworkGeneratedColumnsToUpdate}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	</update>
+
+	<delete id="delete" parameterType="hashmap">
+	<![CDATA[
+		DELETE SYS_MENU_AUTH_LINK
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	]]>
+	</delete>
+</mapper>

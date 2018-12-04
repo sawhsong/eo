@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<!--/* Framework Common */-->
+	<package name="zebraCommon" extends="default" namespace="/zebra/common" strict-method-invocation="false">
+		<default-interceptor-ref name="ZebraDefaultStack"/>
+
+		<!--/* Auto Completion */-->
+		<action name="autoCompletion/*" class="zebra.example.common.module.autocompletion.AutoCompletionAction" method="{1}">
+		</action>
+	</package>
+</struts>

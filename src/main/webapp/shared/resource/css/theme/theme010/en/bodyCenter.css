@@ -1,0 +1,55 @@
+/**************************************************************************************************
+* Body Center CSS
+**************************************************************************************************/
+@charset "utf-8";
+
+/**
+ * Body Center Common
+ */
+#divBodyCenter {overflow:auto;
+	border:1px solid #D1D1D1;
+	background:#FFFFFF;
+}
+
+/* Each 'Area' in Body Center must set this class('areaContainer') when it has its contents */
+.areaContainer {padding:4px 8px 2px 8px;}
+.areaContainerPopup {padding:4px 5px 2px 5px;}
+
+/**
+ * Layout
+ */
+#divFixedPanel{}
+#divLocationPathArea {}
+#divTabArea {}
+#divButtonArea {display:table;width:100%;}
+#divButtonAreaLeft {float:left;}
+#divButtonAreaLeft div {float:left;}
+#divButtonAreaRight {float:right;}
+#divButtonAreaRight div {float:left;}
+#divButtonAreaCenter {margin:0px auto;text-align:center;}
+.divButtonAreaCenter {display:inline-block;}
+#divAdminToolArea {}
+#divSearchCriteriaArea {}
+#divInformArea {}
+#divScrollablePanel{overflow:auto;}
+#divDataArea {}
+#divDataArea.areaContainer {margin:4px 8px 0px 0px;padding:0px 0px 0px 8px;}
+#divDataArea.areaContainerPopup {margin:4px 5px 0px 0px;padding:0px 0px 0px 5px;}
+#divPagingArea {}
+/* Set class attribute instead of id, if an area is needed to be used for exeption */
+.divTabArea {}
+.divButtonArea {display:table;width:100%;}
+.divButtonAreaLeft {float:left;}
+.divButtonAreaLeft div {float:left;}
+.divButtonAreaRight {float:right;}
+.divButtonAreaRight div {float:left;}
+.divButtonAreaCenter {margin:0px auto;text-align:center;}
+.divSearchCriteriaArea {}
+.divInformArea {}
+.divDataArea {}
+.divPagingArea {}
+
+/**
+ * Bootstrap panel in 'divSearchCriteriaArea'
+ */
+#divSearchCriteriaArea div.panel, #divInformArea div.panel {margin-bottom:0px;}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+    <!--Bbs0202 - Notice-->
+    <bean class="${name.package.project}.app.bbs.bbs0202.Bbs0202Action" id="bbs0202Action" name="bbs0202Action"/>
+    <bean class="${name.package.project}.app.bbs.bbs0202.Bbs0202BizImpl" id="bbs0202Biz" name="bbs0202Biz" parent="baseBiz"/>
+    <!--Bbs0204 - Free board-->
+    <bean class="${name.package.project}.app.bbs.bbs0204.Bbs0204Action" id="bbs0204Action" name="bbs0204Action"/>
+    <bean class="${name.package.project}.app.bbs.bbs0204.Bbs0204BizImpl" id="bbs0204Biz" name="bbs0204Biz" parent="baseBiz"/>
+</beans>

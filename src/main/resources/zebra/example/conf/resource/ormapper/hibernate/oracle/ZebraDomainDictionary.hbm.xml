@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--/*
+ * Framework Generated Hibernate Config hbm Source
+ * - ZEBRA_DOMAIN_DICTIONARY - Domain Dictionary
+ */-->
+<hibernate-mapping>
+	<class name="zebra.example.conf.resource.ormapper.dto.oracle.ZebraDomainDictionary" table="ZEBRA_DOMAIN_DICTIONARY" lazy="false">
+		<meta attribute="class-description" inherit="false">Domain Dictionary</meta>
+
+		<id name="domainId" column="DOMAIN_ID" type="java.lang.String" length="30"></id>
+
+		<property name="domainName" column="DOMAIN_NAME" not-null="true" type="java.lang.String" length="100"/>
+		<property name="nameAbbreviation" column="NAME_ABBREVIATION" not-null="true" type="java.lang.String" length="50"/>
+		<property name="dataType" column="DATA_TYPE" not-null="true" type="java.lang.String" length="30"/>
+		<property name="dataLength" column="DATA_LENGTH" type="java.lang.Double"/>
+		<property name="dataPrecision" column="DATA_PRECISION" type="java.lang.Double"/>
+		<property name="dataScale" column="DATA_SCALE" type="java.lang.Double"/>
+		<property name="description" column="DESCRIPTION" type="java.lang.String" length="4000"/>
+		<property name="insertDate" column="INSERT_DATE" type="java.util.Date"/>
+		<property name="insertUserId" column="INSERT_USER_ID" type="java.lang.String" length="30"/>
+		<property name="updateDate" column="UPDATE_DATE" type="java.util.Date"/>
+		<property name="updateUserId" column="UPDATE_USER_ID" type="java.lang.String" length="30"/>
+	</class>
+
+	<sql-query name="zebraDomainDictionary.selectAll">
+	<![CDATA[
+		SELECT DOMAIN_ID,
+		       DOMAIN_NAME,
+		       NAME_ABBREVIATION,
+		       DATA_TYPE,
+		       DATA_LENGTH,
+		       DATA_PRECISION,
+		       DATA_SCALE,
+		       DESCRIPTION,
+		       TO_CHAR(INSERT_DATE, 'yyyymmddhh24miss') AS INSERT_DATE,
+		       INSERT_USER_ID,
+		       TO_CHAR(UPDATE_DATE, 'yyyymmddhh24miss') AS UPDATE_DATE,
+		       UPDATE_USER_ID
+		  FROM ZEBRA_DOMAIN_DICTIONARY
+		 WHERE 1 = 1
+		 ${auto_fill}
+		 ${frameworkGeneratedWhere}
+		 ${frameworkGeneratedOrderBy}
+		 FOR UPDATE
+	]]>
+	</sql-query>
+
+	<sql-query name="zebraDomainDictionary.insert">
+	<![CDATA[
+		INSERT INTO ZEBRA_DOMAIN_DICTIONARY (
+		       DOMAIN_ID,
+		       DOMAIN_NAME,
+		       NAME_ABBREVIATION,
+		       DATA_TYPE,
+		       DATA_LENGTH,
+		       DATA_PRECISION,
+		       DATA_SCALE,
+		       DESCRIPTION,
+		       INSERT_DATE,
+		       INSERT_USER_ID,
+		       UPDATE_DATE,
+		       UPDATE_USER_ID
+		       )
+		VALUES (
+		       ${DOMAIN_ID},
+		       ${DOMAIN_NAME},
+		       ${NAME_ABBREVIATION},
+		       ${DATA_TYPE},
+		       ${DATA_LENGTH},
+		       ${DATA_PRECISION},
+		       ${DATA_SCALE},
+		       ${DESCRIPTION},
+		       ${INSERT_DATE},
+		       ${INSERT_USER_ID},
+		       ${UPDATE_DATE},
+		       ${UPDATE_USER_ID}
+		       )
+	]]>
+	</sql-query>
+
+	<sql-query name="zebraDomainDictionary.update">
+	<![CDATA[
+		UPDATE ZEBRA_DOMAIN_DICTIONARY
+		   SET DOMAIN_NAME = ${DOMAIN_NAME},
+		       NAME_ABBREVIATION = ${NAME_ABBREVIATION},
+		       DATA_TYPE = ${DATA_TYPE},
+		       DATA_LENGTH = ${DATA_LENGTH},
+		       DATA_PRECISION = ${DATA_PRECISION},
+		       DATA_SCALE = ${DATA_SCALE},
+		       DESCRIPTION = ${DESCRIPTION},
+		       INSERT_DATE = ${INSERT_DATE},
+		       INSERT_USER_ID = ${INSERT_USER_ID},
+		       UPDATE_DATE = ${UPDATE_DATE},
+		       UPDATE_USER_ID = ${UPDATE_USER_ID}
+		 WHERE 1 = 1
+		   ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+
+	<sql-query name="zebraDomainDictionary.updateColumns">
+	<![CDATA[
+		UPDATE ZEBRA_DOMAIN_DICTIONARY
+		   SET ${frameworkGeneratedColumnsToUpdate}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+
+	<sql-query name="zebraDomainDictionary.delete">
+	<![CDATA[
+		DELETE ZEBRA_DOMAIN_DICTIONARY
+		 WHERE 1 = 1
+		   ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+</hibernate-mapping>

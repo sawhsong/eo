@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--/*
+ * Framework Generated MyBatis DAO Mapper Query XML Source
+ * - SYS_MENU - Menu Info
+ */-->
+<mapper namespace="project.conf.resource.ormapper.dao.SysMenu.SysMenuDaoMapper">
+	<resultMap id="hashmap" type="java.util.HashMap"></resultMap>
+
+	<select id="getAllActiveMenu" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		 select connect_by_root menu_id as root,
+		        level,
+		        connect_by_isleaf as is_leaf,
+		        substr(sys_connect_by_path(menu_id, '/'), 2) as path,
+		        sys_menu.*
+		   from sys_menu
+		  where is_active = 'Y'
+		connect by prior menu_id = parent_menu_id
+		  start with parent_menu_id is null
+		  order siblings by sort_order
+	]]>
+	</select>
+
+	<select id="getAllActiveQuickMenu" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		 select connect_by_root menu_id as root,
+		        level,
+		        connect_by_isleaf as is_leaf,
+		        substr(sys_connect_by_path(menu_id, '/'), 2) as path,
+		        sys_menu.*
+		   from sys_menu
+		  where is_active = 'Y'
+		    and menu_id like 'QM%'
+		connect by prior menu_id = parent_menu_id
+		  start with parent_menu_id is null
+		  order siblings by sort_order
+	]]>
+	</select>
+
+	<select id="getAllActiveMenuDataSetBySearchCriteria" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		with src as (
+			 select connect_by_root menu_id as root,
+			        level as menu_level,
+			        connect_by_isleaf as is_leaf,
+			        substr(sys_connect_by_path(menu_id, '/'), 2) as path,
+			        menu_id,
+			        parent_menu_id,
+			        menu_name_ko,
+			        menu_name_en,
+			        menu_url,
+			        menu_icon,
+			        sort_order,
+			        description,
+			        is_active,
+			        insert_user_id,
+			        insert_date,
+			        update_user_id,
+			        update_date
+			   from sys_menu
+			  where is_active = 'Y'
+			    and menu_id not like 'QM%'
+			connect by prior menu_id = parent_menu_id
+			  start with parent_menu_id is null
+			  order by sort_order
+		)
+		select src.*,
+		       to_char(nvl(update_date, insert_date), '${dateFormat}') as creation_date
+		  from src
+		 where 1 = 1
+		   ${auto_fill}
+	]]>
+	</select>
+</mapper>

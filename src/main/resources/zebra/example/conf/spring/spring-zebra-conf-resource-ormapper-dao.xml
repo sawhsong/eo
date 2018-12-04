@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+    <!--/* Dummy DAO */-->
+    <!-- For Hibernate -->
+    <bean class="${name.package.framework}.example.conf.resource.ormapper.dao.Dummy.DummyHDaoImpl" id="zebraDummyDao" init-method="init" name="zebraDummyDao" parent="baseHDao" scope="prototype"/>
+    <!-- Both are one pair (For Spring JDBC or MyBatis). Use Hibernate. -->
+    <!-- 	<bean id="zebraDummyDao" name="zebraDummyDao" class="${name.package.framework}.example.conf.resource.ormapper.dao.Dummy.DummyDaoImpl" parent="namedParameterJdbcDao"/> -->
+    <!-- 	<bean id="zebraDummyDaoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> -->
+    <!-- 		<property name="mapperInterface" value="${name.package.framework}.example.conf.resource.ormapper.dao.Dummy.DummyDaoMapper" /> -->
+    <!-- 		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> -->
+    <!-- 	</bean> -->
+    <!--/* ZebraCommonCode DAO */-->
+    <!-- For Hibernate -->
+    <bean class="${name.package.framework}.example.conf.resource.ormapper.dao.ZebraCommonCode.ZebraCommonCodeHDaoImpl" id="zebraCommonCodeDao" init-method="init" name="zebraCommonCodeDao" parent="baseHDao" scope="prototype"/>
+    <!-- Both are one pair (For Spring JDBC or MyBatis). Use Hibernate. -->
+    <!-- 	<bean id="zebraCommonCodeDao" name="zebraCommonCodeDao" class="${name.package.framework}.example.conf.resource.ormapper.dao.ZebraCommonCode.ZebraCommonCodeDaoImpl" parent="namedParameterJdbcDao"/> -->
+    <!-- 	<bean id="zebraCommonCodeDaoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> -->
+    <!-- 		<property name="mapperInterface" value="${name.package.framework}.example.conf.resource.ormapper.dao.ZebraCommonCode.ZebraCommonCodeDaoMapper" /> -->
+    <!-- 		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> -->
+    <!-- 	</bean> -->
+    <!--/* ZebraDomainDictionary DAO */-->
+    <!-- For Hibernate -->
+    <bean class="${name.package.framework}.example.conf.resource.ormapper.dao.ZebraDomainDictionary.ZebraDomainDictionaryHDaoImpl" id="zebraDomainDictionaryDao" init-method="init" name="zebraDomainDictionaryDao" parent="baseHDao" scope="prototype"/>
+    <!-- Both are one pair (For Spring JDBC or MyBatis). Use Hibernate. -->
+    <!-- 	<bean id="zebraDomainDictionaryDao" name="zebraDomainDictionaryDao" class="${name.package.framework}.example.conf.resource.ormapper.dao.ZebraDomainDictionary.ZebraDomainDictionaryDaoImpl" parent="namedParameterJdbcDao"/> -->
+    <!-- 	<bean id="zebraDomainDictionaryDaoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> -->
+    <!-- 		<property name="mapperInterface" value="${name.package.framework}.example.conf.resource.ormapper.dao.ZebraDomainDictionary.ZebraDomainDictionaryDaoMapper" /> -->
+    <!-- 		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> -->
+    <!-- 	</bean> -->
+    <!--/* ZebraBoard DAO */-->
+    <!-- For Hibernate -->
+    <bean class="${name.package.framework}.example.conf.resource.ormapper.dao.ZebraBoard.ZebraBoardHDaoImpl" id="zebraBoardDao" init-method="init" name="zebraBoardDao" parent="baseHDao" scope="prototype"/>
+    <!-- Both are one pair (For Spring JDBC or MyBatis). Use Hibernate. -->
+    <!-- 	<bean id="zebraBoardDao" name="zebraBoardDao" class="${name.package.framework}.example.conf.resource.ormapper.dao.ZebraBoard.ZebraBoardDaoImpl" parent="namedParameterJdbcDao"/> -->
+    <!-- 	<bean id="zebraBoardDaoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> -->
+    <!-- 		<property name="mapperInterface" value="${name.package.framework}.example.conf.resource.ormapper.dao.ZebraBoard.ZebraBoardDaoMapper" /> -->
+    <!-- 		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> -->
+    <!-- 	</bean> -->
+    <!--/* ZebraBoardFile DAO */-->
+    <!-- For Hibernate -->
+    <bean class="${name.package.framework}.example.conf.resource.ormapper.dao.ZebraBoardFile.ZebraBoardFileHDaoImpl" id="zebraBoardFileDao" init-method="init" name="zebraBoardFileDao" parent="baseHDao" scope="prototype"/>
+    <!-- Both are one pair (For Spring JDBC or MyBatis). Use Hibernate. -->
+    <!-- 	<bean id="zebraBoardFileDao" name="zebraBoardFileDao" class="${name.package.framework}.example.conf.resource.ormapper.dao.ZebraBoardFile.ZebraBoardFileDaoImpl" parent="namedParameterJdbcDao"/> -->
+    <!-- 	<bean id="zebraBoardFileDaoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> -->
+    <!-- 		<property name="mapperInterface" value="${name.package.framework}.example.conf.resource.ormapper.dao.ZebraBoardFile.ZebraBoardFileDaoMapper" /> -->
+    <!-- 		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> -->
+    <!-- 	</bean> -->
+</beans>

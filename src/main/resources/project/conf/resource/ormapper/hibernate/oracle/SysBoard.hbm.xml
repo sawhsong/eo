@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--/*
+ * Framework Generated Hibernate Config hbm Source
+ * - SYS_BOARD - Bulletin Board
+ */-->
+<hibernate-mapping>
+	<class name="project.conf.resource.ormapper.dto.oracle.SysBoard" table="SYS_BOARD" lazy="false">
+		<meta attribute="class-description" inherit="false">Bulletin Board</meta>
+
+		<id name="articleId" column="ARTICLE_ID" type="java.lang.String" length="30"></id>
+
+		<property name="boardType" column="BOARD_TYPE" not-null="true" type="java.lang.String" length="30"/>
+		<property name="hitCnt" column="HIT_CNT" not-null="true" type="java.lang.Double"/>
+		<property name="parentArticleId" column="PARENT_ARTICLE_ID" not-null="true" type="java.lang.String" length="30"/>
+		<property name="writerName" column="WRITER_NAME" not-null="true" type="java.lang.String" length="50"/>
+		<property name="articleContents" column="ARTICLE_CONTENTS" type="java.lang.String"/>
+		<property name="articlePassword" column="ARTICLE_PASSWORD" type="java.lang.String" length="30"/>
+		<property name="articleSubject" column="ARTICLE_SUBJECT" type="java.lang.String" length="1000"/>
+		<property name="insertDate" column="INSERT_DATE" type="java.util.Date"/>
+		<property name="insertUserId" column="INSERT_USER_ID" type="java.lang.String" length="30"/>
+		<property name="isConfidential" column="IS_CONFIDENTIAL" type="java.lang.String" length="1"/>
+		<property name="updateDate" column="UPDATE_DATE" type="java.util.Date"/>
+		<property name="updateUserId" column="UPDATE_USER_ID" type="java.lang.String" length="30"/>
+		<property name="writerEmail" column="WRITER_EMAIL" type="java.lang.String" length="100"/>
+		<property name="writerId" column="WRITER_ID" type="java.lang.String" length="30"/>
+		<property name="writerIpAddress" column="WRITER_IP_ADDRESS" type="java.lang.String" length="50"/>
+	</class>
+
+	<sql-query name="sysBoard.selectAll">
+	<![CDATA[
+		SELECT ARTICLE_ID,
+		       BOARD_TYPE,
+		       HIT_CNT,
+		       PARENT_ARTICLE_ID,
+		       WRITER_NAME,
+		       ARTICLE_CONTENTS,
+		       ARTICLE_PASSWORD,
+		       ARTICLE_SUBJECT,
+		       TO_CHAR(INSERT_DATE, 'yyyymmddhh24miss') AS INSERT_DATE,
+		       INSERT_USER_ID,
+		       IS_CONFIDENTIAL,
+		       TO_CHAR(UPDATE_DATE, 'yyyymmddhh24miss') AS UPDATE_DATE,
+		       UPDATE_USER_ID,
+		       WRITER_EMAIL,
+		       WRITER_ID,
+		       WRITER_IP_ADDRESS
+		  FROM SYS_BOARD
+		 WHERE 1 = 1
+		 ${auto_fill}
+		 ${frameworkGeneratedWhere}
+		 ${frameworkGeneratedOrderBy}
+		 FOR UPDATE
+	]]>
+	</sql-query>
+
+	<sql-query name="sysBoard.insert">
+	<![CDATA[
+		INSERT INTO SYS_BOARD (
+		       ARTICLE_ID,
+		       BOARD_TYPE,
+		       HIT_CNT,
+		       PARENT_ARTICLE_ID,
+		       WRITER_NAME,
+		       ARTICLE_CONTENTS,
+		       ARTICLE_PASSWORD,
+		       ARTICLE_SUBJECT,
+		       INSERT_DATE,
+		       INSERT_USER_ID,
+		       IS_CONFIDENTIAL,
+		       UPDATE_DATE,
+		       UPDATE_USER_ID,
+		       WRITER_EMAIL,
+		       WRITER_ID,
+		       WRITER_IP_ADDRESS
+		       )
+		VALUES (
+		       ${ARTICLE_ID},
+		       ${BOARD_TYPE},
+		       ${HIT_CNT},
+		       ${PARENT_ARTICLE_ID},
+		       ${WRITER_NAME},
+		       ${ARTICLE_CONTENTS},
+		       ${ARTICLE_PASSWORD},
+		       ${ARTICLE_SUBJECT},
+		       ${INSERT_DATE},
+		       ${INSERT_USER_ID},
+		       ${IS_CONFIDENTIAL},
+		       ${UPDATE_DATE},
+		       ${UPDATE_USER_ID},
+		       ${WRITER_EMAIL},
+		       ${WRITER_ID},
+		       ${WRITER_IP_ADDRESS}
+		       )
+	]]>
+	</sql-query>
+
+	<sql-query name="sysBoard.update">
+	<![CDATA[
+		UPDATE SYS_BOARD
+		   SET BOARD_TYPE = ${BOARD_TYPE},
+		       HIT_CNT = ${HIT_CNT},
+		       PARENT_ARTICLE_ID = ${PARENT_ARTICLE_ID},
+		       WRITER_NAME = ${WRITER_NAME},
+		       ARTICLE_CONTENTS = ${ARTICLE_CONTENTS},
+		       ARTICLE_PASSWORD = ${ARTICLE_PASSWORD},
+		       ARTICLE_SUBJECT = ${ARTICLE_SUBJECT},
+		       INSERT_DATE = ${INSERT_DATE},
+		       INSERT_USER_ID = ${INSERT_USER_ID},
+		       IS_CONFIDENTIAL = ${IS_CONFIDENTIAL},
+		       UPDATE_DATE = ${UPDATE_DATE},
+		       UPDATE_USER_ID = ${UPDATE_USER_ID},
+		       WRITER_EMAIL = ${WRITER_EMAIL},
+		       WRITER_ID = ${WRITER_ID},
+		       WRITER_IP_ADDRESS = ${WRITER_IP_ADDRESS}
+		 WHERE 1 = 1
+		   ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+
+	<sql-query name="sysBoard.updateColumns">
+	<![CDATA[
+		UPDATE SYS_BOARD
+		   SET ${frameworkGeneratedColumnsToUpdate}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+
+	<sql-query name="sysBoard.delete">
+	<![CDATA[
+		DELETE SYS_BOARD
+		 WHERE 1 = 1
+		   ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+</hibernate-mapping>

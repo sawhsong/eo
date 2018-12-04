@@ -1,0 +1,113 @@
+/**
+ *contextMenu.js v 1.1.2
+ *Author: Sudhanshu Yadav
+ *s-yadav.github.com
+ *http://ignitersworld.com/lab/contextMenu.html
+ *Copyright (c) 2013 Sudhanshu Yadav.
+ *Dual licensed under the MIT and GPL licenses
+ */
+
+/* Default Context menu css */
+.iw-contextMenu {display:none;z-index:1000;overflow:auto;box-shadow:2px 2px 5px rgba(0, 0, 0, 0.2);
+	border:1px solid #CCCCCC;
+}
+.iw-cm-menu {padding:4px 0px;
+	color:#000000;
+	background:#FBFBFB;
+}
+.iw-cm-menu li {position:relative;padding:10px 10px;list-style:none;cursor:pointer;transition:background 0.2s;}
+.iw-mOverlay {position:absolute;width:100%;height:100%;top:0px;left:0px;opacity:.5;
+	background:#FFFFFF;
+}
+.iw-contextMenu li.iw-mDisable {opacity:.7;}
+.iw-mSelected {transition:background 0.2s;
+	color:#000000;
+	background:#D8D8D8;
+}
+.iw-cm-arrow-right {width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:5px solid #000000;position:absolute;right:3px;top:50%;margin-top:-4px;}
+.iw-mSelected > .iw-cm-arrow-right {width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:5px solid #000000;position:absolute;right:3px;top:50%;margin-top:-4px;}
+.iw-mIcon {margin:-1px 0px 0px 0px;padding:0px 10px 0px 0px;float:left;}
+
+/* Header - Theme Context menu css */
+.theme-contextMenu {display:none;z-index:1000;overflow:auto;width:170px;font-size:1.1em;box-shadow:0px 2px 10px rgba(0, 0, 0, 0.4);
+	border:1px solid #459E00;
+}
+.theme-cm-menu {padding:5px 0px;
+	color:#ffffff;
+	background:#459E00;
+}
+.theme-cm-menu li {position:relative;padding:15px 15px;list-style:none;cursor:pointer;transition:background 0.2s;}
+.theme-mOverlay {position:absolute;width:100%;height:100%;top:0px;left:0px;opacity:.5;
+	background:#FFFFFF;
+}
+.theme-contextMenu li.iw-mDisable {opacity:.7;}
+.theme-mSelected {transition:background 0.2s;border-radius:0px;
+	color:#FFFFFF;
+	background:#007836;
+}
+.theme-cm-arrow-right {width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:5px solid #000000;position:absolute;right:3px;top:50%;margin-top:-4px;}
+.theme-mSelected > .iw-cm-arrow-right {width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:5px solid #000000;position:absolute;right:3px;top:50%;margin-top:-4px;}
+.theme-mIcon {margin-top:-9px;padding:0px 15px 0px 0px;float:left;}
+
+/* Header - Logged-In User info Context menu css */
+.header-contextMenu {display:none;z-index:1000;overflow:auto;font-size:1.1em;box-shadow:0px 2px 10px rgba(0, 0, 0, 0.4);
+	border:1px solid #AAAAAA;
+}
+.header-cm-menu {padding:5px 0px;
+	color:#000000;
+	background:#FBFBFB;
+}
+.header-cm-menu li {position:relative;padding:10px 15px;list-style:none;cursor:pointer;transition:background 0.2s;}
+.header-mOverlay {position:absolute;width:100%;height:100%;top:0px;left:0px;opacity:.5;
+	background:#FFFFFF;
+}
+.header-contextMenu li.iw-mDisable {opacity:.7;}
+.header-mSelected {transition:background 0.2s;border-radius:0px;
+	color:#ffffff;
+	background:#007836;
+}
+.header-cm-arrow-right {width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:5px solid #000000;position:absolute;right:3px;top:50%;margin-top:-4px;}
+.header-mSelected > .iw-cm-arrow-right {width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:5px solid #000000;position:absolute;right:3px;top:50%;margin-top:-4px;}
+.header-mIcon {margin-top:-1px;padding:0px 15px 0px 0px;float:left;}
+
+/* Action button in Grid Table */
+.actionInGrid-contextMenu {display:none;z-index:1000;overflow:auto;font-size:1.1em;box-shadow:0px 2px 10px rgba(0, 0, 0, 0.4);
+	border:1px solid #AAAAAA;
+}
+.actionInGrid-cm-menu {padding:5px 0px;
+	color:#000000;
+	background:#FBFBFB;
+}
+.actionInGrid-cm-menu li {position:relative;padding:10px 15px 10px 15px;list-style:none;cursor:pointer;transition:background 0.2s;}
+.actionInGrid-mOverlay {position:absolute;width:100%;height:100%;top:0px;left:0px;opacity:.5;
+	background:#FFFFFF;
+}
+.actionInGrid-contextMenu li.iw-mDisable {opacity:.7;}
+.actionInGrid-mSelected {transition:background 0.2s;border-radius:0px;
+	color:#ffffff;
+	background:#007836;
+}
+.actionInGrid-cm-arrow-right {width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:5px solid #000000;position:absolute;right:3px;top:50%;margin-top:-4px;}
+.actionInGrid-mSelected > .iw-cm-arrow-right {width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:5px solid #000000;position:absolute;right:3px;top:50%;margin-top:-4px;}
+.actionInGrid-mIcon {margin-top:-1px;padding:0px 15px 0px 0px;float:left;}
+
+/* Action Button */
+.actionButton-contextMenu {display:none;z-index:1000;overflow:auto;font-size:1.1em;box-shadow:0px 1px 1px rgba(0, 0, 0, 0.4);
+	border:1px solid #AAAAAA;
+}
+.actionButton-cm-menu {padding:5px 0px;
+	color:#000000;
+	background:#FBFBFB;
+}
+.actionButton-cm-menu li {position:relative;padding:10px 15px 10px 15px;list-style:none;cursor:pointer;transition:background 0.2s;}
+.actionButton-mOverlay {position:absolute;width:100%;height:100%;top:0px;left:0px;opacity:.5;
+	background:#FFFFFF;
+}
+.actionButton-contextMenu li.iw-mDisable {opacity:.7;}
+.actionButton-mSelected {transition:background 0.2s;border-radius:0px;
+	color:#ffffff;
+	background:#007836;
+}
+.actionButton-cm-arrow-right {width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:5px solid #000000;position:absolute;right:3px;top:50%;margin-top:-4px;}
+.actionButton-mSelected > .iw-cm-arrow-right {width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:5px solid #000000;position:absolute;right:3px;top:50%;margin-top:-4px;}
+.actionButton-mIcon {margin-top:-1px;padding:0px 15px 0px 0px;float:left;}

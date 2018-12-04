@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--/*
+ * Framework Generated Hibernate Query hbm Source
+ * - SYS_USER - User Info
+ */-->
+<hibernate-mapping>
+	<sql-query name="query.SysUser.getUserDataSetBySearchCriteria">
+	<![CDATA[
+		select usr.user_id,
+		       usr.user_name,
+		       usr.login_id,
+		       usr.login_password,
+		       usr.auth_group_id,
+		       (select group_name from sys_auth_group where group_id = usr.auth_group_id) as auth_group_name,
+		       usr.language,
+		       (select description_${langCode} from sys_common_code where code_type = 'LANGUAGE_TYPE' and common_code = usr.language) as language_name,
+		       usr.theme_type,
+		       (select description_${langCode} from sys_common_code where code_type = 'USER_THEME_TYPE' and common_code = usr.theme_type) as theme_type_name,
+		       usr.user_type,
+		       (select description_${langCode} from sys_common_code where code_type = 'USER_TYPE' and common_code = usr.user_type) as user_type_name,
+		       usr.email,
+		       usr.user_status,
+		       (select description_${langCode} from sys_common_code where code_type = 'USER_STATUS' and common_code = usr.user_status) as user_status_name,
+		       usr.photo_path,
+		       usr.default_start_url,
+		       usr.is_active,
+		       usr.insert_user_id,
+		       (select user_name from sys_user where user_id = usr.insert_user_id) as insert_user_name,
+		       usr.update_user_id,
+		       (select user_name from sys_user where user_id = usr.update_user_id) as update_user_name,
+		       to_char(insert_date, '${dateFormat}') as insert_date,
+		       to_char(update_date, '${dateFormat}') as update_date
+		  from sys_user usr
+		 where 1 = 1
+		${auto_fill}
+		${order_by_clause}
+	]]>
+	</sql-query>
+
+	<sql-query name="query.SysUser.getUserNameDataSetForAutoCompletion">
+	<![CDATA[
+		select *
+		  from sys_user
+		 where 1 = 1
+		 ${auto_fill}
+		 ${order_by_clause}
+	]]>
+	</sql-query>
+</hibernate-mapping>

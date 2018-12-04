@@ -1,0 +1,81 @@
+/**************************************************************************************************
+* Table CSS - Sort / Filter / Pagination / Scroll of tables
+**************************************************************************************************/
+/* Sorting */
+table.sort th.sortable:hover {text-decoration:none;
+	color:#4D7496;
+}
+table.sort th.sortable:after {content:"";}
+table.sort th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/03_ascending.gif"); vertical-align:0px;}
+table.sort th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/03_descending.gif"); vertical-align:0px;}
+
+table.sort01 th.sortable:after {content:" "url("/shared/resource/image/sortableTable/01_unsorted.gif"); vertical-align:-2px;}
+table.sort01 th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/01_ascending.gif"); vertical-align:-2px;}
+table.sort01 th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/01_descending.gif"); vertical-align:-2px;}
+
+table.sort02 th.sortable:after {content:"";}
+table.sort02 th.sorted-asc:after {cursor:pointer; content:""url("/shared/resource/image/sortableTable/02_ascending.gif"); vertical-align:0px;}
+table.sort02 th.sorted-desc:after {cursor:pointer; content:""url("/shared/resource/image/sortableTable/02_descending.gif"); vertical-align:0px;}
+
+table.sort03 th.sortable:after {content:"";}
+table.sort03 th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/03_ascending.gif"); vertical-align:0px;}
+table.sort03 th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/03_descending.gif"); vertical-align:0px;}
+
+table.sort04 th.sortable:after {content:"";}
+table.sort04 th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/04_ascending.gif"); vertical-align:0px;}
+table.sort04 th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/04_descending.gif"); vertical-align:0px;}
+
+table.sort05 th.sortable:after {content:" "url("/shared/resource/image/sortableTable/05_unsorted.gif"); vertical-align:-9px;}
+table.sort05 th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/05_ascending.gif"); vertical-align:-9px;}
+table.sort05 th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/05_descending.gif"); vertical-align:-9px;}
+
+table.sort06 th.sortable:after {content:"";}
+table.sort06 th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/06_ascending.gif"); vertical-align:0px;}
+table.sort06 th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/06_descending.gif"); vertical-align:0px;}
+
+table.sort07 th.sortable:after {content:"";}
+table.sort07 th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/07_ascending.gif"); vertical-align:0px;}
+table.sort07 th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/07_descending.gif"); vertical-align:0px;}
+
+table.sort08 th.sortable:after {content:"";}
+table.sort08 th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/08_ascending.gif"); vertical-align:0px;}
+table.sort08 th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/08_descending.gif"); vertical-align:0px;}
+
+table.sort09 th.sortable:after {content:"";}
+table.sort09 th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/09_ascending.gif"); vertical-align:-7px;}
+table.sort09 th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/09_descending.gif"); vertical-align:-7px;}
+
+table.sort10 th.sortable:after {content:" "url("/shared/resource/image/sortableTable/10_unsorted.gif"); vertical-align:-2px;}
+table.sort10 th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/10_ascending.gif"); vertical-align:0px;}
+table.sort10 th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/10_descending.gif"); vertical-align:0px;}
+
+table.sort11 th.sortable:after {content:"";}
+table.sort11 th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/11_ascending.gif"); vertical-align:-4px;}
+table.sort11 th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/11_descending.gif"); vertical-align:-4px;}
+
+table.sort12 th.sortable:after {content:"";}
+table.sort12 th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/12_ascending.gif"); vertical-align:-1px;}
+table.sort12 th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/12_descending.gif"); vertical-align:-1px;}
+
+table.sort13 th.sortable:after {content:"";}
+table.sort13 th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/13_ascending.gif"); vertical-align:-1px;}
+table.sort13 th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/13_descending.gif"); vertical-align:-1px;}
+
+table.sort15 th.sortable:after {content:"";}
+table.sort15 th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/15_ascending.gif"); vertical-align:-7px;}
+table.sort15 th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/15_descending.gif"); vertical-align:-7px;}
+
+table.sort16 th.sortable:after {content:"";}
+table.sort16 th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/16_ascending.gif"); vertical-align:-1px;}
+table.sort16 th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/16_descending.gif"); vertical-align:-1px;}
+
+table.sort17 th.sortable:after {content:"";}
+table.sort17 th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/17_ascending.gif"); vertical-align:-1px;}
+table.sort17 th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/17_descending.gif"); vertical-align:-1px;}
+
+table.sort18 th.sortable:after {content:" "url("/shared/resource/image/sortableTable/18_unsorted.gif"); vertical-align:0px;}
+table.sort18 th.sorted-asc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/18_ascending.gif"); vertical-align:-1px;}
+table.sort18 th.sorted-desc:after {cursor:pointer; content:" "url("/shared/resource/image/sortableTable/18_descending.gif"); vertical-align:-1px;}
+
+/* Dummy for default content image - Do not delete */
+th.sortable, th.sortable:after {cursor:pointer; content:"";}

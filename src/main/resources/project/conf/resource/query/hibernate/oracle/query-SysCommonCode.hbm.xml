@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--/*
+ * Framework Generated Hibernate Query hbm Source
+ * - SYS_COMMON_CODE - Common Lookup Code
+ */-->
+<hibernate-mapping>
+	<sql-query name="query.SysCommonCode.getActiveCommonCodeDataSet">
+	<![CDATA[
+		select *
+		  from sys_common_code
+		 where 1 = 1
+		${auto_fill}
+		${where_clause}
+		${order_by_clause}
+	]]>
+	</sql-query>
+</hibernate-mapping>

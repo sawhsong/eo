@@ -1,0 +1,33 @@
+#############################################################################################
+# Messages - #MENU_ID_START_UPPER# - #MENU_NAME#
+#   -
+#############################################################################################
+# Button
+
+# List - Search
+#THIS_MENU_ID#.search.searchType=조회유형
+#THIS_MENU_ID#.search.searchPeriod=조회기간
+#THIS_MENU_ID#.search.searchDateFrom=시작일
+#THIS_MENU_ID#.search.searchDateTo=종료일
+
+# List - Data Grid
+#THIS_MENU_ID#.grid.subject=제목
+#THIS_MENU_ID#.grid.file=파일
+#THIS_MENU_ID#.grid.writerName=작성자
+#THIS_MENU_ID#.grid.date=입력일
+#THIS_MENU_ID#.grid.hitCount=조회건수
+
+# List - Etc
+
+# Detail, Insert, Update - Table Header
+#THIS_MENU_ID#.header.writer=작성자 ID
+#THIS_MENU_ID#.header.writerName=작성자명
+#THIS_MENU_ID#.header.writerEmail=작성자 이메일
+#THIS_MENU_ID#.header.writerIp=IP Address
+#THIS_MENU_ID#.header.articlePassword=비밀번호
+#THIS_MENU_ID#.header.articleSubject=제목
+#THIS_MENU_ID#.header.articleContents=내용
+#THIS_MENU_ID#.header.hitCount=조회건수
+#THIS_MENU_ID#.header.attachedFile=첨부파일
+
+# Message, Comments

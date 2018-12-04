@@ -1,0 +1,167 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="868EC497-BD52-1D4E-2753-CAD2E45616AE" schemaObject="620113D4-D911-FF99-9D6E-82D500529D4F" name="SYS_MENU_AUTH_LINK">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>SYS_MENU_AUTH_LINK</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:22:34 UTC</createdTime>
+<commentInRDBMS>Menu - Authority group mapping</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="GROUP_ID" id="D0B5BA96-0A46-2E33-6784-E6FEFEB241CB">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU_AUTH_LINK</sourceObjSchema>
+<sourceObjName>GROUP_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:22:34 UTC</createdTime>
+<commentInRDBMS>Authority group UID (PK) ([sys_auth_group.auth_id])</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="658FB862-32C6-2627-B7F5-29A64F5C3960" referredColumn="83166F4D-1AC4-E436-05FA-42D28C05C7A4"/>
+</associations>
+</Column>
+<Column name="MENU_ID" id="3A4640F5-FD13-B518-3A41-CED37D235EF2">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU_AUTH_LINK</sourceObjSchema>
+<sourceObjName>MENU_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:22:34 UTC</createdTime>
+<commentInRDBMS>Menu UID (PK) ([sys_menu.menu_id])</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="3DE36C76-721C-183B-4756-817ACF54D1DB" referredColumn="C806764F-AFDB-47F5-86EB-F33D3E863293"/>
+</associations>
+</Column>
+<Column name="INSERT_USER_ID" id="7DA9DA0A-CCDE-C0ED-6402-78638E781CB6">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU_AUTH_LINK</sourceObjSchema>
+<sourceObjName>INSERT_USER_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:22:34 UTC</createdTime>
+<commentInRDBMS>Insert User UID</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="INSERT_DATE" id="B842EA99-3404-FFCE-BCE2-F1D936AC613A">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU_AUTH_LINK</sourceObjSchema>
+<sourceObjName>INSERT_DATE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:22:34 UTC</createdTime>
+<commentInRDBMS>Insert Date</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<defaultValue>sysdate</defaultValue>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="UPDATE_USER_ID" id="02E4DBC8-FFA0-79C6-ED0B-FC7B34C04AAF">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU_AUTH_LINK</sourceObjSchema>
+<sourceObjName>UPDATE_USER_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:22:34 UTC</createdTime>
+<commentInRDBMS>Update User UID</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="UPDATE_DATE" id="3D0690F7-5AE7-7744-82E0-7EB10088E07C">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU_AUTH_LINK</sourceObjSchema>
+<sourceObjName>UPDATE_DATE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:22:34 UTC</createdTime>
+<commentInRDBMS>Update Date</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8C519265-1E9D-C0C0-2F74-02908346C403" name="PK_SYS_MENU_AUTH_LINK">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>PK_SYS_MENU_AUTH_LINK</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:22:34 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D0B5BA96-0A46-2E33-6784-E6FEFEB241CB"/>
+<colUsage columnID="3A4640F5-FD13-B518-3A41-CED37D235EF2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0917A7A0-6D00-A55E-E9AE-BAC176A1F542" schemaObject="620113D4-D911-FF99-9D6E-82D500529D4F" name="PK_SYS_MENU_AUTH_LINK">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>PK_SYS_MENU_AUTH_LINK</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:22:34 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D0B5BA96-0A46-2E33-6784-E6FEFEB241CB"/>
+<colUsage columnID="3A4640F5-FD13-B518-3A41-CED37D235EF2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="24D23615-7D83-8194-36E9-FA587349D9D5" name="FK_SYS_MENU_AUTH_LINK_GROUP">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:22:34 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D0B5BA96-0A46-2E33-6784-E6FEFEB241CB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B5C5368B-9603-59D3-EFF0-70438055A497" name="FK_SYS_MENU_AUTH_LINK_MENU">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:22:34 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3A4640F5-FD13-B518-3A41-CED37D235EF2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,10 @@
+/**************************************************************************************************
+ * Framework Generated HDAOImpl Source
+ * - #TABLE_NAME# - #TABLE_DESCRIPTION#
+ *************************************************************************************************/
+package #PACKAGE#;
+
+import #PROJECT_NAME#.common.extend.BaseHDao;
+
+public class #TABLE_NAME_CAMELCASE#HDaoImpl extends BaseHDao implements #TABLE_NAME_CAMELCASE#Dao {
+}

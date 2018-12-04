@@ -1,0 +1,110 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="SYS_COUNTRY_CURRENCY" directorySegmentName="seg_0" id="1DDA7E1A-60C7-159F-3321-B7657C70A0AB">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<schemaObject>620113D4-D911-FF99-9D6E-82D500529D4F</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>4513DF37-444A-0ED5-FD2D-3C76408E5A0A</segment>
+<tableSpace>B38EE602-44FA-F789-F820-658B4D301CC6</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="COUNTRY_CURRENCY_ID" id="024A27FE-031C-34F4-0E4F-AE4B0BC88918">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CURRENCY_SYMBOL" id="07D7B2B9-AEBB-D3A0-1E4E-BB9F4EF1F507">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="COUNTRY_CODE_2" id="1C4CC705-490E-D4E7-2C51-2570285B79F2">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="UPDATE_USER_ID" id="253259EE-3328-F722-5C16-00A5D9C178C6">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="UPDATE_DATE" id="59ED529E-C825-9A71-8AB4-E5959B588A03">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CURRENCY_NAME" id="899416E9-C5BD-6036-1A70-3391107E8E05">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="INSERT_DATE" id="8CECB984-EFFA-8364-704C-4BC178FCD892">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<defaultValue>sysdate</defaultValue>
+</ColumnProxy>
+<ColumnProxy name="COUNTRY_NUMERIC_CODE" id="8E90F581-C84C-39B6-8E2E-0C20708CA75E">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="COUNTRY_CODE_3" id="970CEBF2-7B03-1777-526F-A215B7395C94">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="COUNTRY_NAME" id="A8258282-572F-8A3C-E1C1-D40EC571E296">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CURRENCY_NUMERIC_CODE" id="B01A70B6-E57E-938B-F880-988A12529106">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="COUNTRY_LANGUAGE_CODE" id="D89F1267-C7AB-5A40-8C0C-43F8CD61F2E3">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CURRENCY_ALPHABETIC_CODE" id="DBC00B64-9EEA-0721-24D7-F91866283BD3">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="INSERT_USER_ID" id="FBDBA31E-768C-FB0E-B111-CE9584BF72AA">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="PK_SYS_COUNTRY_CURRENCY" id="B5A6F341-2A4C-DFFF-567A-11191E9A23F5">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<schemaObject>620113D4-D911-FF99-9D6E-82D500529D4F</schemaObject>
+<segment>C8D3AAC6-859D-CC51-BD72-AFF30E8E3E76</segment>
+<tableSpace>FEF03E0B-E47A-82DA-4040-B648365A9228</tableSpace>
+</IndexProxy>
+</indexProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="PK_SYS_COUNTRY_CURRENCY" id="B7626312-B003-ACFE-72CD-497FFAEA6272">
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:41 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<segment>C8D3AAC6-859D-CC51-BD72-AFF30E8E3E76</segment>
+<tableSpace>FEF03E0B-E47A-82DA-4040-B648365A9228</tableSpace>
+<existingIndex>B5A6F341-2A4C-DFFF-567A-11191E9A23F5</existingIndex>
+<indexSegment>C8D3AAC6-859D-CC51-BD72-AFF30E8E3E76</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

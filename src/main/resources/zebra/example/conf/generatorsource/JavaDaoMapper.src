@@ -1,0 +1,10 @@
+/**************************************************************************************************
+ * Framework Generated DAO Source
+ * - #TABLE_NAME# - #TABLE_DESCRIPTION#
+ *************************************************************************************************/
+package #PACKAGE#;
+
+import zebra.base.Mapper;
+
+public interface #TABLE_NAME_CAMELCASE#DaoMapper extends Mapper {
+}

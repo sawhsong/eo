@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--/*
+ * Framework Generated MyBatis DAO Mapper Query XML Source
+ * - SYS_COMMON_CODE - Common Lookup Code
+ */-->
+<mapper namespace="project.conf.resource.ormapper.dao.SysCommonCode.SysCommonCodeDaoMapper">
+	<resultMap id="hashmap" type="java.util.HashMap"></resultMap>
+
+	<select id="getActiveCommonCodeDataSet" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		select *
+		  from sys_common_code
+		 where 1 = 1
+		${auto_fill}
+		${where_clause}
+		${order_by_clause}
+	]]>
+	</select>
+
+	<select id="getActiveCommonCodeDataSetPagination" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		select *
+		  from (select page_query.*,
+		               rownum num
+		          from (
+		select *
+		  from sys_common_code
+		 where 1 = 1
+		${auto_fill}
+		${where_clause}
+		${order_by_clause}
+		               ) page_query
+		       )
+		 where num between ${startRow} and ${endRow}
+	]]>
+	</select>
+</mapper>

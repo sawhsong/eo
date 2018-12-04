@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!--/* Index */-->
+	<bean id="zebraFrameworkIndexAction" name="zebraFrameworkIndexAction" class="${name.package.framework}.example.app.framework.index.IndexAction"/>
+	<bean id="zebraFrameworkIndexBiz" name="zebraFrameworkIndexBiz" class="${name.package.framework}.example.app.framework.index.IndexBizImpl" parent="baseBiz"/>
+
+	<!--/* DtoGenerator */-->
+	<bean id="zebraFrameworkDtoGeneratorAction" name="zebraFrameworkDtoGeneratorAction" class="${name.package.framework}.example.app.framework.dtogenerator.DtoGeneratorAction"/>
+	<bean id="zebraFrameworkDtoGeneratorBiz" name="zebraFrameworkDtoGeneratorBiz" class="${name.package.framework}.example.app.framework.dtogenerator.DtoGeneratorBizImpl" parent="baseBiz"/>
+
+	<!--/* CommonCode */-->
+	<bean id="zebraFrameworkCommonCodeAction" name="zebraFrameworkCommonCodeAction" class="${name.package.framework}.example.app.framework.commoncode.CommonCodeAction"/>
+	<bean id="zebraFrameworkCommonCodeBiz" name="zebraFrameworkCommonCodeBiz" class="${name.package.framework}.example.app.framework.commoncode.CommonCodeBizImpl" parent="baseBiz"/>
+
+	<!--/* DomainDictionary */-->
+	<bean id="zebraFrameworkDomainDictionaryAction" name="zebraFrameworkDomainDictionaryAction" class="${name.package.framework}.example.app.framework.domaindictionary.DomainDictionaryAction"/>
+	<bean id="zebraFrameworkDomainDictionaryBiz" name="zebraFrameworkDomainDictionaryBiz" class="${name.package.framework}.example.app.framework.domaindictionary.DomainDictionaryBizImpl" parent="baseBiz"/>
+
+	<!--/* SourceGenerator */-->
+	<bean id="zebraFrameworkSourceGeneratorAction" name="zebraFrameworkSourceGeneratorAction" class="${name.package.framework}.example.app.framework.sourcegenerator.SourceGeneratorAction"/>
+	<bean id="zebraFrameworkSourceGeneratorBiz" name="zebraFrameworkSourceGeneratorBiz" class="${name.package.framework}.example.app.framework.sourcegenerator.SourceGeneratorBizImpl" parent="baseBiz"/>
+
+	<!--/* TableScript */-->
+	<bean id="zebraFrameworkTableScriptAction" name="zebraFrameworkTableScriptAction" class="${name.package.framework}.example.app.framework.tablescript.TableScriptAction"/>
+	<bean id="zebraFrameworkTableScriptBiz" name="zebraFrameworkTableScriptBiz" class="${name.package.framework}.example.app.framework.tablescript.TableScriptBizImpl" parent="baseBiz"/>
+</beans>

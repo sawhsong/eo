@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd" version="2.0">
+	<tlib-version>2.0</tlib-version>
+	<short-name>Taglib MC</short-name>
+
+	<!-- Zebra -->
+	<tag>
+		<name>msg</name>
+		<tag-class>zebra.taglib.Message</tag-class>
+		<body-content>empty</body-content>
+		<description>Messages from message bundles</description>
+		<attribute>
+			<name>key</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>langCode</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>defaultMsg</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>cp</name>
+		<tag-class>zebra.taglib.ConfigProperty</tag-class>
+		<body-content>empty</body-content>
+		<description>Config Properties</description>
+		<attribute>
+			<name>key</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<!-- Project -->
+</taglib>

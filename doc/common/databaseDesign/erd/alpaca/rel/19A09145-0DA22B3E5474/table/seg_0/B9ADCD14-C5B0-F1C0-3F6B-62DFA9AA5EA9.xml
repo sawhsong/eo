@@ -1,0 +1,250 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="B9ADCD14-C5B0-F1C0-3F6B-62DFA9AA5EA9" schemaObject="620113D4-D911-FF99-9D6E-82D500529D4F" name="SYS_MENU">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>SYS_MENU</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:23:04 UTC</createdTime>
+<commentInRDBMS>Menu Info</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="MENU_ID" id="C806764F-AFDB-47F5-86EB-F33D3E863293">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU</sourceObjSchema>
+<sourceObjName>MENU_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:23:04 UTC</createdTime>
+<commentInRDBMS>Menu UID (PK)</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PARENT_MENU_ID" id="5604EA25-7206-019E-76C8-41732C10D6F2">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU</sourceObjSchema>
+<sourceObjName>PARENT_MENU_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:23:04 UTC</createdTime>
+<commentInRDBMS>Parent menu UID</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="MENU_NAME_KO" id="8F38856A-4CB0-865D-5347-CDA2516E43CD">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU</sourceObjSchema>
+<sourceObjName>MENU_NAME_KO</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:23:04 UTC</createdTime>
+<commentInRDBMS>Menu name (Korean)</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>500 BYTE</dataTypeSize>
+<ownDataTypeParameters>500 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="MENU_NAME_EN" id="812AEEE1-7AD6-5658-174C-265789884A09">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU</sourceObjSchema>
+<sourceObjName>MENU_NAME_EN</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:23:04 UTC</createdTime>
+<commentInRDBMS>Menu name (English)</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>500 BYTE</dataTypeSize>
+<ownDataTypeParameters>500 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="MENU_URL" id="4FDB477E-B8D3-4A7B-3020-04624A128FA9">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU</sourceObjSchema>
+<sourceObjName>MENU_URL</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:23:04 UTC</createdTime>
+<commentInRDBMS>Menu URL</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>500 BYTE</dataTypeSize>
+<ownDataTypeParameters>500 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="MENU_ICON" id="C96FB88F-D445-42A5-515F-6B4BEE5C96E6">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU</sourceObjSchema>
+<sourceObjName>MENU_ICON</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:23:04 UTC</createdTime>
+<commentInRDBMS>Menu Icon</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SORT_ORDER" id="0BCF5F92-855E-70B8-540E-B7574A3988F8">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU</sourceObjSchema>
+<sourceObjName>SORT_ORDER</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:23:04 UTC</createdTime>
+<commentInRDBMS>Sort order</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 BYTE</dataTypeSize>
+<ownDataTypeParameters>10 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DESCRIPTION" id="0156AC27-C3DD-A069-436A-74664114497E">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU</sourceObjSchema>
+<sourceObjName>DESCRIPTION</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:23:04 UTC</createdTime>
+<commentInRDBMS>Description</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 BYTE</dataTypeSize>
+<ownDataTypeParameters>1000 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="IS_ACTIVE" id="08695EAF-CD7F-6651-D109-801C7400D60B">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU</sourceObjSchema>
+<sourceObjName>IS_ACTIVE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:23:04 UTC</createdTime>
+<commentInRDBMS>Is active?</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1 BYTE</dataTypeSize>
+<ownDataTypeParameters>1 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="INSERT_USER_ID" id="DA9D745F-C4EC-6539-96EB-4F349630A1B1">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU</sourceObjSchema>
+<sourceObjName>INSERT_USER_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:23:04 UTC</createdTime>
+<commentInRDBMS>Insert User UID</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="INSERT_DATE" id="87D82F1F-8FC2-49EF-115B-527504C68517">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU</sourceObjSchema>
+<sourceObjName>INSERT_DATE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:23:04 UTC</createdTime>
+<commentInRDBMS>Insert Date</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<defaultValue>sysdate</defaultValue>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="UPDATE_USER_ID" id="472A89D5-CB47-B906-82A2-1059FFC7B674">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU</sourceObjSchema>
+<sourceObjName>UPDATE_USER_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:23:04 UTC</createdTime>
+<commentInRDBMS>Update User UID</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="UPDATE_DATE" id="A5219028-2E41-0097-49D7-EEED0BDB5E5C">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_MENU</sourceObjSchema>
+<sourceObjName>UPDATE_DATE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:23:04 UTC</createdTime>
+<commentInRDBMS>Update Date</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="272F6CF7-A524-305B-3E0F-3271777C10A8" name="PK_SYS_MENU">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>PK_SYS_MENU</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:23:04 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C806764F-AFDB-47F5-86EB-F33D3E863293"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E427DA06-3E69-E008-4E19-F35C393A7ECD" schemaObject="620113D4-D911-FF99-9D6E-82D500529D4F" name="PK_SYS_MENU">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>PK_SYS_MENU</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 05:23:04 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C806764F-AFDB-47F5-86EB-F33D3E863293"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

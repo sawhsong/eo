@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--/*
+ * Framework Generated Hibernate Query hbm Source
+ * - ZEBRA_BOARD_FILE - 게시판 첨부파일
+ */-->
+<hibernate-mapping>
+	<sql-query name="query.zebra.ZebraBoardFile.getBoardFileListDataSetByArticleIdForDeletion">
+	<![CDATA[
+		select *
+		  from nony_board_file
+		 where article_id in (select article_id
+		                        from nony_board
+		                     connect by prior article_id = ref_article_id
+		                       start with article_id = '${articleId}')
+	]]>
+	</sql-query>
+</hibernate-mapping>

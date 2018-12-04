@@ -1,0 +1,33 @@
+#############################################################################################
+# Messages - #MENU_ID_START_UPPER# - #MENU_NAME#
+#   -
+#############################################################################################
+# Button
+
+# List - Search
+#THIS_MENU_ID#.search.searchType=Search Type
+#THIS_MENU_ID#.search.searchPeriod=Search Period
+#THIS_MENU_ID#.search.searchDateFrom=Date From
+#THIS_MENU_ID#.search.searchDateTo=Date To
+
+# List - Data Grid
+#THIS_MENU_ID#.grid.subject=Subject
+#THIS_MENU_ID#.grid.file=File
+#THIS_MENU_ID#.grid.writerName=Writer Name
+#THIS_MENU_ID#.grid.date=Date Inserted
+#THIS_MENU_ID#.grid.hitCount=Hit Count
+
+# List - Etc
+
+# Detail, Insert, Update - Table Header
+#THIS_MENU_ID#.header.writer=Writer
+#THIS_MENU_ID#.header.writerName=Writer Name
+#THIS_MENU_ID#.header.writerEmail=Writer Email
+#THIS_MENU_ID#.header.writerIp=IP Address
+#THIS_MENU_ID#.header.articlePassword=Password
+#THIS_MENU_ID#.header.articleSubject=Subject
+#THIS_MENU_ID#.header.articleContents=Contents
+#THIS_MENU_ID#.header.hitCount=Hit Count
+#THIS_MENU_ID#.header.attachedFile=Attached File
+
+# Message, Comments

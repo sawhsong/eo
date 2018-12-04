@@ -1,0 +1,15 @@
+/**************************************************************************************************
+ * Framework Generated DAO Source
+ * - #TABLE_NAME# - #TABLE_DESCRIPTION#
+ *************************************************************************************************/
+package #PACKAGE#;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import #PROJECT_NAME#.common.extend.BaseDao;
+
+public class #TABLE_NAME_CAMELCASE#DaoImpl extends BaseDao implements #TABLE_NAME_CAMELCASE#Dao {
+	@SuppressWarnings("unused")
+	@Autowired
+	private #TABLE_NAME_CAMELCASE#DaoMapper #TABLE_NAME_CAMELCASE_LOWER#DaoMapper;
+}

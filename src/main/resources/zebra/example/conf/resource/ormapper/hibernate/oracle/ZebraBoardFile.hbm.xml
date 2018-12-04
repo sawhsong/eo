@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--/*
+ * Framework Generated Hibernate Config hbm Source
+ * - ZEBRA_BOARD_FILE - 게시판 첨부파일
+ */-->
+<hibernate-mapping>
+	<class name="zebra.example.conf.resource.ormapper.dto.oracle.ZebraBoardFile" table="ZEBRA_BOARD_FILE" lazy="false">
+		<meta attribute="class-description" inherit="false">게시판 첨부파일</meta>
+
+		<id name="fileId" column="FILE_ID" type="java.lang.String" length="30"></id>
+
+		<property name="articleId" column="ARTICLE_ID" not-null="true" type="java.lang.String" length="30"/>
+		<property name="newName" column="NEW_NAME" not-null="true" type="java.lang.String" length="1000"/>
+		<property name="originalName" column="ORIGINAL_NAME" not-null="true" type="java.lang.String" length="1000"/>
+		<property name="repositoryPath" column="REPOSITORY_PATH" not-null="true" type="java.lang.String" length="2000"/>
+		<property name="fileIcon" column="FILE_ICON" type="java.lang.String" length="1000"/>
+		<property name="fileSize" column="FILE_SIZE" type="java.lang.Double"/>
+		<property name="fileType" column="FILE_TYPE" type="java.lang.String" length="300"/>
+		<property name="insertDate" column="INSERT_DATE" type="java.util.Date"/>
+		<property name="insertUserId" column="INSERT_USER_ID" type="java.lang.String" length="30"/>
+		<property name="updateDate" column="UPDATE_DATE" type="java.util.Date"/>
+		<property name="updateUserId" column="UPDATE_USER_ID" type="java.lang.String" length="30"/>
+	</class>
+
+	<sql-query name="zebraBoardFile.selectAll">
+	<![CDATA[
+		SELECT ARTICLE_ID,
+		       FILE_ID,
+		       NEW_NAME,
+		       ORIGINAL_NAME,
+		       REPOSITORY_PATH,
+		       FILE_ICON,
+		       FILE_SIZE,
+		       FILE_TYPE,
+		       TO_CHAR(INSERT_DATE, 'yyyymmddhh24miss') AS INSERT_DATE,
+		       INSERT_USER_ID,
+		       TO_CHAR(UPDATE_DATE, 'yyyymmddhh24miss') AS UPDATE_DATE,
+		       UPDATE_USER_ID
+		  FROM ZEBRA_BOARD_FILE
+		 WHERE 1 = 1
+		 ${auto_fill}
+		 ${frameworkGeneratedWhere}
+		 ${frameworkGeneratedOrderBy}
+		 FOR UPDATE
+	]]>
+	</sql-query>
+
+	<sql-query name="zebraBoardFile.insert">
+	<![CDATA[
+		INSERT INTO ZEBRA_BOARD_FILE (
+		       ARTICLE_ID,
+		       FILE_ID,
+		       NEW_NAME,
+		       ORIGINAL_NAME,
+		       REPOSITORY_PATH,
+		       FILE_ICON,
+		       FILE_SIZE,
+		       FILE_TYPE,
+		       INSERT_DATE,
+		       INSERT_USER_ID,
+		       UPDATE_DATE,
+		       UPDATE_USER_ID
+		       )
+		VALUES (
+		       ${ARTICLE_ID},
+		       ${FILE_ID},
+		       ${NEW_NAME},
+		       ${ORIGINAL_NAME},
+		       ${REPOSITORY_PATH},
+		       ${FILE_ICON},
+		       ${FILE_SIZE},
+		       ${FILE_TYPE},
+		       ${INSERT_DATE},
+		       ${INSERT_USER_ID},
+		       ${UPDATE_DATE},
+		       ${UPDATE_USER_ID}
+		       )
+	]]>
+	</sql-query>
+
+	<sql-query name="zebraBoardFile.update">
+	<![CDATA[
+		UPDATE ZEBRA_BOARD_FILE
+		   SET ARTICLE_ID = ${ARTICLE_ID},
+		       NEW_NAME = ${NEW_NAME},
+		       ORIGINAL_NAME = ${ORIGINAL_NAME},
+		       REPOSITORY_PATH = ${REPOSITORY_PATH},
+		       FILE_ICON = ${FILE_ICON},
+		       FILE_SIZE = ${FILE_SIZE},
+		       FILE_TYPE = ${FILE_TYPE},
+		       INSERT_DATE = ${INSERT_DATE},
+		       INSERT_USER_ID = ${INSERT_USER_ID},
+		       UPDATE_DATE = ${UPDATE_DATE},
+		       UPDATE_USER_ID = ${UPDATE_USER_ID}
+		 WHERE 1 = 1
+		   ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+
+	<sql-query name="zebraBoardFile.updateColumns">
+	<![CDATA[
+		UPDATE ZEBRA_BOARD_FILE
+		   SET ${frameworkGeneratedColumnsToUpdate}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+
+	<sql-query name="zebraBoardFile.delete">
+	<![CDATA[
+		DELETE ZEBRA_BOARD_FILE
+		 WHERE 1 = 1
+		   ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+</hibernate-mapping>

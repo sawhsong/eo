@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--/*
+ * Framework Generated MyBatis DAO Mapper Query XML Source
+ * - SYS_AUTH_GROUP - Menu Authority Info
+ */-->
+<mapper namespace="project.conf.resource.ormapper.dao.SysAuthGroup.SysAuthGroupDaoMapper">
+	<resultMap id="hashmap" type="java.util.HashMap"></resultMap>
+
+	<select id="getAuthGroupDataSetByAuthGroupId" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		select *
+		  from sys_auth_group
+		 where group_id = '${groupId}'
+		 order by group_id
+	]]>
+	</select>
+</mapper>

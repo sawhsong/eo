@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+<!--
+	@ Cron Expression
+	1. Seconds      : [Mandatory] [0-59] [,-*/]
+	2. Minutes      : [Mandatory] [0-59] [,-*/]
+	3. Hours        : [Mandatory] [0-23] [,-*/]
+	4. Day of month : [Mandatory] [1-31] [,-*?/LW]
+	5. Month        : [Mandatory] [1-12 or JAN-DEC] [,-*/]
+	6. Day of week  : [Mandatory] [1-7 or SUN-SAT] [,-*?/L#]
+	7. Year         : [Optional]  [empty, 1970-2099] [,-*/]
+
+	@ "," => used to specify additional values. For example, "MON,WED,FRI" in the day-of-week field means "the days Monday, Wednesday, and Friday"
+	@ "-" => used to specify ranges. For example, "10-12" in the hour field means "the hours 10, 11 and 12"
+	@ "*(all values)" => used to select all values within a field. For example, "" in the minute field means *"every minute"
+	@ "?" => useful when you need to specify something in one of the two fields in which the character is allowed, but not the other
+	@ "/" => used to specify increments : eg. "0/15" in the seconds field means "the seconds 0, 15, 30 and 45", "5/15" in the seconds field means "the seconds 5, 20, 35 and 50"
+	@ "L(last)" => Day of month : the LAST day of the month, Day of week : (1) simply means "7" or "SAT", (2) means "the last xxx day of the month" eg. "6L" means "the last Friday of the month"
+	@ "W(weekday)" => used to specify the weekday (Monday-Friday) nearest the given day : "15W" as the value for the day-of-month field, the meaning is: "the nearest weekday to the 15th of the month"
+	@ "#" => used to specify "the nth" XXX day of the month. For example, the value of "6#3" in the day-of-week field means "the third Friday of the month" (day 6 = Friday and "#3" = the 3rd one in the month)
+-->
+
+	<!--/* Register Quartz trigger jobs - Caution : triggers는 한쪽에서만 등록되어야 함. project에서 등록할것 */-->
+	<!--/* Define Job Details */-->
+	<bean id="zebraBoardArticleCreationJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="${name.package.framework}.example.common.schedule.ZebraBoardArticleCreationJob"/>
+		<!-- Service injection test -->
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="zebraBoardDao" value-ref="zebraBoardDao"/>
+			</map>
+		</property>
+	</bean>
+	<bean id="zebraBoardArticleCreationJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="zebraBoardArticleCreationJobDetail"/>
+		<property name="cronExpression" value="0 0/5 * * * ?"/>
+	</bean>
+</beans>

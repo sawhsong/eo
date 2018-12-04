@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--/*
+ * Framework Generated Hibernate Config hbm Source
+ * - SYS_AUTH_GROUP - Menu Authority Info
+ */-->
+<hibernate-mapping>
+	<class name="project.conf.resource.ormapper.dto.oracle.SysAuthGroup" table="SYS_AUTH_GROUP" lazy="false">
+		<meta attribute="class-description" inherit="false">Menu Authority Info</meta>
+
+		<id name="groupId" column="GROUP_ID" type="java.lang.String" length="30"></id>
+
+		<property name="groupName" column="GROUP_NAME" not-null="true" type="java.lang.String" length="50"/>
+		<property name="description" column="DESCRIPTION" type="java.lang.String" length="1000"/>
+		<property name="insertDate" column="INSERT_DATE" type="java.util.Date"/>
+		<property name="insertUserId" column="INSERT_USER_ID" type="java.lang.String" length="30"/>
+		<property name="isActive" column="IS_ACTIVE" type="java.lang.String" length="1"/>
+		<property name="updateDate" column="UPDATE_DATE" type="java.util.Date"/>
+		<property name="updateUserId" column="UPDATE_USER_ID" type="java.lang.String" length="30"/>
+	</class>
+
+	<sql-query name="sysAuthGroup.selectAll">
+	<![CDATA[
+		SELECT GROUP_ID,
+		       GROUP_NAME,
+		       DESCRIPTION,
+		       TO_CHAR(INSERT_DATE, 'yyyymmddhh24miss') AS INSERT_DATE,
+		       INSERT_USER_ID,
+		       IS_ACTIVE,
+		       TO_CHAR(UPDATE_DATE, 'yyyymmddhh24miss') AS UPDATE_DATE,
+		       UPDATE_USER_ID
+		  FROM SYS_AUTH_GROUP
+		 WHERE 1 = 1
+		 ${auto_fill}
+		 ${frameworkGeneratedWhere}
+		 ${frameworkGeneratedOrderBy}
+		 FOR UPDATE
+	]]>
+	</sql-query>
+
+	<sql-query name="sysAuthGroup.insert">
+	<![CDATA[
+		INSERT INTO SYS_AUTH_GROUP (
+		       GROUP_ID,
+		       GROUP_NAME,
+		       DESCRIPTION,
+		       INSERT_DATE,
+		       INSERT_USER_ID,
+		       IS_ACTIVE,
+		       UPDATE_DATE,
+		       UPDATE_USER_ID
+		       )
+		VALUES (
+		       ${GROUP_ID},
+		       ${GROUP_NAME},
+		       ${DESCRIPTION},
+		       ${INSERT_DATE},
+		       ${INSERT_USER_ID},
+		       ${IS_ACTIVE},
+		       ${UPDATE_DATE},
+		       ${UPDATE_USER_ID}
+		       )
+	]]>
+	</sql-query>
+
+	<sql-query name="sysAuthGroup.update">
+	<![CDATA[
+		UPDATE SYS_AUTH_GROUP
+		   SET GROUP_NAME = ${GROUP_NAME},
+		       DESCRIPTION = ${DESCRIPTION},
+		       INSERT_DATE = ${INSERT_DATE},
+		       INSERT_USER_ID = ${INSERT_USER_ID},
+		       IS_ACTIVE = ${IS_ACTIVE},
+		       UPDATE_DATE = ${UPDATE_DATE},
+		       UPDATE_USER_ID = ${UPDATE_USER_ID}
+		 WHERE 1 = 1
+		   ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+
+	<sql-query name="sysAuthGroup.updateColumns">
+	<![CDATA[
+		UPDATE SYS_AUTH_GROUP
+		   SET ${frameworkGeneratedColumnsToUpdate}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+
+	<sql-query name="sysAuthGroup.delete">
+	<![CDATA[
+		DELETE SYS_AUTH_GROUP
+		 WHERE 1 = 1
+		   ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+</hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<!--/* Board */-->
+	<package name="zebraBoard" extends="default" namespace="/zebra/board" strict-method-invocation="false">
+		<default-interceptor-ref name="ZebraDefaultStack"/>
+
+		<!--/* Index */-->
+		<action name="index/*" class="zebra.example.app.board.index.IndexAction" method="{1}">
+			<result name="index" type="debugDispatcherResult">/zebra/example/app/board/index/index.jsp</result>
+		</action>
+
+		<!--/* Notice */-->
+		<action name="notice/*" class="zebra.example.app.board.notice.NoticeAction" method="{1}">
+			<result name="list" type="debugDispatcherResult">/zebra/example/app/board/notice/noticeList.jsp</result>
+			<result name="detail" type="debugDispatcherResult">/zebra/example/app/board/notice/noticeDetailPop.jsp</result>
+			<result name="insert" type="debugDispatcherResult">/zebra/example/app/board/notice/noticeInsertPop.jsp</result>
+			<result name="update" type="debugDispatcherResult">/zebra/example/app/board/notice/noticeUpdatePop.jsp</result>
+		</action>
+
+		<!--/* Free Board */-->
+		<action name="freeboard/*" class="zebra.example.app.board.freeboard.FreeBoardAction" method="{1}">
+			<result name="list" type="debugDispatcherResult">/zebra/example/app/board/freeboard/freeBoardList.jsp</result>
+			<result name="detail" type="debugDispatcherResult">/zebra/example/app/board/freeboard/freeBoardDetail.jsp</result>
+			<result name="insert" type="debugDispatcherResult">/zebra/example/app/board/freeboard/freeBoardInsert.jsp</result>
+			<result name="update" type="debugDispatcherResult">/zebra/example/app/board/freeboard/freeBoardUpdate.jsp</result>
+		</action>
+	</package>
+</struts>

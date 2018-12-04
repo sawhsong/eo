@@ -1,0 +1,10 @@
+/**************************************************************************************************
+ * Framework Generated DAO Source
+ * - #TABLE_NAME# - #TABLE_DESCRIPTION#
+ *************************************************************************************************/
+package #PACKAGE#;
+
+import zebra.base.IDao;
+
+public interface #TABLE_NAME_CAMELCASE#Dao extends IDao {
+}

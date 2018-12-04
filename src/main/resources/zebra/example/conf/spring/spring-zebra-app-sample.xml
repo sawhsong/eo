@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!--/* Index */-->
+	<bean id="zebraSampleIndexAction" name="zebraSampleIndexAction" class="${name.package.framework}.example.app.sample.index.IndexAction"/>
+	<bean id="zebraSampleIndexBiz" name="zebraSampleIndexBiz" class="${name.package.framework}.example.app.sample.index.IndexBizImpl" parent="baseBiz"/>
+
+	<!--/* UIElement */-->
+	<bean id="zebraSampleUielementAction" name="zebraSampleUielementAction" class="${name.package.framework}.example.app.sample.uielement.UielementAction"/>
+	<bean id="zebraSampleUielementBiz" name="zebraSampleUielementBiz" class="${name.package.framework}.example.app.sample.uielement.UielementBizImpl" parent="baseBiz"/>
+
+	<!--/* MultipleDataSource */-->
+	<bean id="zebraSampleMultiDatasourceAction" name="zebraSampleMultiDatasourceAction" class="${name.package.framework}.example.app.sample.multidatasource.MultiDatasourceAction"/>
+	<bean id="zebraSampleMultiDatasourceBiz" name="zebraSampleMultiDatasourceBiz" class="${name.package.framework}.example.app.sample.multidatasource.MultiDatasourceBizImpl" parent="baseBiz"/>
+
+	<!--/* RESTWebService Client */-->
+	<bean id="zebraSampleRestWebServiceClientAction" name="zebraSampleRestWebServiceClientAction" class="${name.package.framework}.example.app.sample.restwebservice.RestWebServiceClientAction"/>
+	<bean id="zebraSampleRestWebServicClienteBiz" name="zebraSampleRestWebServiceClientBiz" class="${name.package.framework}.example.app.sample.restwebservice.RestWebServiceClientBizImpl" parent="baseBiz"/>
+
+	<!--/* SOAPWebService Client */-->
+	<bean id="zebraSampleSoapWebServiceClientAction" name="zebraSampleSoapWebServiceClientAction" class="${name.package.framework}.example.app.sample.soapwebservice.SoapWebServiceClientAction"/>
+	<bean id="zebraSampleSoapWebServiceClientBiz" name="zebraSampleSoapWebServiceClientBiz" class="${name.package.framework}.example.app.sample.soapwebservice.SoapWebServiceClientBizImpl" parent="baseBiz"/>
+</beans>

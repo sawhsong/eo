@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!--/* Menu */-->
+	<bean id="menuManager" name="menuManager" class="${name.package.project}.common.module.menu.MenuManager" parent="baseBiz">
+		<property name="sysMenuDao" ref="sysMenuDao"/>
+		<property name="sysMenuAuthLinkDao" ref="sysMenuAuthLinkDao"/>
+	</bean>
+
+	<!--/* CommonCode */-->
+	<bean id="commonCodeManager" name="commonCodeManager" class="${name.package.project}.common.module.commoncode.CommonCodeManager" parent="baseBiz">
+		<property name="sysCommonCodeDao" ref="sysCommonCodeDao"/>
+	</bean>
+
+	<!--/* Auto Completion */-->
+	<bean id="autoCompletionAction" name="autoCompletionAction" class="${name.package.project}.common.module.autocompletion.AutoCompletionAction"/>
+	<bean id="autoCompletionBiz" name="autoCompletionBiz" class="${name.package.project}.common.module.autocompletion.AutoCompletionBizImpl" parent="baseBiz"/>
+
+	<!--/* Common Lookup */-->
+	<bean id="commonLookupAction" name="commonLookupAction" class="${name.package.project}.common.module.commonlookup.CommonLookupAction"/>
+	<bean id="commonLookupBiz" name="commonLookupBiz" class="${name.package.project}.common.module.commonlookup.CommonLookupBizImpl" parent="baseBiz"/>
+
+	<!--/* DataHelper */-->
+	<bean id="dataHelper" name="dataHelper" class="${name.package.project}.common.module.datahelper.DataHelper" parent="baseBiz">
+		<property name="sysUserDao" ref="sysUserDao"/>
+		<property name="sysAuthGroupDao" ref="sysAuthGroupDao"/>
+	</bean>
+</beans>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="zebra.example.conf.resource.ormapper.mybatis.oracle.Dummy.DummyMapper">
+	<resultMap id="hashmap" type="java.util.HashMap"></resultMap>
+
+	<select id="selectAll" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT DUMMY
+		  FROM DUAL
+		 WHERE 1 = 1
+		 ${auto_fill}
+		 ${frameworkGeneratedWhere}
+		 ${frameworkGeneratedOrderBy}
+	]]>
+	</select>
+
+	<insert id="insert" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO DUAL (
+		       DUMMY
+		       )
+		VALUES (
+		       ${DUMMY}
+		       )
+	]]>
+	</insert>
+
+	<insert id="insertWithDto" parameterType="zebra.example.conf.resource.ormapper.dto.oracle.Dummy">
+	<![CDATA[
+		INSERT INTO DUAL (
+		       DUMMY
+		       )
+		VALUES (
+		       #{dummy,jdbcType=VARCHAR}
+		       )
+	]]>
+	</insert>
+
+	<update id="update" parameterType="hashmap">
+		UPDATE DUAL
+		   SET DUMMY = ${DUMMY}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	</update>
+
+	<update id="updateWithDto" parameterType="zebra.example.conf.resource.ormapper.dto.oracle.Dummy">
+		UPDATE DUAL
+		   SET DUMMY = #{dummy,jdbcType=VARCHAR}
+		 WHERE 1 = 1
+		 ${additionalAttributesForUpdateWithDto}
+	</update>
+
+	<update id="updateColumns" parameterType="zebra.example.conf.resource.ormapper.dto.oracle.Dummy">
+		UPDATE DUAL
+		   SET ${frameworkGeneratedColumnsToUpdate}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	</update>
+
+	<delete id="delete" parameterType="hashmap">
+	<![CDATA[
+		DELETE DUAL
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	]]>
+	</delete>
+</mapper>

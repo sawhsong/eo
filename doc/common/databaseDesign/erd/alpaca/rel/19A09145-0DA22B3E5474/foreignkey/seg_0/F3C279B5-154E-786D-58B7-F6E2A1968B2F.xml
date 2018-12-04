@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="F3C279B5-154E-786D-58B7-F6E2A1968B2F" containerWithKeyObject="E1F08956-320A-0C85-B8D2-A167FF867A0E" localFKIndex="E6A58C55-381A-1456-4551-2824ACDC0320" name="FK_SYS_BOARD_FILE">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>FK_SYS_BOARD_FILE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 03:05:54 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<referredTableLongName>ALPACA.SYS_BOARD</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>2BFD9FB1-76D5-9FFF-E6FE-30BB1DB39A02</referredTableID>
+<keyObject>5315A5A5-E9DA-C264-61E2-98025FB0784D</keyObject>
+<referredKeyID>5315A5A5-E9DA-C264-61E2-98025FB0784D</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>ARTICLE_ID</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

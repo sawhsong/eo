@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zebra.example.conf.resource.ormapper.dao.Dummy.DummyDaoMapper">
+	<resultMap id="hashmap" type="java.util.HashMap"></resultMap>
+
+	<select id="getTableListDataSetByCriteria" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		select table_name,
+		       comments
+		  from user_tab_comments
+		 where table_type = 'TABLE'
+		   ${auto_fill}
+		 order by table_name
+	]]>
+	</select>
+	<select id="getTableListDataSetByCriteriaPagination" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		select *
+		  from (select page_query.*,
+		               rownum num
+		          from (
+						select table_name,
+						       comments
+						  from user_tab_comments
+						 where table_type = 'TABLE'
+						   ${auto_fill}
+						 order by table_name
+		               ) page_query
+		       )
+		 where num between ${startRow} and ${endRow}
+	]]>
+	</select>
+
+	<select id="getTableDetailDataSetByTableName" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		select a.table_name,
+		       a.column_name,
+		       a.data_type,
+		       a.data_default,
+		       decode(a.data_type, 'NUMBER', decode(a.data_precision || ',' || a.data_scale, ',', '', a.data_precision || ',' || a.data_scale), a.data_length) data_length,
+		       a.nullable,
+		       c.constraint_type,
+		       d.comments,
+		       (select comments
+		          from user_tab_comments
+		         where table_name = '${table_name}'
+		       ) table_description
+		  from user_tab_columns a,
+		       (select a.table_name,
+		               b.column_name,
+		               listagg(decode(a.constraint_type, 'P', 'PK', 'R', 'FK', 'U', 'UK'), ', ') within group(order by a.constraint_type) as constraint_type
+		          from user_constraints a,
+		               user_cons_columns b
+		         where a.constraint_type in ('P', 'R', 'U')
+		           and a.table_name = b.table_name
+		           and a.constraint_name = b.constraint_name
+		         group by a.table_name, b.column_name
+		       ) c,
+		       user_col_comments d
+		 where a.table_name = '${table_name}'
+		   and a.table_name = c.table_name (+)
+		   and a.column_name = c.column_name (+)
+		   and a.table_name = d.table_name (+)
+		   and a.column_name = d.column_name (+)
+		 order by a.table_name,
+		       a.nullable,
+		       c.constraint_type,
+		       a.column_name
+	]]>
+	</select>
+</mapper>

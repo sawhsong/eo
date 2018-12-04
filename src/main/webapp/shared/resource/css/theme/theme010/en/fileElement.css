@@ -1,0 +1,64 @@
+/**************************************************************************************************
+* File Element CSS
+**************************************************************************************************/
+@charset "utf-8";
+
+/**
+ * Default Attributes
+ */
+.file {display:block;padding:4px 4px;width:100%;cursor:pointer;border-radius:3px;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075);
+			box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition:border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+			transition:border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	color:#555555;
+	border:1px solid #cccccc;
+	background-color:#ffffff;
+	background-image:none;
+}
+.file:hover, .filen:focus {outline:0;cursor:pointer;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 4px rgba(102, 175, 233, .5);
+			box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 4px rgba(102, 175, 233, .5);
+	border-color:#66afe9;
+}
+
+/**
+ * Customed Attributes
+ */
+.fileCustomed {padding:4px 4px;position:relative;opacity:0;z-index:2;cursor:pointer;}
+.divFileElementHolder {position:relative;float:left;}
+.divStyledFileHolder {position:absolute;z-index:1;vertical-align:middle;border:1px solid transparent;background:transparent;}
+
+.txtEnForFileElement {display:block;padding:6px 4px;width:100%;cursor:pointer;border-radius:3px;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075);
+			box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition:border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+			transition:border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	color:#555555;
+	border:1px solid #cccccc;
+	background-color:#ffffff;
+	background-image:none;
+}
+.txtEnForFileElementHover {display:block;padding:6px 4px;width:100%;cursor:pointer;outline:0;border-radius:3px;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 4px rgba(102, 175, 233, .5);
+			box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 4px rgba(102, 175, 233, .5);
+	-webkit-transition:border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+			transition:border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	color:#555555;
+	border:1px solid #66afe9;
+	background-color:#ffffff;
+	background-image:none;
+}
+
+.btn-default-hover {outline:0px;transition:background .2s;text-shadow:0px 1px 1px rgba(255, 255, 255, 1.0);box-shadow:0px 1px 1px rgba(0, 0, 0, .1);
+	color:#333333;
+	border-color:#adadad;
+	background-color:#e6e6e6;
+}
+.btn-default-active {outline:0px;text-shadow:0px 1px 1px rgba(255, 255, 255, 1.0);
+	-webkit-box-shadow:inset 0 3px 5px rgba(0, 0, 0, .125), 0px 0px 2px rgba(0, 0, 0, .4);
+			box-shadow:inset 0 3px 5px rgba(0, 0, 0, .125), 0px 0px 2px rgba(0, 0, 0, .4);
+	color:#333333;
+	border-color:#8c8c8c;
+	background-color:#d4d4d4;
+}

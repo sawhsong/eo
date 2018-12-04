@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--/*
+ * Framework Generated Hibernate Query hbm Source
+ * - SYS_BOARD - Bulletin Board
+ */-->
+<hibernate-mapping>
+	<sql-query name="query.SysBoard.getNoticeBoardDataSetByCriteria">
+	<![CDATA[
+		 select connect_by_root board.article_id as root,
+		        level,
+		        connect_by_isleaf as is_leaf,
+		        substr(sys_connect_by_path(article_id, '>'), 2) as path,
+		        board.article_id,
+		        board.board_type,
+		        board.writer_id,
+		        board.writer_name,
+		        board.article_password,
+		        board.writer_email,
+		        board.writer_ip_address,
+		        board.article_subject,
+		        board.hit_cnt,
+		        to_char(board.insert_date, '${dateFormat}') as insert_date,
+		        to_char(board.update_date, '${dateFormat}') as update_date,
+		        board.parent_article_id,
+		        (select count(file_id) file_cnt
+		           from sys_board_file
+		          where article_id = board.article_id
+		        ) as file_cnt
+		   from sys_board board
+		  where board_type = '${boardType}'
+		    ${auto_fill}
+		connect by prior board.article_id = board.parent_article_id
+		  start with board.parent_article_id = '-1'
+		  order siblings by nvl(board.update_date, board.insert_date) desc
+	]]>
+	</sql-query>
+
+	<sql-query name="query.SysBoard.getFreeBoardDataSetByCriteria">
+	<![CDATA[
+		 select connect_by_root board.article_id as root,
+		        level,
+		        connect_by_isleaf as is_leaf,
+		        substr(sys_connect_by_path(article_id, '>'), 2) as path,
+		        board.article_id,
+		        board.board_type,
+		        board.writer_id,
+		        board.writer_name,
+		        board.article_password,
+		        board.writer_email,
+		        board.writer_ip_address,
+		        board.article_subject,
+		        board.hit_cnt,
+		        to_char(board.insert_date, '${dateFormat}') as insert_date,
+		        to_char(board.update_date, '${dateFormat}') as update_date,
+		        board.parent_article_id,
+		        (select count(file_id) file_cnt
+		           from sys_board_file
+		          where article_id = board.article_id
+		        ) as file_cnt
+		   from sys_board board
+		  where board_type = '${boardType}'
+		    ${auto_fill}
+		connect by prior board.article_id = board.parent_article_id
+		  start with board.parent_article_id = '-1'
+		  order siblings by nvl(board.update_date, board.insert_date) desc
+	]]>
+	</sql-query>
+</hibernate-mapping>

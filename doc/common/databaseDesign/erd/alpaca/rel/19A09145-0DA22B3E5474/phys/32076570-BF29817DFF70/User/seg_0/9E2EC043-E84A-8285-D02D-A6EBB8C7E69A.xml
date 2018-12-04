@@ -1,0 +1,10 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<UserOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.UserOraclev10g" name="ALPACA" directorySegmentName="seg_0" id="9E2EC043-E84A-8285-D02D-A6EBB8C7E69A">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjName>ALPACA</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<schemaObject>620113D4-D911-FF99-9D6E-82D500529D4F</schemaObject>
+<privileges>UNLIMITED TABLESPACE, CREATE DATABASE LINK, CREATE VIEW, CREATE SYNONYM, CREATE PUBLIC SYNONYM, DROP PUBLIC SYNONYM</privileges>
+</UserOraclev10g>

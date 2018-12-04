@@ -1,0 +1,10 @@
+/**************************************************************************************************
+ * Framework Generated MyBatis DTO Mapper Source
+ * - #TABLE_NAME# - #TABLE_DESCRIPTION#
+ *************************************************************************************************/
+package #PACKAGE#;
+
+import zebra.base.Mapper;
+
+public interface #TABLE_NAME_CAMELCASE#Mapper extends Mapper {
+}

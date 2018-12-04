@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--/*
+ * Framework Generated MyBatis DTO Mapper XML Source
+ * - SYS_MENU - Menu Info
+ */-->
+<mapper namespace="project.conf.resource.ormapper.mybatis.oracle.SysMenu.SysMenuMapper">
+	<resultMap id="hashmap" type="java.util.HashMap"></resultMap>
+
+	<select id="selectAll" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT MENU_ID,
+		       MENU_NAME_EN,
+		       MENU_NAME_KO,
+		       DESCRIPTION,
+		       TO_CHAR(INSERT_DATE, 'yyyymmddhh24miss') AS INSERT_DATE,
+		       INSERT_USER_ID,
+		       IS_ACTIVE,
+		       MENU_ICON,
+		       MENU_URL,
+		       PARENT_MENU_ID,
+		       SORT_ORDER,
+		       TO_CHAR(UPDATE_DATE, 'yyyymmddhh24miss') AS UPDATE_DATE,
+		       UPDATE_USER_ID
+		  FROM SYS_MENU
+		 WHERE 1 = 1
+		 ${auto_fill}
+		 ${frameworkGeneratedWhere}
+		 ${frameworkGeneratedOrderBy}
+		 FOR UPDATE
+	]]>
+	</select>
+
+	<insert id="insert" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO SYS_MENU (
+		       MENU_ID,
+		       MENU_NAME_EN,
+		       MENU_NAME_KO,
+		       DESCRIPTION,
+		       INSERT_DATE,
+		       INSERT_USER_ID,
+		       IS_ACTIVE,
+		       MENU_ICON,
+		       MENU_URL,
+		       PARENT_MENU_ID,
+		       SORT_ORDER,
+		       UPDATE_DATE,
+		       UPDATE_USER_ID
+		       )
+		VALUES (
+		       ${MENU_ID},
+		       ${MENU_NAME_EN},
+		       ${MENU_NAME_KO},
+		       ${DESCRIPTION},
+		       ${INSERT_DATE},
+		       ${INSERT_USER_ID},
+		       ${IS_ACTIVE},
+		       ${MENU_ICON},
+		       ${MENU_URL},
+		       ${PARENT_MENU_ID},
+		       ${SORT_ORDER},
+		       ${UPDATE_DATE},
+		       ${UPDATE_USER_ID}
+		       )
+	]]>
+	</insert>
+
+	<insert id="insertWithDto" parameterType="project.conf.resource.ormapper.dto.oracle.SysMenu">
+	<![CDATA[
+		INSERT INTO SYS_MENU (
+		       MENU_ID,
+		       MENU_NAME_EN,
+		       MENU_NAME_KO,
+		       DESCRIPTION,
+		       INSERT_DATE,
+		       INSERT_USER_ID,
+		       IS_ACTIVE,
+		       MENU_ICON,
+		       MENU_URL,
+		       PARENT_MENU_ID,
+		       SORT_ORDER,
+		       UPDATE_DATE,
+		       UPDATE_USER_ID
+		       )
+		VALUES (
+		       #{menuId,jdbcType=VARCHAR},
+		       #{menuNameEn,jdbcType=VARCHAR},
+		       #{menuNameKo,jdbcType=VARCHAR},
+		       #{description,jdbcType=VARCHAR},
+		       #{insertDate,jdbcType=TIME},
+		       #{insertUserId,jdbcType=VARCHAR},
+		       #{isActive,jdbcType=VARCHAR},
+		       #{menuIcon,jdbcType=VARCHAR},
+		       #{menuUrl,jdbcType=VARCHAR},
+		       #{parentMenuId,jdbcType=VARCHAR},
+		       #{sortOrder,jdbcType=VARCHAR},
+		       #{updateDate,jdbcType=TIME},
+		       #{updateUserId,jdbcType=VARCHAR}
+		       )
+	]]>
+	</insert>
+
+	<update id="update" parameterType="hashmap">
+		UPDATE SYS_MENU
+		   SET MENU_NAME_EN = ${MENU_NAME_EN},
+		       MENU_NAME_KO = ${MENU_NAME_KO},
+		       DESCRIPTION = ${DESCRIPTION},
+		       INSERT_DATE = ${INSERT_DATE},
+		       INSERT_USER_ID = ${INSERT_USER_ID},
+		       IS_ACTIVE = ${IS_ACTIVE},
+		       MENU_ICON = ${MENU_ICON},
+		       MENU_URL = ${MENU_URL},
+		       PARENT_MENU_ID = ${PARENT_MENU_ID},
+		       SORT_ORDER = ${SORT_ORDER},
+		       UPDATE_DATE = ${UPDATE_DATE},
+		       UPDATE_USER_ID = ${UPDATE_USER_ID}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	</update>
+
+	<update id="updateWithDto" parameterType="project.conf.resource.ormapper.dto.oracle.SysMenu">
+		UPDATE SYS_MENU
+		   SET MENU_NAME_EN = #{menuNameEn,jdbcType=VARCHAR},
+		       MENU_NAME_KO = #{menuNameKo,jdbcType=VARCHAR},
+		       DESCRIPTION = #{description,jdbcType=VARCHAR},
+		       INSERT_DATE = #{insertDate,jdbcType=TIME},
+		       INSERT_USER_ID = #{insertUserId,jdbcType=VARCHAR},
+		       IS_ACTIVE = #{isActive,jdbcType=VARCHAR},
+		       MENU_ICON = #{menuIcon,jdbcType=VARCHAR},
+		       MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+		       PARENT_MENU_ID = #{parentMenuId,jdbcType=VARCHAR},
+		       SORT_ORDER = #{sortOrder,jdbcType=VARCHAR},
+		       UPDATE_DATE = #{updateDate,jdbcType=TIME},
+		       UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR}
+		 WHERE 1 = 1
+		 ${additionalAttributesForUpdateWithDto}
+	</update>
+
+	<update id="updateColumns" parameterType="project.conf.resource.ormapper.dto.oracle.SysMenu">
+		UPDATE SYS_MENU
+		   SET ${frameworkGeneratedColumnsToUpdate}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	</update>
+
+	<delete id="delete" parameterType="hashmap">
+	<![CDATA[
+		DELETE SYS_MENU
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	]]>
+	</delete>
+</mapper>

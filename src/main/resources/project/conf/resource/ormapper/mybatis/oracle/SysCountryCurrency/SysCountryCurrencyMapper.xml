@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--/*
+ * Framework Generated MyBatis DTO Mapper XML Source
+ * - SYS_COUNTRY_CURRENCY - Country and Currency Info
+ */-->
+<mapper namespace="project.conf.resource.ormapper.mybatis.oracle.SysCountryCurrency.SysCountryCurrencyMapper">
+	<resultMap id="hashmap" type="java.util.HashMap"></resultMap>
+
+	<select id="selectAll" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT COUNTRY_CURRENCY_ID,
+		       COUNTRY_CODE_2,
+		       COUNTRY_CODE_3,
+		       COUNTRY_LANGUAGE_CODE,
+		       COUNTRY_NAME,
+		       COUNTRY_NUMERIC_CODE,
+		       CURRENCY_ALPHABETIC_CODE,
+		       CURRENCY_NAME,
+		       CURRENCY_NUMERIC_CODE,
+		       CURRENCY_SYMBOL,
+		       TO_CHAR(INSERT_DATE, 'yyyymmddhh24miss') AS INSERT_DATE,
+		       INSERT_USER_ID,
+		       TO_CHAR(UPDATE_DATE, 'yyyymmddhh24miss') AS UPDATE_DATE,
+		       UPDATE_USER_ID
+		  FROM SYS_COUNTRY_CURRENCY
+		 WHERE 1 = 1
+		 ${auto_fill}
+		 ${frameworkGeneratedWhere}
+		 ${frameworkGeneratedOrderBy}
+		 FOR UPDATE
+	]]>
+	</select>
+
+	<insert id="insert" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO SYS_COUNTRY_CURRENCY (
+		       COUNTRY_CURRENCY_ID,
+		       COUNTRY_CODE_2,
+		       COUNTRY_CODE_3,
+		       COUNTRY_LANGUAGE_CODE,
+		       COUNTRY_NAME,
+		       COUNTRY_NUMERIC_CODE,
+		       CURRENCY_ALPHABETIC_CODE,
+		       CURRENCY_NAME,
+		       CURRENCY_NUMERIC_CODE,
+		       CURRENCY_SYMBOL,
+		       INSERT_DATE,
+		       INSERT_USER_ID,
+		       UPDATE_DATE,
+		       UPDATE_USER_ID
+		       )
+		VALUES (
+		       ${COUNTRY_CURRENCY_ID},
+		       ${COUNTRY_CODE_2},
+		       ${COUNTRY_CODE_3},
+		       ${COUNTRY_LANGUAGE_CODE},
+		       ${COUNTRY_NAME},
+		       ${COUNTRY_NUMERIC_CODE},
+		       ${CURRENCY_ALPHABETIC_CODE},
+		       ${CURRENCY_NAME},
+		       ${CURRENCY_NUMERIC_CODE},
+		       ${CURRENCY_SYMBOL},
+		       ${INSERT_DATE},
+		       ${INSERT_USER_ID},
+		       ${UPDATE_DATE},
+		       ${UPDATE_USER_ID}
+		       )
+	]]>
+	</insert>
+
+	<insert id="insertWithDto" parameterType="project.conf.resource.ormapper.dto.oracle.SysCountryCurrency">
+	<![CDATA[
+		INSERT INTO SYS_COUNTRY_CURRENCY (
+		       COUNTRY_CURRENCY_ID,
+		       COUNTRY_CODE_2,
+		       COUNTRY_CODE_3,
+		       COUNTRY_LANGUAGE_CODE,
+		       COUNTRY_NAME,
+		       COUNTRY_NUMERIC_CODE,
+		       CURRENCY_ALPHABETIC_CODE,
+		       CURRENCY_NAME,
+		       CURRENCY_NUMERIC_CODE,
+		       CURRENCY_SYMBOL,
+		       INSERT_DATE,
+		       INSERT_USER_ID,
+		       UPDATE_DATE,
+		       UPDATE_USER_ID
+		       )
+		VALUES (
+		       #{countryCurrencyId,jdbcType=VARCHAR},
+		       #{countryCode2,jdbcType=VARCHAR},
+		       #{countryCode3,jdbcType=VARCHAR},
+		       #{countryLanguageCode,jdbcType=VARCHAR},
+		       #{countryName,jdbcType=VARCHAR},
+		       #{countryNumericCode,jdbcType=VARCHAR},
+		       #{currencyAlphabeticCode,jdbcType=VARCHAR},
+		       #{currencyName,jdbcType=VARCHAR},
+		       #{currencyNumericCode,jdbcType=VARCHAR},
+		       #{currencySymbol,jdbcType=VARCHAR},
+		       #{insertDate,jdbcType=TIME},
+		       #{insertUserId,jdbcType=VARCHAR},
+		       #{updateDate,jdbcType=TIME},
+		       #{updateUserId,jdbcType=VARCHAR}
+		       )
+	]]>
+	</insert>
+
+	<update id="update" parameterType="hashmap">
+		UPDATE SYS_COUNTRY_CURRENCY
+		   SET COUNTRY_CODE_2 = ${COUNTRY_CODE_2},
+		       COUNTRY_CODE_3 = ${COUNTRY_CODE_3},
+		       COUNTRY_LANGUAGE_CODE = ${COUNTRY_LANGUAGE_CODE},
+		       COUNTRY_NAME = ${COUNTRY_NAME},
+		       COUNTRY_NUMERIC_CODE = ${COUNTRY_NUMERIC_CODE},
+		       CURRENCY_ALPHABETIC_CODE = ${CURRENCY_ALPHABETIC_CODE},
+		       CURRENCY_NAME = ${CURRENCY_NAME},
+		       CURRENCY_NUMERIC_CODE = ${CURRENCY_NUMERIC_CODE},
+		       CURRENCY_SYMBOL = ${CURRENCY_SYMBOL},
+		       INSERT_DATE = ${INSERT_DATE},
+		       INSERT_USER_ID = ${INSERT_USER_ID},
+		       UPDATE_DATE = ${UPDATE_DATE},
+		       UPDATE_USER_ID = ${UPDATE_USER_ID}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	</update>
+
+	<update id="updateWithDto" parameterType="project.conf.resource.ormapper.dto.oracle.SysCountryCurrency">
+		UPDATE SYS_COUNTRY_CURRENCY
+		   SET COUNTRY_CODE_2 = #{countryCode2,jdbcType=VARCHAR},
+		       COUNTRY_CODE_3 = #{countryCode3,jdbcType=VARCHAR},
+		       COUNTRY_LANGUAGE_CODE = #{countryLanguageCode,jdbcType=VARCHAR},
+		       COUNTRY_NAME = #{countryName,jdbcType=VARCHAR},
+		       COUNTRY_NUMERIC_CODE = #{countryNumericCode,jdbcType=VARCHAR},
+		       CURRENCY_ALPHABETIC_CODE = #{currencyAlphabeticCode,jdbcType=VARCHAR},
+		       CURRENCY_NAME = #{currencyName,jdbcType=VARCHAR},
+		       CURRENCY_NUMERIC_CODE = #{currencyNumericCode,jdbcType=VARCHAR},
+		       CURRENCY_SYMBOL = #{currencySymbol,jdbcType=VARCHAR},
+		       INSERT_DATE = #{insertDate,jdbcType=TIME},
+		       INSERT_USER_ID = #{insertUserId,jdbcType=VARCHAR},
+		       UPDATE_DATE = #{updateDate,jdbcType=TIME},
+		       UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR}
+		 WHERE 1 = 1
+		 ${additionalAttributesForUpdateWithDto}
+	</update>
+
+	<update id="updateColumns" parameterType="project.conf.resource.ormapper.dto.oracle.SysCountryCurrency">
+		UPDATE SYS_COUNTRY_CURRENCY
+		   SET ${frameworkGeneratedColumnsToUpdate}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	</update>
+
+	<delete id="delete" parameterType="hashmap">
+	<![CDATA[
+		DELETE SYS_COUNTRY_CURRENCY
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	]]>
+	</delete>
+</mapper>

@@ -1,0 +1,300 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2BFD9FB1-76D5-9FFF-E6FE-30BB1DB39A02" schemaObject="620113D4-D911-FF99-9D6E-82D500529D4F" name="SYS_BOARD">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>SYS_BOARD</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>Bulletin Board</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ARTICLE_ID" id="A82E36F5-9818-1A07-1085-3626D854E258">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_BOARD</sourceObjSchema>
+<sourceObjName>ARTICLE_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>Article UID (PK)</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="BOARD_TYPE" id="FB7DB313-A105-2847-09D4-D4CE968830C4">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_BOARD</sourceObjSchema>
+<sourceObjName>BOARD_TYPE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>BBS Type([sys_common_code.board_type - bbs / notice])</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PARENT_ARTICLE_ID" id="159E0FF6-B8EE-CE9D-022D-8E1624B1237A">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_BOARD</sourceObjSchema>
+<sourceObjName>PARENT_ARTICLE_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>Parent article UID (Level 1 =&gt; 0)</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="WRITER_ID" id="5E605611-4EEB-366B-B6D6-F688DF7E322B">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_BOARD</sourceObjSchema>
+<sourceObjName>WRITER_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>Writer UID ([sys_user.user_id] Anonymous user is allowed to write an article with only name)</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="WRITER_NAME" id="86AD0DC1-65CE-B52A-1751-EA5BAFB181EE">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_BOARD</sourceObjSchema>
+<sourceObjName>WRITER_NAME</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>Writer Name (Anonymous user is allowed to write an article with only name)</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ARTICLE_PASSWORD" id="86FCD3C3-0502-6CC7-A50D-D0A953694E46">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_BOARD</sourceObjSchema>
+<sourceObjName>ARTICLE_PASSWORD</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>Article Password (if the article is confidential)</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="WRITER_EMAIL" id="BF083A4F-11E2-24A6-B38F-04DB57AA3A7B">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_BOARD</sourceObjSchema>
+<sourceObjName>WRITER_EMAIL</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>Writer e-mail</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="WRITER_IP_ADDRESS" id="91C9FB2F-5D7A-5DC8-B0DA-9C3F4AC27EB1">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_BOARD</sourceObjSchema>
+<sourceObjName>WRITER_IP_ADDRESS</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>Writer IP Adress</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ARTICLE_SUBJECT" id="862189BA-52A0-36DA-AEAD-546075C9969E">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_BOARD</sourceObjSchema>
+<sourceObjName>ARTICLE_SUBJECT</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>Subject</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 BYTE</dataTypeSize>
+<ownDataTypeParameters>1000 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ARTICLE_CONTENTS" id="EFECDBB6-0511-73D3-04B3-90E0F4D5FE14">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_BOARD</sourceObjSchema>
+<sourceObjName>ARTICLE_CONTENTS</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>Contents</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT028</logicalDatatype>
+<dataTypeSize>4000</dataTypeSize>
+<defaultValue>empty_clob()</defaultValue>
+<ownDataTypeParameters>4000,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="HIT_CNT" id="FEBE7D97-26C8-15A8-7261-A6CB684AD646">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_BOARD</sourceObjSchema>
+<sourceObjName>HIT_CNT</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>Hit count</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<defaultValue>0</defaultValue>
+<ownDataTypeParameters>,5,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="IS_CONFIDENTIAL" id="F0297861-1C5D-7214-BABE-0E2CCA531B6B">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_BOARD</sourceObjSchema>
+<sourceObjName>IS_CONFIDENTIAL</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>Is confidential?</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1 BYTE</dataTypeSize>
+<defaultValue>&apos;N&apos;</defaultValue>
+<ownDataTypeParameters>1 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="INSERT_USER_ID" id="56D198C4-3832-EE3F-1823-080A285F8D47">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_BOARD</sourceObjSchema>
+<sourceObjName>INSERT_USER_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>Insert User UID</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="INSERT_DATE" id="1E984F4E-0E2C-CA1C-E539-4E23B4D5412E">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_BOARD</sourceObjSchema>
+<sourceObjName>INSERT_DATE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>Insert Date</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<defaultValue>sysdate</defaultValue>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="UPDATE_USER_ID" id="F9DB9865-F2B3-EF12-EA90-C34EE3B9EAFE">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_BOARD</sourceObjSchema>
+<sourceObjName>UPDATE_USER_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>Update User UID</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="UPDATE_DATE" id="E656055C-3A73-2126-2B01-2BE21BD4485C">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_BOARD</sourceObjSchema>
+<sourceObjName>UPDATE_DATE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<commentInRDBMS>Update Date</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="96B75858-CEB1-5055-A732-1263A56F806B" name="PK_SYS_BOARD">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>PK_SYS_BOARD</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A82E36F5-9818-1A07-1085-3626D854E258"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5315A5A5-E9DA-C264-61E2-98025FB0784D" schemaObject="620113D4-D911-FF99-9D6E-82D500529D4F" name="PK_SYS_BOARD">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>PK_SYS_BOARD</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:11:10 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A82E36F5-9818-1A07-1085-3626D854E258"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

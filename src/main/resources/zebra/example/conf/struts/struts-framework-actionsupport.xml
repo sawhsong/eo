@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<!--/* Framework Support */-->
+	<package name="frameworkSupport" extends="default" namespace="/" strict-method-invocation="false">
+		<default-interceptor-ref name="ZebraDefaultStack"/>
+
+		<!--/* File Download */-->
+		<action name="download" class="zebra.actionsupport.DownloadAction">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">4096</param>
+				<param name="contentDisposition">${contentDisposition}</param>
+				<param name="contentLength">${contentLength}</param>
+			</result>
+		</action>
+
+		<!--/* File Export */-->
+		<action name="export" class="zebra.actionsupport.ExportAction">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">4096</param>
+				<param name="contentDisposition">${contentDisposition}</param>
+				<param name="contentLength">${contentLength}</param>
+			</result>
+		</action>
+
+		<!--/* File Download for RESTWebService */-->
+		<action name="restServiceDownload" class="zebra.actionsupport.RestServiceDownloadAction">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">4096</param>
+				<param name="contentDisposition">${contentDisposition}</param>
+				<param name="contentLength">${contentLength}</param>
+			</result>
+		</action>
+
+		<!--/* File Export for RESTWebService */-->
+		<action name="restServiceExport" class="zebra.actionsupport.RestServiceExportAction">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">4096</param>
+				<param name="contentDisposition">${contentDisposition}</param>
+				<param name="contentLength">${contentLength}</param>
+			</result>
+		</action>
+
+		<!--/* File Download for SOAPWebService */-->
+		<action name="soapServiceDownload" class="zebra.actionsupport.SoapServiceDownloadAction">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">4096</param>
+				<param name="contentDisposition">${contentDisposition}</param>
+				<param name="contentLength">${contentLength}</param>
+			</result>
+		</action>
+
+		<!--/* File Export for SOAPWebService */-->
+		<action name="soapServiceExport" class="zebra.actionsupport.SoapServiceExportAction">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">4096</param>
+				<param name="contentDisposition">${contentDisposition}</param>
+				<param name="contentLength">${contentLength}</param>
+			</result>
+		</action>
+	</package>
+</struts>

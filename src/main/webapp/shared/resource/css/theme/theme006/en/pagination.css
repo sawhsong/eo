@@ -1,0 +1,121 @@
+/**************************************************************************************************
+* Page Navigation CSS
+**************************************************************************************************/
+@charset "utf-8";
+
+/**
+ * Layout
+ */
+#divPagination {margin-top:-2px;}
+#tblPagination {width:100%;}
+
+.tdPaginationLeft {width:32%;text-align:left;}
+.tdPaginationCenter {width:36%;text-align:center;}
+.tdPaginationRight {width:32%;text-align:right;}
+
+/**
+ * Center box ul
+ */
+#ulPagination {margin:0px;padding:0px;display:inline-block;border-radius:3px;}
+#ulPagination > li {display:inline;}
+#ulPagination > li > a, #ulPagination > li > span {position:relative;padding:4px 10px;margin-left:-1px;text-decoration:none;
+	color:#337ab7;
+	border:1px solid #dddddd;
+	background-color:#ffffff;
+}
+#ulPagination > li:first-child > a, #ulPagination > li:first-child > span {margin-left:0;border-top-left-radius:3px;border-bottom-left-radius:3px;}
+#ulPagination > li:last-child > a, #ulPagination > li:last-child > span {border-top-right-radius:3px;border-bottom-right-radius:3px;}
+#ulPagination > li > a:hover, #ulPagination > li > span:hover, #ulPagination > li > a:focus, #ulPagination > li > span:focus {z-index:3;
+	color:#23527c;
+	border-color:#dddddd;
+	background-color:#eeeeee;
+}
+#ulPagination > .active > a, #ulPagination > .active > span,
+#ulPagination > .active > a:hover, #ulPagination > .active > span:hover,
+#ulPagination > .active > a:focus, #ulPagination > .active > span:focus {z-index:2;cursor:default;transition:background .2s;
+	color:#ffffff;
+	border-color:#337ab7;
+	background-color:#337ab7;
+}
+#ulPagination > .disabled > span, #ulPagination > .disabled > span:hover, #ulPagination > .disabled > span:focus,
+#ulPagination > .disabled > a, #ulPagination > .disabled > a:hover, #ulPagination > .disabled > a:focus {cursor:not-allowed;
+	color:#777777;
+	border-color:#dddddd;
+	background-color:#ffffff;
+}
+
+.liPaginationButton {}
+.aPaginationButtonEn {cursor:pointer;}
+.aPaginationButtonEn:hover {}
+.aPaginationButtonEn:link, .aPaginationButtonEn:visited, .aPaginationButtonEn:active {}
+.aPaginationButtonDis {cursor:not-allowed;}
+
+.spanPaginationBreaker {margin:0px 9px;padding:0px 0px;display:inline-block;vertical-align:-3px;height:14px;
+	border:1px solid #aaaaaa;
+}
+
+#divPaginationDescriptor {padding-top:2px;display:inline-block;text-align:right;}
+#divPaginationDescriptor div {float:left;}
+.paginationDescriptor {padding-top:5px;float:left;}
+
+.txtPagination {display:block;width:32px;padding:4px 2px;text-align:center;border-radius:3px;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075);
+			box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition:border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+			transition:border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	color:#555555;
+	border:1px solid #cccccc;
+	background-color:#ffffff;
+	background-image:none;
+}
+.txtPagination[readonly] {cursor:not-allowed;opacity:0.6;}
+.txtPagination:not([readonly]):hover, .txtPagination:not([readonly]):focus {outline:0;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 4px rgba(102, 175, 233, .5);
+			box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 4px rgba(102, 175, 233, .5);
+	border-color:#66afe9;
+}
+
+/**
+ * overriden from bootstrap
+ */
+#divPaginationDescriptor button.dropdown-toggle {padding:3px 18px 3px 8px;border-radius:3px;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075);
+			box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition:border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+			transition:border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	border:1px solid #CCCCCC;
+	background:#FFFFFF;
+}
+#divPaginationDescriptor button.dropdown-toggle:hover, #divPaginationDescriptor button.dropdown-toggle:focus {outline:0;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 4px rgba(102, 175, 233, .5);
+			box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 4px rgba(102, 175, 233, .5);
+	border-color:#66afe9;
+}
+#divPaginationDescriptor button.dropdown-toggle:active, #divPaginationDescriptor .open button.dropdown-toggle {outline:0;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 4px rgba(102, 175, 233, .5);
+			box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 4px rgba(102, 175, 233, .5);
+	border-color:#66afe9;
+	background:#FFFFFF;
+}
+#divPaginationDescriptor button.dropdown-toggle.disabled {padding:3px 18px 3px 8px;border-radius:3px;opacity:0.6;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075);
+			box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition:border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+			transition:border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	border:1px solid #CCCCCC;
+	background:#FFFFFF;
+}
+#divPaginationDescriptor button.dropdown-toggle.disabled:hover, #divPaginationDescriptor button.dropdown-toggle.disabled:focus {outline:0;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 0px rgba(102, 175, 233, .5);
+			box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 0px rgba(102, 175, 233, .5);
+	border-color:#CCCCCC;
+}
+#divPaginationDescriptor button.dropdown-toggle > span.filter-option {padding-right:8px;}
+#divPaginationDescriptor button.dropdown-toggle > span.caret {margin-right:-3px;}
+#divPaginationDescriptor .dropdown-menu {margin-top:1px;font-size:1.0em;box-shadow:0px 0px 0px rgba(0, 0, 0, 0.1);}
+#divPaginationDescriptor .dropdown-menu.open {box-shadow:1px 1px 1px rgba(0, 0, 0, 0.1);}
+#divPaginationDescriptor .dropdown-menu > li > a {padding-left:10px;padding-right:18px;min-width:60px;}
+#divPaginationDescriptor .dropdown-menu > li > a:active, #divPaginationDescriptor .dropdown-menu > li > a:focus, #divPaginationDescriptor .dropdown-menu > li > a:active:focus {outline:none;}
+#divPaginationDescriptor .dropdown-menu > li > a:hover, #divPaginationDescriptor .dropdown-menu > li > a:focus {
+	background-color:#e8e8e8;
+}

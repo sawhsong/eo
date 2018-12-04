@@ -1,0 +1,264 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5EB89106-0B3A-1554-8ECC-222288567A2A" schemaObject="3B244B7E-2760-7E7D-5EDC-785B4BD7AEEC" name="ZEBRA_COMMON_CODE">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>ZEBRA_COMMON_CODE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<commentInRDBMS>공통코드</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="CODE_TYPE" id="C4D576F3-EE97-0C46-7042-04486E6B9719">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ZEBRA_COMMON_CODE</sourceObjSchema>
+<sourceObjName>CODE_TYPE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<commentInRDBMS>상위구분코드</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="COMMON_CODE" id="32763C32-0A66-B287-AABE-F5582724F438">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ZEBRA_COMMON_CODE</sourceObjSchema>
+<sourceObjName>COMMON_CODE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<commentInRDBMS>코드</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DESCRIPTION_KO" id="16F0FD8B-CED3-9E19-7C17-5705F9196CF0">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ZEBRA_COMMON_CODE</sourceObjSchema>
+<sourceObjName>DESCRIPTION_KO</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<commentInRDBMS>코드설명(Korean)</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 BYTE</dataTypeSize>
+<ownDataTypeParameters>1000 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DESCRIPTION_EN" id="18E84D0F-EA1A-8B15-5231-16A7EF8FCC95">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ZEBRA_COMMON_CODE</sourceObjSchema>
+<sourceObjName>DESCRIPTION_EN</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<commentInRDBMS>코드설명(English)</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 BYTE</dataTypeSize>
+<ownDataTypeParameters>1000 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PROGRAM_CONSTANTS" id="62F31AAB-53B7-7BDC-5AB0-FD04549DE177">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ZEBRA_COMMON_CODE</sourceObjSchema>
+<sourceObjName>PROGRAM_CONSTANTS</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<commentInRDBMS>Constants value for the common code to be used in program</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SORT_ORDER" id="EBACEADE-B9B8-A26D-6B99-7CEEC862ED59">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ZEBRA_COMMON_CODE</sourceObjSchema>
+<sourceObjName>SORT_ORDER</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<commentInRDBMS>정렬순서</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>3 BYTE</dataTypeSize>
+<ownDataTypeParameters>3 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="USE_YN" id="DF41B451-7DD9-DD78-C357-C24C4A1BD18F">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ZEBRA_COMMON_CODE</sourceObjSchema>
+<sourceObjName>USE_YN</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<commentInRDBMS>사용여부</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1 BYTE</dataTypeSize>
+<defaultValue>&apos;Y&apos;</defaultValue>
+<ownDataTypeParameters>1 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DEFAULT_YN" id="A1643DAE-A93E-5CF5-DC75-188210277E58">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ZEBRA_COMMON_CODE</sourceObjSchema>
+<sourceObjName>DEFAULT_YN</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<commentInRDBMS>기본데이터여부(기본데이터는 변경불가)</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1 BYTE</dataTypeSize>
+<defaultValue>&apos;N&apos;</defaultValue>
+<ownDataTypeParameters>1 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="INSERT_USER_ID" id="A0B0C952-B8D2-D44D-10A5-E80B80AB2DA0">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ZEBRA_COMMON_CODE</sourceObjSchema>
+<sourceObjName>INSERT_USER_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<commentInRDBMS>입력자 uid</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="INSERT_DATE" id="06C69A66-9CD2-045D-B2BC-915504AA8B96">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ZEBRA_COMMON_CODE</sourceObjSchema>
+<sourceObjName>INSERT_DATE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<commentInRDBMS>입력일자</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<defaultValue>sysdate</defaultValue>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="UPDATE_USER_ID" id="B2F0BD5A-168C-E834-87C7-7D800FFBE8BC">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ZEBRA_COMMON_CODE</sourceObjSchema>
+<sourceObjName>UPDATE_USER_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<commentInRDBMS>수정자 uid</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 BYTE</dataTypeSize>
+<ownDataTypeParameters>30 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="UPDATE_DATE" id="A6599F7C-0EE4-1C7B-A6D8-C5AD8D501D31">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ZEBRA_COMMON_CODE</sourceObjSchema>
+<sourceObjName>UPDATE_DATE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<commentInRDBMS>수정일자</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="5035F2E5-665B-67B1-2F12-7B51DC72D949" name="PK_ZEBRA_COMMON_CODE">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>PK_ZEBRA_COMMON_CODE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C4D576F3-EE97-0C46-7042-04486E6B9719"/>
+<colUsage columnID="32763C32-0A66-B287-AABE-F5582724F438"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="70E47CA0-B410-B5A8-C160-89DFC425812C" name="UK_ZEBRA_COMMON_CODE">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>UK_ZEBRA_COMMON_CODE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="62F31AAB-53B7-7BDC-5AB0-FD04549DE177"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="67C69854-0A05-F037-9BD6-2C05063F2A8B" schemaObject="3B244B7E-2760-7E7D-5EDC-785B4BD7AEEC" name="PK_ZEBRA_COMMON_CODE">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>PK_ZEBRA_COMMON_CODE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C4D576F3-EE97-0C46-7042-04486E6B9719"/>
+<colUsage columnID="32763C32-0A66-B287-AABE-F5582724F438"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="8D6B3BDA-EDD0-A775-FB95-22F772E19F66" schemaObject="3B244B7E-2760-7E7D-5EDC-785B4BD7AEEC" name="UK_ZEBRA_COMMON_CODE">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>UK_ZEBRA_COMMON_CODE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:07:37 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="62F31AAB-53B7-7BDC-5AB0-FD04549DE177"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

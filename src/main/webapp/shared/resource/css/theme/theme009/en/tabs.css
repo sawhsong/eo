@@ -1,0 +1,49 @@
+/**************************************************************************************************
+* Tabs CSS
+**************************************************************************************************/
+@charset "utf-8";
+
+/**
+ * tab holder
+ */
+.tabHolder {padding-top:8px;
+	border-bottom:0px solid #DDDDDD;
+}
+.tabHolder:after {content:".";display:block;line-height:0px;font-size:1px;clear:both;}
+
+/**
+ * tab list holder (ul)
+ */
+.tabListHolder {padding:0px 5px;}
+.tabList {font-weight:bold;}
+
+/**
+ * overriden from bootstrap
+ */
+.nav > li > a > img {}
+.nav-tabs > li {}
+.nav-tabs > li > a {margin-right:1px;padding:8px 20px;
+	margin-bottom:-3px;
+	color:#459e00;
+}
+.nav-tabs > li > a:hover {cursor:pointer;transition:background .3s;
+	top:-3px;
+	color:#ffffff;
+	background:#459e00;
+	border:1px solid #DDDDDD;
+	border-top:4px solid #007836;
+}
+.nav-tabs > li.active > a {cursor:pointer;
+	top:-3px;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {cursor:pointer;
+	color:#459e00;
+	border-top:4px solid #007836;
+}
+
+.nav > li.disabled > a {opacity:0.6;}
+.nav > li.disabled > a:hover, .nav > li.disabled > a:focus {opacity:0.6;
+}
+.nav-tabs > li.disabled.active > a {opacity:0.6;}
+.nav-tabs > li.disabled.active > a, .nav-tabs > li.disabled.active > a:hover, .nav-tabs > li.disabled.active > a:focus {opacity:0.6;cursor:not-allowed;
+}

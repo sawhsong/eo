@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!--/* ZebraCommonCode Manager */-->
+	<bean id="zebraCommonCodeManager" name="zebraCommonCodeManager" class="${name.package.framework}.example.common.module.commoncode.ZebraCommonCodeManager" parent="baseBiz">
+		<property name="zebraCommonCodeDao" ref="zebraCommonCodeDao"/>
+	</bean>
+
+	<!--/* Zebra Auto Completion */-->
+	<bean id="zebraAutoCompletionAction" name="zebraAutoCompletionAction" class="${name.package.framework}.example.common.module.autocompletion.AutoCompletionAction"/>
+	<bean id="zebraAutoCompletionBiz" name="zebraAutoCompletionBiz" class="${name.package.framework}.example.common.module.autocompletion.AutoCompletionBizImpl" parent="baseBiz"/>
+
+	<!--/* DataHelper */-->
+	<bean id="zebraDataHelper" name="zebraDataHelper" class="${name.package.framework}.example.common.module.datahelper.ZebraDataHelper" parent="baseBiz">
+		<property name="sysUserDao" ref="sysUserDao"/>
+	</bean>
+</beans>

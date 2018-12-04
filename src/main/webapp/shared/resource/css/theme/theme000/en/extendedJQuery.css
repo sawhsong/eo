@@ -1,0 +1,33 @@
+/**************************************************************************************************
+* Extended JQuery CSS
+**************************************************************************************************/
+@charset "utf-8";
+
+/**
+ * Auto Complete
+ */
+.ui-autocomplete {overflow-y:auto;overflow-x: hidden;background:#ffffff;
+	max-height:250px;
+	border-radius:4px;
+	box-shadow:1px 1px 2px rgba(0, 0, 0, .2);
+	border:1px solid #AFAFAF;
+}
+
+.ui-autocomplete .ui-menu-item {margin:1px 0px 0px 0px;padding:6px 6px 6px 6px;transition:background .2s;border:0px solid #E8E8E8;}
+.ui-autocomplete .ui-menu-item:hover {background:#E8E8E8;border:0px solid #E8E8E8;}
+
+/**
+ * Tooltip
+ */
+.ui-tooltip {
+	padding:4px 4px;
+	position:absolute;
+	z-index:9999;
+	max-width:400px;
+	-webkit-box-shadow:1px 1px 2px rgba(0, 0, 0, .2);
+	box-shadow:1px 1px 2px rgba(0, 0, 0, .2);
+	background:#FFFEF9;
+}
+body .ui-tooltip {
+	border-width:1px;
+}

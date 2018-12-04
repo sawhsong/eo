@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--/*
+ * Framework Generated Hibernate Config hbm Source
+ * - ZEBRA_COMMON_CODE - 공통코드
+ */-->
+<hibernate-mapping>
+	<class name="zebra.example.conf.resource.ormapper.dto.oracle.ZebraCommonCode" table="ZEBRA_COMMON_CODE" lazy="false">
+		<meta attribute="class-description" inherit="false">공통코드</meta>
+
+		<composite-id>
+			<key-property name="codeType" column="CODE_TYPE" type="java.lang.String" length="30"/>
+			<key-property name="commonCode" column="COMMON_CODE" type="java.lang.String" length="30"/>
+		</composite-id>
+
+		<property name="programConstants" column="PROGRAM_CONSTANTS" not-null="true" type="java.lang.String" length="100"/>
+		<property name="defaultYn" column="DEFAULT_YN" type="java.lang.String" length="1"/>
+		<property name="descriptionEn" column="DESCRIPTION_EN" type="java.lang.String" length="1000"/>
+		<property name="descriptionKo" column="DESCRIPTION_KO" type="java.lang.String" length="1000"/>
+		<property name="insertDate" column="INSERT_DATE" type="java.util.Date"/>
+		<property name="insertUserId" column="INSERT_USER_ID" type="java.lang.String" length="30"/>
+		<property name="sortOrder" column="SORT_ORDER" type="java.lang.String" length="3"/>
+		<property name="updateDate" column="UPDATE_DATE" type="java.util.Date"/>
+		<property name="updateUserId" column="UPDATE_USER_ID" type="java.lang.String" length="30"/>
+		<property name="useYn" column="USE_YN" type="java.lang.String" length="1"/>
+	</class>
+
+	<sql-query name="zebraCommonCode.selectAll">
+	<![CDATA[
+		SELECT CODE_TYPE,
+		       COMMON_CODE,
+		       PROGRAM_CONSTANTS,
+		       DEFAULT_YN,
+		       DESCRIPTION_EN,
+		       DESCRIPTION_KO,
+		       TO_CHAR(INSERT_DATE, 'yyyymmddhh24miss') AS INSERT_DATE,
+		       INSERT_USER_ID,
+		       SORT_ORDER,
+		       TO_CHAR(UPDATE_DATE, 'yyyymmddhh24miss') AS UPDATE_DATE,
+		       UPDATE_USER_ID,
+		       USE_YN
+		  FROM ZEBRA_COMMON_CODE
+		 WHERE 1 = 1
+		 ${auto_fill}
+		 ${frameworkGeneratedWhere}
+		 ${frameworkGeneratedOrderBy}
+		 FOR UPDATE
+	]]>
+	</sql-query>
+
+	<sql-query name="zebraCommonCode.insert">
+	<![CDATA[
+		INSERT INTO ZEBRA_COMMON_CODE (
+		       CODE_TYPE,
+		       COMMON_CODE,
+		       PROGRAM_CONSTANTS,
+		       DEFAULT_YN,
+		       DESCRIPTION_EN,
+		       DESCRIPTION_KO,
+		       INSERT_DATE,
+		       INSERT_USER_ID,
+		       SORT_ORDER,
+		       UPDATE_DATE,
+		       UPDATE_USER_ID,
+		       USE_YN
+		       )
+		VALUES (
+		       ${CODE_TYPE},
+		       ${COMMON_CODE},
+		       ${PROGRAM_CONSTANTS},
+		       ${DEFAULT_YN},
+		       ${DESCRIPTION_EN},
+		       ${DESCRIPTION_KO},
+		       ${INSERT_DATE},
+		       ${INSERT_USER_ID},
+		       ${SORT_ORDER},
+		       ${UPDATE_DATE},
+		       ${UPDATE_USER_ID},
+		       ${USE_YN}
+		       )
+	]]>
+	</sql-query>
+
+	<sql-query name="zebraCommonCode.update">
+	<![CDATA[
+		UPDATE ZEBRA_COMMON_CODE
+		   SET PROGRAM_CONSTANTS = ${PROGRAM_CONSTANTS},
+		       DEFAULT_YN = ${DEFAULT_YN},
+		       DESCRIPTION_EN = ${DESCRIPTION_EN},
+		       DESCRIPTION_KO = ${DESCRIPTION_KO},
+		       INSERT_DATE = ${INSERT_DATE},
+		       INSERT_USER_ID = ${INSERT_USER_ID},
+		       SORT_ORDER = ${SORT_ORDER},
+		       UPDATE_DATE = ${UPDATE_DATE},
+		       UPDATE_USER_ID = ${UPDATE_USER_ID},
+		       USE_YN = ${USE_YN}
+		 WHERE 1 = 1
+		   ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+
+	<sql-query name="zebraCommonCode.updateColumns">
+	<![CDATA[
+		UPDATE ZEBRA_COMMON_CODE
+		   SET ${frameworkGeneratedColumnsToUpdate}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+
+	<sql-query name="zebraCommonCode.delete">
+	<![CDATA[
+		DELETE ZEBRA_COMMON_CODE
+		 WHERE 1 = 1
+		   ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+</hibernate-mapping>

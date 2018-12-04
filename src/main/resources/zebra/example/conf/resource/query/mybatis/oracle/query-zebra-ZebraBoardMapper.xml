@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--/*
+ * Framework Generated MyBatis DAO Mapper Query XML Source
+ * - ZEBRA_BOARD - 게시판
+ */-->
+<mapper namespace="zebra.example.conf.resource.ormapper.dao.ZebraBoard.ZebraBoardDaoMapper">
+	<resultMap id="hashmap" type="java.util.HashMap"></resultMap>
+
+	<select id="getNoticeBoardDataSetByCriteria" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		 select connect_by_root board.article_id as root,
+		        level,
+		        connect_by_isleaf as is_leaf,
+		        substr(sys_connect_by_path(article_id, '>'), 2) as path,
+		        board.article_id,
+		        board.board_type,
+		        board.writer_id,
+		        board.writer_name,
+		        board.article_password,
+		        board.writer_email,
+		        board.writer_ip_address,
+		        board.article_subject,
+		        board.visit_cnt,
+		        to_char(nvl(update_date, insert_date), '${dateFormat}') as created_date,
+		        board.ref_article_id,
+		        (select count(file_id) file_cnt
+		           from zebra_board_file
+		          where article_id = board.article_id
+		        ) as file_cnt
+		   from zebra_board board
+		  where board_type = '${boardType}'
+		    ${auto_fill}
+		connect by prior board.article_id = board.ref_article_id
+		  start with board.ref_article_id = '-1'
+		  order siblings by board.insert_date desc
+	]]>
+	</select>
+	<select id="getNoticeBoardDataSetByCriteriaPagination" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		select *
+		  from (select page_query.*,
+		               rownum num
+		          from (
+		 select connect_by_root board.article_id as root,
+		        level,
+		        connect_by_isleaf as is_leaf,
+		        substr(sys_connect_by_path(article_id, '>'), 2) as path,
+		        board.article_id,
+		        board.board_type,
+		        board.writer_id,
+		        board.writer_name,
+		        board.article_password,
+		        board.writer_email,
+		        board.writer_ip_address,
+		        board.article_subject,
+		        board.visit_cnt,
+		        to_char(nvl(update_date, insert_date), '${dateFormat}') as created_date,
+		        board.ref_article_id,
+		        (select count(file_id) file_cnt
+		           from zebra_board_file
+		          where article_id = board.article_id
+		        ) as file_cnt
+		   from zebra_board board
+		  where board_type = '${boardType}'
+		    ${auto_fill}
+		connect by prior board.article_id = board.ref_article_id
+		  start with board.ref_article_id = '-1'
+		  order siblings by board.insert_date desc
+		               ) page_query
+		       )
+		 where num between ${startRow} and ${endRow}
+	]]>
+	</select>
+
+	<select id="getFreeBoardDataSetByCriteria" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		 select connect_by_root board.article_id as root,
+		        level,
+		        connect_by_isleaf as is_leaf,
+		        substr(sys_connect_by_path(article_id, '>'), 2) as path,
+		        board.article_id,
+		        board.board_type,
+		        board.writer_id,
+		        board.writer_name,
+		        board.article_password,
+		        board.writer_email,
+		        board.writer_ip_address,
+		        board.article_subject,
+		        board.visit_cnt,
+		        to_char(nvl(update_date, insert_date), '${dateFormat}') as created_date,
+		        board.ref_article_id,
+		        (select count(file_id) file_cnt
+		           from zebra_board_file
+		          where article_id = board.article_id
+		        ) as file_cnt
+		   from zebra_board board
+		  where board_type = '${boardType}'
+		    ${auto_fill}
+		connect by prior board.article_id = board.ref_article_id
+		  start with board.ref_article_id = '-1'
+		  order siblings by board.insert_date desc
+	]]>
+	</select>
+	<select id="getFreeBoardDataSetByCriteriaPagination" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		select *
+		  from (select page_query.*,
+		               rownum num
+		          from (
+		 select connect_by_root board.article_id as root,
+		        level,
+		        connect_by_isleaf as is_leaf,
+		        substr(sys_connect_by_path(article_id, '>'), 2) as path,
+		        board.article_id,
+		        board.board_type,
+		        board.writer_id,
+		        board.writer_name,
+		        board.article_password,
+		        board.writer_email,
+		        board.writer_ip_address,
+		        board.article_subject,
+		        board.visit_cnt,
+		        to_char(nvl(update_date, insert_date), '${dateFormat}') as created_date,
+		        board.ref_article_id,
+		        (select count(file_id) file_cnt
+		           from zebra_board_file
+		          where article_id = board.article_id
+		        ) as file_cnt
+		   from zebra_board board
+		  where board_type = '${boardType}'
+		    ${auto_fill}
+		connect by prior board.article_id = board.ref_article_id
+		  start with board.ref_article_id = '-1'
+		  order siblings by board.insert_date desc
+		               ) page_query
+		       )
+		 where num between ${startRow} and ${endRow}
+	]]>
+	</select>
+</mapper>

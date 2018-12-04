@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--/*
+ * Framework Generated Hibernate Config hbm Source
+ * - ZEBRA_BOARD - 게시판
+ */-->
+<hibernate-mapping>
+	<class name="zebra.example.conf.resource.ormapper.dto.oracle.ZebraBoard" table="ZEBRA_BOARD" lazy="false">
+		<meta attribute="class-description" inherit="false">게시판</meta>
+
+		<id name="articleId" column="ARTICLE_ID" type="java.lang.String" length="30"></id>
+
+		<property name="boardType" column="BOARD_TYPE" not-null="true" type="java.lang.String" length="30"/>
+		<property name="refArticleId" column="REF_ARTICLE_ID" not-null="true" type="java.lang.String" length="30"/>
+		<property name="visitCnt" column="VISIT_CNT" not-null="true" type="java.lang.Double"/>
+		<property name="writerName" column="WRITER_NAME" not-null="true" type="java.lang.String" length="50"/>
+		<property name="articleContents" column="ARTICLE_CONTENTS" type="java.lang.String"/>
+		<property name="articlePassword" column="ARTICLE_PASSWORD" type="java.lang.String" length="12"/>
+		<property name="articleSubject" column="ARTICLE_SUBJECT" type="java.lang.String" length="1000"/>
+		<property name="insertDate" column="INSERT_DATE" type="java.util.Date"/>
+		<property name="insertUserId" column="INSERT_USER_ID" type="java.lang.String" length="30"/>
+		<property name="updateDate" column="UPDATE_DATE" type="java.util.Date"/>
+		<property name="updateUserId" column="UPDATE_USER_ID" type="java.lang.String" length="30"/>
+		<property name="writerEmail" column="WRITER_EMAIL" type="java.lang.String" length="100"/>
+		<property name="writerId" column="WRITER_ID" type="java.lang.String" length="30"/>
+		<property name="writerIpAddress" column="WRITER_IP_ADDRESS" type="java.lang.String" length="50"/>
+	</class>
+
+	<sql-query name="zebraBoard.selectAll">
+	<![CDATA[
+		SELECT ARTICLE_ID,
+		       BOARD_TYPE,
+		       REF_ARTICLE_ID,
+		       VISIT_CNT,
+		       WRITER_NAME,
+		       ARTICLE_CONTENTS,
+		       ARTICLE_PASSWORD,
+		       ARTICLE_SUBJECT,
+		       TO_CHAR(INSERT_DATE, 'yyyymmddhh24miss') AS INSERT_DATE,
+		       INSERT_USER_ID,
+		       TO_CHAR(UPDATE_DATE, 'yyyymmddhh24miss') AS UPDATE_DATE,
+		       UPDATE_USER_ID,
+		       WRITER_EMAIL,
+		       WRITER_ID,
+		       WRITER_IP_ADDRESS
+		  FROM ZEBRA_BOARD
+		 WHERE 1 = 1
+		 ${auto_fill}
+		 ${frameworkGeneratedWhere}
+		 ${frameworkGeneratedOrderBy}
+		 FOR UPDATE
+	]]>
+	</sql-query>
+
+	<sql-query name="zebraBoard.insert">
+	<![CDATA[
+		INSERT INTO ZEBRA_BOARD (
+		       ARTICLE_ID,
+		       BOARD_TYPE,
+		       REF_ARTICLE_ID,
+		       VISIT_CNT,
+		       WRITER_NAME,
+		       ARTICLE_CONTENTS,
+		       ARTICLE_PASSWORD,
+		       ARTICLE_SUBJECT,
+		       INSERT_DATE,
+		       INSERT_USER_ID,
+		       UPDATE_DATE,
+		       UPDATE_USER_ID,
+		       WRITER_EMAIL,
+		       WRITER_ID,
+		       WRITER_IP_ADDRESS
+		       )
+		VALUES (
+		       ${ARTICLE_ID},
+		       ${BOARD_TYPE},
+		       ${REF_ARTICLE_ID},
+		       ${VISIT_CNT},
+		       ${WRITER_NAME},
+		       ${ARTICLE_CONTENTS},
+		       ${ARTICLE_PASSWORD},
+		       ${ARTICLE_SUBJECT},
+		       ${INSERT_DATE},
+		       ${INSERT_USER_ID},
+		       ${UPDATE_DATE},
+		       ${UPDATE_USER_ID},
+		       ${WRITER_EMAIL},
+		       ${WRITER_ID},
+		       ${WRITER_IP_ADDRESS}
+		       )
+	]]>
+	</sql-query>
+
+	<sql-query name="zebraBoard.update">
+	<![CDATA[
+		UPDATE ZEBRA_BOARD
+		   SET BOARD_TYPE = ${BOARD_TYPE},
+		       REF_ARTICLE_ID = ${REF_ARTICLE_ID},
+		       VISIT_CNT = ${VISIT_CNT},
+		       WRITER_NAME = ${WRITER_NAME},
+		       ARTICLE_CONTENTS = ${ARTICLE_CONTENTS},
+		       ARTICLE_PASSWORD = ${ARTICLE_PASSWORD},
+		       ARTICLE_SUBJECT = ${ARTICLE_SUBJECT},
+		       INSERT_DATE = ${INSERT_DATE},
+		       INSERT_USER_ID = ${INSERT_USER_ID},
+		       UPDATE_DATE = ${UPDATE_DATE},
+		       UPDATE_USER_ID = ${UPDATE_USER_ID},
+		       WRITER_EMAIL = ${WRITER_EMAIL},
+		       WRITER_ID = ${WRITER_ID},
+		       WRITER_IP_ADDRESS = ${WRITER_IP_ADDRESS}
+		 WHERE 1 = 1
+		   ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+
+	<sql-query name="zebraBoard.updateColumns">
+	<![CDATA[
+		UPDATE ZEBRA_BOARD
+		   SET ${frameworkGeneratedColumnsToUpdate}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+
+	<sql-query name="zebraBoard.delete">
+	<![CDATA[
+		DELETE ZEBRA_BOARD
+		 WHERE 1 = 1
+		   ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+</hibernate-mapping>

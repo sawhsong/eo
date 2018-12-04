@@ -1,0 +1,123 @@
+{
+	"globalMenu":{
+		"G1":{"menuId":"G1", "menuName_en":"Implicit Objects", "menuName_ko":"내장객체보기", "menuUrl":"/shared/page/implicitObjects.jsp"},
+		"G2":{"menuId":"G2", "menuName_en":"Garbage Collection", "menuName_ko":"메모리정리", "menuUrl":"/zebra/main/getGarbageColletion.do"},
+		"G3":{"menuId":"G3", "menuName_en":"Main Menu", "menuName_ko":"메인메뉴", "menuUrl":"/index.do"}
+	},
+	"mainMenu":{
+		"M100":{
+			"menuId":"M100",
+			"menuLevel":"1",
+			"menuName_en":"Bulletin Board",
+			"menuName_ko":"게시판",
+			"icon":"headerMainMenu-M100",
+			"menuUrl":"/zebra/board/index/getDefault.do",
+			"subMenu":[{
+					"menuId":"M110",
+					"menuLevel":"2",
+					"menuName_en":"Notice Board",
+					"menuName_ko":"공지사항",
+					"icon":"leftMenu-M110",
+					"menuUrl":"/zebra/board/notice/getDefault.do"
+				}, {
+					"menuId":"M120",
+					"menuLevel":"2",
+					"menuName_en":"Free Board",
+					"menuName_ko":"자유게시판",
+					"icon":"leftMenu-M120",
+					"menuUrl":"/zebra/board/freeboard/getDefault.do"
+				}
+			]
+		},
+		"M200":{
+			"menuId":"M200",
+			"menuLevel":"1",
+			"menuName_en":"Framework",
+			"menuName_ko":"프레임웍",
+			"icon":"headerMainMenu-M200",
+			"menuUrl":"/zebra/framework/index/getDefault.do",
+			"subMenu":[{
+					"menuId":"M210",
+					"menuLevel":"2",
+					"menuName_en":"Domain Dictionary",
+					"menuName_ko":"Domain Dictionary",
+					"icon":"leftMenu-M210",
+					"menuUrl":"/zebra/framework/domaindictionary/getDefault.do"
+				}, {
+					"menuId":"M220",
+					"menuLevel":"2",
+					"menuName_en":"DTO Generator",
+					"menuName_ko":"DTO 생성",
+					"icon":"leftMenu-M220",
+					"menuUrl":"/zebra/framework/dtogenerator/getDefault.do"
+				}, {
+					"menuId":"M230",
+					"menuLevel":"2",
+					"menuName_en":"Common Code Mgmt.",
+					"menuName_ko":"공통코드 관리",
+					"icon":"leftMenu-M230",
+					"menuUrl":"/zebra/framework/commoncode/getDefault.do"
+				}, {
+					"menuId":"M240",
+					"menuLevel":"2",
+					"menuName_en":"Source Code Generator",
+					"menuName_ko":"소스코드 생성",
+					"icon":"leftMenu-M240",
+					"menuUrl":"/zebra/framework/sourcegenerator/getDefault.do"
+				}, {
+					"menuId":"M250",
+					"menuLevel":"2",
+					"menuName_en":"Table Creation Script",
+					"menuName_ko":"테이블 생성 Script",
+					"icon":"leftMenu-M250",
+					"menuUrl":"/zebra/framework/tablescript/getDefault.do"
+				}
+			]
+		},
+		"M300":{
+			"menuId":"M300",
+			"menuLevel":"1",
+			"menuName_en":"Sample Codes",
+			"menuName_ko":"샘플코드",
+			"icon":"headerMainMenu-M300",
+			"menuUrl":"/zebra/sample/index/getDefault.do",
+			"subMenu":[{
+					"menuId":"M310",
+					"menuLevel":"2",
+					"menuName_en":"UI Element",
+					"menuName_ko":"화면요소",
+					"icon":"leftMenu-M310",
+					"menuUrl":"/zebra/sample/uielement/getDefault.do"
+				}, {
+					"menuId":"M320",
+					"menuLevel":"2",
+					"menuName_en":"Multiple Datasource",
+					"menuName_ko":"다중 데이터소스",
+					"icon":"leftMenu-M320",
+					"menuUrl":"/zebra/sample/multidatasource/getDefault.do"
+				}, {
+					"menuId":"M330",
+					"menuLevel":"2",
+					"menuName_en":"Web Services(REST)",
+					"menuName_ko":"웹서비스(REST)",
+					"icon":"leftMenu-M330",
+					"menuUrl":"/zebra/sample/restwebservice/getDefault.do"
+				}, {
+					"menuId":"M340",
+					"menuLevel":"2",
+					"menuName_en":"Web Services(SOAP)",
+					"menuName_ko":"웹서비스(SOAP)",
+					"icon":"leftMenu-M340",
+					"menuUrl":"/zebra/sample/soapwebservice/getDefault.do"
+				}, {
+					"menuId":"M350",
+					"menuLevel":"2",
+					"menuName_en":"JMS(ActiveMQ)",
+					"menuName_ko":"메시지서비스(ActiveMQ)",
+					"icon":"leftMenu-M350",
+					"menuUrl":"/zebra/sample/jms/getDefault.do"
+				}
+			]
+		},
+	}
+}

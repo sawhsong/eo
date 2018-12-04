@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--/*
+ * Framework Generated MyBatis DAO Mapper Query XML Source
+ * - ZEBRA_BOARD_FILE - 게시판 첨부파일
+ */-->
+<mapper namespace="zebra.example.conf.resource.ormapper.dao.ZebraBoardFile.ZebraBoardFileDaoMapper">
+	<resultMap id="hashmap" type="java.util.HashMap"></resultMap>
+
+	<select id="getBoardFileListDataSetByArticleIdForDeletion" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		select *
+		  from nony_board_file
+		 where article_id in (select article_id
+		                        from nony_board
+		                     connect by prior article_id = ref_article_id
+		                       start with article_id = '${articleId}')
+	]]>
+	</select>
+</mapper>

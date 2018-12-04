@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--/*
+ * Framework Generated MyBatis DTO Mapper XML Source
+ * - SYS_USER - User Info
+ */-->
+<mapper namespace="project.conf.resource.ormapper.mybatis.oracle.SysUser.SysUserMapper">
+	<resultMap id="hashmap" type="java.util.HashMap"></resultMap>
+
+	<select id="selectAll" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT USER_ID,
+		       AUTH_GROUP_ID,
+		       IS_ACTIVE,
+		       LANGUAGE,
+		       LOGIN_ID,
+		       LOGIN_PASSWORD,
+		       MAX_ROW_PER_PAGE,
+		       PAGE_NUM_PER_PAGE,
+		       PERSON_ID,
+		       THEME_TYPE,
+		       USER_NAME,
+		       USER_STATUS,
+		       USER_TYPE,
+		       DESCRIPTION,
+		       TO_CHAR(DISABLED_DATE, 'yyyymmddhh24miss') AS DISABLED_DATE,
+		       EMAIL,
+		       TO_CHAR(INSERT_DATE, 'yyyymmddhh24miss') AS INSERT_DATE,
+		       INSERT_USER_ID,
+		       IS_PORTAL_USER,
+		       PHOTO_PATH,
+		       PIN,
+		       PORTAL_ORG_PROFILE_ID,
+		       PORTAL_SECURITY_ROLE,
+		       PORTAL_SKIN,
+		       PROP_TO_PORTAL,
+		       RESET_PASSWORD,
+		       RESET_TERM_CONDITION,
+		       SECURITY_QUESTION_1,
+		       SECURITY_QUESTION_2,
+		       SECURITY_QUESTION_ANSWER_1,
+		       SECURITY_QUESTION_ANSWER_2,
+		       TO_CHAR(UPDATE_DATE, 'yyyymmddhh24miss') AS UPDATE_DATE,
+		       UPDATE_USER_ID
+		  FROM SYS_USER
+		 WHERE 1 = 1
+		 ${auto_fill}
+		 ${frameworkGeneratedWhere}
+		 ${frameworkGeneratedOrderBy}
+		 FOR UPDATE
+	]]>
+	</select>
+
+	<insert id="insert" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO SYS_USER (
+		       USER_ID,
+		       AUTH_GROUP_ID,
+		       IS_ACTIVE,
+		       LANGUAGE,
+		       LOGIN_ID,
+		       LOGIN_PASSWORD,
+		       MAX_ROW_PER_PAGE,
+		       PAGE_NUM_PER_PAGE,
+		       PERSON_ID,
+		       THEME_TYPE,
+		       USER_NAME,
+		       USER_STATUS,
+		       USER_TYPE,
+		       DESCRIPTION,
+		       DISABLED_DATE,
+		       EMAIL,
+		       INSERT_DATE,
+		       INSERT_USER_ID,
+		       IS_PORTAL_USER,
+		       PHOTO_PATH,
+		       PIN,
+		       PORTAL_ORG_PROFILE_ID,
+		       PORTAL_SECURITY_ROLE,
+		       PORTAL_SKIN,
+		       PROP_TO_PORTAL,
+		       RESET_PASSWORD,
+		       RESET_TERM_CONDITION,
+		       SECURITY_QUESTION_1,
+		       SECURITY_QUESTION_2,
+		       SECURITY_QUESTION_ANSWER_1,
+		       SECURITY_QUESTION_ANSWER_2,
+		       UPDATE_DATE,
+		       UPDATE_USER_ID
+		       )
+		VALUES (
+		       ${USER_ID},
+		       ${AUTH_GROUP_ID},
+		       ${IS_ACTIVE},
+		       ${LANGUAGE},
+		       ${LOGIN_ID},
+		       ${LOGIN_PASSWORD},
+		       ${MAX_ROW_PER_PAGE},
+		       ${PAGE_NUM_PER_PAGE},
+		       ${PERSON_ID},
+		       ${THEME_TYPE},
+		       ${USER_NAME},
+		       ${USER_STATUS},
+		       ${USER_TYPE},
+		       ${DESCRIPTION},
+		       ${DISABLED_DATE},
+		       ${EMAIL},
+		       ${INSERT_DATE},
+		       ${INSERT_USER_ID},
+		       ${IS_PORTAL_USER},
+		       ${PHOTO_PATH},
+		       ${PIN},
+		       ${PORTAL_ORG_PROFILE_ID},
+		       ${PORTAL_SECURITY_ROLE},
+		       ${PORTAL_SKIN},
+		       ${PROP_TO_PORTAL},
+		       ${RESET_PASSWORD},
+		       ${RESET_TERM_CONDITION},
+		       ${SECURITY_QUESTION_1},
+		       ${SECURITY_QUESTION_2},
+		       ${SECURITY_QUESTION_ANSWER_1},
+		       ${SECURITY_QUESTION_ANSWER_2},
+		       ${UPDATE_DATE},
+		       ${UPDATE_USER_ID}
+		       )
+	]]>
+	</insert>
+
+	<insert id="insertWithDto" parameterType="project.conf.resource.ormapper.dto.oracle.SysUser">
+	<![CDATA[
+		INSERT INTO SYS_USER (
+		       USER_ID,
+		       AUTH_GROUP_ID,
+		       IS_ACTIVE,
+		       LANGUAGE,
+		       LOGIN_ID,
+		       LOGIN_PASSWORD,
+		       MAX_ROW_PER_PAGE,
+		       PAGE_NUM_PER_PAGE,
+		       PERSON_ID,
+		       THEME_TYPE,
+		       USER_NAME,
+		       USER_STATUS,
+		       USER_TYPE,
+		       DESCRIPTION,
+		       DISABLED_DATE,
+		       EMAIL,
+		       INSERT_DATE,
+		       INSERT_USER_ID,
+		       IS_PORTAL_USER,
+		       PHOTO_PATH,
+		       PIN,
+		       PORTAL_ORG_PROFILE_ID,
+		       PORTAL_SECURITY_ROLE,
+		       PORTAL_SKIN,
+		       PROP_TO_PORTAL,
+		       RESET_PASSWORD,
+		       RESET_TERM_CONDITION,
+		       SECURITY_QUESTION_1,
+		       SECURITY_QUESTION_2,
+		       SECURITY_QUESTION_ANSWER_1,
+		       SECURITY_QUESTION_ANSWER_2,
+		       UPDATE_DATE,
+		       UPDATE_USER_ID
+		       )
+		VALUES (
+		       #{userId,jdbcType=VARCHAR},
+		       #{authGroupId,jdbcType=VARCHAR},
+		       #{isActive,jdbcType=VARCHAR},
+		       #{language,jdbcType=VARCHAR},
+		       #{loginId,jdbcType=VARCHAR},
+		       #{loginPassword,jdbcType=VARCHAR},
+		       #{maxRowPerPage,jdbcType=NUMERIC},
+		       #{pageNumPerPage,jdbcType=NUMERIC},
+		       #{personId,jdbcType=VARCHAR},
+		       #{themeType,jdbcType=VARCHAR},
+		       #{userName,jdbcType=VARCHAR},
+		       #{userStatus,jdbcType=VARCHAR},
+		       #{userType,jdbcType=VARCHAR},
+		       #{description,jdbcType=VARCHAR},
+		       #{disabledDate,jdbcType=TIME},
+		       #{email,jdbcType=VARCHAR},
+		       #{insertDate,jdbcType=TIME},
+		       #{insertUserId,jdbcType=VARCHAR},
+		       #{isPortalUser,jdbcType=VARCHAR},
+		       #{photoPath,jdbcType=VARCHAR},
+		       #{pin,jdbcType=VARCHAR},
+		       #{portalOrgProfileId,jdbcType=VARCHAR},
+		       #{portalSecurityRole,jdbcType=VARCHAR},
+		       #{portalSkin,jdbcType=VARCHAR},
+		       #{propToPortal,jdbcType=VARCHAR},
+		       #{resetPassword,jdbcType=VARCHAR},
+		       #{resetTermCondition,jdbcType=VARCHAR},
+		       #{securityQuestion1,jdbcType=VARCHAR},
+		       #{securityQuestion2,jdbcType=VARCHAR},
+		       #{securityQuestionAnswer1,jdbcType=VARCHAR},
+		       #{securityQuestionAnswer2,jdbcType=VARCHAR},
+		       #{updateDate,jdbcType=TIME},
+		       #{updateUserId,jdbcType=VARCHAR}
+		       )
+	]]>
+	</insert>
+
+	<update id="update" parameterType="hashmap">
+		UPDATE SYS_USER
+		   SET AUTH_GROUP_ID = ${AUTH_GROUP_ID},
+		       IS_ACTIVE = ${IS_ACTIVE},
+		       LANGUAGE = ${LANGUAGE},
+		       LOGIN_ID = ${LOGIN_ID},
+		       LOGIN_PASSWORD = ${LOGIN_PASSWORD},
+		       MAX_ROW_PER_PAGE = ${MAX_ROW_PER_PAGE},
+		       PAGE_NUM_PER_PAGE = ${PAGE_NUM_PER_PAGE},
+		       PERSON_ID = ${PERSON_ID},
+		       THEME_TYPE = ${THEME_TYPE},
+		       USER_NAME = ${USER_NAME},
+		       USER_STATUS = ${USER_STATUS},
+		       USER_TYPE = ${USER_TYPE},
+		       DESCRIPTION = ${DESCRIPTION},
+		       DISABLED_DATE = ${DISABLED_DATE},
+		       EMAIL = ${EMAIL},
+		       INSERT_DATE = ${INSERT_DATE},
+		       INSERT_USER_ID = ${INSERT_USER_ID},
+		       IS_PORTAL_USER = ${IS_PORTAL_USER},
+		       PHOTO_PATH = ${PHOTO_PATH},
+		       PIN = ${PIN},
+		       PORTAL_ORG_PROFILE_ID = ${PORTAL_ORG_PROFILE_ID},
+		       PORTAL_SECURITY_ROLE = ${PORTAL_SECURITY_ROLE},
+		       PORTAL_SKIN = ${PORTAL_SKIN},
+		       PROP_TO_PORTAL = ${PROP_TO_PORTAL},
+		       RESET_PASSWORD = ${RESET_PASSWORD},
+		       RESET_TERM_CONDITION = ${RESET_TERM_CONDITION},
+		       SECURITY_QUESTION_1 = ${SECURITY_QUESTION_1},
+		       SECURITY_QUESTION_2 = ${SECURITY_QUESTION_2},
+		       SECURITY_QUESTION_ANSWER_1 = ${SECURITY_QUESTION_ANSWER_1},
+		       SECURITY_QUESTION_ANSWER_2 = ${SECURITY_QUESTION_ANSWER_2},
+		       UPDATE_DATE = ${UPDATE_DATE},
+		       UPDATE_USER_ID = ${UPDATE_USER_ID}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	</update>
+
+	<update id="updateWithDto" parameterType="project.conf.resource.ormapper.dto.oracle.SysUser">
+		UPDATE SYS_USER
+		   SET AUTH_GROUP_ID = #{authGroupId,jdbcType=VARCHAR},
+		       IS_ACTIVE = #{isActive,jdbcType=VARCHAR},
+		       LANGUAGE = #{language,jdbcType=VARCHAR},
+		       LOGIN_ID = #{loginId,jdbcType=VARCHAR},
+		       LOGIN_PASSWORD = #{loginPassword,jdbcType=VARCHAR},
+		       MAX_ROW_PER_PAGE = #{maxRowPerPage,jdbcType=NUMERIC},
+		       PAGE_NUM_PER_PAGE = #{pageNumPerPage,jdbcType=NUMERIC},
+		       PERSON_ID = #{personId,jdbcType=VARCHAR},
+		       THEME_TYPE = #{themeType,jdbcType=VARCHAR},
+		       USER_NAME = #{userName,jdbcType=VARCHAR},
+		       USER_STATUS = #{userStatus,jdbcType=VARCHAR},
+		       USER_TYPE = #{userType,jdbcType=VARCHAR},
+		       DESCRIPTION = #{description,jdbcType=VARCHAR},
+		       DISABLED_DATE = #{disabledDate,jdbcType=TIME},
+		       EMAIL = #{email,jdbcType=VARCHAR},
+		       INSERT_DATE = #{insertDate,jdbcType=TIME},
+		       INSERT_USER_ID = #{insertUserId,jdbcType=VARCHAR},
+		       IS_PORTAL_USER = #{isPortalUser,jdbcType=VARCHAR},
+		       PHOTO_PATH = #{photoPath,jdbcType=VARCHAR},
+		       PIN = #{pin,jdbcType=VARCHAR},
+		       PORTAL_ORG_PROFILE_ID = #{portalOrgProfileId,jdbcType=VARCHAR},
+		       PORTAL_SECURITY_ROLE = #{portalSecurityRole,jdbcType=VARCHAR},
+		       PORTAL_SKIN = #{portalSkin,jdbcType=VARCHAR},
+		       PROP_TO_PORTAL = #{propToPortal,jdbcType=VARCHAR},
+		       RESET_PASSWORD = #{resetPassword,jdbcType=VARCHAR},
+		       RESET_TERM_CONDITION = #{resetTermCondition,jdbcType=VARCHAR},
+		       SECURITY_QUESTION_1 = #{securityQuestion1,jdbcType=VARCHAR},
+		       SECURITY_QUESTION_2 = #{securityQuestion2,jdbcType=VARCHAR},
+		       SECURITY_QUESTION_ANSWER_1 = #{securityQuestionAnswer1,jdbcType=VARCHAR},
+		       SECURITY_QUESTION_ANSWER_2 = #{securityQuestionAnswer2,jdbcType=VARCHAR},
+		       UPDATE_DATE = #{updateDate,jdbcType=TIME},
+		       UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR}
+		 WHERE 1 = 1
+		 ${additionalAttributesForUpdateWithDto}
+	</update>
+
+	<update id="updateColumns" parameterType="project.conf.resource.ormapper.dto.oracle.SysUser">
+		UPDATE SYS_USER
+		   SET ${frameworkGeneratedColumnsToUpdate}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	</update>
+
+	<delete id="delete" parameterType="hashmap">
+	<![CDATA[
+		DELETE SYS_USER
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	]]>
+	</delete>
+</mapper>

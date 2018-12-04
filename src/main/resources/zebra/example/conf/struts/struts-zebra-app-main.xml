@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<!--/* Framework Main */-->
+	<package name="zebraMain" extends="default, jfreechart-default" namespace="/zebra" strict-method-invocation="false">
+		<default-interceptor-ref name="ZebraDefaultStack"/>
+
+		<!--/* Main */-->
+		<action name="main/*" class="zebra.example.app.main.MainAction" method="{1}">
+			<result name="index" type="debugDispatcherResult">/zebra/example/app/main/mainDefault.jsp</result>
+			<result name="garbageCollection" type="debugDispatcherResult">/zebra/example/app/main/garbageCollection.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<!--/* Framework */-->
+	<package name="zebraSample" extends="default" namespace="/zebra/sample" strict-method-invocation="false">
+		<default-interceptor-ref name="ZebraDefaultStack"/>
+
+		<!--/* Index */-->
+		<action name="index/*" class="zebra.example.app.sample.index.IndexAction" method="{1}">
+			<result name="index" type="debugDispatcherResult">/zebra/example/app/sample/index/index.jsp</result>
+		</action>
+
+		<!--/* UIElement */-->
+		<action name="uielement/*" class="zebra.example.app.sample.uielement.UielementAction" method="{1}">
+			<result name="uielementList" type="debugDispatcherResult">/zebra/example/app/sample/uielement/uielementList.jsp</result>
+		</action>
+
+		<!--/* MultipleDataSource */-->
+		<action name="multidatasource/*" class="zebra.example.app.sample.multidatasource.MultiDatasourceAction" method="{1}">
+			<result name="list" type="debugDispatcherResult">/zebra/example/app/sample/multidatasource/multiDatasourceList.jsp</result>
+			<result name="detail" type="debugDispatcherResult">/zebra/example/app/sample/multidatasource/multiDatasourceDetailPop.jsp</result>
+			<result name="insert" type="debugDispatcherResult">/zebra/example/app/sample/multidatasource/multiDatasourceInsertPop.jsp</result>
+			<result name="update" type="debugDispatcherResult">/zebra/example/app/sample/multidatasource/multiDatasourceUpdatePop.jsp</result>
+		</action>
+
+		<!--/* WebService(REST) */-->
+		<action name="restwebservice/*" class="zebra.example.app.sample.restwebservice.RestWebServiceClientAction" method="{1}">
+			<result name="list" type="debugDispatcherResult">/zebra/example/app/sample/restwebservice/restWebServiceClientList.jsp</result>
+			<result name="detail" type="debugDispatcherResult">/zebra/example/app/sample/restwebservice/restWebServiceClientDetailPop.jsp</result>
+			<result name="insert" type="debugDispatcherResult">/zebra/example/app/sample/restwebservice/restWebServiceClientInsertPop.jsp</result>
+			<result name="update" type="debugDispatcherResult">/zebra/example/app/sample/restwebservice/restWebServiceClientUpdatePop.jsp</result>
+		</action>
+
+		<!--/* WebService(SOAP) */-->
+		<action name="soapwebservice/*" class="zebra.example.app.sample.soapwebservice.SoapWebServiceClientAction" method="{1}">
+			<result name="list" type="debugDispatcherResult">/zebra/example/app/sample/soapwebservice/soapWebServiceClientList.jsp</result>
+			<result name="detail" type="debugDispatcherResult">/zebra/example/app/sample/soapwebservice/soapWebServiceClientDetailPop.jsp</result>
+			<result name="insert" type="debugDispatcherResult">/zebra/example/app/sample/soapwebservice/soapWebServiceClientInsertPop.jsp</result>
+			<result name="update" type="debugDispatcherResult">/zebra/example/app/sample/soapwebservice/soapWebServiceClientUpdatePop.jsp</result>
+			<result name="soapServiceDownload" type="chain">
+				<param name="actionName">soapServiceDownload</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="soapServiceExport" type="chain">
+				<param name="actionName">soapServiceExport</param>
+				<param name="namespace">/</param>
+			</result>
+		</action>
+	</package>
+</struts>

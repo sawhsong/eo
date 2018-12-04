@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--/*
+ * Framework Generated Hibernate Config hbm Source
+ * - #TABLE_NAME# - #TABLE_DESCRIPTION#
+ */-->
+<hibernate-mapping>
+	<class name="#PACKAGE#.#TABLE_NAME_CAMELCASE#" table="#TABLE_NAME#" lazy="false">
+		<meta attribute="class-description" inherit="false">#TABLE_DESCRIPTION#</meta>
+
+		#PK_COLUMN#
+
+		#COLUMNS#
+	</class>
+
+	<sql-query name="#TABLE_NAME_CAMELCASE_LOWER#.selectAll">
+	<![CDATA[
+		#QUERY_SELECT_ALL#
+	]]>
+	</sql-query>
+
+	<sql-query name="#TABLE_NAME_CAMELCASE_LOWER#.insert">
+	<![CDATA[
+		#QUERY_INSERT#
+	]]>
+	</sql-query>
+
+	<sql-query name="#TABLE_NAME_CAMELCASE_LOWER#.update">
+	<![CDATA[
+		#QUERY_UPDATE#
+	]]>
+	</sql-query>
+
+	<sql-query name="#TABLE_NAME_CAMELCASE_LOWER#.updateColumns">
+	<![CDATA[
+		#QUERY_UPDATE_COLUMNS#
+	]]>
+	</sql-query>
+
+	<sql-query name="#TABLE_NAME_CAMELCASE_LOWER#.delete">
+	<![CDATA[
+		#QUERY_DELETE#
+	]]>
+	</sql-query>
+</hibernate-mapping>

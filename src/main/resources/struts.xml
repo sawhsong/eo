@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="default" namespace="" extends="struts-default">
+		<result-types>
+			<result-type name="debugDispatcherResult" class="zebra.mvc.DebugDispatcherResult"/>
+			<result-type name="ajaxResponse" class="zebra.mvc.AjaxResponse"/>
+		</result-types>
+
+		<interceptors>
+			<interceptor name="timerInterceptor" class="zebra.mvc.TimerInterceptor"/>
+			<interceptor name="requestInterceptor" class="zebra.mvc.RequestInterceptor"/>
+			<interceptor name="loginInterceptor" class="zebra.mvc.LoginInterceptor"/>
+
+			<interceptor-stack name="ZebraDefaultStack">
+				<interceptor-ref name="timerInterceptor"/>
+				<interceptor-ref name="requestInterceptor"/>
+				<interceptor-ref name="loginInterceptor"/>
+<!-- 				<interceptor-ref name="paramsPrepareParamsStack"/> -->
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+
+		<global-results>
+			<!-- Common for both Framework and Project -->
+			<result name="index" type="redirect">index.jsp</result>
+			<result name="checkScreenForLogin" type="debugDispatcherResult">/shared/page/checkScreenForLogin.jsp</result>
+			<result name="ajaxSessionTimeout" type="debugDispatcherResult">/shared/page/ajaxSessionTimeout.jsp</result>
+			<result name="login" type="redirect">/login/index.do</result>
+			<result name="accessDenied" type="debugDispatcherResult">/shared/page/accessDenied.jsp</result>
+			<result name="error" type="debugDispatcherResult">/shared/page/error.jsp</result>
+			<result name="pageHandler" type="debugDispatcherResult">/shared/page/pageHandler.jsp</result>
+			<result name="ajaxResponse" type="ajaxResponse"></result>
+			<result name="export" type="chain">
+				<param name="actionName">export</param>
+				<param name="namespace">/</param>
+			</result>
+		</global-results>
+	</package>
+
+	<!-- Include struts config here -->
+	<include file="zebra/example/conf/struts/struts.xml"/>
+	<include file="project/conf/struts/struts.xml"/>
+</struts>

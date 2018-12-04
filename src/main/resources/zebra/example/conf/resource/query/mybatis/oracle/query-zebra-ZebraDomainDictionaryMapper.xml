@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--/*
+ * Framework Generated MyBatis DAO Mapper Query XML Source
+ * - ZEBRA_DOMAIN_DICTIONARY - Domain Dictionary
+ */-->
+<mapper namespace="zebra.example.conf.resource.ormapper.dao.ZebraDomainDictionary.ZebraDomainDictionaryDaoMapper">
+	<resultMap id="hashmap" type="java.util.HashMap"></resultMap>
+
+	<select id="getDomainDictionaryDataSet" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		select domain_id as domain_id,
+		       domain_name as domain_name,
+		       name_abbreviation as name_abbreviation,
+		       data_type as data_type,
+		       decode(lower(data_type), 'number', decode(data_precision||','||data_scale, ',', '', data_precision||', '||data_scale), to_char(data_length, '9,999')) as data_length,
+		       nvl(description, ' ') as description,
+		       to_char(nvl(update_date, insert_date), '${dateFormat}') as last_update
+		  from zebra_domain_dictionary
+		 where 1 = 1
+		${auto_fill}
+		 order by to_char(nvl(update_date, insert_date), '${dateFormat}') desc
+	]]>
+	</select>
+
+	<select id="getDomainDictionaryDataSetPagination" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		select *
+		  from (select page_query.*,
+		               rownum num
+		          from (
+		select domain_id as domain_id,
+		       domain_name as domain_name,
+		       name_abbreviation as name_abbreviation,
+		       data_type as data_type,
+		       decode(lower(data_type), 'number', decode(data_precision||','||data_scale, ',', '', data_precision||', '||data_scale), to_char(data_length, '9,999')) as data_length,
+		       nvl(description, ' ') as description,
+		       to_char(nvl(update_date, insert_date), '${dateFormat}') as last_update
+		  from zebra_domain_dictionary
+		 where 1 = 1
+		${auto_fill}
+		 order by to_char(nvl(update_date, insert_date), '${dateFormat}') desc
+		               ) page_query
+		       )
+		 where num between ${startRow} and ${endRow}
+	]]>
+	</select>
+
+	<select id="getNameDataSetByName" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+		select domain_name
+		  from zebra_domain_dictionary
+		 where 1 = 1
+		${auto_fill}
+		 order by domain_name
+	]]>
+	</select>
+</mapper>

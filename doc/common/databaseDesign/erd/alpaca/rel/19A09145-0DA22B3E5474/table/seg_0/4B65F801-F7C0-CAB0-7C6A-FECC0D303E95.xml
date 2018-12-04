@@ -1,0 +1,279 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="4B65F801-F7C0-CAB0-7C6A-FECC0D303E95" schemaObject="620113D4-D911-FF99-9D6E-82D500529D4F" name="SYS_COMMON_CODE">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>SYS_COMMON_CODE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<commentInRDBMS>Common Lookup Code</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="CODE_TYPE" id="91A5E9B8-E615-70C6-A296-6FD9939310C3">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_COMMON_CODE</sourceObjSchema>
+<sourceObjName>CODE_TYPE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<commentInRDBMS>Code type (PK) - PERCI codes have 50(need to be amended to 30 later), ideal length is 30</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="COMMON_CODE" id="749A833B-C9AF-2C62-8B9B-D251B1D81581">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_COMMON_CODE</sourceObjSchema>
+<sourceObjName>COMMON_CODE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<commentInRDBMS>Common code (PK) - PERCI codes have 60(need to be amended to 30 later), ideal length is 30</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>60 BYTE</dataTypeSize>
+<ownDataTypeParameters>60 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CODE_MEANING" id="1CF3DB3F-A828-170D-8609-2A94E2D20DA2">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_COMMON_CODE</sourceObjSchema>
+<sourceObjName>CODE_MEANING</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<commentInRDBMS>Code Meaning</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 BYTE</dataTypeSize>
+<ownDataTypeParameters>1000 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DESCRIPTION_KO" id="3481ED62-47D3-D269-C252-2BCA03119983">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_COMMON_CODE</sourceObjSchema>
+<sourceObjName>DESCRIPTION_KO</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<commentInRDBMS>Code Description (Korean) - PERCI codes have 2000(need to be amended to 1000 later), ideal length is 1000</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>2000 BYTE</dataTypeSize>
+<ownDataTypeParameters>2000 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DESCRIPTION_EN" id="A5A26036-C663-C894-52A4-45CD70A7D698">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_COMMON_CODE</sourceObjSchema>
+<sourceObjName>DESCRIPTION_EN</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<commentInRDBMS>Code Description (English) - PERCI codes have 2000(need to be amended to 1000 later), ideal length is 1000</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>2000 BYTE</dataTypeSize>
+<ownDataTypeParameters>2000 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PROGRAM_CONSTANTS" id="20AC58F5-84B4-E9E2-DE55-9B644475AABF">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_COMMON_CODE</sourceObjSchema>
+<sourceObjName>PROGRAM_CONSTANTS</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<commentInRDBMS>Constants value for the common code to be used in program source code</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SORT_ORDER" id="B9749E05-4C05-B346-E9EC-D666F2B08D41">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_COMMON_CODE</sourceObjSchema>
+<sourceObjName>SORT_ORDER</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<commentInRDBMS>Sort order</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>3 BYTE</dataTypeSize>
+<ownDataTypeParameters>3 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="IS_ACTIVE" id="4C440945-58FE-B33D-AE8E-38590E0D6865">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_COMMON_CODE</sourceObjSchema>
+<sourceObjName>IS_ACTIVE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<commentInRDBMS>Is active?</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1 BYTE</dataTypeSize>
+<defaultValue>&apos;Y&apos;</defaultValue>
+<ownDataTypeParameters>1 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="IS_DEFAULT" id="41C12AEC-ED50-8C59-14E7-10994DF9E37E">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_COMMON_CODE</sourceObjSchema>
+<sourceObjName>IS_DEFAULT</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<commentInRDBMS>Is default code item? (default code item should not be deleted)</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1 BYTE</dataTypeSize>
+<defaultValue>&apos;N&apos;</defaultValue>
+<ownDataTypeParameters>1 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="INSERT_USER_ID" id="B60B87DD-5A96-034A-881C-4D5F06065BF3">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_COMMON_CODE</sourceObjSchema>
+<sourceObjName>INSERT_USER_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<commentInRDBMS>Insert User UID</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="INSERT_DATE" id="68A26FF1-C61B-47E0-4BCA-519045CD918C">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_COMMON_CODE</sourceObjSchema>
+<sourceObjName>INSERT_DATE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<commentInRDBMS>Insert Date</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<defaultValue>sysdate</defaultValue>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="UPDATE_USER_ID" id="22127BE3-A0F8-8436-24B6-6254276E66B0">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_COMMON_CODE</sourceObjSchema>
+<sourceObjName>UPDATE_USER_ID</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<commentInRDBMS>Update User UID</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="UPDATE_DATE" id="0AC49CF6-274B-B83C-3AD2-67CF39904727">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>SYS_COMMON_CODE</sourceObjSchema>
+<sourceObjName>UPDATE_DATE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<commentInRDBMS>Update Date</commentInRDBMS>
+<ownerDesignName>alpaca</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="77DC7D02-2191-0B31-E7DA-6AB6FE9E0500" name="PK_SYS_COMMON_CODE">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>PK_SYS_COMMON_CODE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="91A5E9B8-E615-70C6-A296-6FD9939310C3"/>
+<colUsage columnID="749A833B-C9AF-2C62-8B9B-D251B1D81581"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2E5FBC54-69F7-AD6E-6528-7F0BC2DAFF80" name="UK_SYS_COMMON_CODE">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>UK_SYS_COMMON_CODE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="20AC58F5-84B4-E9E2-DE55-9B644475AABF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="42E80AC6-101A-2271-C117-EE7B40205FCB" schemaObject="620113D4-D911-FF99-9D6E-82D500529D4F" name="PK_SYS_COMMON_CODE">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>PK_SYS_COMMON_CODE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="91A5E9B8-E615-70C6-A296-6FD9939310C3"/>
+<colUsage columnID="749A833B-C9AF-2C62-8B9B-D251B1D81581"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9B912F53-3B9C-01C8-0F58-2C71A7BB326F" schemaObject="620113D4-D911-FF99-9D6E-82D500529D4F" name="UK_SYS_COMMON_CODE">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjSchema>ALPACA</sourceObjSchema>
+<sourceObjName>UK_SYS_COMMON_CODE</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="20AC58F5-84B4-E9E2-DE55-9B644475AABF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

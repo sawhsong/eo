@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--/*
+ * Framework Generated MyBatis DTO Mapper XML Source
+ * - #TABLE_NAME# - #TABLE_DESCRIPTION#
+ */-->
+<mapper namespace="#PACKAGE#.#TABLE_NAME_CAMELCASE#Mapper">
+	<resultMap id="hashmap" type="java.util.HashMap"></resultMap>
+
+	<select id="selectAll" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		#QUERY_SELECT_ALL#
+	]]>
+	</select>
+
+	<insert id="insert" parameterType="hashmap">
+	<![CDATA[
+		#QUERY_INSERT#
+	]]>
+	</insert>
+
+	<insert id="insertWithDto" parameterType="#DTO_NAME#">
+	<![CDATA[
+		#QUERY_INSERT_WITH_DTO#
+	]]>
+	</insert>
+
+	<update id="update" parameterType="hashmap">
+		#QUERY_UPDATE#
+	</update>
+
+	<update id="updateWithDto" parameterType="#DTO_NAME#">
+		#QUERY_UPDATE_WITH_DTO#
+	</update>
+
+	<update id="updateColumns" parameterType="#DTO_NAME#">
+		#QUERY_UPDATE_COLUMNS#
+	</update>
+
+	<delete id="delete" parameterType="hashmap">
+	<![CDATA[
+		#QUERY_DELETE#
+	]]>
+	</delete>
+</mapper>

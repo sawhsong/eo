@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- Mail -->
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<!-- Normal mail(Apache James) - Begin -->
+		<property name="host" value="${mail.host.ip}" />
+		<property name="port" value="${mail.host.port}" />
+		<property name="defaultEncoding" value="${mail.default.encoding}" />
+		<!-- Normal mail(Apache James) - End -->
+
+		<!-- Google smtp - Begin -->
+<!-- 		<property name="host" value="${mail.host.ip}" /> -->
+<!-- 		<property name="port" value="${mail.host.port}" /> -->
+<!-- 		<property name="username" value="${mail.default.from}" /> -->
+<!-- 		<property name="password" value="sawh7673sa" /> -->
+<!-- 		<property name="javaMailProperties"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="mail.smtp.auth">true</prop> -->
+<!-- 				<prop key="mail.smtp.starttls.enable">true</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+		<!-- Google smtp - End -->
+	</bean>
+
+	<!--/* Exception email */-->
+	<bean id="exceptionMessageSender" class="${name.package.framework}.mail.ExceptionMessageSender">
+		<property name="javaMailSender" ref="javaMailSender" />
+		<property name="messageSourceAccessor" ref="messageSourceAccessor" />
+	</bean>
+</beans>

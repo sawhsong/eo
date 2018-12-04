@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+
+	<display-name>Alpaca</display-name>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:spring.xml</param-value>
+	</context-param>
+
+	<filter>
+		<filter-name>EncodingFilter</filter-name>
+		<filter-class>zebra.filter.EncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>EncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>struts</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>FrameworkAppLoader</servlet-name>
+		<servlet-class>zebra.config.AppLoader</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>ProjectAppLoader</servlet-name>
+		<servlet-class>project.common.extend.AppLoader</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- WebServices with CXF -->
+	<servlet>
+		<servlet-name>CXFServlet</servlet-name>
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CXFServlet</servlet-name>
+		<url-pattern>/ws/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- Tomcat8 needs this -->
+	<jsp-config>
+		<taglib>
+			<taglib-uri>UI taglib</taglib-uri>
+			<taglib-location>/WEB-INF/tld/tagui.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>Message / Config taglib</taglib-uri>
+			<taglib-location>/WEB-INF/tld/tagmc.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/shared/page/error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/shared/page/error.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/shared/page/error.jsp</location>
+	</error-page>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<resource-ref>
+		<res-ref-name>jdbc/alpacaJndi</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+</web-app>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xmlns:amq="http://activemq.apache.org/schema/core"
+	xmlns:integration="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.5.0.xsd
+		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
+		http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!--/* Queue Sender */-->
+<!-- 	<bean id="zebraMessageQueueSender" class="${name.package.framework}.example.common.jms.ZebraMessageQueueSender"/> -->
+	<!--/* Queue Listener */-->
+<!-- 	<bean id="zebraMessageQueueListener" class="${name.package.framework}.example.common.jms.ZebraMessageQueueListener"/> -->
+<!-- 	<bean class="org.springframework.jms.listener.SimpleMessageListenerContainer"> -->
+<!-- 		<property name="connectionFactory" ref="connectionFactory"/> -->
+<!-- 		<property name="destinationName" value="${jms.queue.name}"/> -->
+<!-- 		<property name="messageListener" ref="zebraMessageQueueListener"/> -->
+<!-- 	</bean> -->
+	<!--/* Queue Receiver */-->
+<!-- 	<bean id="zebraMessageQueueReceiver" class="${name.package.framework}.example.common.jms.ZebraMessageQueueReceiver"/> -->
+
+	<!--/* Topic Sender */-->
+<!-- 	<bean id="zebraMessageTopicSender" class="${name.package.framework}.example.common.jms.ZebraMessageTopicSender"> -->
+<!-- 		<property name="jmsTemplate" ref="jmsTopicTemplate"/> -->
+<!-- 	</bean> -->
+	<!--/* Topic Listener */-->
+<!-- 	<bean id="zebraMessageTopicListener" class="${name.package.framework}.example.common.jms.ZebraMessageTopicListener"/> -->
+<!-- 	<bean class="org.springframework.jms.listener.SimpleMessageListenerContainer"> -->
+<!-- 		<property name="connectionFactory" ref="connectionFactory"/> -->
+<!-- 		<property name="destinationName" value="${jms.topic.name}"/> -->
+<!-- 		<property name="messageListener" ref="zebraMessageTopicListener"/> -->
+<!-- 	</bean> -->
+	<!--/* Topic Listener Container */-->
+<!-- 	<jms:listener-container connection-factory="connectionFactory" acknowledge="auto" destination-type="topic"> -->
+<!-- 		<jms:listener destination="${jms.topic.name}" ref="zebraMessageTopicListener"/> -->
+<!-- 	</jms:listener-container> -->
+</beans>

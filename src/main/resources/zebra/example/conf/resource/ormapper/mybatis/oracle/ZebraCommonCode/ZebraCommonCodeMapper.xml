@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--/*
+ * Framework Generated MyBatis DTO Mapper XML Source
+ * - ZEBRA_COMMON_CODE - 공통코드
+ */-->
+<mapper namespace="zebra.example.conf.resource.ormapper.mybatis.oracle.ZebraCommonCode.ZebraCommonCodeMapper">
+	<resultMap id="hashmap" type="java.util.HashMap"></resultMap>
+
+	<select id="selectAll" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT CODE_TYPE,
+		       COMMON_CODE,
+		       PROGRAM_CONSTANTS,
+		       DEFAULT_YN,
+		       DESCRIPTION_EN,
+		       DESCRIPTION_KO,
+		       TO_CHAR(INSERT_DATE, 'yyyymmddhh24miss') AS INSERT_DATE,
+		       INSERT_USER_ID,
+		       SORT_ORDER,
+		       TO_CHAR(UPDATE_DATE, 'yyyymmddhh24miss') AS UPDATE_DATE,
+		       UPDATE_USER_ID,
+		       USE_YN
+		  FROM ZEBRA_COMMON_CODE
+		 WHERE 1 = 1
+		 ${auto_fill}
+		 ${frameworkGeneratedWhere}
+		 ${frameworkGeneratedOrderBy}
+		 FOR UPDATE
+	]]>
+	</select>
+
+	<insert id="insert" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO ZEBRA_COMMON_CODE (
+		       CODE_TYPE,
+		       COMMON_CODE,
+		       PROGRAM_CONSTANTS,
+		       DEFAULT_YN,
+		       DESCRIPTION_EN,
+		       DESCRIPTION_KO,
+		       INSERT_DATE,
+		       INSERT_USER_ID,
+		       SORT_ORDER,
+		       UPDATE_DATE,
+		       UPDATE_USER_ID,
+		       USE_YN
+		       )
+		VALUES (
+		       ${CODE_TYPE},
+		       ${COMMON_CODE},
+		       ${PROGRAM_CONSTANTS},
+		       ${DEFAULT_YN},
+		       ${DESCRIPTION_EN},
+		       ${DESCRIPTION_KO},
+		       ${INSERT_DATE},
+		       ${INSERT_USER_ID},
+		       ${SORT_ORDER},
+		       ${UPDATE_DATE},
+		       ${UPDATE_USER_ID},
+		       ${USE_YN}
+		       )
+	]]>
+	</insert>
+
+	<insert id="insertWithDto" parameterType="zebra.example.conf.resource.ormapper.dto.oracle.ZebraCommonCode">
+	<![CDATA[
+		INSERT INTO ZEBRA_COMMON_CODE (
+		       CODE_TYPE,
+		       COMMON_CODE,
+		       PROGRAM_CONSTANTS,
+		       DEFAULT_YN,
+		       DESCRIPTION_EN,
+		       DESCRIPTION_KO,
+		       INSERT_DATE,
+		       INSERT_USER_ID,
+		       SORT_ORDER,
+		       UPDATE_DATE,
+		       UPDATE_USER_ID,
+		       USE_YN
+		       )
+		VALUES (
+		       #{codeType,jdbcType=VARCHAR},
+		       #{commonCode,jdbcType=VARCHAR},
+		       #{programConstants,jdbcType=VARCHAR},
+		       #{defaultYn,jdbcType=VARCHAR},
+		       #{descriptionEn,jdbcType=VARCHAR},
+		       #{descriptionKo,jdbcType=VARCHAR},
+		       #{insertDate,jdbcType=TIME},
+		       #{insertUserId,jdbcType=VARCHAR},
+		       #{sortOrder,jdbcType=VARCHAR},
+		       #{updateDate,jdbcType=TIME},
+		       #{updateUserId,jdbcType=VARCHAR},
+		       #{useYn,jdbcType=VARCHAR}
+		       )
+	]]>
+	</insert>
+
+	<update id="update" parameterType="hashmap">
+		UPDATE ZEBRA_COMMON_CODE
+		   SET PROGRAM_CONSTANTS = ${PROGRAM_CONSTANTS},
+		       DEFAULT_YN = ${DEFAULT_YN},
+		       DESCRIPTION_EN = ${DESCRIPTION_EN},
+		       DESCRIPTION_KO = ${DESCRIPTION_KO},
+		       INSERT_DATE = ${INSERT_DATE},
+		       INSERT_USER_ID = ${INSERT_USER_ID},
+		       SORT_ORDER = ${SORT_ORDER},
+		       UPDATE_DATE = ${UPDATE_DATE},
+		       UPDATE_USER_ID = ${UPDATE_USER_ID},
+		       USE_YN = ${USE_YN}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	</update>
+
+	<update id="updateWithDto" parameterType="zebra.example.conf.resource.ormapper.dto.oracle.ZebraCommonCode">
+		UPDATE ZEBRA_COMMON_CODE
+		   SET PROGRAM_CONSTANTS = #{programConstants,jdbcType=VARCHAR},
+		       DEFAULT_YN = #{defaultYn,jdbcType=VARCHAR},
+		       DESCRIPTION_EN = #{descriptionEn,jdbcType=VARCHAR},
+		       DESCRIPTION_KO = #{descriptionKo,jdbcType=VARCHAR},
+		       INSERT_DATE = #{insertDate,jdbcType=TIME},
+		       INSERT_USER_ID = #{insertUserId,jdbcType=VARCHAR},
+		       SORT_ORDER = #{sortOrder,jdbcType=VARCHAR},
+		       UPDATE_DATE = #{updateDate,jdbcType=TIME},
+		       UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR},
+		       USE_YN = #{useYn,jdbcType=VARCHAR}
+		 WHERE 1 = 1
+		 ${additionalAttributesForUpdateWithDto}
+	</update>
+
+	<update id="updateColumns" parameterType="zebra.example.conf.resource.ormapper.dto.oracle.ZebraCommonCode">
+		UPDATE ZEBRA_COMMON_CODE
+		   SET ${frameworkGeneratedColumnsToUpdate}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	</update>
+
+	<delete id="delete" parameterType="hashmap">
+	<![CDATA[
+		DELETE ZEBRA_COMMON_CODE
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	]]>
+	</delete>
+</mapper>

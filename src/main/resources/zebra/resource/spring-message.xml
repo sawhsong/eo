@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<bean id="messageSourceAccessor" class="org.springframework.context.support.MessageSourceAccessor">
+		<constructor-arg ref="messageSource"/>
+	</bean>
+	<bean id="messageSource" class="${name.package.framework}.config.DirectoryResourceBundleMessageSource">
+		<property name="directoryNames">
+			<list>
+				<!-- Message Files Begin -->
+				<value>classpath:${path.dir.messageFwk}</value>
+				<value>classpath:${path.dir.messageProject}</value>
+				<!-- Message Files End -->
+
+				<!-- Hibernate Query Files Begin -->
+<!-- 				<value>classpath:${path.hibernate.mapperDirFwk}</value> -->
+<!-- 				<value>classpath:${path.hibernate.queryDirFwk}</value> -->
+<!-- 				<value>classpath:${path.hibernate.mapperDirProject}</value> -->
+<!-- 				<value>classpath:${path.hibernate.queryDirProject}</value> -->
+				<!-- Hibernate Query Files End -->
+			</list>
+		</property>
+	</bean>
+</beans>

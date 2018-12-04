@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--/*
+ * Framework Generated Hibernate Query hbm Source
+ * - SYS_AUTH_GROUP - Menu Authority Info
+ */-->
+<hibernate-mapping>
+	<sql-query name="query.SysAuthGroup.getAuthGroupDataSetByAuthGroupId">
+	<![CDATA[
+		select *
+		  from sys_auth_group
+		 where group_id = '${authGroupId}'
+		 order by group_id
+	]]>
+	</sql-query>
+
+	<sql-query name="query.SysAuthGroup.getAuthGroupDataSetBySearchCriteria">
+	<![CDATA[
+		select group_id,
+		       group_name,
+		       description,
+		       is_active,
+		       insert_user_id,
+		       (select user_name from sys_user where user_id = sys_auth_group.insert_user_id) as insert_user_name,
+		       to_char(insert_date, '${dateFormat}') as insert_date,
+		       update_user_id,
+		       (select user_name from sys_user where user_id = sys_auth_group.update_user_id) as update_user_name,
+		       to_char(update_date, '${dateFormat}') as update_date
+		  from sys_auth_group
+		 where 1 = 1
+		${auto_fill}
+		${order_by_clause}
+	]]>
+	</sql-query>
+</hibernate-mapping>

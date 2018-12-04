@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jms="http://www.springframework.org/schema/integration/jms"
+	xmlns:amq="http://activemq.apache.org/schema/core"
+	xmlns:integration="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.5.0.xsd
+		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
+		http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!--/* Connection Factory */-->
+	<bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="${jms.broker.url}"/>
+	</bean>
+	<bean id="connectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+		<constructor-arg ref="amqConnectionFactory"/>
+	</bean>
+
+	<!--/* Queue Destination & JMS Template */-->
+	<bean id="defaultQueueDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="${jms.queue.name}"/>
+	</bean>
+	<bean id="jmsQueueTemplate" name="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory"/>
+		<property name="defaultDestination" ref="defaultQueueDestination"/>
+		<property name="pubSubDomain" value="false"/>
+	</bean>
+
+	<!--/* Topic Destination & JMS Template */-->
+	<bean id="defaultTopicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg value="${jms.topic.name}"/>
+	</bean>
+	<bean id="jmsTopicTemplate" name="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory"/>
+		<property name="defaultDestination" ref="defaultTopicDestination"/>
+		<property name="pubSubDomain" value="true"/>
+	</bean>
+</beans>

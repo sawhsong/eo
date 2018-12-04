@@ -1,0 +1,10 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableSpaceOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TableSpaceOraclev10g" name="ALPACA_IDX" directorySegmentName="seg_0" id="FEF03E0B-E47A-82DA-4040-B648365A9228">
+<sourceConnName>ZZ_XE_ALPACA</sourceConnName>
+<sourceObjName>ALPACA_IDX</sourceObjName>
+<createdBy>dsa</createdBy>
+<createdTime>2018-10-05 02:10:31 UTC</createdTime>
+<ownerDesignName>alpaca</ownerDesignName>
+<emUniformSize>0</emUniformSize>
+<extentManagement>LOCAL</extentManagement>
+</TableSpaceOraclev10g>
