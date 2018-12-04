@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Copy Web Sources" default="0.All" basedir=".">
+	<property file="copyWebSource.properties"/>
+
+	<target name="0.All"
+		depends="1.project app,
+				 2.project appjs,
+				 3.project common,
+				 4.shared,
+				 5.zebra app,
+				 6.zebra appjs,
+				 7.zebra common,
+				 8.project conf,
+				 9.zebra conf"
+		description="Run All Targets"
+	/>
+
+	<target name="1.project app" description="Copy project app sources">
+		<copy todir="${target.project.app}">
+			<fileset dir="${src.project.app}"/>
+		</copy>
+	</target>
+
+	<target name="2.project appjs" description="Copy project appjs sources">
+		<copy todir="${target.project.appjs}">
+			<fileset dir="${src.project.appjs}"/>
+		</copy>
+	</target>
+
+	<target name="3.project common" description="Copy project common sources">
+		<copy todir="${target.project.common}">
+			<fileset dir="${src.project.common}"/>
+		</copy>
+	</target>
+
+	<target name="4.shared" description="Copy shared sources">
+		<copy todir="${target.shared}">
+			<fileset dir="${src.shared}"/>
+		</copy>
+	</target>
+
+	<target name="5.zebra app" description="Copy zebra app sources">
+		<copy todir="${target.zebra.app}">
+			<fileset dir="${src.zebra.app}"/>
+		</copy>
+	</target>
+
+	<target name="6.zebra appjs" description="Copy zebra appjs sources">
+		<copy todir="${target.zebra.appjs}">
+			<fileset dir="${src.zebra.appjs}"/>
+		</copy>
+	</target>
+
+	<target name="7.zebra common" description="Copy zebra common sources">
+		<copy todir="${target.zebra.common}">
+			<fileset dir="${src.zebra.common}"/>
+		</copy>
+	</target>
+
+	<target name="8.project conf" description="Copy project conf">
+		<copy todir="${target.project.conf}">
+			<fileset dir="${src.project.conf}"/>
+		</copy>
+	</target>
+
+	<target name="9.zebra conf" description="Copy zebra conf">
+		<copy todir="${target.zebra.conf}">
+			<fileset dir="${src.zebra.conf}"/>
+		</copy>
+	</target>
+</project>
