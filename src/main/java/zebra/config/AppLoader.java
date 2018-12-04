@@ -37,7 +37,7 @@ public class AppLoader extends HttpServlet {
 
 		// Framework Menu & CommonCode
 		ZebraMenuManager.loadMenu();
-		ZebraCommonCodeManager.loadCommonCode();
+//		ZebraCommonCodeManager.loadCommonCode();
 
 		MessageManager.loadMessageBundles();
 	}

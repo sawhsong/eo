@@ -8,7 +8,7 @@
 	<class name="project.conf.resource.ormapper.dto.oracle.SysCommonLookups" table="SYS_COMMON_LOOKUPS" lazy="false">
 		<meta attribute="class-description" inherit="false"></meta>
 
-		<id column="ROWID" type="java.lang.String"/>
+		<id name="lookupId" column="LOOKUP_ID" type="java.lang.String" length="30"></id>
 
 		<property name="createdBy" column="CREATED_BY" not-null="true" type="java.lang.Double"/>
 		<property name="creationDate" column="CREATION_DATE" not-null="true" type="java.util.Date"/>
@@ -26,7 +26,6 @@
 		<property name="description" column="DESCRIPTION" type="java.lang.String" length="4000"/>
 		<property name="displayOrder" column="DISPLAY_ORDER" type="java.lang.Double"/>
 		<property name="fromDateActive" column="FROM_DATE_ACTIVE" type="java.util.Date"/>
-		<property name="lookupId" column="LOOKUP_ID" type="java.lang.Double"/>
 		<property name="toDateActive" column="TO_DATE_ACTIVE" type="java.util.Date"/>
 	</class>
 

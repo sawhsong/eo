@@ -4,8 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import project.common.extend.BaseBiz;
-import project.conf.resource.ormapper.dao.SysMenu.SysMenuDao;
-import project.conf.resource.ormapper.dao.SysMenuAuthLink.SysMenuAuthLinkDao;
+import project.conf.resource.ormapper.dao.EoMenu.EoMenuDao;
+import project.conf.resource.ormapper.dao.EoMenuAuthLink.EoMenuAuthLinkDao;
 import zebra.config.MemoryBean;
 import zebra.data.DataSet;
 import zebra.util.CommonUtil;
@@ -13,28 +13,27 @@ import zebra.util.ConfigUtil;
 
 public class MenuManager extends BaseBiz {
 	private static Logger logger = LogManager.getLogger(MenuManager.class);
-	private static SysMenuDao sysMenuDao;
-	private static SysMenuAuthLinkDao sysMenuAuthLinkDao;
+	private static EoMenuDao eoMenuDao;
+	private static EoMenuAuthLinkDao eoMenuAuthLinkDao;
 
-	public static SysMenuDao getSysMenuDao() {
-		return sysMenuDao;
+	public static EoMenuDao getEoMenuDao() {
+		return eoMenuDao;
 	}
 
-	public static void setSysMenuDao(SysMenuDao sysMenuDao) {
-		MenuManager.sysMenuDao = sysMenuDao;
+	public static void setEoMenuDao(EoMenuDao eoMenuDao) {
+		MenuManager.eoMenuDao = eoMenuDao;
 	}
 
-	public static SysMenuAuthLinkDao getSysMenuAuthLinkDao() {
-		return sysMenuAuthLinkDao;
+	public static EoMenuAuthLinkDao getEoMenuAuthLinkDao() {
+		return eoMenuAuthLinkDao;
 	}
 
-	public static void setSysMenuAuthLinkDao(SysMenuAuthLinkDao sysMenuAuthLinkDao) {
-		MenuManager.sysMenuAuthLinkDao = sysMenuAuthLinkDao;
+	public static void setEoMenuAuthLinkDao(EoMenuAuthLinkDao eoMenuAuthLinkDao) {
+		MenuManager.eoMenuAuthLinkDao = eoMenuAuthLinkDao;
 	}
 
 	public static void loadMenu() throws Exception {
 		MemoryBean.set("menuDataSet", MenuManager.getMenuDataSet());
-		MemoryBean.set("quickMenuDataSet", MenuManager.getQuickMenuDataSet());
 		logger.info("[MemoryBean] - Project Menu has been loaded.");
 	}
 
@@ -43,8 +42,8 @@ public class MenuManager extends BaseBiz {
 	}
 
 	public static DataSet getMenuDataSet() throws Exception {
-		DataSet dsMenuAll = sysMenuDao.getAllActiveMenu();
-		DataSet dsAuthGroupLink = sysMenuAuthLinkDao.getAllMenuAuthLink();
+		DataSet dsMenuAll = eoMenuDao.getAllActiveMenu();
+		DataSet dsAuthGroupLink = eoMenuAuthLinkDao.getAllMenuAuthLink();
 		String delimiter = ConfigUtil.getProperty("delimiter.data");
 		String menuId = "";
 
@@ -80,10 +79,6 @@ public class MenuManager extends BaseBiz {
 		}
 
 		return dsRtn;
-	}
-
-	public static DataSet getQuickMenuDataSet() throws Exception {
-		return sysMenuDao.getAllActiveQuickMenu();
 	}
 
 	public static DataSet getMenu(String authGroupId, String parentMenuId, String startMenuLevel, String endMenuLevel) throws Exception {
@@ -124,9 +119,5 @@ public class MenuManager extends BaseBiz {
 		}
 
 		return dsRtn;
-	}
-
-	public static DataSet getQuickMenu() throws Exception {
-		return (DataSet)MemoryBean.get("quickMenuDataSet");
 	}
 }

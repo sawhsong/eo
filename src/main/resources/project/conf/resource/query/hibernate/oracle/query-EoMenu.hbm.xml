@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--/*
+ * Framework Generated Hibernate Query hbm Source
+ * - EO_MENU - Menu Info
+ */-->
+<hibernate-mapping>
+	<sql-query name="query.EoMenu.getAllActiveMenu">
+	<![CDATA[
+		 select connect_by_root menu_id as root,
+		        level,
+		        connect_by_isleaf as is_leaf,
+		        substr(sys_connect_by_path(menu_id, '/'), 2) as path,
+		        eo_menu.*
+		   from eo_menu
+		  where is_active = 'Y'
+		connect by prior menu_id = parent_menu_id
+		  start with parent_menu_id is null
+		  order siblings by sort_order
+	]]>
+	</sql-query>
+</hibernate-mapping>

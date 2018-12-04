@@ -7,8 +7,8 @@
 
 	<!--/* Menu */-->
 	<bean id="menuManager" name="menuManager" class="${name.package.project}.common.module.menu.MenuManager" parent="baseBiz">
-		<property name="sysMenuDao" ref="sysMenuDao"/>
-		<property name="sysMenuAuthLinkDao" ref="sysMenuAuthLinkDao"/>
+		<property name="eoMenuDao" ref="eoMenuDao"/>
+		<property name="eoMenuAuthLinkDao" ref="eoMenuAuthLinkDao"/>
 	</bean>
 
 	<!--/* CommonCode */-->

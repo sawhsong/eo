@@ -6,7 +6,7 @@ drop table eo_menu_auth_link cascade constraints;
 purge recyclebin;
 
 create table eo_menu_auth_link (
-    group_id                        varchar2(30)                                        not null,   -- Authority group UID (PK) ([sys_auth_group.auth_id])
+    group_id                        varchar2(60)                                        not null,   -- Authority group UID (PK) (lookup_type = PORTAL_SECURITY_GROUP [sys_common_lookup.lookup_code])
     menu_id                         varchar2(30)                                        not null,   -- Menu UID (PK) ([sys_menu.menu_id])
     insert_user_id                  varchar2(30),                                                   -- Insert User UID
     insert_date                     date                        default sysdate,                    -- Insert Date
@@ -17,7 +17,7 @@ create table eo_menu_auth_link (
 );
 
 comment on table  eo_menu_auth_link                 is 'Menu - Authority group mapping';
-comment on column eo_menu_auth_link.group_id        is 'Authority group UID (PK) ([eo_auth_group.auth_id])';
+comment on column eo_menu_auth_link.group_id        is 'Authority group UID (PK) Authority group UID (PK) (lookup_type = PORTAL_SECURITY_GROUP [sys_common_lookup.lookup_code])';
 comment on column eo_menu_auth_link.menu_id         is 'Menu UID (PK) ([eo_menu.menu_id])';
 comment on column eo_menu_auth_link.insert_user_id  is 'Insert User UID';
 comment on column eo_menu_auth_link.insert_date     is 'Insert Date';
