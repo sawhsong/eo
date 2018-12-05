@@ -234,6 +234,8 @@ $(window).load(function() {
 	if (jsconfig.get("useScrollablePanel")) {$.nony._doResizeScrollablePanel();}
 	if (jsconfig.get("useJqTooltip")) {$.nony._jqTooltip();}
 	if (jsconfig.get("useJqSelectmenu")) {$.nony._jqSelectmenu();}
+
+//	$.nony._customiseUserEvent();
 });
 
 /*!

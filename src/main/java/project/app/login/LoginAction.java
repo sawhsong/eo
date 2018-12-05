@@ -8,12 +8,17 @@ package project.app.login;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import project.common.extend.BaseAction;
+import project.conf.resource.ormapper.dto.oracle.HpPersonD;
+import project.conf.resource.ormapper.dto.oracle.SysUsers;
+import zebra.data.DataSet;
+import zebra.util.CommonUtil;
+import zebra.util.ConfigUtil;
 
 public class LoginAction extends BaseAction {
 	@Autowired
 	private LoginBiz biz;
 
-	public String index() throws Exception {
+	public String userlogin() throws Exception {
 		biz.index(paramEntity);
 		return "loginPage";
 	}
@@ -27,31 +32,36 @@ public class LoginAction extends BaseAction {
 		biz.index(paramEntity);
 		return "requestRegister";
 	}
-
+*/
 	public String login() throws Exception {
 		try {
 			biz.exeLogin(paramEntity);
 
 			if (paramEntity.isSuccess()) {
-				SysUser sysUser = (SysUser)paramEntity.getObject("sysUser");
+				SysUsers sysUsers = (SysUsers)paramEntity.getObject("sysUsers");
+				HpPersonD hpPersonD = (HpPersonD)paramEntity.getObject("hpPersonD");
+				DataSet resultDataset = (DataSet)paramEntity.getObject("resultDataset");
 
-				session.setAttribute("UserId", sysUser.getUserId());
-				session.setAttribute("UserName", sysUser.getUserName());
-				session.setAttribute("LoginId", sysUser.getLoginId());
-				session.setAttribute("langCode", CommonUtil.lowerCase(sysUser.getLanguage()));
-				session.setAttribute("themeId", CommonUtil.lowerCase(sysUser.getThemeType()));
-				session.setAttribute("maxRowsPerPage", CommonUtil.toString(sysUser.getMaxRowPerPage(), "###"));
-				session.setAttribute("pageNumsPerPage", CommonUtil.toString(sysUser.getPageNumPerPage(), "###"));
-				session.setAttribute("SysUser", sysUser);
+				session.setAttribute("UserId", CommonUtil.toString(sysUsers.getUserId()));
+				session.setAttribute("LoginId", sysUsers.getUserName()); // LoginId = UserName
+				session.setAttribute("UserSurname", hpPersonD.getSurname());
+				session.setAttribute("UserFirstName", hpPersonD.getFirstName());
+				session.setAttribute("UserFullName", hpPersonD.getFullName());
+				session.setAttribute("SecurityRole", sysUsers.getPortalSecurityRole());
+				session.setAttribute("themeId", CommonUtil.lowerCase(sysUsers.getPortalSkin())); // ThemeId = PortalSkin
+				session.setAttribute("maxRowsPerPage", CommonUtil.toDouble(CommonUtil.split(ConfigUtil.getProperty("view.data.maxRowsPerPage"), ConfigUtil.getProperty("delimiter.data"))[2]));
+				session.setAttribute("pageNumsPerPage", CommonUtil.toDouble(CommonUtil.split(ConfigUtil.getProperty("view.data.pageNumsPerPage"), ConfigUtil.getProperty("delimiter.data"))[0]));
+				session.setAttribute("SysUsers", sysUsers);
+				session.setAttribute("HpPersonD", hpPersonD);
 
-				paramEntity.setAjaxResponseDataSet(sysUser.getDataSet());
+				paramEntity.setAjaxResponseDataSet(resultDataset);
 			}
 		} catch (Exception ex) {
 		}
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";
 	}
-
+/*
 	public String exeResetPassword() throws Exception {
 		try {
 			biz.exeResetPassword(paramEntity);

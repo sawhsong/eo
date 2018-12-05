@@ -3,4 +3,10 @@
     <bean class="${name.package.project}.conf.resource.ormapper.dao.EoMenu.EoMenuHDaoImpl" id="eoMenuDao" init-method="init" name="eoMenuDao" parent="baseHDao" scope="prototype"/>
     <!--EoMenuAuthLink DAO-->
     <bean class="${name.package.project}.conf.resource.ormapper.dao.EoMenuAuthLink.EoMenuAuthLinkHDaoImpl" id="eoMenuAuthLinkDao" init-method="init" name="eoMenuAuthLinkDao" parent="baseHDao" scope="prototype"/>
+    <!--SysCommonLookups DAO-->
+    <bean class="${name.package.project}.conf.resource.ormapper.dao.SysCommonLookups.SysCommonLookupsHDaoImpl" id="sysCommonLookupsDao" init-method="init" name="sysCommonLookupsDao" parent="baseHDao" scope="prototype"/>
+    <!--SysUsers DAO-->
+    <bean class="${name.package.project}.conf.resource.ormapper.dao.SysUsers.SysUsersHDaoImpl" id="sysUsersDao" init-method="init" name="sysUsersDao" parent="baseHDao" scope="prototype"/>
+    <!--HpPersonD DAO-->
+    <bean class="${name.package.project}.conf.resource.ormapper.dao.HpPersonD.HpPersonDHDaoImpl" id="hpPersonDDao" init-method="init" name="hpPersonDDao" parent="baseHDao" scope="prototype"/>
 </beans>

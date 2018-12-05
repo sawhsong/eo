@@ -26,7 +26,7 @@
 			<result name="index" type="redirect">index.jsp</result>
 			<result name="checkScreenForLogin" type="debugDispatcherResult">/shared/page/checkScreenForLogin.jsp</result>
 			<result name="ajaxSessionTimeout" type="debugDispatcherResult">/shared/page/ajaxSessionTimeout.jsp</result>
-			<result name="login" type="redirect">/login/index.do</result>
+			<result name="login" type="redirect">/login/userlogin</result>
 			<result name="accessDenied" type="debugDispatcherResult">/shared/page/accessDenied.jsp</result>
 			<result name="error" type="debugDispatcherResult">/shared/page/error.jsp</result>
 			<result name="pageHandler" type="debugDispatcherResult">/shared/page/pageHandler.jsp</result>

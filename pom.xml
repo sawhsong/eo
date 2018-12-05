@@ -351,6 +351,21 @@
 			<artifactId>spring-instrument-tomcat</artifactId>
 			<version>4.3.18.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${version.springframework}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${version.springframework}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${version.springframework}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.apache.struts</groupId>

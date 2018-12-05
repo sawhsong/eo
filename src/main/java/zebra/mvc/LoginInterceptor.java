@@ -64,13 +64,13 @@ public class LoginInterceptor implements Interceptor {
 
 		if (action instanceof LoginAction) {
 			if (CommonUtil.equalsIgnoreCase(invocation.getProxy().getMethod(), "getUserProfile")) {
-				userId = (String)sessionMap.get("UserId");
+				userId = (String)sessionMap.get("LoginId");
 				if (CommonUtil.isBlank(userId)) {
 					returnValue = "checkScreenForLogin";
 				}
 			}
 		} else {
-			userId = (String)sessionMap.get("UserId");
+			userId = (String)sessionMap.get("LoginId");
 			if (CommonUtil.isBlank(userId)) {
 				if (isAjaxCall(request)) {
 					returnValue = "ajaxSessionTimeout";

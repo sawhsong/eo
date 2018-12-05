@@ -40,19 +40,18 @@ $(function() {
 			}
 
 			commonJs.ajaxSubmit({
-				url:"/login/login.do",
+				url:"/login/login",
 				dataType:"json",
 				formId:"fmDefault",
 				success:function(data, textStatus) {
 					var result = commonJs.parseAjaxResult(data, textStatus, "json");
 					if (result.isSuccess == true || result.isSuccess == "true") {
 						var dataSet = result.dataSet;
-//						var actionString = "/index/dashboard.do";
-						var actionString = dataSet.getValue(0, "DEFAULT_START_URL");
+						var actionString = "/index/dashboard.do";
 
 						commonJs.openDialog({
 							type:com.message.I000,
-							contents:result.message+" "+dataSet.getValue(0, "USER_NAME")+"!",
+							contents:result.message+" "+dataSet.getValue(0, "UserName")+"!",
 							blind:true,
 							draggable:false,
 							width:350,

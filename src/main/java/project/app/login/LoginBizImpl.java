@@ -6,12 +6,20 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import project.common.extend.BaseBiz;
+import project.conf.resource.ormapper.dao.HpPersonD.HpPersonDDao;
+import project.conf.resource.ormapper.dao.SysUsers.SysUsersDao;
+import project.conf.resource.ormapper.dto.oracle.HpPersonD;
+import project.conf.resource.ormapper.dto.oracle.SysUsers;
+import zebra.data.DataSet;
 import zebra.data.ParamEntity;
 import zebra.exception.FrameworkException;
+import zebra.util.CommonUtil;
 
 public class LoginBizImpl extends BaseBiz implements LoginBiz {
-//	@Autowired
-//	private SysUserDao sysUserDao;
+	@Autowired
+	private SysUsersDao sysUsersDao;
+	@Autowired
+	private HpPersonDDao hpPersonDDao;
 	@Autowired
 	private LoginMessageSender loginMessageSender;
 
@@ -117,27 +125,43 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 		}
 		return paramEntity;
 	}
-
+*/
 	public ParamEntity exeLogin(ParamEntity paramEntity) throws Exception {
 		DataSet requestDataSet = paramEntity.getRequestDataSet();
-		SysUser sysUser = new SysUser();
 		String loginId = requestDataSet.getValue("loginId");
 		String password = requestDataSet.getValue("password");
+		SysUsers sysUsers = new SysUsers();
+		HpPersonD hpPersonD = new HpPersonD();
+		DataSet resultDataset = new DataSet();
 
 		try {
-			// Check with LoginID
-			sysUser = sysUserDao.getUserByLoginId(loginId);
-			if (sysUser == null || CommonUtil.isBlank(sysUser.getUserId())) {
-				throw new FrameworkException("E907", getMessage("E907", paramEntity));
+			// Check with LoginID - loginId = userName
+			sysUsers = sysUsersDao.getUserByLoginId(loginId);
+			if (sysUsers == null || CommonUtil.isBlank(sysUsers.getUserName())) {
+//				throw new FrameworkException("E907", getMessage("E907", paramEntity));
+				paramEntity.setSuccess(false);
+				paramEntity.setMessage("E907", getMessage("E907", paramEntity));
+				return paramEntity;
 			}
 
 			// Check with LoginID and Password
-			sysUser = sysUserDao.getUserByLoginIdAndPassword(loginId, password);
-			if (sysUser == null || CommonUtil.isBlank(sysUser.getUserId())) {
-				throw new FrameworkException("E908", getMessage("E908", paramEntity));
+			sysUsers = sysUsersDao.getUserByLoginIdAndPassword(loginId, password);
+			if (sysUsers == null || CommonUtil.isBlank(sysUsers.getUserName())) {
+//				throw new FrameworkException("E908", getMessage("E908", paramEntity));
+				paramEntity.setSuccess(false);
+				paramEntity.setMessage("E908", getMessage("E908", paramEntity));
+				return paramEntity;
 			}
 
-			paramEntity.setObject("sysUser", sysUser);
+			hpPersonD = hpPersonDDao.getPersonByPersonId(CommonUtil.toString(sysUsers.getPersonId()));
+			resultDataset.addName(new String[] {"LoginId", "UserName"});
+			resultDataset.addRow();
+			resultDataset.setValue("LoginId", sysUsers.getUserName());
+			resultDataset.setValue("UserName", hpPersonD.getFirstName());
+
+			paramEntity.setObject("sysUsers", sysUsers);
+			paramEntity.setObject("hpPersonD", hpPersonD);
+			paramEntity.setObject("resultDataset", resultDataset);
 
 			paramEntity.setSuccess(true);
 			paramEntity.setMessage("I903", getMessage("I903", paramEntity));
@@ -146,7 +170,7 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 		}
 		return paramEntity;
 	}
-
+/*
 	public ParamEntity getUserProfile(ParamEntity paramEntity) throws Exception {
 		DataSet requestDataSet = paramEntity.getRequestDataSet();
 		SysUser sysUser = new SysUser();

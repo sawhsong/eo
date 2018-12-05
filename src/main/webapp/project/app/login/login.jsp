@@ -39,7 +39,7 @@ html, body {height:100%;background:#FFFFFF;}
 .passwordLink {float:left;width:50%;text-align:left;}
 .registerLink {float:right;width:50%;text-align:right;}
 
-.divLoginFooter {position:absolute;bottom:0px;width:100%;background:#eeeeee;padding:25px 60px 25px 60px;color:#000000;font-weight:bold;font-size:11px;}
+.divLoginFooter {position:absolute;bottom:0px;width:100%;background:#eeeeee;padding:20px 60px 20px 60px;color:#000000;font-weight:bold;font-size:11px;}
 .divLoginFooterLeft {float:left;width:33%;}
 .divLoginFooterCenter {float:left;width:34%;}
 .divLoginFooterRight {float:right;width:33%;}
@@ -50,7 +50,7 @@ html, body {height:100%;background:#FFFFFF;}
 .clickablItems a, .clickablItems a:link, .clickablItems a:visited {text-decoration:none;color:#000000;}
 .clickablItems a:hover, .clickablItems i:hover {text-decoration:none;color:#000000;transition:background .2s;text-shadow:1px 1px 2px rgba(0, 0, 0, 0.2);}
 .clickablItemsBreak {margin:1px 10px;height:12px;font-size:1px;border-left:2px solid #000000;background-color:#000000;}
-.clickablItems i {font-weight:bold;font-size:14px;}
+.clickablItems i {font-weight:bold;font-size:15px;}
 </style>
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
@@ -62,7 +62,7 @@ html, body {height:100%;background:#FFFFFF;}
 <body>
 <form id="fmDefault" name="fmDefault" method="post" action="">
 <div id="divLogo" class="logoImage">
-	<ui:img id="imgLogo" src="<mc:cp key=imgIcon/>/logoEntitySolutions.png" style="width:100px;height:54px;" status="display"/>
+	<ui:img id="imgLogo" src="<mc:cp key=imgIcon/>/logoEntitySolutions.png" style="width:120px;height:66px;" status="display"/>
 </div>
 <div id="divLoginPanel" class="loginPanel">
 	<div class="panel panel-default panelLogin">
@@ -72,11 +72,11 @@ html, body {height:100%;background:#FFFFFF;}
 		<div class="panel-body">
 			<div class="input-group">
 				<div class="input-group-addon"><ui:icon className="fa-user fa-lg addonIcon" status="display"/></div>
-				<ui:text name="loginId" value="" className="form-control" placeHolder="login.header.loginId" checkName="login.header.loginId" options="mandatory"/>
+				<ui:text name="loginId" className="form-control" placeHolder="login.header.loginId" checkName="login.header.loginId" options="mandatory"/>
 			</div>
 			<div class="input-group">
 				<div class="input-group-addon"><ui:icon className="fa-lock fa-lg addonIcon" status="display"/></div>
-				<ui:password name="password" value="" className="form-control" placeHolder="login.header.password" checkName="login.header.password" options="mandatory"/>
+				<ui:password name="password" className="form-control" placeHolder="login.header.password" checkName="login.header.password" options="mandatory"/>
 			</div>
 			<div class="buttonDiv">
 				<ui:button id="btnLogin" type="success" caption="login.button.login" iconClass="fa-key" buttonStyle="padding-top:8px;width:100%;height:40px;font-size:14px;"/>
@@ -94,11 +94,11 @@ html, body {height:100%;background:#FFFFFF;}
 </div>
 <div class="divLoginFooter">
 	<div class="divLoginFooterLeft">
-		<div class="clickablItems"><a onclick="">&copy; Entity Solutions 2018</a></div>
+		<div class="clickablItems" style="cursor:default">&copy; Entity Solutions 2018</div>
 		<div class="clickablItemsBreak"></div>
-		<div class="clickablItems"><a onclick="">Disclaimer</a></div>
+		<div class="clickablItems"><a onclick="window.open('http://10.14.35.40:7777/webcenter/portal/entity/disclaimer')">Disclaimer</a></div>
 		<div class="clickablItemsBreak"></div>
-		<div class="clickablItems"><a onclick="">Privacy</a></div>
+		<div class="clickablItems"><a onclick="window.open('http://10.14.35.40:7777/webcenter/portal/entity/privacy')">Privacy</a></div>
 	</div>
 	<div class="divLoginFooterCenter"></div>
 	<div class="divLoginFooterRight">

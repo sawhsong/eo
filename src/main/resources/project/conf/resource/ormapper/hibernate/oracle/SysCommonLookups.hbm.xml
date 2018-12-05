@@ -8,7 +8,7 @@
 	<class name="project.conf.resource.ormapper.dto.oracle.SysCommonLookups" table="SYS_COMMON_LOOKUPS" lazy="false">
 		<meta attribute="class-description" inherit="false"></meta>
 
-		<id name="lookupId" column="LOOKUP_ID" type="java.lang.String" length="30"></id>
+		<id name="lookupId" column="LOOKUP_ID" type="java.lang.Double"/>
 
 		<property name="createdBy" column="CREATED_BY" not-null="true" type="java.lang.Double"/>
 		<property name="creationDate" column="CREATION_DATE" not-null="true" type="java.util.Date"/>

@@ -23,13 +23,12 @@
 				<Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="entityonline_access_log" suffix=".txt"/>
 
 				<Context docBase="C:/myworkspace/entityonline/target/entityonline" path="" reloadable="true">
-					<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" maxIdle="30" maxTotal="100" name="jdbc/alpacaJndi" username="alpaca" password="alpaca" type="javax.sql.DataSource" url="jdbc:oracle:thin:@127.0.0.1:1521:XE"/>
-					<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" maxIdle="30" maxTotal="100" name="jdbc/perciJndi" username="PERCI" password="WELCOME1" type="javax.sql.DataSource" url="jdbc:oracle:thin:@entipx-ora2:1521:PROD"/>
+					<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" maxIdle="30" maxTotal="100" name="jdbc/perciJndi" username="PERCI_1122" password="welcome1" type="javax.sql.DataSource" url="jdbc:oracle:thin:@10.14.35.41:1521:TEST"/>
+<!-- 					<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" maxIdle="30" maxTotal="100" name="jdbc/perciJndi" username="PERCI" password="WELCOME1" type="javax.sql.DataSource" url="jdbc:oracle:thin:@entipx-ora2:1521:PROD"/> -->
 				</Context>
 
 <!-- 				<Context docBase="C:/myworkspace/entityonline/target/entityonline.war" path="" reloadable="true"> -->
-<!-- 					<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" maxIdle="30" maxTotal="100" name="jdbc/alpacaJndi" username="alpaca" password="alpaca" type="javax.sql.DataSource" url="jdbc:oracle:thin:@127.0.0.1:1521:XE"/> -->
-<!-- 					<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" maxIdle="30" maxTotal="100" name="jdbc/perciJndi" username="PERCI_DEV" password="welcome1" type="javax.sql.DataSource" url="jdbc:oracle:thin:@10.14.35.41:1521:TEST"/> -->
+<!-- 					<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" maxIdle="30" maxTotal="100" name="jdbc/perciJndi" username="PERCI" password="WELCOME1" type="javax.sql.DataSource" url="jdbc:oracle:thin:@entipx-ora2:1521:PROD"/> -->
 <!-- 				</Context> -->
 			</Host>
 		</Engine>
