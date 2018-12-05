@@ -23,7 +23,7 @@
 ************************************************************************************************/%>
 <%@ include file="/shared/page/incCssJs.jsp"%>
 <style type="text/css">
-body {background:#FFFFFF;}
+html, body {height:100%;background:#FFFFFF;}
 .form-control {padding:6px 12px;}
 .logoImage {margin:0px auto;width:100%;text-align:center;}
 .logoImage img {margin-top:10%;}
@@ -38,6 +38,19 @@ body {background:#FFFFFF;}
 .additionalLink {padding-top:20px;font-size:13px;}
 .passwordLink {float:left;width:50%;text-align:left;}
 .registerLink {float:right;width:50%;text-align:right;}
+
+.divLoginFooter {position:absolute;bottom:0px;width:100%;background:#eeeeee;padding:25px 60px 25px 60px;color:#000000;font-weight:bold;font-size:11px;}
+.divLoginFooterLeft {float:left;width:33%;}
+.divLoginFooterCenter {float:left;width:34%;}
+.divLoginFooterRight {float:right;width:33%;}
+.divLoginFooterLeft div {float:left;}
+.divLoginFooterRight div {float:right;}
+
+.clickablItems {cursor:pointer;padding:0px 10px 0px 10px;}
+.clickablItems a, .clickablItems a:link, .clickablItems a:visited {text-decoration:none;color:#000000;}
+.clickablItems a:hover, .clickablItems i:hover {text-decoration:none;color:#000000;transition:background .2s;text-shadow:1px 1px 2px rgba(0, 0, 0, 0.2);}
+.clickablItemsBreak {margin:1px 10px;height:12px;font-size:1px;border-left:2px solid #000000;background-color:#000000;}
+.clickablItems i {font-weight:bold;font-size:14px;}
 </style>
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
@@ -77,6 +90,25 @@ body {background:#FFFFFF;}
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+<div class="divLoginFooter">
+	<div class="divLoginFooterLeft">
+		<div class="clickablItems"><a onclick="">&copy; Entity Solutions 2018</a></div>
+		<div class="clickablItemsBreak"></div>
+		<div class="clickablItems"><a onclick="">Disclaimer</a></div>
+		<div class="clickablItemsBreak"></div>
+		<div class="clickablItems"><a onclick="">Privacy</a></div>
+	</div>
+	<div class="divLoginFooterCenter"></div>
+	<div class="divLoginFooterRight">
+		<div class="clickablItems"><ui:icon className="fa-google-plus" status="display" script="window.open('https://plus.google.com/100110685160025735918')"/></div>
+		<div class="horGap10"></div>
+		<div class="clickablItems"><ui:icon className="fa-linkedin" status="display" script="window.open('https://www.linkedin.com/company/entity-solutions')"/></div>
+		<div class="horGap10"></div>
+		<div class="clickablItems"><ui:icon className="fa-twitter" status="display" script="window.open('https://twitter.com/entityworld')"/></div>
+		<div class="horGap10"></div>
+		<div class="clickablItems"><ui:icon className="fa-facebook" status="display" script="window.open('https://www.facebook.com/entitysolutions1')"/></div>
 	</div>
 </div>
 </form>
