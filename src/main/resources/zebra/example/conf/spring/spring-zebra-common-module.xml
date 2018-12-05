@@ -13,9 +13,4 @@
 	<!--/* Zebra Auto Completion */-->
 	<bean id="zebraAutoCompletionAction" name="zebraAutoCompletionAction" class="${name.package.framework}.example.common.module.autocompletion.AutoCompletionAction"/>
 	<bean id="zebraAutoCompletionBiz" name="zebraAutoCompletionBiz" class="${name.package.framework}.example.common.module.autocompletion.AutoCompletionBizImpl" parent="baseBiz"/>
-
-	<!--/* DataHelper */-->
-	<bean id="zebraDataHelper" name="zebraDataHelper" class="${name.package.framework}.example.common.module.datahelper.ZebraDataHelper" parent="baseBiz">
-		<property name="sysUserDao" ref="sysUserDao"/>
-	</bean>
 </beans>

@@ -4,7 +4,7 @@
  *************************************************************************************************/
 package project.conf.resource.ormapper.dao.EoMenu;
 
-import project.conf.resource.ormapper.dto.oracle.SysMenu;
+import project.conf.resource.ormapper.dto.oracle.EoMenu;
 import zebra.base.IDao;
 import zebra.data.DataSet;
 
@@ -21,5 +21,5 @@ public interface EoMenuDao extends IDao {
 	 * @return SysMenu
 	 * @throws Exception
 	 */
-	public SysMenu getMenuByMenuId(String menuId) throws Exception;
+	public EoMenu getMenuByMenuId(String menuId) throws Exception;
 }

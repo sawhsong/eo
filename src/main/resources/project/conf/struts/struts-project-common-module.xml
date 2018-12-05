@@ -8,10 +8,5 @@
 		<!--/* Auto Completion */-->
 		<action name="autoCompletion/*" class="project.common.module.autocompletion.AutoCompletionAction" method="{1}">
 		</action>
-
-		<!--/* Common Key Value Lookup */-->
-		<action name="lookup/*" class="project.common.module.commonlookup.CommonLookupAction" method="{1}">
-			<result name="organisation" type="debugDispatcherResult">/project/common/module/commonlookup/OrganisationLookupPop.jsp</result>
-		</action>
 	</package>
 </struts>

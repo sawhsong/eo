@@ -6,20 +6,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import project.common.extend.BaseBiz;
-import project.common.module.commoncode.CommonCodeManager;
-import project.conf.resource.ormapper.dao.SysUser.SysUserDao;
-import project.conf.resource.ormapper.dto.oracle.SysUser;
-import zebra.config.MemoryBean;
-import zebra.data.DataSet;
 import zebra.data.ParamEntity;
 import zebra.exception.FrameworkException;
-import zebra.util.CommonUtil;
-import zebra.util.ConfigUtil;
-import zebra.util.FileUtil;
 
 public class LoginBizImpl extends BaseBiz implements LoginBiz {
-	@Autowired
-	private SysUserDao sysUserDao;
+//	@Autowired
+//	private SysUserDao sysUserDao;
 	@Autowired
 	private LoginMessageSender loginMessageSender;
 
@@ -36,7 +28,7 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 		}
 		return paramEntity;
 	}
-
+/*
 	public ParamEntity exeResetPassword(ParamEntity paramEntity) throws Exception {
 		DataSet requestDataSet = paramEntity.getRequestDataSet();
 		DataSet userDataSet = new DataSet();
@@ -224,4 +216,5 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 		}
 		return paramEntity;
 	}
+*/
 }

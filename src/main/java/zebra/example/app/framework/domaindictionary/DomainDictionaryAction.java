@@ -12,7 +12,7 @@ public class DomainDictionaryAction extends BaseAction {
 		biz.getDefault(paramEntity);
 		return "list";
 	}
-
+/*
 	public String getList() throws Exception {
 		try {
 			biz.getList(paramEntity);
@@ -69,4 +69,5 @@ public class DomainDictionaryAction extends BaseAction {
 		setRequestAttribute("paramEntity", paramEntity);
 		return "export";
 	}
+*/
 }

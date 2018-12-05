@@ -27,17 +27,4 @@
 
 	<!--/* Register Quartz trigger jobs Caution : triggers는 한쪽에서만 등록되어야 함. project scheduleCenter에서 등록할것 */-->
 	<!--/* Define Job Details */-->
-	<bean id="boardArticleCreationJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-		<property name="jobClass" value="${name.package.project}.common.schedule.BoardArticleCreationJob"/>
-		<!-- Service injection -->
-		<property name="jobDataAsMap">
-			<map>
-				<entry key="sysBoardDao" value-ref="sysBoardDao"/>
-			</map>
-		</property>
-	</bean>
-	<bean id="boardArticleCreationJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail" ref="boardArticleCreationJobDetail"/>
-		<property name="cronExpression" value="0 0/5 * * * ?"/>
-	</bean>
 </beans>

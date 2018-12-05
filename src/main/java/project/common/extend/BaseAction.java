@@ -5,7 +5,6 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import project.common.module.commoncode.CommonCodeManager;
 import zebra.base.Action;
 import zebra.util.CommonUtil;
 import zebra.util.ConfigUtil;
@@ -51,7 +50,7 @@ public class BaseAction extends Action {
 			session.setAttribute("projectName", ConfigUtil.getProperty("name.project"));
 			session.setAttribute("langCode", languageCode);
 			session.setAttribute("themeId", themeId);
-			session.setAttribute("themeName", CommonCodeManager.getCodeDescription("USER_THEME_TYPE", CommonUtil.upperCase(themeId)));
+//			session.setAttribute("themeName", CommonCodeManager.getCodeDescription("USER_THEME_TYPE", CommonUtil.upperCase(themeId)));
 			session.setAttribute("maxRowsPerPage", maxRowsPerPage);
 			session.setAttribute("pageNumsPerPage", pageNumsPerPage);
 		} catch (Exception ex) {
@@ -66,7 +65,7 @@ public class BaseAction extends Action {
 		if (CommonUtil.isNotBlank(themeId)) {
 			try {
 				session.setAttribute("themeId", themeId);
-				session.setAttribute("themeName", CommonCodeManager.getCodeDescription("USER_THEME_TYPE", CommonUtil.upperCase(themeId)));
+//				session.setAttribute("themeName", CommonCodeManager.getCodeDescription("USER_THEME_TYPE", CommonUtil.upperCase(themeId)));
 			} catch (Exception ex) {
 				logger.error(ex);
 			}

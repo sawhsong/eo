@@ -30,7 +30,7 @@ public class DomainDictionaryBizImpl extends BaseBiz implements DomainDictionary
 
 		return paramEntity;
 	}
-
+/*
 	public ParamEntity getList(ParamEntity paramEntity) throws Exception {
 		DataSet requestDataSet = paramEntity.getRequestDataSet();
 		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
@@ -219,4 +219,5 @@ public class DomainDictionaryBizImpl extends BaseBiz implements DomainDictionary
 
 		return paramEntity;
 	}
+*/
 }

@@ -29,8 +29,6 @@
 	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-<!-- 				<ref bean="boardArticleCreationJobTrigger"/> -->
-<!-- 				<ref bean="zebraBoardArticleCreationJobTrigger"/> -->
 			</list>
 		</property>
 	</bean>

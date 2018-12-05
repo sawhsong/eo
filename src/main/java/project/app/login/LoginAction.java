@@ -8,10 +8,6 @@ package project.app.login;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import project.common.extend.BaseAction;
-import project.conf.resource.ormapper.dto.oracle.SysUser;
-import zebra.config.MemoryBean;
-import zebra.data.DataSet;
-import zebra.util.CommonUtil;
 
 public class LoginAction extends BaseAction {
 	@Autowired
@@ -21,7 +17,7 @@ public class LoginAction extends BaseAction {
 		biz.index(paramEntity);
 		return "loginPage";
 	}
-
+/*
 	public String resetPassword() throws Exception {
 		biz.index(paramEntity);
 		return "resetPassword";
@@ -132,4 +128,5 @@ public class LoginAction extends BaseAction {
 		System.runFinalization();
 		return "index";
 	}
+*/
 }

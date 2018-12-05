@@ -27,17 +27,4 @@
 
 	<!--/* Register Quartz trigger jobs - Caution : triggers는 한쪽에서만 등록되어야 함. project에서 등록할것 */-->
 	<!--/* Define Job Details */-->
-	<bean id="zebraBoardArticleCreationJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-		<property name="jobClass" value="${name.package.framework}.example.common.schedule.ZebraBoardArticleCreationJob"/>
-		<!-- Service injection test -->
-		<property name="jobDataAsMap">
-			<map>
-				<entry key="zebraBoardDao" value-ref="zebraBoardDao"/>
-			</map>
-		</property>
-	</bean>
-	<bean id="zebraBoardArticleCreationJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail" ref="zebraBoardArticleCreationJobDetail"/>
-		<property name="cronExpression" value="0 0/5 * * * ?"/>
-	</bean>
 </beans>

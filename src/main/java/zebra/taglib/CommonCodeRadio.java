@@ -5,7 +5,6 @@ import java.lang.reflect.Field;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspWriter;
 
-import project.common.module.commoncode.CommonCodeManager;
 import zebra.base.TaglibSupport;
 import zebra.data.DataSet;
 import zebra.example.common.module.commoncode.ZebraCommonCodeManager;
@@ -31,6 +30,7 @@ public class CommonCodeRadio extends TaglibSupport {
 
 	public int doStartTag() {
 		try {
+/*
 			JspWriter jspWriter = pageContext.getOut();
 			HttpSession httpSession = pageContext.getSession();
 			StringBuffer html = new StringBuffer();
@@ -151,6 +151,7 @@ public class CommonCodeRadio extends TaglibSupport {
 
 			jspWriter.print(html.toString());
 			initialise();
+*/
 		} catch (Exception ex) {
 			logger.error(ex);
 		}

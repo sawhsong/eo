@@ -12,7 +12,7 @@ public class SourceGeneratorAction extends BaseAction {
 		biz.getDefault(paramEntity);
 		return "list";
 	}
-
+/*
 	public String getList() throws Exception {
 		try {
 			biz.getList(paramEntity);
@@ -35,4 +35,5 @@ public class SourceGeneratorAction extends BaseAction {
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";
 	}
+*/
 }

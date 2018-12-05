@@ -2,7 +2,6 @@ package zebra.example.app.framework.sourcegenerator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import project.conf.resource.ormapper.dao.SysMenu.SysMenuDao;
 import zebra.config.MemoryBean;
 import zebra.data.DataSet;
 import zebra.data.ParamEntity;
@@ -17,8 +16,6 @@ import zebra.util.FileUtil;
 
 public class SourceGeneratorBizImpl extends BaseBiz implements SourceGeneratorBiz {
 	@Autowired
-	private SysMenuDao sysMenuDao;
-	@Autowired
 	private ZebraFrameworkBizService zebraFramworkBizService;
 
 	public ParamEntity getDefault(ParamEntity paramEntity) throws Exception {
@@ -30,7 +27,7 @@ public class SourceGeneratorBizImpl extends BaseBiz implements SourceGeneratorBi
 			qaMenu.addAutoFillCriteria("searchMenu", "menu_level = '1'");
 			qaMenu.setPagination(false);
 
-			paramEntity.setObject("searchMenu", sysMenuDao.getAllActiveMenuDataSetBySearchCriteria(qaMenu));
+//			paramEntity.setObject("searchMenu", sysMenuDao.getAllActiveMenuDataSetBySearchCriteria(qaMenu));
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
@@ -38,7 +35,7 @@ public class SourceGeneratorBizImpl extends BaseBiz implements SourceGeneratorBi
 
 		return paramEntity;
 	}
-
+/*
 	public ParamEntity getList(ParamEntity paramEntity) throws Exception {
 		DataSet requestDataSet = paramEntity.getRequestDataSet();
 		DataSet resultDataSet = new DataSet();
@@ -51,7 +48,7 @@ public class SourceGeneratorBizImpl extends BaseBiz implements SourceGeneratorBi
 			qaList.addAutoFillCriteria(searchMenu, "root = '"+searchMenu+"'");
 			qaList.setPagination(false);
 
-			resultDataSet = sysMenuDao.getAllActiveMenuDataSetBySearchCriteria(qaList);
+//			resultDataSet = sysMenuDao.getAllActiveMenuDataSetBySearchCriteria(qaList);
 			resultDataSet.addColumn("IS_ACTIVE");
 			for (int i=0; i<resultDataSet.getRowCnt(); i++) {
 				if (CommonUtil.equals(resultDataSet.getValue(i, "IS_LEAF"), "1") && !BeanHelper.containsBean(CommonUtil.toCamelCaseStartLowerCase(resultDataSet.getValue(i, "MENU_ID"))+"Action")) {
@@ -141,4 +138,5 @@ public class SourceGeneratorBizImpl extends BaseBiz implements SourceGeneratorBi
 
 		return paramEntity;
 	}
+*/
 }

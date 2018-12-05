@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration name="alpaca" status="OFF">
+<configuration name="entityonline" status="OFF">
 	<!-- Log Level : TRACE, DEBUG, INFO, WARN, ERROR and FATAL -->
 	<appenders>
 		<Console name="Console" target="SYSTEM_OUT">
 			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss} %p] - %C.%M(%L) - %m%n"/>
 		</Console>
-		<RollingFile name="RollingFile" fileName="C:/apache-tomcat-9.0.10/logs/alpacaRollingFile.log" filePattern="C:/apache-tomcat-9.0.10/logs/$${date:yyyy-MM}/alpacaRollingFile-%d{yyyy-MM-dd}-%i.log">
+		<RollingFile name="RollingFile" fileName="C:/apache-tomcat-9.0.10/logs/entityonlineRollingFile.log" filePattern="C:/apache-tomcat-9.0.10/logs/$${date:yyyy-MM}/entityonlineRollingFile-%d{yyyy-MM-dd}-%i.log">
 			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss} %p] - %C.%M(%L) - %m%n"/>
 			<TimeBasedTriggeringPolicy />
 		</RollingFile>
-		<File name="File" fileName="C:/apache-tomcat-9.0.10/logs/alpacaFile.log" append="false">
+		<File name="File" fileName="C:/apache-tomcat-9.0.10/logs/entityonlineFile.log" append="false">
 			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss} %p] - %C.%M(%L) - %m%n" />
 		</File>
 	</appenders>

@@ -1,18 +1,13 @@
 package project.app.login;
 
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.mail.javamail.MimeMessageHelper;
 
-import project.conf.resource.ormapper.dto.oracle.SysUser;
 import zebra.mail.AbstractMessageSender;
-import zebra.util.ConfigUtil;
 
 @SuppressWarnings("rawtypes")
 public class LoginMessageSender extends AbstractMessageSender implements ApplicationListener {
+/*
 	public void sendResetPasswordMessage(SysUser sysUser) {
 		String defaultEncoding = ConfigUtil.getProperty("mail.default.encoding");
 		String subject = "Password Reset Notice";
@@ -72,7 +67,7 @@ public class LoginMessageSender extends AbstractMessageSender implements Applica
 			logger.error(ex);
 		}
 	}
-
+*/
 	@Override
 	public void onApplicationEvent(ApplicationEvent applicationEvent) {
 	}

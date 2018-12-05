@@ -11,22 +11,7 @@
 		<property name="eoMenuAuthLinkDao" ref="eoMenuAuthLinkDao"/>
 	</bean>
 
-	<!--/* CommonCode */-->
-	<bean id="commonCodeManager" name="commonCodeManager" class="${name.package.project}.common.module.commoncode.CommonCodeManager" parent="baseBiz">
-		<property name="sysCommonCodeDao" ref="sysCommonCodeDao"/>
-	</bean>
-
 	<!--/* Auto Completion */-->
 	<bean id="autoCompletionAction" name="autoCompletionAction" class="${name.package.project}.common.module.autocompletion.AutoCompletionAction"/>
 	<bean id="autoCompletionBiz" name="autoCompletionBiz" class="${name.package.project}.common.module.autocompletion.AutoCompletionBizImpl" parent="baseBiz"/>
-
-	<!--/* Common Lookup */-->
-	<bean id="commonLookupAction" name="commonLookupAction" class="${name.package.project}.common.module.commonlookup.CommonLookupAction"/>
-	<bean id="commonLookupBiz" name="commonLookupBiz" class="${name.package.project}.common.module.commonlookup.CommonLookupBizImpl" parent="baseBiz"/>
-
-	<!--/* DataHelper */-->
-	<bean id="dataHelper" name="dataHelper" class="${name.package.project}.common.module.datahelper.DataHelper" parent="baseBiz">
-		<property name="sysUserDao" ref="sysUserDao"/>
-		<property name="sysAuthGroupDao" ref="sysAuthGroupDao"/>
-	</bean>
 </beans>

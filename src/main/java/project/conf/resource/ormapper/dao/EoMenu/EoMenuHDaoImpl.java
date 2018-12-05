@@ -5,7 +5,7 @@
 package project.conf.resource.ormapper.dao.EoMenu;
 
 import project.common.extend.BaseHDao;
-import project.conf.resource.ormapper.dto.oracle.SysMenu;
+import project.conf.resource.ormapper.dto.oracle.EoMenu;
 import zebra.data.DataSet;
 import zebra.data.QueryAdvisor;
 
@@ -15,9 +15,9 @@ public class EoMenuHDaoImpl extends BaseHDao implements EoMenuDao {
 		return selectAsDataSet(queryAdvisor, "query.EoMenu.getAllActiveMenu");
 	}
 
-	public SysMenu getMenuByMenuId(String menuId) throws Exception {
+	public EoMenu getMenuByMenuId(String menuId) throws Exception {
 		QueryAdvisor queryAdvisor = new QueryAdvisor();
 		queryAdvisor.addWhereClause("menu_id = '"+menuId+"'");
-		return (SysMenu)selectAllToDto(queryAdvisor, new SysMenu());
+		return (EoMenu)selectAllToDto(queryAdvisor, new EoMenu());
 	}
 }
