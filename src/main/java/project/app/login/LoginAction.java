@@ -56,9 +56,10 @@ public class LoginAction extends BaseAction {
 				session.setAttribute("UserFirstName", hpPersonD.getFirstName());
 				session.setAttribute("UserFullName", hpPersonD.getFullName());
 				session.setAttribute("SecurityRole", sysUsers.getPortalSecurityRole());
+				session.setAttribute("StartupUrl", sysUsers.getStartupUrl());
 				session.setAttribute("themeId", CommonUtil.lowerCase(sysUsers.getPortalSkin())); // ThemeId = PortalSkin
-				session.setAttribute("maxRowsPerPage", CommonUtil.toDouble(CommonUtil.split(ConfigUtil.getProperty("view.data.maxRowsPerPage"), ConfigUtil.getProperty("delimiter.data"))[2]));
-				session.setAttribute("pageNumsPerPage", CommonUtil.toDouble(CommonUtil.split(ConfigUtil.getProperty("view.data.pageNumsPerPage"), ConfigUtil.getProperty("delimiter.data"))[0]));
+				session.setAttribute("maxRowsPerPage", CommonUtil.split(ConfigUtil.getProperty("view.data.maxRowsPerPage"), ConfigUtil.getProperty("delimiter.data"))[2]);
+				session.setAttribute("pageNumsPerPage", CommonUtil.split(ConfigUtil.getProperty("view.data.pageNumsPerPage"), ConfigUtil.getProperty("delimiter.data"))[0]);
 				session.setAttribute("SysUsers", sysUsers);
 				session.setAttribute("HpPersonD", hpPersonD);
 

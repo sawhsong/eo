@@ -108,7 +108,7 @@
 //				contentsString += data.message + "</br>";
 
 				$.nony.openDialog({
-					type:"error",
+					type:"Error",
 					contents:data,
 					width:"400",
 					height:"400",

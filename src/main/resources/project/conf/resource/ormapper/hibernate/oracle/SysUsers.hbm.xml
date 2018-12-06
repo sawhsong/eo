@@ -45,6 +45,7 @@
 		<property name="securityQuestionAnswer2" column="SECURITY_QUESTION_ANSWER_2" type="java.lang.String" length="30"/>
 		<property name="supplier" column="SUPPLIER" type="java.lang.Double"/>
 		<property name="toDate" column="TO_DATE" type="java.util.Date"/>
+		<property name="startupUrl" column="STARTUP_URL" type="java.lang.String"/>
 	</class>
 
 	<sql-query name="sysUsers.selectAll">
@@ -84,7 +85,8 @@
 		       SECURITY_QUESTION_ANSWER_1,
 		       SECURITY_QUESTION_ANSWER_2,
 		       SUPPLIER,
-		       TO_CHAR(TO_DATE, 'yyyymmddhh24miss') AS TO_DATE
+		       TO_CHAR(TO_DATE, 'yyyymmddhh24miss') AS TO_DATE,
+		       STARTUP_URL
 		  FROM SYS_USERS
 		 WHERE 1 = 1
 		 ${auto_fill}
@@ -131,7 +133,8 @@
 		       SECURITY_QUESTION_ANSWER_1,
 		       SECURITY_QUESTION_ANSWER_2,
 		       SUPPLIER,
-		       TO_DATE
+		       TO_DATE,
+		       STARTUP_URL
 		       )
 		VALUES (
 		       ${USER_ID},
@@ -169,7 +172,8 @@
 		       ${SECURITY_QUESTION_ANSWER_1},
 		       ${SECURITY_QUESTION_ANSWER_2},
 		       ${SUPPLIER},
-		       ${TO_DATE}
+		       ${TO_DATE},
+		       ${STARTUP_URL}
 		       )
 	]]>
 	</sql-query>
@@ -211,7 +215,8 @@
 		       SECURITY_QUESTION_ANSWER_1 = ${SECURITY_QUESTION_ANSWER_1},
 		       SECURITY_QUESTION_ANSWER_2 = ${SECURITY_QUESTION_ANSWER_2},
 		       SUPPLIER = ${SUPPLIER},
-		       TO_DATE = ${TO_DATE}
+		       TO_DATE = ${TO_DATE},
+		       STARTUP_URL = ${STARTUP_URL}
 		 WHERE 1 = 1
 		   ${frameworkGeneratedWhere}
 	]]>

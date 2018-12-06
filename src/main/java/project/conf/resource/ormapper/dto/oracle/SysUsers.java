@@ -89,6 +89,8 @@ public class SysUsers extends BaseDto implements Serializable {
 	private String SUPPLIER;
 	private Date toDate;
 	private String TO_DATE;
+	private String startupUrl;
+	private String STARTUP_URL;
 	private String insertUserName;
 	private String INSERT_USER_NAME;
 	private String updateUserName;
@@ -452,6 +454,15 @@ public class SysUsers extends BaseDto implements Serializable {
 		setValueFromAccessor("TO_DATE", CommonUtil.toString(toDate));
 	}
 
+	public String getStartupUrl() {
+		return startupUrl;
+	}
+
+	public void setStartupUrl(String startupUrl) throws Exception {
+		this.startupUrl = startupUrl;
+		setValueFromAccessor("STARTUP_URL", startupUrl);
+	}
+
 	public String getInsertUserName() {
 		return insertUserName;
 	}
@@ -617,6 +628,7 @@ public class SysUsers extends BaseDto implements Serializable {
 		str += "securityQuestionAnswer2 : "+securityQuestionAnswer2+"\n";
 		str += "supplier : "+supplier+"\n";
 		str += "toDate : "+toDate+"\n";
+		str += "startupUrl : "+startupUrl+"\n";
 		str += "insertUserName : "+insertUserName+"\n";
 		str += "updateUserName : "+updateUserName+"\n";
 
@@ -665,6 +677,7 @@ public class SysUsers extends BaseDto implements Serializable {
 		str += "<column name=\"securityQuestionAnswer2\" value=\""+securityQuestionAnswer2+"\">";
 		str += "<column name=\"supplier\" value=\""+supplier+"\">";
 		str += "<column name=\"toDate\" value=\""+toDate+"\">";
+		str += "<column name=\"startupUrl\" value=\""+startupUrl+"\">";
 		str += "<column name=\"insertUserName\" value=\""+insertUserName+"\">";
 		str += "<column name=\"updateUserName\" value=\""+updateUserName+"\">";
 
@@ -713,6 +726,7 @@ public class SysUsers extends BaseDto implements Serializable {
 		str += "\"securityQuestionAnswer2\":\""+securityQuestionAnswer2+"\", ";
 		str += "\"supplier\":\""+supplier+"\", ";
 		str += "\"toDate\":\""+toDate+"\", ";
+		str += "\"startupUrl\":\""+startupUrl+"\", ";
 		str += "\"insertUserName\":\""+insertUserName+"\", ";
 		str += "\"updateUserName\":\""+updateUserName+"\"";
 

@@ -1,0 +1,184 @@
+/**************************************************************************************************
+* Tables CSS
+**************************************************************************************************/
+@charset "utf-8";
+
+/**
+ * Table Common
+ */
+/* Table caption : do not use for fixedHeader table with scroll instead use panel */
+table caption {padding:8px 8px;font-size:1.0em;font-weight:bold;border-top-left-radius:4px;border-top-right-radius:4px;
+	color:#555555;
+	border:1px solid #dddddd;
+	border-bottom:0px;
+	background-color:#F5F5F5;
+}
+table caption.captionGrid {}
+table caption.captionDefault {}
+table caption.captionEdit {}
+
+table > tbody > tr.default, table > tbody > tr > td.default {
+	background-color:#ffffff;
+}
+table > tbody > tr.default:hover, table > tbody > tr > td.default:hover {
+	background-color:#F9F9F9;
+}
+table > tbody > tr.active, table > tbody > tr > td.active {
+	background-color:#f5f5f5;
+}
+table > tbody > tr.active:hover, table > tbody > tr > td.active:hover {
+	background-color:#e8e8e8;
+}
+table > tbody > tr.success, table > tbody > tr > td.success {
+	background-color:#dff0d8;
+}
+table > tbody > tr.success:hover, table > tbody > tr > td.success:hover {
+	background-color:#d0e9c6;
+}
+table > tbody > tr.info, table > tbody > tr > td.info {
+	background-color:#d9edf7;
+}
+table > tbody > tr.info:hover, table > tbody > tr > td.info:hover {
+	background-color:#c4e3f3;
+}
+table > tbody > tr.warning, table > tbody > tr > td.warning {
+	background-color:#fcf8e3;
+}
+table > tbody > tr.warning:hover, table > tbody > tr > td.warning:hover {
+	background-color:#faf2cc;
+}
+table > tbody > tr.danger, table > tbody > tr > td.danger {
+	background-color:#f2dede;
+}
+table > tbody > tr.danger:hover, table > tbody > tr > td.danger:hover {
+	background-color:#ebcccc;
+}
+
+/* Table in Panel */
+div.panel > table {border-bottom:0px;}
+div.panel > table th:first-child, div.panel > table td:first-child {border-left:0px;}
+div.panel > table th:last-child, div.panel > table td:last-child {border-right:0px;}
+div.panel > table caption {border-left:0px;border-right:0px;}
+
+/**
+ * Search Criteria Tables
+ */
+.tblSearch {width:100%;border:1px solid #CFDAE9;}
+table.tblSearch caption {padding:8px 8px;font-size:1.0em;font-weight:bold;border-top-left-radius:4px;border-top-right-radius:4px;
+	color:#555555;
+	border:1px solid #CFDAE9;
+	border-bottom:0px;
+	background-color:#F2F5F9;
+}
+.thSearch {padding:2px 6px;
+	color:#555555;
+	background:#FFFFFF;
+}
+.tblSearch td {padding:2px 6px;border:0px solid #FFFFFF;}
+.tblSearch tfoot td {padding:2px 6px;}
+.tblSearch tr:first-child th, .tblSearch tr:first-child td {padding-top:6px;}
+.tblSearch tr:last-child th, .tblSearch tr:last-child td {padding-bottom:6px;}
+
+/**
+ * Inform Tables
+ */
+.tblInform {width:100%;border:1px solid #F8E3B8;}
+table.tblInform caption {padding:8px 8px;font-size:1.0em;font-weight:bold;border-top-left-radius:4px;border-top-right-radius:4px;
+	color:#555555;
+	border:1px solid #F8E3B8;
+	border-bottom:0px;
+	background-color:#FCF8E3;
+}
+.thInform {padding:6px 6px;
+	color:#555555;
+	border:1px solid #F8E3B8;
+	background:#FCF8E3;
+}
+.tblInform td {padding:6px 6px;
+	border:1px solid #F8E3B8;
+}
+.tblInform tfoot td {padding:6px 6px;}
+
+/**
+ * Edit Tables
+ */
+.tblEdit {width:100%;}
+.thEdit {padding:6px 6px;
+	color:#555555;
+	border:1px solid #DDDDDD;
+	background:#F5F5F5;
+}
+.tblEdit td {padding:6px 6px;
+	border:1px solid #DDDDDD;
+}
+.tblEdit tfoot td {padding:6px 6px;}
+
+/**
+ * Grid style Tables
+ */
+.tblGrid {width:100%;box-shadow:0px 0px 0px rgba(0, 0, 0, .2);
+	border-bottom:1px solid #DDDDDD;
+}
+.thGrid {padding:8px 4px;text-align:center;
+	border:1px solid #DDDDDD;
+	background:#F5F5F5;
+}
+.tblGrid td {padding:6px 4px;
+	border:1px solid #DDDDDD;
+}
+.tblGrid tbody tr:last-child td {}
+.tblGrid tfoot td {padding:6px 4px;
+	border:1px solid #DDDDDD;
+	background:#F5F5F5;
+}
+.tblGrid tfoot tr:first-child td {}
+.tblGrid tfoot tr:last-child td {}
+.tblGrid tr:not(.default):not(.active):not(.info):not(.success):not(.warning):not(.danger):hover td {transition:background .2s;
+	background:#FEFAE5;
+}
+.tblGrid tr:not(.default):not(.active):not(.info):not(.success):not(.warning):not(.danger):not(.noStripe):nth-child(even) {
+	background:#F9F9F9;
+}
+.tblGrid tfoot tr:not(.default):not(.active):not(.info):not(.success):not(.warning):not(.danger):hover td {
+	background:#F5F5F5;
+}
+
+.tblGrid tr.noBorderHor td, .tblGrid tr.noBorderHor th {
+	border-top:0px solid #DDDDDD;
+	border-bottom:0px solid #DDDDDD;
+}
+.tblGrid tr.noBorderHor:first-child th {
+	border-top:1px solid #DDDDDD;
+}
+.tblGrid tr.noBorderHor:first-child td {
+	border-top:1px solid #DDDDDD;
+}
+.tblGrid tr.noBorderVer td, .tblGrid tr.noBorderVer th {
+	border-left:0px solid #DDDDDD;
+	border-right:0px solid #DDDDDD;
+}
+.tblGrid tr.noBorderAll td, .tblGrid tr.noBorderAll th {
+	border:0px solid #DDDDDD;
+}
+.tblGrid tr.noBorderAll:first-child th, .tblGrid tr.noBorderAll:first-child td {
+	border-top:1px solid #DDDDDD;
+}
+
+/**
+ * Default Tables - No border - add .withPadding class in table tag for padding
+ */
+.tblDefault {width:100%;
+	border:0px solid #DDDDDD;
+}
+.thDefault {padding:0px 0px;
+	color:#555555;
+	border:0px solid #DDDDDD;
+}
+.tblDefault td {padding:0px 0px;
+	border:0px solid #DDDDDD;
+}
+.tblDefault tfoot td {padding:0px 0px;
+	border:0px solid #DDDDDD;
+}
+
+table.withPadding th, table.withPadding td {padding:4px 4px;}

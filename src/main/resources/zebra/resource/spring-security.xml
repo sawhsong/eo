@@ -7,23 +7,30 @@
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
-<!-- 	<http auto-config="true"> -->
-<!-- 		<intercept-url pattern="/" access="permitAll"/> -->
-<!-- 		<intercept-url pattern="/home" access="permitAll"/> -->
+	<http pattern="/login/**" security="none"/>
+	<http pattern="/shared/**" security="none"/>
+	<http pattern="/index/**" security="none"/>
+<!-- 	<http pattern="/**" security="none"/> -->
+	<http auto-config="true">
+		<intercept-url pattern="/login*" access="permitAll"/>
+<!-- 		<intercept-url pattern="/**" access="permitAll"/> -->
 <!-- 		<intercept-url pattern="/admin" access="ROLE_ADMIN"/> -->
 <!-- 		<intercept-url pattern="/user" access="ROLE_USER"/> -->
 
-<!-- 		<form-login login-page="/login/userlogin" default-target-url="/index" authentication-failure-url="/index" username-parameter="loginId" password-parameter="password"/> -->
+		<form-login login-page="/login/userlogin" default-target-url="/shared/page/checkScreenForLogin.jsp" authentication-failure-url="/shared/page/implicitObject.jsp" username-parameter="loginId" password-parameter="password"/>
 <!-- 		<csrf/> -->
 <!-- 		<logout logout-success-url="/login?logout"/> -->
-<!-- 		<access-denied-handler error-page="/shared/page/error.jsp"/> -->
-<!-- 	</http> -->
-<!-- 	<authentication-manager erase-credentials="false"> -->
-<!-- 		<authentication-provider> -->
-<!-- 			<user-service> -->
-<!-- 				<user name="ddkr" password="1986" authorities="ROLE_ADMIN"/> -->
+<!-- 		<access-denied-handler error-page="/shared/page/implicitObject.jsp"/> -->
+		<headers>
+			<frame-options policy="SAMEORIGIN"/>
+		</headers>
+	</http>
+	<authentication-manager erase-credentials="false">
+		<authentication-provider>
+			<user-service>
+				<user name="dustin" password="dustin" authorities="ROLE_ADMIN"/>
 <!-- 				<user name="ram" password="abc$123" authorities="ROLE_USER"/> -->
-<!-- 			</user-service> -->
-<!-- 		</authentication-provider> -->
-<!-- 	</authentication-manager> -->
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
 </beans:beans>

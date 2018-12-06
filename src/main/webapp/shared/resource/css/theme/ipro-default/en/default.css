@@ -1,0 +1,165 @@
+/**************************************************************************************************
+* Defult CSS - Be cautious of order of the css files
+**************************************************************************************************/
+@charset "utf-8";
+
+@import url("./bootstrap-select.css");
+@import url("./extendedJQuery.css");
+@import url("./extendedBootstrap.css");
+@import url("./elements.css");
+@import url("./header.css");
+@import url("./contextMenu.css");
+@import url("./popup.css");
+@import url("./footer.css");
+@import url("./bodyLeft.css");
+@import url("./bodyCenter.css");
+@import url("./bodyRight.css");
+@import url("./bodyLocationPathArea.css");
+@import url("./tabs.css");
+@import url("./buttons.css");
+@import url("./tables.css");
+@import url("./sortableTable.css");
+@import url("./pagination.css");
+@import url("./calendar.css");
+@import url("./fileElement.css");
+@import url("./imageSlider.css");
+
+/**
+ * Elements common
+ */
+* {margin:0px 0px;padding:0px 0px;}
+body {padding:0px 0px;
+	color:#000000;
+	font:normal normal normal 11px/1.2 "Verdana", "Malgun Gothic", "Sans-serif";
+}
+
+/**
+ * Basic Layout
+ */
+#divHeaderHolder {overflow:hidden;clear:both;}
+#divBodyHolder {overflow:hidden;clear:both;}
+#divFooterHolder {overflow:hidden;clear:both;}
+
+/**
+ * jQuery-Layout component
+ */
+.layoutTogglers-north-open, .layoutTogglers-south-closed {background:url("/shared/resource/image/theme/theme000/common/togglerUp.gif") no-repeat scroll center bottom transparent;}
+.layoutTogglers-north-closed, .layoutTogglers-south-open {background:url("/shared/resource/image/theme/theme000/common/togglerDown.gif") no-repeat scroll center bottom transparent;}
+.layoutTogglers-west-open, .layoutTogglers-east-closed {background:url("/shared/resource/image/theme/theme000/common/togglerLeft.gif") no-repeat scroll center bottom transparent;}
+.layoutTogglers-west-closed, .layoutTogglers-east-open {background:url("/shared/resource/image/theme/theme000/common/togglerRight.gif") no-repeat scroll center bottom transparent;}
+.northLayoutResizers {transition:background 0.2s;
+	background-color:#191919;
+}
+.northLayoutResizers:hover {
+	background-color:#191919;
+}
+.southLayoutResizers {transition:background 0.2s;
+	background-color:#E4E4E4;
+}
+.southLayoutResizers:hover {
+	background-color:#D2D2D2;
+}
+.layoutResizers {transition:background 0.2s;
+	background-color:#E4E4E4;
+}
+.layoutResizers:hover {
+	background-color:#D2D2D2;
+}
+.ui-layout-center {overflow:hidden !important;}
+
+/**
+ * Global attributes - ETC
+ */
+/* Textbox / Textarea / Th / Td Alignment */
+input[type=text].Lt, input[type=text].lt {text-align:left;}
+input[type=text].Rt, input[type=text].rt {text-align:right;}
+input[type=text].Ct, input[type=text].ct {text-align:center;}
+textarea.Lt, textarea.lt, th.Lt, th.lt, td.Lt, td.lt {text-align:left;}
+textarea.Rt, textarea.rt, th.Rt, th.rt, td.Rt, td.rt {text-align:right;}
+textarea.Ct, textarea.ct, th.Ct, th.ct, td.Ct, td.ct {text-align:center;}
+
+/* Mandatory field in table header - <th class="thEdit mandatory">Search 1</th> */
+.mandatory:after, .Mandatory:after {font-size:.8em;content:"\00a0 \273B";color:#FF4A4A;}
+
+/* Inline */
+label.hor, input[type=text].hor, input[type=file].hor, i.hor, img.hor {float:left;margin-right:4px;}
+
+/**
+ * Log Console
+ */
+#divLogPanelHolder {position:absolute;padding:8px 6px;float:left;width:100%;z-index:150;overflow:hidden;border-top-left-radius:5px;border-top-right-radius:5px;box-shadow:0px 0px 10px rgba(0, 0, 0, .3);
+	border:1px solid #ADADAD;
+	background:#FFFFFF;
+}
+#textAreaForLog {overflow:auto;width:100%;height:150px;outline:0;
+	border:0px solid #ADADAD;
+	background:#FFFFFF;
+}
+#divLogPanelCloser {float:right;width:20px;text-align:right;}
+#imgLogPanelCloserFolder {margin:0px 2px 0px 1px;}
+#imgLogPanelColserClose {margin:5px 2px 0px 1px;}
+#imgLogPanelCloserFolder:hover {}
+#imgLogPanelColserClose:hover {}
+
+/* Spaces */
+.horGap2 {float:left;margin:0px 1px 0px 1px;}
+.horGap2:before {content:"\00a0";}
+.horGap4 {float:left;margin:0px 2px 0px 2px;}
+.horGap4:before {content:"\00a0";}
+.horGap6 {float:left;margin:0px 3px 0px 3px;}
+.horGap6:before {content:"\00a0";}
+.horGap8 {float:left;margin:0px 4px 0px 4px;}
+.horGap8:before {content:"\00a0";}
+.horGap10 {float:left;margin:0px 5px;}
+.horGap10:before {content:"\00a0";}
+.horGap20 {float:left;margin:0px 10px;}
+.horGap20:before {content:"\00a0";}
+.horGap30 {float:left;margin:0px 15px;}
+.horGap30:before {content:"\00a0";}
+.horGap40 {float:left;margin:0px 20px;}
+.horGap40:before {content:"\00a0";}
+.horGap50 {float:left;margin:0px 25px;}
+.horGap50:before {content:"\00a0";}
+.horGap60 {float:left;margin:0px 30px;}
+.horGap60:before {content:"\00a0";}
+.horGap70 {float:left;margin:0px 35px;}
+.horGap70:before {content:"\00a0";}
+.horGap80 {float:left;margin:0px 40px;}
+.horGap80:before {content:"\00a0";}
+.horGap90 {float:left;margin:0px 45px;}
+.horGap90:before {content:"\00a0";}
+.horGap100 {float:left;margin:0px 50px;}
+.horGap100:before {content:"\00a0";}
+
+.verGap2 {clear:both;margin:1px 0px 1px 0px;font-size:1px;}
+.verGap2:before {content:"\00a0";}
+.verGap4 {clear:both;margin:2px 0px;font-size:1px;}
+.verGap4:before {content:"\00a0";}
+.verGap6 {clear:both;margin:3px 0px 3px 0px;font-size:1px;}
+.verGap6:before {content:"\00a0";}
+.verGap8 {clear:both;margin:4px 0px 4px 0px;font-size:1px;}
+.verGap8:before {content:"\00a0";}
+.verGap10 {clear:both;margin:5px 0px;font-size:1px;}
+.verGap10:before {content:"\00a0";}
+.verGap20 {clear:both;margin:10px 0px;font-size:1px;}
+.verGap20:before {content:"\00a0";}
+.verGap30 {clear:both;margin:15px 0px;font-size:1px;}
+.verGap30:before {content:"\00a0";}
+.verGap40 {clear:both;margin:20px 0px;font-size:1px;}
+.verGap40:before {content:"\00a0";}
+.verGap50 {clear:both;margin:25px 0px;font-size:1px;}
+.verGap50:before {content:"\00a0";}
+.verGap60 {clear:both;margin:30px 0px;font-size:1px;}
+.verGap60:before {content:"\00a0";}
+.verGap70 {clear:both;margin:35px 0px;font-size:1px;}
+.verGap70:before {content:"\00a0";}
+.verGap80 {clear:both;margin:40px 0px;font-size:1px;}
+.verGap80:before {content:"\00a0";}
+.verGap90 {clear:both;margin:45px 0px;font-size:1px;}
+.verGap90:before {content:"\00a0";}
+.verGap100 {clear:both;margin:50px 0px;font-size:1px;}
+.verGap100:before {content:"\00a0";}
+
+/* Misc */
+.breaker {clear:both;}
+#divErrorPage {}

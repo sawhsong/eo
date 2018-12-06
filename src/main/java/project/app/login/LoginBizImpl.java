@@ -138,7 +138,6 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 			// Check with LoginID - loginId = userName
 			sysUsers = sysUsersDao.getUserByLoginId(loginId);
 			if (sysUsers == null || CommonUtil.isBlank(sysUsers.getUserName())) {
-//				throw new FrameworkException("E907", getMessage("E907", paramEntity));
 				paramEntity.setSuccess(false);
 				paramEntity.setMessage("E907", getMessage("E907", paramEntity));
 				return paramEntity;
@@ -147,17 +146,17 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 			// Check with LoginID and Password
 			sysUsers = sysUsersDao.getUserByLoginIdAndPassword(loginId, password);
 			if (sysUsers == null || CommonUtil.isBlank(sysUsers.getUserName())) {
-//				throw new FrameworkException("E908", getMessage("E908", paramEntity));
 				paramEntity.setSuccess(false);
 				paramEntity.setMessage("E908", getMessage("E908", paramEntity));
 				return paramEntity;
 			}
 
 			hpPersonD = hpPersonDDao.getPersonByPersonId(CommonUtil.toString(sysUsers.getPersonId(), "#"));
-			resultDataset.addName(new String[] {"LoginId", "UserName"});
+			resultDataset.addName(new String[] {"LoginId", "UserName", "StartupUrl"});
 			resultDataset.addRow();
 			resultDataset.setValue("LoginId", sysUsers.getUserName());
 			resultDataset.setValue("UserName", hpPersonD.getFirstName());
+			resultDataset.setValue("StartupUrl", sysUsers.getStartupUrl());
 
 			paramEntity.setObject("sysUsers", sysUsers);
 			paramEntity.setObject("hpPersonD", hpPersonD);

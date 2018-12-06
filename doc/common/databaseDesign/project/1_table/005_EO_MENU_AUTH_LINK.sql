@@ -32,15 +32,18 @@ comment on column eo_menu_auth_link.update_date     is 'Update Date';
 delete eo_menu_auth_link;
 /*
 insert into eo_menu_auth_link (
-	select eo_auth_group.group_id,
-	       eo_menu.menu_id,
-	       0,
-	       sysdate,
-	       null,
-	       null
-	  from sys_auth_group,
-	       eo_menu
-	 where sys_auth_group.group_id = '0'
+select auth_group.group_id,
+       eo_menu.menu_id,
+       (select user_id from sys_users where user_name = 'admdustin') as insert_user_id,
+       sysdate as insert_date,
+       null as update_user_id,
+       null as update_date
+  from (select lookup_code as group_id
+          from sys_common_lookups
+         where lookup_type = 'PORTAL_SECURITY_GROUP'
+       ) auth_group,
+       eo_menu
+-- where auth_group.group_id = '0'
 )
 ;
 */

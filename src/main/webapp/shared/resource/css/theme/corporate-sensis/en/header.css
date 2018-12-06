@@ -1,0 +1,115 @@
+/**************************************************************************************************
+* Header CSS
+**************************************************************************************************/
+@charset "utf-8";
+
+/**
+ * Header Layout
+ */
+#divHeaderLeft {float:left;width:0%;display:none;}
+#divHeaderRight {float:right;width:0%;display:none;}
+#divHeaderCenter {float:left;width:100%;
+	color:#FFFFFF;
+}
+
+/**
+ * Layout - Header Center
+ */
+#divGlobalMenuHeaderGroup {padding:12px 8px 12px 8px;
+	background:#FFFFFF;
+}
+#divGlobalMenuHeaderGroup:after {content:"";display:block;line-height:0px;clear:both;}
+
+#divMainMenuHeaderGroup {
+	background:#094369;
+}
+#divMainMenuHeaderGroup:after {content:"";display:block;line-height:0px;clear:both;}
+
+/**
+ * Global Menu Layout
+ */
+#divGlobalMenuLeft {float:left;}
+#divGlobalMenuRight {float:right;}
+#divGlobalMenuRight div {float:left;}
+
+/**
+ * Global Menu - Left(Logo)
+ */
+#divLogoArea {font-size:1.3em;font-weight:bold;cursor:pointer;text-shadow:1px 1px 2px rgba(0, 0, 0, 0.2);}
+#divLogoArea a, #divLogoArea a:link, #divLogoArea a:visited {text-decoration:none;
+	color:#000000;
+}
+#divLogoArea a:hover {text-decoration:none;
+	color:#D92E24;
+}
+#aLogoFramework {padding:6px 0px 6px 24px;
+	font-size:0.8em;
+	background:url('/shared/resource/image/icon/logo-gear_Black.png') no-repeat 0% 50%;
+}
+#aLogo {padding:6px 0px 8px 100px;
+	background:url('/shared/resource/image/icon/logoPerci.png') no-repeat 0% 0%;
+	background-size:64px 30px;
+}
+
+/**
+ * Global Menu - Right(Global menu items)
+ */
+#divGblMenuAreaFramework {margin-top:2px;}
+#divGblMenuArea {}
+.headerGblMenus {float:right;font-size:1.0em;font-weight:bold;cursor:pointer;text-shadow:1px 1px 2px rgba(0, 0, 0, 0.2);
+	color:#1D2B58;
+}
+.headerGblMenus a, .headerGblMenus a:link, .headerGblMenus a:visited {text-decoration:none;
+	color:#1D2B58;
+}
+.headerGblMenus a:hover {text-decoration:none;
+	color:#D92E24;
+}
+.divGblMenuBreak {margin:1px 10px;float:right;height:12px;font-size:1px;
+	border-left:4px solid #000000;
+	background-color:#000000;
+}
+#aThemeSelector {padding:6px 0px 6px 20px;
+	background:url('/shared/resource/image/icon/themeSelector_Black.png') no-repeat 0% 50%;
+}
+#aFrameworkMenu {padding:6px 0px 6px 20px;
+	background:url('/shared/resource/image/icon/frameworkMenu_Black.png') no-repeat 0% 50%;
+}
+
+/**
+ * Main menu Layout
+ */
+#divMainMenuAreaLeft {float:left;}
+#divMainMenuAreaRight {float:right;display:inline-block;text-align:right;}
+
+/**
+ * Main menu - Left - Menu items(ul)
+ */
+.headerMainMenus {float:left;display:inline-block;padding:12px 18px;transition:background .2s;cursor:pointer;
+	border-right:1px solid #191919;
+	background:#094369;
+}
+.headerMainMenus:hover {
+	background:#6695B0;
+}
+.headerMainMenusSelected {float:left;display:inline-block;padding:12px 18px;transition:background .2s;cursor:pointer;
+	border-right:1px solid #191919;
+	background:#6695B0;
+}
+.headerMainMenus a, .headerMainMenus a:hover, .headerMainMenus a:link, .headerMainMenus a:visited,
+.headerMainMenusSelected a, .headerMainMenusSelected a:hover, .headerMainMenusSelected a:link, .headerMainMenusSelected a:visited {padding:0px 0px 1px 25px;font-size:1.1em;text-decoration:none;
+	color:#ffffff;
+}
+/**
+ * Main menu - Right - User loggedin(ul)
+ */
+#divLoggedInUser, #divQuickMenu {float:left;
+	border-left:1px solid #191919;
+	border-right:0px solid #191919;
+}
+#aLoggedInUser {
+	background:url('/shared/resource/image/theme/theme000/common/icnUser-loggedIn_White.png') no-repeat 0px 0px
+}
+#divLoggedInUser.selected {
+	background-color:#51819E;
+}

@@ -1,0 +1,186 @@
+/**************************************************************************************************
+* JSSOR Image Slider CSS
+**************************************************************************************************/
+@charset "utf-8";
+
+/**
+ * Arrow
+ */
+.arrow1 {display:block;position:absolute;cursor:pointer;}
+.arrow1 .a {fill:#fff;fill-opacity:.8;stroke:#000;stroke-width:120;stroke-miterlimit:10;stroke-opacity:.5;}
+.arrow1:hover {opacity:.8;}
+.arrow1.arrow1dn {opacity:.4;}
+.arrow1.arrow1ds {opacity:.3;pointer-events:none;}
+
+.arrow2 {display:block;position:absolute;cursor:pointer;}
+.arrow2 .a {fill:#000;fill-opacity:.8;stroke:#fff;stroke-width:120;stroke-miterlimit:10;stroke-opacity:.5;}
+.arrow2:hover {opacity:.8;}
+.arrow2.arrow2dn {opacity:.4;}
+.arrow2.arrow2ds {opacity:.3;pointer-events:none;}
+
+.arrow3 {display:block;position:absolute;cursor:pointer;}
+.arrow3 .a {fill:#ddd;fill-opacity:.7;stroke:#000;stroke-width:160;stroke-miterlimit:10;stroke-opacity:.7;}
+.arrow3:hover {opacity:.8;}
+.arrow3.arrow3dn {opacity:.4;}
+.arrow3.arrow3ds {opacity:.3;pointer-events:none;}
+
+.arrow4 {display:block;position:absolute;cursor:pointer;}
+.arrow4 .a {fill:#333;fill-opacity:.7;stroke:#fff;stroke-width:160;stroke-miterlimit:10;stroke-opacity:.7;}
+.arrow4:hover {opacity:.8;}
+.arrow4.arrow4dn {opacity:.4;}
+.arrow4.arrow4ds {opacity:.3;pointer-events:none;}
+
+.arrow5 {display:block;position:absolute;cursor:pointer;}
+.arrow5 .c {fill:#000;fill-opacity:.5;stroke:#fff;stroke-width:120;stroke-miterlimit:10;stroke-opacity:0.5;}
+.arrow5 .a {fill:#fff;opacity:.8;}
+.arrow5:hover .c {fill-opacity:.3;}
+.arrow5:hover .a {opacity:1;}
+.arrow5.arrow5dn {opacity:.5;}
+.arrow5.arrow5ds {opacity:.3;pointer-events:none;}
+
+.arrow6 {display:block;position:absolute;cursor:pointer;}
+.arrow6 .c {fill:#fff;fill-opacity:.5;stroke:#000;stroke-width:160;stroke-miterlimit:10;stroke-opacity:0.3;}
+.arrow6 .a {fill:#000;opacity:.8;}
+.arrow6:hover .c {fill-opacity:.3;}
+.arrow6:hover .a {opacity:1;}
+.arrow6.arrow6dn {opacity:.5;}
+.arrow6.arrow6ds {opacity:.3;pointer-events:none;}
+
+.arrow7 {display:block;position:absolute;cursor:pointer;}
+.arrow7 .a {fill:none;stroke:#fff;stroke-width:960;stroke-miterlimit:10;}
+.arrow7:hover {opacity:.8;}
+.arrow7.arrow7dn {opacity:.5;}
+.arrow7.arrow7ds {opacity:.3;pointer-events:none;}
+
+.arrow8 {display:block;position:absolute;cursor:pointer;}
+.arrow8 .a {fill:none;stroke:#000;stroke-width:960;stroke-miterlimit:10;}
+.arrow8:hover {opacity:.8;}
+.arrow8.arrow8dn {opacity:.5;}
+.arrow8.arrow8ds {opacity:.3;pointer-events:none;}
+
+.arrow9 {display:block;position:absolute;cursor:pointer;}
+.arrow9 .c {fill:#fff;fill-opacity:0.7;}
+.arrow9 .a {fill:#333;}
+.arrow9:hover {opacity:.8;}
+.arrow9.arrow9dn {opacity:.5;}
+.arrow9.arrow9ds {opacity:.3;pointer-events:none;}
+
+.arrow10 {display:block;position:absolute;cursor:pointer;}
+.arrow10 .c {fill:#000;fill-opacity:0.5;}
+.arrow10 .a {fill:#ddd;}
+.arrow10:hover {opacity:.8;}
+.arrow10.arrow10dn {opacity:.5;}
+.arrow10.arrow10ds {opacity:.3;pointer-events:none;}
+
+.arrow11 {display:block;position:absolute;cursor:pointer;}
+.arrow11 .c {fill:none;stroke:#fff;stroke-width:400;stroke-miterlimit:10;}
+.arrow11 .a {fill:none;stroke:#fff;stroke-width:400;stroke-miterlimit:10;}
+.arrow11:hover {opacity:.8;}
+.arrow11.arrow11dn {opacity:.6;}
+.arrow11.arrow11ds {opacity:.3;pointer-events:none;}
+
+.arrow12 {display:block;position:absolute;cursor:pointer;}
+.arrow12 .c {fill:none;stroke:#000;stroke-width:400;stroke-miterlimit:10;}
+.arrow12 .a {fill:none;stroke:#000;stroke-width:400;stroke-miterlimit:10;}
+.arrow12:hover {opacity:.8;}
+.arrow12.arrow12dn {opacity:.6;}
+.arrow12.arrow12ds {opacity:.3;pointer-events:none;}
+
+/**
+ * Thumbnail
+ */
+.thumb1 .p {position:absolute;top:0;left:0;background-color:#000;}
+.thumb1 .t {position:absolute;top:0;left:0;width:100%;height:100%;border:none;opacity:.45;}
+.thumb1 .p:hover .t{opacity:.8;}
+.thumb1 .pav .t, .thumb1 .pdn .t, .thumb1 .p:hover.pdn .t{opacity:1;}
+
+.thumb2 .p {position:absolute;top:0;left:0;background-color:#fff;}
+.thumb2 .t {position:absolute;top:0;left:0;width:100%;height:100%;border:none;opacity:.45;}
+.thumb2 .p:hover .t{opacity:.8;}
+.thumb2 .pav .t, .thumb2 .pdn .t, .thumb2 .p:hover.pdn .t{opacity:1;}
+
+.thumb3 .p {position:absolute;top:0;left:0;border:2px solid rgba(255,255,255,.5);box-sizing:border-box;}
+.thumb3 .t {position:absolute;top:0;left:0;width:100%;height:100%;border:none;opacity:.6;}
+.thumb3 .p:hover {border-color:rgba(0,0,0,.6);}
+.thumb3 .pav, .thumb3 .p:hover.pdn{border-color:#000;}
+.thumb3 .pav .t, .thumb3 .p:hover.pdn .t{opacity:1;}
+
+.thumb4 .p {position:absolute;top:0;left:0;border:2px solid rgba(0,0,0,.4);box-sizing:border-box;}
+.thumb4 .t {position:absolute;top:0;left:0;width:100%;height:100%;border:none;opacity:.6;}
+.thumb4 .p:hover {border-color:rgba(255,255,255,.6);}
+.thumb4 .pav, .thumb4 .p:hover.pdn{border-color:#fff;}
+.thumb4 .pav .t, .thumb4 .p:hover.pdn .t{opacity:1;}
+
+/**
+ * Bullet
+ */
+.bullet1 {position:absolute;}
+.bullet1 .i {position:absolute;cursor:pointer;}
+.bullet1 .i .b {fill:#000;fill-opacity:0.5;stroke:#fff;stroke-width:1200;stroke-miterlimit:10;stroke-opacity:0.3;}
+.bullet1 .i:hover .b {fill:#fff;fill-opacity:.7;stroke:#000;stroke-opacity:.5;}
+.bullet1 .iav .b {fill:#fff;stroke:#000;fill-opacity:1;}
+.bullet1 .i.idn {opacity:.3;}
+
+.bullet2 {position:absolute;}
+.bullet2 .i {position:absolute;cursor:pointer;}
+.bullet2 .i .b {fill:#fff;fill-opacity:0.7;stroke:#000;stroke-width:1200;stroke-miterlimit:10;stroke-opacity:0.25;}
+.bullet2 .i:hover .b {fill:#000;fill-opacity:.6;stroke:#fff;stroke-opacity:.35;}
+.bullet2 .iav .b {fill:#000;fill-opacity:1;stroke:#fff;stroke-opacity:.35;}
+.bullet2 .i.idn {opacity:.3;}
+
+.bullet3 {position:absolute;}
+.bullet3 .i {position:absolute;cursor:pointer;}
+.bullet3 .i .b {fill:#000;fill-opacity:0.5;stroke:#fff;stroke-width:1200;stroke-miterlimit:10;stroke-opacity:0.3;}
+.bullet3 .i:hover .b {fill:#fff;fill-opacity:.7;stroke:#000;stroke-opacity:.5;}
+.bullet3 .iav .b {fill:#fff;stroke:#000;fill-opacity:1;}
+.bullet3 .i.idn {opacity:.3;}
+
+.bullet4 {position:absolute;}
+.bullet4 .i {position:absolute;cursor:pointer;}
+.bullet4 .i .b {fill:#fff;fill-opacity:0.7;stroke:#000;stroke-width:1200;stroke-miterlimit:10;stroke-opacity:0.25;}
+.bullet4 .i:hover .b {fill:#000;fill-opacity:.6;stroke:#fff;stroke-opacity:.35;}
+.bullet4 .iav .b {fill:#000;fill-opacity:1;stroke:#fff;stroke-opacity:.35;}
+.bullet4 .i.idn {opacity:.3;}
+
+.bullet5 {position:absolute;}
+.bullet5 .i {position:absolute;cursor:pointer;}
+.bullet5 .i .b {fill:#000;fill-opacity:0.5;stroke:#fff;stroke-width:1200;stroke-miterlimit:10;stroke-opacity:0.3;}
+.bullet5 .i:hover .b {fill:#fff;fill-opacity:.7;stroke:#000;stroke-opacity:.5;}
+.bullet5 .iav .b {fill:#fff;stroke:#000;fill-opacity:1;}
+.bullet5 .i.idn {opacity:.3;}
+
+.bullet6 {position:absolute;}
+.bullet6 .i {position:absolute;cursor:pointer;}
+.bullet6 .i .b {fill:#fff;fill-opacity:0.7;stroke:#000;stroke-width:1200;stroke-miterlimit:10;stroke-opacity:0.25;}
+.bullet6 .i:hover .b {fill:#000;fill-opacity:.6;stroke:#fff;stroke-opacity:.35;}
+.bullet6 .iav .b {fill:#000;fill-opacity:1;stroke:#fff;stroke-opacity:.35;}
+.bullet6 .i.idn {opacity:.3;}
+
+.bullet7 {position:absolute;}
+.bullet7 .i {position:absolute;cursor:pointer;}
+.bullet7 .i .b {fill:#fff;stroke:#000;stroke-width:400;stroke-miterlimit:10;stroke-opacity:0.5;}
+.bullet7 .i:hover .b {fill-opacity:.7;}
+.bullet7 .iav .b {fill:#ffe200;stroke:#ffaa00;stroke-opacity:.7;stroke-width:2000;}
+.bullet7 .i.idn {opacity:.3;}
+
+.bullet8 {position:absolute;}
+.bullet8 .i {position:absolute;cursor:pointer;}
+.bullet8 .i .b {fill:#000;fill-opacity:.5;stroke:#fff;stroke-width:400;stroke-miterlimit:10;stroke-opacity:0.5;}
+.bullet8 .i:hover .b {fill-opacity:.8;}
+.bullet8 .iav .b {fill:#ffe200;fill-opacity:1;stroke:#ffaa00;stroke-opacity:.7;stroke-width:2000;}
+.bullet8 .iav:hover .b {fill-opacity:.6;}
+.bullet8 .i.idn {opacity:.3;}
+
+.bullet9 .i {position:absolute;color:#fff;font-family:"Helvetica neue",Helvetica,Arial,sans-serif;text-align:center;cursor:pointer;z-index:0;}
+.bullet9 .i .b {fill:#000;opacity:.2;}
+.bullet9 .i:hover {opacity:.7;}
+.bullet9 .iav {color:#000;}
+.bullet9 .iav .b {fill:#fff;opacity:1;}
+.bullet9 .i.idn {opacity:.3;}
+
+.bullet10 .i {position:absolute;color:#000;font-family:"Helvetica neue",Helvetica,Arial,sans-serif;text-align:center;cursor:pointer;z-index:0;}
+.bullet10 .i .b {fill:#fff;opacity:.3;}
+.bullet10 .i:hover {opacity:.7;}
+.bullet10 .iav {color:#fff;}
+.bullet10 .iav .b {fill:#000;opacity:.5;}
+.bullet10 .i.idn {opacity:.3;}
