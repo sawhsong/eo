@@ -94,13 +94,11 @@ html, body {height:100%;background:#FFFFFF;}
 </div>
 <div class="divLoginFooter">
 	<div class="divLoginFooterLeft">
-		<div class="clickablItems" style="cursor:default">&copy; Entity Solutions 2018</div>
-		<div class="clickablItemsBreak"></div>
 		<div class="clickablItems"><a onclick="window.open('http://10.14.35.40:7777/webcenter/portal/entity/disclaimer')">Disclaimer</a></div>
 		<div class="clickablItemsBreak"></div>
 		<div class="clickablItems"><a onclick="window.open('http://10.14.35.40:7777/webcenter/portal/entity/privacy')">Privacy</a></div>
 	</div>
-	<div class="divLoginFooterCenter"></div>
+	<div class="divLoginFooterCenter"><div style="width:100%;text-align:center;">&copy; Entity Solutions 2018</div></div>
 	<div class="divLoginFooterRight">
 		<div class="clickablItems"><ui:icon className="fa-google-plus" status="display" script="window.open('https://plus.google.com/100110685160025735918')"/></div>
 		<div class="horGap10"></div>

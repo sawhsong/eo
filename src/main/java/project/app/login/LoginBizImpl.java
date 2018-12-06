@@ -153,7 +153,7 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 				return paramEntity;
 			}
 
-			hpPersonD = hpPersonDDao.getPersonByPersonId(CommonUtil.toString(sysUsers.getPersonId()));
+			hpPersonD = hpPersonDDao.getPersonByPersonId(CommonUtil.toString(sysUsers.getPersonId(), "#"));
 			resultDataset.addName(new String[] {"LoginId", "UserName"});
 			resultDataset.addRow();
 			resultDataset.setValue("LoginId", sysUsers.getUserName());

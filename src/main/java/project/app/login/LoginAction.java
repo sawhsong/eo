@@ -5,7 +5,15 @@
  *************************************************************************************************/
 package project.app.login;
 
+import java.security.Principal;
+import java.util.Collection;
+import java.util.Iterator;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import project.common.extend.BaseAction;
 import project.conf.resource.ormapper.dto.oracle.HpPersonD;
