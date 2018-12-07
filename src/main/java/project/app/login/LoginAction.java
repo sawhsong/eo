@@ -5,19 +5,12 @@
  *************************************************************************************************/
 package project.app.login;
 
-import java.security.Principal;
-import java.util.Collection;
-import java.util.Iterator;
-
-import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import project.common.extend.BaseAction;
 import project.conf.resource.ormapper.dto.oracle.HpPersonD;
 import project.conf.resource.ormapper.dto.oracle.SysUsers;
+import zebra.config.MemoryBean;
 import zebra.data.DataSet;
 import zebra.util.CommonUtil;
 import zebra.util.ConfigUtil;
@@ -57,7 +50,7 @@ public class LoginAction extends BaseAction {
 				session.setAttribute("UserFullName", hpPersonD.getFullName());
 				session.setAttribute("SecurityRole", sysUsers.getPortalSecurityRole());
 				session.setAttribute("StartupUrl", sysUsers.getStartupUrl());
-				session.setAttribute("themeId", CommonUtil.lowerCase(sysUsers.getPortalSkin())); // ThemeId = PortalSkin
+				session.setAttribute("themeId", CommonUtil.nvl(CommonUtil.lowerCase(sysUsers.getPortalSkin()), ConfigUtil.getProperty("view.theme.default"))); // ThemeId = PortalSkin
 				session.setAttribute("maxRowsPerPage", CommonUtil.split(ConfigUtil.getProperty("view.data.maxRowsPerPage"), ConfigUtil.getProperty("delimiter.data"))[2]);
 				session.setAttribute("pageNumsPerPage", CommonUtil.split(ConfigUtil.getProperty("view.data.pageNumsPerPage"), ConfigUtil.getProperty("delimiter.data"))[0]);
 				session.setAttribute("SysUsers", sysUsers);
@@ -139,7 +132,7 @@ public class LoginAction extends BaseAction {
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";
 	}
-
+*/
 	public String logout() throws Exception {
 		MemoryBean.remove(session.getId());
 		session.invalidate();
@@ -147,5 +140,4 @@ public class LoginAction extends BaseAction {
 		System.runFinalization();
 		return "index";
 	}
-*/
 }

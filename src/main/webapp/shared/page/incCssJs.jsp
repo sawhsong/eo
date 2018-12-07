@@ -7,7 +7,6 @@
 <script type="text/javascript" src="<mc:cp key="jsJq"/>/jquery-2.1.4.js"></script>
 <script type="text/javascript" src="<mc:cp key="jsJq"/>/jquery-ui.js"></script>
 <script type="text/javascript" src="<mc:cp key="jsJq"/>/bootstrap.js"></script>
-<script type="text/javascript" src="<mc:cp key="jsNg"/>/angular.js"></script>
 
 <script type="text/javascript" src="<mc:cp key="jsMessage"/>/message-framework_${sessionScope.langCode}.js"></script>
 <script type="text/javascript" src="<mc:cp key="jsMessage"/>/message-common_${sessionScope.langCode}.js"></script>
@@ -110,6 +109,7 @@ jsconfig.put("pagehandlerActionType", "<mc:cp key="pagehandlerActionType"/>");
 jsconfig.put("webServiceProviderUrl", "<mc:cp key="webService.provider.url"/>");
 jsconfig.put("maxRowsPerPageArray", "<mc:cp key="view.data.maxRowsPerPage"/>");
 jsconfig.put("viewPageName", "<mc:cp key="viewPageName"/>");
+jsconfig.put("noWest", "true")
 /*!
  * auto-setup search criteria
  */

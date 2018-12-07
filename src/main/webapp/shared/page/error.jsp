@@ -147,7 +147,7 @@ $(function() {
 * Real Contents
 ************************************************************************************************/%>
 <div class="errorCodeBox">
-	<div class="errorIcon"><img src="/shared/resource/image/icon/Error.png"/></div>
+	<div class="errorIcon"><img src="/shared/resource/image/icon/error.png"/></div>
 	<div class="errorTitle">
 		Exception occurred!<br/>
 		[Error Code : ${requestScope["javax.servlet.error.status_code"]}]

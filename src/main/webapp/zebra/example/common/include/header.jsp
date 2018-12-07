@@ -9,7 +9,7 @@
 	pageContext.setAttribute("globalMenu", ZebraMenuManager.getGlobalMenu());
 	pageContext.setAttribute("mainMenu", ZebraMenuManager.getMainMenu());
 
-	SysUser sysUser = (SysUser)session.getAttribute("SysUser");
+	SysUsers sysUsers = (SysUsers)session.getAttribute("SysUsers");
 	DataSet themeType = ZebraCommonCodeManager.getCodeDataSetByCodeType("USER_THEME_TYPE");
 
 	String userName = sysUser.getUserName();

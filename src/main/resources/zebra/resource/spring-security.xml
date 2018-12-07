@@ -7,30 +7,21 @@
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
-	<http pattern="/login/**" security="none"/>
-	<http pattern="/shared/**" security="none"/>
-	<http pattern="/index/**" security="none"/>
-<!-- 	<http pattern="/**" security="none"/> -->
-	<http auto-config="true">
-		<intercept-url pattern="/login*" access="permitAll"/>
-<!-- 		<intercept-url pattern="/**" access="permitAll"/> -->
-<!-- 		<intercept-url pattern="/admin" access="ROLE_ADMIN"/> -->
-<!-- 		<intercept-url pattern="/user" access="ROLE_USER"/> -->
-
-		<form-login login-page="/login/userlogin" default-target-url="/shared/page/checkScreenForLogin.jsp" authentication-failure-url="/shared/page/implicitObject.jsp" username-parameter="loginId" password-parameter="password"/>
-<!-- 		<csrf/> -->
-<!-- 		<logout logout-success-url="/login?logout"/> -->
-<!-- 		<access-denied-handler error-page="/shared/page/implicitObject.jsp"/> -->
+	<http pattern="/**/**" security="none"/>
+	<http auto-config="true" use-expressions="true">
 		<headers>
 			<frame-options policy="SAMEORIGIN"/>
 		</headers>
 	</http>
-	<authentication-manager erase-credentials="false">
+
+	<authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="dustin" password="dustin" authorities="ROLE_ADMIN"/>
-<!-- 				<user name="ram" password="abc$123" authorities="ROLE_USER"/> -->
+				<user name="admdustin" password="admdustin" authorities="ROLE_ADMIN"/>
 			</user-service>
+			<password-encoder ref="encoder"/>
 		</authentication-provider>
 	</authentication-manager>
+
+	<beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 </beans:beans>
