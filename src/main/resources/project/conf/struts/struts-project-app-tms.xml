@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<!--/* MTS - Timesheet */-->
+	<package name="TMS" extends="default" namespace="/timesheet" strict-method-invocation="false">
+		<default-interceptor-ref name="ZebraDefaultStack"/>
+		<action name="/*" class="project.app.tms.TimesheetAction" method="{1}">
+			<result name="myTimesheet" type="debugDispatcherResult">/project/app/tms/MyTimesheet.jsp</result>
+		</action>
+	</package>
+</struts>

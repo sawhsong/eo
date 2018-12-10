@@ -4,4 +4,5 @@
     <include file="project/conf/struts/struts-project-common-module.xml"/>
     <include file="project/conf/struts/struts-project-app-index.xml"/>
     <include file="project/conf/struts/struts-project-app-login.xml"/>
+    <include file="project/conf/struts/struts-project-app-tms.xml"/>
 </struts>

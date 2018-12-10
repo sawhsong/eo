@@ -9,6 +9,7 @@
 	SysUsers sysUserHeaderPage = (SysUsers)session.getAttribute("SysUsers");
 	HpPersonD hpPersonDHeaderPage = (HpPersonD)session.getAttribute("HpPersonD");
 	String authGroupIdHeaderPage = sysUserHeaderPage.getPortalSecurityRole();
+	String startupUrlHeaderPage = (String)session.getAttribute("StartupUrl");
 
 	String userNameHeaderPage = hpPersonDHeaderPage.getFullName();
 	String userIdHeaderPage = sysUserHeaderPage.getUserName();
@@ -24,6 +25,7 @@
 <script type="text/javascript">
 var popupUserProfile;
 var authGroupIdHeaderPage = "<%=authGroupIdHeaderPage%>";
+var startupUrl = "<%=startupUrlHeaderPage%>";
 
 $(function() {
 	$("#aLogo").click(function(event) {
@@ -31,7 +33,7 @@ $(function() {
 		$("#hdnHeaderMenuName").val("");
 		$("#hdnHeaderMenuUrl").val("");
 
-		commonJs.doSubmit({form:$("form:eq(0)"), action:"/index"});
+		commonJs.doSubmit({form:$("form:eq(0)"), action:startupUrl});
 	});
 
 	$("#aFrameworkMenu").click(function() {
@@ -42,19 +44,14 @@ $(function() {
 		commonJs.doSubmit({form:$("form:eq(0)"), action:"/zebra/main/getDefault"});
 	});
 
-	$("#aQuickMenu").click(function() {
-		$("#divQuickMenu").addClass("selected");
-		$("#divQuickMenu").trigger("click");
-	});
-
 	$("#aLoggedInUser").click(function() {
 		$("#divLoggedInUser").addClass("selected");
 		$("#divLoggedInUser").trigger("click");
 	});
 
 	doMainMenu = function(menuId, menuName, menuUrl) {
-		if (menuUrl == "#") {
-			menuUrl = "/index";
+		if (menuUrl == "#" || menuId == "HOME") {
+			menuUrl = startupUrl;
 		}
 		$("#hdnHeaderMenuId").val(menuId);
 		$("#hdnHeaderMenuName").val(menuName);
