@@ -11,17 +11,7 @@
 	<bean id="messageSource" class="${name.package.framework}.config.DirectoryResourceBundleMessageSource">
 		<property name="directoryNames">
 			<list>
-				<!-- Message Files Begin -->
-				<value>classpath:${path.dir.messageFwk}</value>
 				<value>classpath:${path.dir.messageProject}</value>
-				<!-- Message Files End -->
-
-				<!-- Hibernate Query Files Begin -->
-<!-- 				<value>classpath:${path.hibernate.mapperDirFwk}</value> -->
-<!-- 				<value>classpath:${path.hibernate.queryDirFwk}</value> -->
-<!-- 				<value>classpath:${path.hibernate.mapperDirProject}</value> -->
-<!-- 				<value>classpath:${path.hibernate.queryDirProject}</value> -->
-				<!-- Hibernate Query Files End -->
 			</list>
 		</property>
 	</bean>

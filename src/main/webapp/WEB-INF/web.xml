@@ -22,86 +22,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- Apache Tomcat Sercurity filters -->
-<!-- 	<filter> -->
-<!-- 		<filter-name>CorsFilter</filter-name> -->
-<!-- 		<filter-class>org.apache.catalina.filters.CorsFilter</filter-class> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>cors.allowed.origins</param-name> -->
-<!-- 			<param-value>https://www.apache.org</param-value> -->
-<!-- 		</init-param> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>cors.allowed.methods</param-name> -->
-<!-- 			<param-value>GET,POST,HEAD,OPTIONS,PUT</param-value> -->
-<!-- 		</init-param> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>cors.allowed.headers</param-name> -->
-<!-- 			<param-value>Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers</param-value> -->
-<!-- 		</init-param> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>cors.exposed.headers</param-name> -->
-<!-- 			<param-value>Access-Control-Allow-Origin,Access-Control-Allow-Credentials</param-value> -->
-<!-- 		</init-param> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>cors.support.credentials</param-name> -->
-<!-- 			<param-value>true</param-value> -->
-<!-- 		</init-param> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>cors.preflight.maxage</param-name> -->
-<!-- 			<param-value>10</param-value> -->
-<!-- 		</init-param> -->
-<!-- 	</filter> -->
-<!-- 	<filter-mapping> -->
-<!-- 		<filter-name>CorsFilter</filter-name> -->
-<!-- 		<url-pattern>/*</url-pattern> -->
-<!-- 	</filter-mapping> -->
-
-<!-- 	<filter> -->
-<!-- 		<filter-name>HttpHeaderSecurityFilter</filter-name> -->
-<!-- 		<filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter</filter-class> -->
-<!-- 		<filter-class>zebra.filter.HttpHeaderSecurityFilter</filter-class> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>hstsEnabled</param-name> -->
-<!-- 			<param-value>true</param-value> -->
-<!-- 		</init-param> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>hstsMaxAgeSeconds</param-name> -->
-<!-- 			<param-value>0</param-value> -->
-<!-- 		</init-param> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>hstsIncludeSubDomains</param-name> -->
-<!-- 			<param-value>false</param-value> -->
-<!-- 		</init-param> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>hstsPreload</param-name> -->
-<!-- 			<param-value>false</param-value> -->
-<!-- 		</init-param> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>antiClickJackingEnabled</param-name> -->
-<!-- 			<param-value>true</param-value> -->
-<!-- 		</init-param> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>antiClickJackingOption</param-name> -->
-<!-- 			<param-value>SAMEORIGIN</param-value>DENY, SAMEORIGIN, ALLOW-FROM -->
-<!-- 		</init-param> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>antiClickJackingUri</param-name> -->
-<!-- 			<param-value></param-value> -->
-<!-- 		</init-param> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>blockContentTypeSniffingEnabled</param-name> -->
-<!-- 			<param-value>true</param-value> -->
-<!-- 		</init-param> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>xssProtectionEnabled</param-name> -->
-<!-- 			<param-value>true</param-value> -->
-<!-- 		</init-param> -->
-<!-- 	</filter> -->
-<!-- 	<filter-mapping> -->
-<!-- 		<filter-name>HttpHeaderSecurityFilter</filter-name> -->
-<!-- 		<url-pattern>/*</url-pattern> -->
-<!-- 	</filter-mapping> -->
-
 	<!-- Spring Security filters -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
@@ -132,21 +52,9 @@
 	</servlet>
 	<servlet>
 		<servlet-name>ProjectAppLoader</servlet-name>
-		<servlet-class>project.common.extend.AppLoader</servlet-class>
+		<servlet-class>com.es.portal.common.extend.AppLoader</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-
-	<!-- WebServices with CXF -->
-	<servlet>
-		<servlet-name>CXFServlet</servlet-name>
-		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>CXFServlet</servlet-name>
-		<url-pattern>/ws/*</url-pattern>
-	</servlet-mapping>
 
 	<!-- Tomcat8 needs this -->
 	<jsp-config>
@@ -166,15 +74,15 @@
 
 	<error-page>
 		<error-code>404</error-code>
-		<location>/shared/page/error.jsp</location>
+		<location>/com/es/portal/shared/page/error.jsp</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>
-		<location>/shared/page/error.jsp</location>
+		<location>/com/es/portal/shared/page/error.jsp</location>
 	</error-page>
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
-		<location>/shared/page/error.jsp</location>
+		<location>/com/es/portal/shared/page/error.jsp</location>
 	</error-page>
 
 	<welcome-file-list>

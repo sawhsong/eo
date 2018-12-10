@@ -11,11 +11,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
+import com.es.portal.login.LoginAction;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 
-import project.app.login.LoginAction;
 import zebra.util.CommonUtil;
 import zebra.util.ConfigUtil;
 
@@ -39,14 +39,6 @@ public class LoginInterceptor implements Interceptor {
 		Map sessionMap = context.getSession();
 		Object action = invocation.getAction();
 		String userId = "", returnValue = "";
-
-//		for (Iterator iter = context.getContextMap().entrySet().iterator(); iter.hasNext();) {
-//			Entry entry = (Entry)iter.next();
-//			String key = (String)entry.getKey();
-//			Object obj = entry.getValue();
-//
-//			logger.debug("getContextMap in LoginInterceptor - [" + key + "] : [" + obj + "]");
-//		}
 
 		// Log
 		if (CommonUtil.equalsIgnoreCase(ConfigUtil.getProperty("log.interceptor.login"), "Y")) {

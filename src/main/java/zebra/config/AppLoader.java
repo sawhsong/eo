@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import zebra.example.common.module.commoncode.ZebraCommonCodeManager;
-import zebra.example.common.module.menu.ZebraMenuManager;
 import zebra.util.CommonUtil;
 
 public class AppLoader extends HttpServlet {
@@ -34,11 +32,6 @@ public class AppLoader extends HttpServlet {
 	 */
 	private void executeWorks() throws Exception {
 		MemoryBean.set("applicationRealPath", CommonUtil.replace(context.getRealPath(""), File.separator, "/"));
-
-		// Framework Menu & CommonCode
-		ZebraMenuManager.loadMenu();
-//		ZebraCommonCodeManager.loadCommonCode();
-
 		MessageManager.loadMessageBundles();
 	}
 }

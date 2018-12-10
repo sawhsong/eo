@@ -5,7 +5,6 @@ import java.util.Locale;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.support.MessageSourceAccessor;
 
 import zebra.data.ParamEntity;
@@ -15,17 +14,8 @@ import zebra.util.ConfigUtil;
 public class Biz {
 	protected Logger logger = LogManager.getLogger(getClass());
 
-	private SqlSessionTemplate sqlSessionTemplate;
 	private SessionFactory sessionFactory;
 	private MessageSourceAccessor messageSourceAccessor;
-
-	protected SqlSessionTemplate getSqlSessionTemplate() {
-		return sqlSessionTemplate;
-	}
-
-	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
-		this.sqlSessionTemplate = sqlSessionTemplate;
-	}
 
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;

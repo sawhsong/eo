@@ -56,7 +56,6 @@ public class Action extends ActionSupport implements ServletContextAware, Servle
 	 */
 	protected ParamEntity paramEntity = new ParamEntity();
 	protected DataSet requestDataSet;
-	protected DataSet searchCriteriaDataSet;
 	protected DataSet requestFileDataSet;
 
 	/*!
@@ -123,10 +122,7 @@ public class Action extends ActionSupport implements ServletContextAware, Servle
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void setParameters(HttpParameters paramHttpParameters) {
 		requestDataSet = new DataSet();
-		searchCriteriaDataSet = new DataSet();
 
-		String searchCriteriaElementSuffix = ConfigUtil.getProperty("etc.formElement.searchCriteriaSuffix");
-		String autoSetSearchCriteria = ConfigUtil.getProperty("view.object.autoSetSearchCriteria");
 		String recordDelimiter = ConfigUtil.getProperty("delimiter.record");
 
 		try {
@@ -137,28 +133,10 @@ public class Action extends ActionSupport implements ServletContextAware, Servle
 				String value = "";
 
 				for (int i=0; i<values.length; i++) {
-//					value += (CommonUtil.isEmpty(value)) ? HtmlUtil.stringToHtml(values[i]) : recordDelimiter + HtmlUtil.stringToHtml(values[i]);
 					value += (CommonUtil.isEmpty(value)) ? values[i] : recordDelimiter + values[i];
 				}
 
-				if (key.indexOf(searchCriteriaElementSuffix) >= 0) {
-					String valueStr = CommonUtil.toString(values, recordDelimiter);
-					if (CommonUtil.indexOf(valueStr, recordDelimiter) == 0) {
-						values = new String[] {};
-					}
-					searchCriteriaDataSet.addColumn(key, value);
-//					searchCriteriaDataSet.addColumn(key, HtmlUtil.stringToHtml(CommonUtil.toString(values, recordDelimiter)));
-//					searchCriteriaDataSet.addColumn(key, HtmlUtil.stringToHtml(value));
-
-				} else {
-					requestDataSet.addColumn(key, value);
-//					requestDataSet.addColumn(key, HtmlUtil.stringToHtml(CommonUtil.toString(values, recordDelimiter)));
-//					requestDataSet.addColumn(key, HtmlUtil.stringToHtml(value));
-				}
-			}
-
-			if (CommonUtil.equalsIgnoreCase(autoSetSearchCriteria, "Y")) {
-				request.setAttribute("searchCriteriaDataSet", searchCriteriaDataSet);
+				requestDataSet.addColumn(key, value);
 			}
 
 			/*!
@@ -170,12 +148,6 @@ public class Action extends ActionSupport implements ServletContextAware, Servle
 			setMultipartRequest();
 			logRequestDataSet();
 		} catch (Exception ex) {
-			/*!
-			 * Export Action - <result name="export" type="chain">
-			 *    - when the next action is called, the value of parameter entry is not array -> error occurring
-			 *    - but this can be ignored
-			 */
-//			logger.error(ex);
 		}
 	}
 
@@ -201,7 +173,6 @@ public class Action extends ActionSupport implements ServletContextAware, Servle
 		paramEntity.setSession(session);
 		paramEntity.setRequest(request);
 		paramEntity.setRequestDataSet(requestDataSet);
-		paramEntity.setSearchCriteriaDataSet(searchCriteriaDataSet);
 		paramEntity.setRequestFileDataSet(requestFileDataSet);
 
 		logParamEntity();
@@ -220,10 +191,6 @@ public class Action extends ActionSupport implements ServletContextAware, Servle
 	private void setMultipartRequest() {
 		try {
 			if (isMultipart) {
-//				String appRealPath = (String)MemoryBean.get("applicationRealPath");
-//				String pathTemp = appRealPath + ConfigUtil.getProperty("path.dir.temp");
-//				String pathUploadRepository = appRealPath + ConfigUtil.getProperty("path.dir.uploadRepository");
-
 				String pathTemp = ConfigUtil.getProperty("path.dir.temp");
 				String pathUploadRepository = ConfigUtil.getProperty("path.dir.uploadRepository");
 				String dataSetHeader[] = {"FORM_TAG_NAME", "ORIGINAL_NAME", "NEW_NAME", "TEMP_PATH", "REPOSITORY_PATH", "TYPE", "SIZE", "ICON"};

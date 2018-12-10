@@ -16,7 +16,6 @@
 				<interceptor-ref name="timerInterceptor"/>
 				<interceptor-ref name="requestInterceptor"/>
 				<interceptor-ref name="loginInterceptor"/>
-<!-- 				<interceptor-ref name="paramsPrepareParamsStack"/> -->
 				<interceptor-ref name="defaultStack"/>
 			</interceptor-stack>
 		</interceptors>
@@ -24,12 +23,12 @@
 		<global-results>
 			<!-- Common for both Framework and Project -->
 			<result name="index" type="redirect">index.jsp</result>
-			<result name="checkScreenForLogin" type="debugDispatcherResult">/shared/page/checkScreenForLogin.jsp</result>
-			<result name="ajaxSessionTimeout" type="debugDispatcherResult">/shared/page/ajaxSessionTimeout.jsp</result>
+			<result name="checkScreenForLogin" type="debugDispatcherResult">/com/es/portal/shared/page/checkScreenForLogin.jsp</result>
+			<result name="ajaxSessionTimeout" type="debugDispatcherResult">/com/es/portal/shared/page/ajaxSessionTimeout.jsp</result>
 			<result name="login" type="redirect">/login/userlogin</result>
-			<result name="accessDenied" type="debugDispatcherResult">/shared/page/accessDenied.jsp</result>
-			<result name="error" type="debugDispatcherResult">/shared/page/error.jsp</result>
-			<result name="pageHandler" type="debugDispatcherResult">/shared/page/pageHandler.jsp</result>
+			<result name="accessDenied" type="debugDispatcherResult">/com/es/portal/shared/page/accessDenied.jsp</result>
+			<result name="error" type="debugDispatcherResult">/com/es/portal/shared/page/error.jsp</result>
+			<result name="pageHandler" type="debugDispatcherResult">/com/es/portal/shared/page/pageHandler.jsp</result>
 			<result name="ajaxResponse" type="ajaxResponse"></result>
 			<result name="export" type="chain">
 				<param name="actionName">export</param>
@@ -40,5 +39,5 @@
 
 	<!-- Include struts config here -->
 	<include file="zebra/example/conf/struts/struts.xml"/>
-	<include file="project/conf/struts/struts.xml"/>
+	<include file="com/es/portal/conf/struts/struts.xml"/>
 </struts>

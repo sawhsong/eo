@@ -11,104 +11,35 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
-	<!-- /*Default Datasource*/ -->
-	<!-- DriverManager -->
 	<bean id="driverManager" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<!-- log4sql (운영시점에는 Oracle로 변경할것 - log4sql seems not to support dbcp2, use log4jdbc instead)-->
 		<property name="driverClassName" value="${jdbc.driver.driverClassName}"/>
-<!-- 		<property name="driverClassName" value="${jdbc.log4sql.driverClassName}"/> -->
-<!-- 		<property name="driverClassName" value="${jdbc.log4jdbc.driverClassName}"/> -->
 		<property name="url" value="${jdbc.driver.url}"/>
-<!-- 		<property name="url" value="${jdbc.log4jdbc.url}"/> -->
 		<property name="username" value="${jdbc.user.name}"/>
 		<property name="password" value="${jdbc.user.pass}"/>
 	</bean>
-	<!-- JNDI(both are OK) -->
-<!--	<jee:jndi-lookup id="jndiFactory" jndi-name="jdbc/${jdbc.jndi.name}" resource-ref="true"/>-->
+
 	<bean id="jndiFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/jdbc/${jdbc.jndi.name}"/>
 		<property name="resourceRef" value="true"/>
 	</bean>
-	<!-- ConnectionPool -->
+
 	<bean id="connectionPool" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource" destroy-method="close">
-		<!-- log4sql (운영시점에는 Oracle로 변경할것 - this seems not to support dbcp2)-->
 		<property name="driverClassName" value="${jdbc.driver.driverClassName}"/>
-<!-- 		<property name="driverClassName" value="${jdbc.log4sql.driverClassName}"/> -->
-<!-- 		<property name="driverClassName" value="${jdbc.log4jdbc.driverClassName}"/> -->
 		<property name="url" value="${jdbc.driver.url}"/>
-<!-- 		<property name="url" value="${jdbc.log4jdbc.url}"/> -->
 		<property name="username" value="${jdbc.user.name}"/>
 		<property name="password" value="${jdbc.user.pass}"/>
 	</bean>
 
-
-	<!-- /*Additional Datasource*/ -->
-<!-- 	<bean id="driverManager_perci" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
-<!-- 		<property name="driverClassName" value="${jdbc.driver.driverClassName}"/> -->
-<!-- 		<property name="url" value="${jdbc.driver.url_perci}"/> -->
-<!-- 		<property name="username" value="${jdbc.user.name_perci}"/> -->
-<!-- 		<property name="password" value="${jdbc.user.pass_perci}"/> -->
-<!-- 	</bean> -->
-<!-- 	<bean id="jndiFactory_perci" class="org.springframework.jndi.JndiObjectFactoryBean"> -->
-<!-- 		<property name="jndiName" value="java:comp/env/jdbc/${jdbc.jndi.name_perci}"/> -->
-<!-- 		<property name="resourceRef" value="true"/> -->
-<!-- 	</bean> -->
-<!-- 	<bean id="connectionPool_perci" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource" destroy-method="close"> -->
-<!-- 		<property name="driverClassName" value="${jdbc.driver.driverClassName}"/> -->
-<!-- 		<property name="url" value="${jdbc.driver.url_perci}"/> -->
-<!-- 		<property name="username" value="${jdbc.user.name_perci}"/> -->
-<!-- 		<property name="password" value="${jdbc.user.pass_perci}"/> -->
-<!-- 	</bean> -->
-
-
-	<!-- Spring JDBC & MyBatis 둘 다 가능 (JdbcDaoSupport, NamedParameterJdbcDaoSupport) & Message Source Accessor -->
-	<bean id="jdbcDao" abstract="true" class="${name.package.framework}.base.JdbcDao">
-		<property name="dataSource" ref="${jdbc.using.dataSource}"/>
-		<property name="messageSourceAccessor" ref="messageSourceAccessor"/>
-		<property name="sqlSession" ref="sqlSessionTemplate"/>
-	</bean>
-	<bean id="namedParameterJdbcDao" abstract="true" class="${name.package.framework}.base.NamedParameterJdbcDao">
-		<property name="dataSource" ref="${jdbc.using.dataSource}"/>
-		<property name="messageSourceAccessor" ref="messageSourceAccessor"/>
-		<property name="sqlSession" ref="sqlSessionTemplate"/>
-	</bean>
-
-	<!-- MyBatis (From MyBatis3.X Mappers replaced with SqlMapClient) -->
-	<!-- mapperLocations : scan mapper files -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="${jdbc.using.dataSource}"/>
-		<property name="configLocation" value="classpath:${path.mybatis.configFile}"></property>
-		<property name="mapperLocations">
-			<list>
-				<value>classpath*:${path.mybatis.mapperDirFwk}/**/*Mapper.xml</value>
-				<value>classpath*:${path.mybatis.queryDirFwk}/**/*Mapper.xml</value>
-				<value>classpath*:${path.mybatis.mapperDirProject}/**/*Mapper.xml</value>
-				<value>classpath*:${path.mybatis.queryDirProject}/**/*Mapper.xml</value>
-			</list>
-		</property>
-	</bean>
-	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory"/>
-	</bean>
-
-	<!-- This makes Transaction to be possible in Service -->
 	<bean id="baseBiz" abstract="true" class="${name.package.framework}.base.Biz">
-		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 		<property name="sessionFactory" ref="hibernateLocalSessionFactory"/>
 		<property name="messageSourceAccessor" ref="messageSourceAccessor"/>
 	</bean>
 
-	<!-- Hibernate -->
 	<bean id="baseHDao" abstract="true" class="${name.package.framework}.base.HDao">
 		<property name="sessionFactory" ref="hibernateLocalSessionFactory"/>
 		<property name="messageSourceAccessor" ref="messageSourceAccessor"/>
 	</bean>
 
-	<!-- TransactionManager based on JDBC & MyBatis -->
-	<bean id="txManagerForJdbc" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="${jdbc.using.dataSource}"/>
-	</bean>
-	<!-- TransactionManager based on Hibernate (sessionFactory info is in spring-nony-hibernate.xml) -->
 	<bean id="txManagerForHibernate" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="hibernateLocalSessionFactory"/>
 	</bean>

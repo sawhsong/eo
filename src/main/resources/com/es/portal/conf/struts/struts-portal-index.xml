@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="index" extends="default" namespace="/" strict-method-invocation="false">
+		<default-interceptor-ref name="ZebraDefaultStack"/>
+		<action name="index/*" class="com.es.portal.index.IndexAction" method="{1}">
+			<result name="dashboard" type="debugDispatcherResult">/com/es/portal/index/indexDashboard.jsp</result>
+			<result name="success" type="debugDispatcherResult">/com/es/portal/index/indexDefault.jsp</result>
+		</action>
+	</package>
+</struts>

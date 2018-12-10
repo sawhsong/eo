@@ -14,7 +14,6 @@ import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.support.MessageSourceAccessor;
 
 import zebra.data.DataSet;
@@ -24,18 +23,9 @@ import zebra.util.ConfigUtil;
 
 public class BaseWebService {
 	protected Logger logger = LogManager.getLogger(this.getClass());
-	private SqlSessionTemplate sqlSessionTemplate;
 	private SessionFactory sessionFactory;
 	private MessageSourceAccessor messageSourceAccessor;
 	protected ParamEntity paramEntity = new ParamEntity();
-
-	protected SqlSessionTemplate getSqlSessionTemplate() {
-		return sqlSessionTemplate;
-	}
-
-	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
-		this.sqlSessionTemplate = sqlSessionTemplate;
-	}
 
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;

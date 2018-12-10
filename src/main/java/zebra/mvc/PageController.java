@@ -16,6 +16,7 @@ import com.opensymphony.xwork2.ActionInvocation;
 
 @Deprecated
 public class PageController extends StrutsResultSupport {
+	@SuppressWarnings("unused")
 	private Logger logger = LogManager.getLogger(this.getClass());
 
 	@SuppressWarnings("unused")
@@ -24,11 +25,10 @@ public class PageController extends StrutsResultSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		RequestDispatcher dispatcher = request.getRequestDispatcher(finalLocation);
-logger.debug("PageController 1");
+
 		response.setContentType("text/html;charset=utf-8");
-logger.debug("PageController 2");
 		PrintWriter out = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), "utf-8"), true);
-logger.debug("PageController 3");
+
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<script language=\"JavaScript\" src=\"\"></script>");
@@ -47,9 +47,6 @@ logger.debug("PageController 3");
 
 		out.println("</body>");
 		out.println("</html>");
-logger.debug("PageController 4");
 		out.flush();
-logger.debug("PageController 5");
-//		dispatcher.forward(request, response);
 	}
 }

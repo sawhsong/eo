@@ -7,7 +7,7 @@ purge recyclebin;
 
 create table eo_menu_auth_link (
     group_id                        varchar2(60)                                        not null,   -- Authority group UID (PK) (lookup_type = PORTAL_SECURITY_GROUP [sys_common_lookup.lookup_code])
-    menu_id                         varchar2(30)                                        not null,   -- Menu UID (PK) ([sys_menu.menu_id])
+    menu_id                         varchar2(100)                                       not null,   -- Menu UID (PK) ([sys_menu.menu_id])
     insert_user_id                  varchar2(30),                                                   -- Insert User UID
     insert_date                     date                        default sysdate,                    -- Insert Date
     update_user_id                  varchar2(30),                                                   -- Update User UID
@@ -50,7 +50,21 @@ select 'ENTITY_SOLUTIONS_STAFF' as group_id,
        null as update_user_id,
        null as update_date
   from eo_menu
- where menu_id in ('HOME', 'MTF', 'MPF', 'DOC', 'PAY', 'TMS', 'FRM', 'SEP', 'SVC', 'IPR', 'CTR', 'INV', 'CON')
+ where menu_id in ('HOME',
+                   'Taskflow',
+                   'Profile',
+                   'Document',
+                   'Payslip',
+                   'Timesheet-IPro',
+                   'Timesheet-Corp',
+                   'Form',
+                   'Expense',
+                   'Service',
+                   'IPro',
+                   'Invoice',
+                   'Contract',
+                   'Contactus'
+                  )
 )
 ;
 
@@ -62,7 +76,17 @@ select 'PREMIUM_IPRO_PORTAL_USER' as group_id,
        null as update_user_id,
        null as update_date
   from eo_menu
- where menu_id in ('HOME', 'MTF', 'MPF', 'DOC', 'PAY', 'TMS', 'FRM', 'SEP', 'SVC', 'CON')
+ where menu_id in ('HOME',
+                   'Taskflow',
+                   'Profile',
+                   'Document',
+                   'Payslip',
+                   'Timesheet-IPro',
+                   'Form',
+                   'Expense',
+                   'Service',
+                   'Contactus'
+                  )
 )
 ;
 
@@ -74,7 +98,16 @@ select 'TEMPORARY_IPRO_PORTAL_USER' as group_id,
        null as update_user_id,
        null as update_date
   from eo_menu
- where menu_id in ('HOME', 'MTF', 'MPF', 'DOC', 'PAY', 'TMS', 'FRM', 'SEP', 'SVC', 'CON')
+ where menu_id in ('HOME',
+                   'Taskflow',
+                   'Profile',
+                   'Document',
+                   'Payslip',
+                   'Timesheet-IPro',
+                   'Form',
+                   'Service',
+                   'Contactus'
+                  )
 )
 ;
 
@@ -86,7 +119,14 @@ select 'GENERAL_CORPORATE_USER' as group_id,
        null as update_user_id,
        null as update_date
   from eo_menu
- where menu_id in ('HOME', 'IPR', 'INV', 'CTR', 'TMS', 'FRM', 'CON')
+ where menu_id in ('HOME',
+                   'Timesheet-Corp',
+                   'Form',
+                   'IPro',
+                   'Invoice',
+                   'Contract',
+                   'Contactus'
+                  )
 )
 ;
 

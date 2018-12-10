@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="ipro" extends="default" namespace="/ipro" strict-method-invocation="false">
+		<default-interceptor-ref name="ZebraDefaultStack"/>
+		<action name="timesheet/*" class="com.es.portal.ipro.timesheet.TimesheetAction" method="{1}">
+			<result name="myTimesheet" type="debugDispatcherResult">/com/es/portal/ipro/timesheet/MyTimesheet.jsp</result>
+		</action>
+	</package>
+</struts>

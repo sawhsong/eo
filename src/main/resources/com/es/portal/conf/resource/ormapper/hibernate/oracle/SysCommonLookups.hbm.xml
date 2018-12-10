@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--/*
+ * Framework Generated Hibernate Config hbm Source
+ * - SYS_COMMON_LOOKUPS - 
+ */-->
+<hibernate-mapping>
+	<class name="com.es.portal.conf.resource.ormapper.dto.oracle.SysCommonLookups" table="SYS_COMMON_LOOKUPS" lazy="false">
+		<meta attribute="class-description" inherit="false"></meta>
+
+		<id name="lookupId" column="LOOKUP_ID" type="java.lang.Double"/>
+
+		<property name="createdBy" column="CREATED_BY" not-null="true" type="java.lang.Double"/>
+		<property name="creationDate" column="CREATION_DATE" not-null="true" type="java.util.Date"/>
+		<property name="enabledFlag" column="ENABLED_FLAG" not-null="true" type="java.lang.String" length="1"/>
+		<property name="lastUpdatedBy" column="LAST_UPDATED_BY" not-null="true" type="java.lang.Double"/>
+		<property name="lastUpdateDate" column="LAST_UPDATE_DATE" not-null="true" type="java.util.Date"/>
+		<property name="lookupCode" column="LOOKUP_CODE" not-null="true" type="java.lang.String" length="150"/>
+		<property name="lookupType" column="LOOKUP_TYPE" not-null="true" type="java.lang.String" length="150"/>
+		<property name="meaning" column="MEANING" not-null="true" type="java.lang.String" length="240"/>
+		<property name="attribute1" column="ATTRIBUTE1" type="java.lang.String" length="100"/>
+		<property name="attribute2" column="ATTRIBUTE2" type="java.lang.String" length="100"/>
+		<property name="attribute3" column="ATTRIBUTE3" type="java.lang.String" length="100"/>
+		<property name="attribute4" column="ATTRIBUTE4" type="java.lang.String" length="100"/>
+		<property name="attribute5" column="ATTRIBUTE5" type="java.lang.String" length="100"/>
+		<property name="description" column="DESCRIPTION" type="java.lang.String" length="4000"/>
+		<property name="displayOrder" column="DISPLAY_ORDER" type="java.lang.Double"/>
+		<property name="fromDateActive" column="FROM_DATE_ACTIVE" type="java.util.Date"/>
+		<property name="toDateActive" column="TO_DATE_ACTIVE" type="java.util.Date"/>
+	</class>
+
+	<sql-query name="sysCommonLookups.selectAll">
+	<![CDATA[
+		SELECT CREATED_BY,
+		       TO_CHAR(CREATION_DATE, 'yyyymmddhh24miss') AS CREATION_DATE,
+		       ENABLED_FLAG,
+		       LAST_UPDATED_BY,
+		       TO_CHAR(LAST_UPDATE_DATE, 'yyyymmddhh24miss') AS LAST_UPDATE_DATE,
+		       LOOKUP_CODE,
+		       LOOKUP_TYPE,
+		       MEANING,
+		       ATTRIBUTE1,
+		       ATTRIBUTE2,
+		       ATTRIBUTE3,
+		       ATTRIBUTE4,
+		       ATTRIBUTE5,
+		       DESCRIPTION,
+		       DISPLAY_ORDER,
+		       TO_CHAR(FROM_DATE_ACTIVE, 'yyyymmddhh24miss') AS FROM_DATE_ACTIVE,
+		       LOOKUP_ID,
+		       TO_CHAR(TO_DATE_ACTIVE, 'yyyymmddhh24miss') AS TO_DATE_ACTIVE
+		  FROM SYS_COMMON_LOOKUPS
+		 WHERE 1 = 1
+		 ${auto_fill}
+		 ${frameworkGeneratedWhere}
+		 ${frameworkGeneratedOrderBy}
+	]]>
+	</sql-query>
+
+	<sql-query name="sysCommonLookups.insert">
+	<![CDATA[
+		INSERT INTO SYS_COMMON_LOOKUPS (
+		       CREATED_BY,
+		       CREATION_DATE,
+		       ENABLED_FLAG,
+		       LAST_UPDATED_BY,
+		       LAST_UPDATE_DATE,
+		       LOOKUP_CODE,
+		       LOOKUP_TYPE,
+		       MEANING,
+		       ATTRIBUTE1,
+		       ATTRIBUTE2,
+		       ATTRIBUTE3,
+		       ATTRIBUTE4,
+		       ATTRIBUTE5,
+		       DESCRIPTION,
+		       DISPLAY_ORDER,
+		       FROM_DATE_ACTIVE,
+		       LOOKUP_ID,
+		       TO_DATE_ACTIVE
+		       )
+		VALUES (
+		       ${CREATED_BY},
+		       ${CREATION_DATE},
+		       ${ENABLED_FLAG},
+		       ${LAST_UPDATED_BY},
+		       ${LAST_UPDATE_DATE},
+		       ${LOOKUP_CODE},
+		       ${LOOKUP_TYPE},
+		       ${MEANING},
+		       ${ATTRIBUTE1},
+		       ${ATTRIBUTE2},
+		       ${ATTRIBUTE3},
+		       ${ATTRIBUTE4},
+		       ${ATTRIBUTE5},
+		       ${DESCRIPTION},
+		       ${DISPLAY_ORDER},
+		       ${FROM_DATE_ACTIVE},
+		       ${LOOKUP_ID},
+		       ${TO_DATE_ACTIVE}
+		       )
+	]]>
+	</sql-query>
+
+	<sql-query name="sysCommonLookups.update">
+	<![CDATA[
+		UPDATE SYS_COMMON_LOOKUPS
+		   SET CREATED_BY = ${CREATED_BY},
+		       CREATION_DATE = ${CREATION_DATE},
+		       ENABLED_FLAG = ${ENABLED_FLAG},
+		       LAST_UPDATED_BY = ${LAST_UPDATED_BY},
+		       LAST_UPDATE_DATE = ${LAST_UPDATE_DATE},
+		       LOOKUP_CODE = ${LOOKUP_CODE},
+		       LOOKUP_TYPE = ${LOOKUP_TYPE},
+		       MEANING = ${MEANING},
+		       ATTRIBUTE1 = ${ATTRIBUTE1},
+		       ATTRIBUTE2 = ${ATTRIBUTE2},
+		       ATTRIBUTE3 = ${ATTRIBUTE3},
+		       ATTRIBUTE4 = ${ATTRIBUTE4},
+		       ATTRIBUTE5 = ${ATTRIBUTE5},
+		       DESCRIPTION = ${DESCRIPTION},
+		       DISPLAY_ORDER = ${DISPLAY_ORDER},
+		       FROM_DATE_ACTIVE = ${FROM_DATE_ACTIVE},
+		       LOOKUP_ID = ${LOOKUP_ID},
+		       TO_DATE_ACTIVE = ${TO_DATE_ACTIVE}
+		 WHERE 1 = 1
+		   ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+
+	<sql-query name="sysCommonLookups.updateColumns">
+	<![CDATA[
+		UPDATE SYS_COMMON_LOOKUPS
+		   SET ${frameworkGeneratedColumnsToUpdate}
+		 WHERE 1 = 1
+		 ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+
+	<sql-query name="sysCommonLookups.delete">
+	<![CDATA[
+		DELETE SYS_COMMON_LOOKUPS
+		 WHERE 1 = 1
+		   ${frameworkGeneratedWhere}
+	]]>
+	</sql-query>
+</hibernate-mapping>

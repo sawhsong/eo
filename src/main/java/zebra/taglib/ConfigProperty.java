@@ -48,7 +48,7 @@ public class ConfigProperty extends TaglibSupport {
 
 			if (CommonUtil.equalsIgnoreCase(getKey(), "viewPageJsName")) {
 				String removeString = "org/apache/jsp";
-				String replaceFrom[] = new String[] {"app", "_jsp"}, replaceTo[] = new String[] {"appjs", ".js"};
+				String replaceFrom[] = new String[] {"_jsp"}, replaceTo[] = new String[] {".js"};
 				String name = CommonUtil.remove(CommonUtil.replace(jspPage.getClass().getName(), ".", "/"), removeString);
 
 				rtnString = CommonUtil.replaceEach(name, replaceFrom, replaceTo);

@@ -1,13 +1,13 @@
 /**
  * Table Name  : EO_MENU
- * Description : Menu Info - Use Excel file to initialise data (eo_menu.xlsx)
+ * Description : 
  */
 drop table eo_menu cascade constraints;
 purge recyclebin;
 
 create table eo_menu (
-    menu_id                         varchar2(30)                                        not null,   -- Menu UID (PK)
-    parent_menu_id                  varchar2(30),                                                   -- Parent menu UID
+    menu_id                         varchar2(100)                                       not null,   -- Menu UID (PK)
+    parent_menu_id                  varchar2(100),                                                  -- Parent menu UID
     menu_name                       varchar2(500)                                       not null,   -- Menu name
     menu_url                        varchar2(500),                                                  -- Menu URL
     menu_icon                       varchar2(100),                                                  -- Menu Icon

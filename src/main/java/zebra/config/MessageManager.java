@@ -19,8 +19,6 @@ public class MessageManager {
 		String realPath = (String)MemoryBean.get("applicationRealPath")+"WEB-INF/classes/";
 		File rootDir;
 
-		rootDir = new File(realPath+ConfigUtil.getProperty("path.dir.messageFwk"));
-		iterateScanDirectory(rootDir);
 		rootDir = new File(realPath+ConfigUtil.getProperty("path.dir.messageProject"));
 		iterateScanDirectory(rootDir);
 	}

@@ -29,12 +29,6 @@ public class DirectoryResourceBundleMessageSource extends ResourceBundleMessageS
 			addMessageBaseNames(baseNames, rootDir);
 		}
 		super.setBasenames((String[])baseNames.toArray(new String[baseNames.size()]));
-
-		/*!
-		 * No need to load query files
-		 */
-//		HibernateQueryManager hibernateQueryManager = new HibernateQueryManager();
-//		hibernateQueryManager.loadQueryFiles(servletContext, directoryPath);
 	}
 
 	private void addMessageBaseNames(ArrayList<String> baseNames, File directory) {

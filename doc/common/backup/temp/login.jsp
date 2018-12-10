@@ -2,7 +2,7 @@
 * Description
 * - 
 ************************************************************************************************/%>
-<%@ include file="/shared/page/incCommon.jsp"%>
+<%@ include file="/com/es/portal/shared/page/incCommon.jsp"%>
 <%/************************************************************************************************
 * Declare objects & variables
 ************************************************************************************************/%>
@@ -21,7 +21,7 @@
 <%/************************************************************************************************
 * Stylesheet & Javascript
 ************************************************************************************************/%>
-<%@ include file="/shared/page/incCssJs.jsp"%>
+<%@ include file="/com/es/portal/shared/page/incCssJs.jsp"%>
 <style type="text/css">
 html, body {height:100%;background:#FFFFFF;}
 .form-control {padding:6px 12px;}
