@@ -14,7 +14,7 @@ public class TimesheetAction extends BaseAction {
 	private TimesheetBiz biz;
 
 	public String mytimesheets() throws Exception {
-		biz.myTimesheet(paramEntity);
+		biz.mytimesheets(paramEntity);
 		return "myTimesheet";
 	}
 }

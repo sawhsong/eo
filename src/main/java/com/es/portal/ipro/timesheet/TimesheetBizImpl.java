@@ -2,34 +2,34 @@ package com.es.portal.ipro.timesheet;
 
 import java.util.Iterator;
 
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.client.WebClient;
 
+import com.es.portal.common.extend.BaseBiz;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
-import com.es.portal.common.extend.BaseBiz;
 import zebra.data.DataSet;
 import zebra.data.ParamEntity;
+import zebra.data.QueryAdvisor;
 import zebra.exception.FrameworkException;
 import zebra.util.CommonUtil;
 import zebra.util.ConfigUtil;
 
 public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
-	public ParamEntity myTimesheet(ParamEntity paramEntity) throws Exception {
+	public ParamEntity mytimesheets(ParamEntity paramEntity) throws Exception {
 		DataSet requestDataSet = paramEntity.getRequestDataSet();
+		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
 		String providerUrl = ConfigUtil.getProperty("webService.perci.url");
 		String result = "";
-		HttpSession session = paramEntity.getSession();
-		String orgId = (String)session.getAttribute("EmploymentOrgId");
-		String searchDateFrom = CommonUtil.remove(CommonUtil.nvl(requestDataSet.getValue("fromDate"), CommonUtil.getSysdate("ddMMyyyy")), "-");
-		String searchDateTo = CommonUtil.remove(CommonUtil.nvl(requestDataSet.getValue("toDate"), CommonUtil.getSysdate("ddMMyyyy")), "-");
+		String orgId = requestDataSet.getValue("orgId");
 		String header[] = new String[] {"billableAmount", "contractorPaidDate", "customerPaidDate", "dueDate", "endDate", "groupInvoiceNumber", "invoiceDate", "invoiceNumber", "invoiceStatus", "startDate"};
 
 		try {
-			WebClient webClient = WebClient.create(providerUrl);
+			queryAdvisor.addVariable(variableName, variableValue);
+
 			Response wsResponse = webClient.path("corporate/"+orgId+"/invoices")
 					.query("dateFrom", searchDateFrom)
 					.query("dateTo", searchDateTo)
@@ -49,7 +49,7 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 		return paramEntity;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked" })
 	private DataSet getDataSet(ParamEntity paramEntity, String objName, String[] header) throws Exception {
 		DataSet ds = new DataSet();
 		JSONArray jsonArray = (JSONArray)JSONSerializer.toJSON(paramEntity.getObject(objName));

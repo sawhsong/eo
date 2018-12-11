@@ -44,7 +44,7 @@
 * Real Contents - fixed panel(tab, button, search, information)
 ************************************************************************************************/%>
 <div id="divTabArea"></div>
-<div id="divButtonArea">
+<div id="divButtonArea" class="areaContainer">
 	<div id="divButtonAreaLeft"></div>
 	<div id="divButtonAreaRight">
 		<ui:buttonGroup id="buttonGroup">
@@ -53,25 +53,27 @@
 		</ui:buttonGroup>
 	</div>
 </div>
-<div id="divSearchCriteriaArea">
+<div id="divSearchCriteriaArea" class="areaContainer">
 	<table class="tblSearch">
-		<caption>Search Criteria</caption>
+		<caption>Please select a contract assignment, then a timesheet period and click 'Search' button to view a timesheet</caption>
 		<colgroup>
 			<col width="50%"/>
 			<col width="50%"/>
 		</colgroup>
 		<tr>
 			<td class="tdSearch">
-				<label for="timesheetCycle" class="lblEn hor">Timesheet Cycle</label>
+				<label for="timesheetCycle" class="lblEn hor mandatory">Timesheet Cycle</label>
 				<div style="float:left;padding-right:4px;">
-					<ui:select name="timesheetCycle" attribute="caption:==Select==">
+					<ui:select name="timesheetCycle">
 					</ui:select>
 				</div>
 			</td>
 		</tr>
 	</table>
 </div>
-<div id="divInformArea"></div>
+<div id="divInformArea" class="areaContainer">
+
+</div>
 <%/************************************************************************************************
 * End of fixed panel
 ************************************************************************************************/%>

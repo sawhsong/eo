@@ -15,12 +15,10 @@ import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
 
 import zebra.data.DataSet;
 import zebra.data.ParamEntity;
+import zebra.data.QueryAdvisor;
 import zebra.util.CommonUtil;
-import zebra.util.ConfigUtil;
 
 public class RestServiceSupport {
-	private static final String PROVIDER_URL = ConfigUtil.getProperty("webService.provider.url");
-
 	/*!
 	 * Server support
 	 */
@@ -69,52 +67,53 @@ public class RestServiceSupport {
 	/*!
 	 * Client support
 	 */
-	/**
-	 * General post - no file upload
-	 * @param serviceUrl
-	 * @param acceptTypeHeader
-	 * @param paramEntity
-	 * @return
-	 * @throws Exception
-	 */
-	public static String post(String serviceUrl, String acceptTypeHeader, ParamEntity paramEntity) throws Exception {
-		if (CommonUtil.isBlank(serviceUrl) || CommonUtil.isBlank(acceptTypeHeader) || paramEntity == null) {
+	public static String get(String providerUrl, String serviceUrl, String acceptTypeHeader, QueryAdvisor queryAdvisor, ParamEntity paramEntity) throws Exception {
+		if (CommonUtil.isBlank(providerUrl) || CommonUtil.isBlank(serviceUrl) || CommonUtil.isBlank(acceptTypeHeader) || paramEntity == null) {
 			return "";
 		}
 
-		WebClient webClient = WebClient.create(PROVIDER_URL);
+		DataSet queryParam = queryAdvisor.getVariableDataSet();
+		WebClient webClient = WebClient.create(providerUrl);
+		webClient.path(serviceUrl);
+		for (int i=0; i<queryParam.getRowCnt(); i++) {
+			webClient.query(queryParam.getValue(i, 0), queryParam.getValue(i, 1));
+		}
+		Response wsResponse = webClient.accept(new String[] {acceptTypeHeader}).get();
+		return (String)wsResponse.readEntity(String.class);
+	}
+
+	public static String post(String providerUrl, String serviceUrl, String acceptTypeHeader, ParamEntity paramEntity) throws Exception {
+		if (CommonUtil.isBlank(providerUrl) || CommonUtil.isBlank(serviceUrl) || CommonUtil.isBlank(acceptTypeHeader) || paramEntity == null) {
+			return "";
+		}
+
+		WebClient webClient = WebClient.create(providerUrl);
 		Response wsResponse = webClient.path(serviceUrl).accept(new String[] {acceptTypeHeader}).post(paramEntity.toJsonString());
 		return (String)wsResponse.readEntity(String.class);
 	}
-	/**
-	 * Post for file download
-	 * @param serviceUrl
-	 * @param paramEntity
-	 * @return
-	 * @throws Exception
-	 */
-	public static MultipartBody postForFileDownload(String serviceUrl, ParamEntity paramEntity) throws Exception {
-		WebClient webClient = WebClient.create(PROVIDER_URL);
+
+	public static MultipartBody postForFileDownload(String providerUrl, String serviceUrl, ParamEntity paramEntity) throws Exception {
+		WebClient webClient = WebClient.create(providerUrl);
 		return webClient.path(serviceUrl).accept("multipart/mixed").post(paramEntity.toJsonString()).readEntity(MultipartBody.class);
 	}
 
 	@SuppressWarnings("rawtypes")
-	public static String postAttachment(String serviceUrl, String contentTypeHeader, String acceptTypeHeader, ParamEntity paramEntity, List attachmentList) throws Exception {
-		if (CommonUtil.isBlank(serviceUrl) || CommonUtil.isBlank(contentTypeHeader) || CommonUtil.isBlank(acceptTypeHeader) || paramEntity == null) {
+	public static String postAttachment(String providerUrl, String serviceUrl, String contentTypeHeader, String acceptTypeHeader, ParamEntity paramEntity, List attachmentList) throws Exception {
+		if (CommonUtil.isBlank(providerUrl) || CommonUtil.isBlank(serviceUrl) || CommonUtil.isBlank(contentTypeHeader) || CommonUtil.isBlank(acceptTypeHeader) || paramEntity == null) {
 			return "";
 		}
 
-		WebClient webClient = WebClient.create(PROVIDER_URL);
+		WebClient webClient = WebClient.create(providerUrl);
 		Response wsResponse = webClient.path(serviceUrl).type(contentTypeHeader).accept(new String[] {acceptTypeHeader}).post(attachmentList);
 		return (String)wsResponse.readEntity(String.class);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static String postAttachment(String serviceUrl, String contentTypeHeader, String acceptTypeHeader, ParamEntity paramEntity, DataSet fileDataSet) throws Exception {
+	public static String postAttachment(String providerUrl, String serviceUrl, String contentTypeHeader, String acceptTypeHeader, ParamEntity paramEntity, DataSet fileDataSet) throws Exception {
 		List attachmentList = new LinkedList();
 		InputStream inputStream;
 
-		if (CommonUtil.isBlank(serviceUrl) || CommonUtil.isBlank(contentTypeHeader) || CommonUtil.isBlank(acceptTypeHeader) || paramEntity == null) {
+		if (CommonUtil.isBlank(providerUrl) || CommonUtil.isBlank(serviceUrl) || CommonUtil.isBlank(contentTypeHeader) || CommonUtil.isBlank(acceptTypeHeader) || paramEntity == null) {
 			return "";
 		}
 
@@ -124,7 +123,7 @@ public class RestServiceSupport {
 			attachmentList.add(new Attachment(fileDataSet.getValue(i, "FORM_TAG_NAME"), fileDataSet.getValue(i, "TYPE"), inputStream));
 		}
 
-		WebClient webClient = WebClient.create(PROVIDER_URL);
+		WebClient webClient = WebClient.create(providerUrl);
 		Response wsResponse = webClient.path(serviceUrl).type(contentTypeHeader).accept(new String[] {acceptTypeHeader}).post(attachmentList);
 		return (String)wsResponse.readEntity(String.class);
 	}
