@@ -50,6 +50,6 @@ $(function() {
 </script>
 </head>
 <body>
-<form id="fmDefault" name="fmDefault" method="post" action="/login"></form>
+<form id="fmDefault" name="fmDefault" method="post" action="/login/userlogin"></form>
 </body>
 </html>

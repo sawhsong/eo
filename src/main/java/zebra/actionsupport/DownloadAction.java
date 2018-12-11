@@ -27,9 +27,6 @@ public class DownloadAction extends Action {
 		String newNameArr[] = CommonUtil.split(requestDataSet.getValue("newName"), delimiter);
 		String originalNameArr[] = CommonUtil.split(requestDataSet.getValue("originalName"), delimiter);
 
-		/*!
-		 * Caution : Some HTML objects are created for submission -> if the page is not refreshed those fields are submitted again
-		 */
 		repositoryPath = repositoryPathArr[repositoryPathArr.length - 1];
 		newName = newNameArr[newNameArr.length - 1];
 		originalName = originalNameArr[originalNameArr.length - 1];

@@ -17,4 +17,31 @@ public class TimesheetAction extends BaseAction {
 		biz.mytimesheets(paramEntity);
 		return "myTimesheet";
 	}
+
+	public String getAssignmentInfo() throws Exception {
+		try {
+			biz.getAssignmentInfo(paramEntity);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
+
+	public String getTimesheetPeriod() throws Exception {
+		try {
+			biz.getTimesheetPeriod(paramEntity);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
+
+	public String getTimesheetDetail() throws Exception {
+		try {
+			biz.getTimesheetDetail(paramEntity);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
 }

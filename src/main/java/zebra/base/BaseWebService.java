@@ -51,9 +51,6 @@ public class BaseWebService {
 		this.paramEntity = paramEntity;
 	}
 
-	/*!
-	 * getMessage() - being called by sub classes
-	 */
 	protected String getMessage(String messageCode) {
 		return messageSourceAccessor.getMessage(messageCode, new Locale(CommonUtil.lowerCase(ConfigUtil.getProperty("etc.default.language"))));
 	}

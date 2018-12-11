@@ -3,16 +3,15 @@
 **************************************************************************************************/
 @charset "utf-8";
 
+#divFooterHolder {width:100%;background:#eeeeee;padding:8px 6px 8px 6px;border-top:1px solid #dddddd;color:#000000;font-weight:bold;font-size:10px;}
 /**
  * Footer Layout
  */
-#divFooterLeft {float:left;width:0%;display:none;}
-#divFooterCenter {padding:6px 10px 6px 10px;width:100%;
-	border-top:1px solid #D1D1D1;
-	color:#939393;
-	background:#F0F0F0;
-}
-#divFooterRight {float:right;width:0%;display:none;}
+#divFooterLeft {float:left;width:33%;}
+#divFooterCenter {float:left;width:34%;}
+#divFooterRight {float:right;width:33%;}
+#divFooterLeft div {float:left;}
+#divFooterRight div {float:right;}
 
 /**
  * Footer Left
@@ -21,7 +20,11 @@
 /**
  * Footer Center
  */
-#divCopyRight {margin:0px auto;text-align:center;clear:both;font-weight:bold;font-size:0.9em;}
+.clickablItems {cursor:pointer;padding:0px 10px 0px 10px;}
+.clickablItems a, .clickablItems a:link, .clickablItems a:visited {text-decoration:none;color:#000000;}
+.clickablItems a:hover, .clickablItems i:hover {text-decoration:none;color:#000000;transition:background .2s;text-shadow:1px 1px 2px rgba(0, 0, 0, 0.2);}
+.clickablItemsBreak {margin:1px 5px;height:12px;font-size:1px;border-left:2px solid #000000;background-color:#000000;}
+.clickablItems i {font-weight:bold;font-size:13px;}
 
 /**
  * Footer Right

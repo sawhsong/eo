@@ -20,6 +20,7 @@ public class RestServiceExportAction extends Action {
 	private long contentLength;
 
 	public String execute() throws Exception {
+		String providerUrl = "http://localhost:8891/ws";
 		MultipartBody multipartBody;
 		InputStream inputStream;
 		String fileName;
@@ -28,7 +29,7 @@ public class RestServiceExportAction extends Action {
 		paramEntity.setObject("dataRange", requestDataSet.getValue("dataRange"));
 		paramEntity.setObject("requestDataSet", paramEntity.getRequestDataSet());
 
-		multipartBody = RestServiceSupport.postForFileDownload(requestDataSet.getValue("webServiceUrl"), paramEntity);
+		multipartBody = RestServiceSupport.postForFileDownload(providerUrl, requestDataSet.getValue("webServiceUrl"), paramEntity);
 		inputStream = RestServiceSupport.getFileInputStreamFromMultipartBody(multipartBody);
 		fileName = RestServiceSupport.getFileNameFromMultipartBody(multipartBody);
 		setContentLength(inputStream.available());

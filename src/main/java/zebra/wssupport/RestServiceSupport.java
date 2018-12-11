@@ -67,16 +67,18 @@ public class RestServiceSupport {
 	/*!
 	 * Client support
 	 */
-	public static String get(String providerUrl, String serviceUrl, String acceptTypeHeader, QueryAdvisor queryAdvisor, ParamEntity paramEntity) throws Exception {
-		if (CommonUtil.isBlank(providerUrl) || CommonUtil.isBlank(serviceUrl) || CommonUtil.isBlank(acceptTypeHeader) || paramEntity == null) {
+	public static String get(String providerUrl, String serviceUrl, String acceptTypeHeader, QueryAdvisor queryAdvisor) throws Exception {
+		if (CommonUtil.isBlank(providerUrl) || CommonUtil.isBlank(serviceUrl) || CommonUtil.isBlank(acceptTypeHeader)) {
 			return "";
 		}
 
 		DataSet queryParam = queryAdvisor.getVariableDataSet();
 		WebClient webClient = WebClient.create(providerUrl);
 		webClient.path(serviceUrl);
-		for (int i=0; i<queryParam.getRowCnt(); i++) {
-			webClient.query(queryParam.getValue(i, 0), queryParam.getValue(i, 1));
+		if (queryParam.getRowCnt() > 1) {
+			for (int i=0; i<queryParam.getRowCnt(); i++) {
+				webClient.query(queryParam.getValue(i, 0), queryParam.getValue(i, 1));
+			}
 		}
 		Response wsResponse = webClient.accept(new String[] {acceptTypeHeader}).get();
 		return (String)wsResponse.readEntity(String.class);

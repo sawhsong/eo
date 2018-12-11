@@ -9,4 +9,6 @@
 		<property name="eoMenuDao" ref="eoMenuDao"/>
 		<property name="eoMenuAuthLinkDao" ref="eoMenuAuthLinkDao"/>
 	</bean>
+
+	<bean id="timesheetBizService" name="timesheetBizService" class="${name.package.project}.common.module.bizservice.timesheet.TimesheetBizServiceImpl" parent="baseBiz"/>
 </beans>
