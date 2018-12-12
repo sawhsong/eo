@@ -7,37 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.es.portal.common.extend.BaseBiz;
 import com.es.portal.common.module.bizservice.timesheet.TimesheetBizService;
 
-import net.sf.json.JSONArray;
 import zebra.data.DataSet;
 import zebra.data.ParamEntity;
-import zebra.data.QueryAdvisor;
-import zebra.example.common.bizservice.framework.ZebraFrameworkBizService;
 import zebra.exception.FrameworkException;
-import zebra.util.ConfigUtil;
-import zebra.util.JsonUtil;
-import zebra.wssupport.RestServiceSupport;
 
 public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 	@Autowired
-	private TimesheetBizService zebraFrameworkBizService;
+	private TimesheetBizService timesheetBizService;
 
 	public ParamEntity mytimesheets(ParamEntity paramEntity) throws Exception {
-		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
 		HttpSession session = paramEntity.getSession();
-		DataSet assignment = new DataSet();
-		String providerUrl = ConfigUtil.getProperty("webService.perci.url");
-		String result = "", serviceUrl = "";
-		String LoginId = (String)session.getAttribute("LoginId");
+		DataSet assignmentList = new DataSet();
+		String loginId = (String)session.getAttribute("LoginId");
 
 		try {
-			serviceUrl = "users/"+LoginId+"/alltimesheets";
-			result = RestServiceSupport.get(providerUrl, serviceUrl, "application/json", queryAdvisor);
-
-			paramEntity.setObjectFromJsonString(result);
-			assignment = JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("timesheetAssignmentList"));
-			paramEntity.setObject("assignmentList", assignment);
-
-			session.setAttribute("assignmentListDataSet", assignment);
+			assignmentList = timesheetBizService.getAssignmentListDataSet(paramEntity, loginId);
+			paramEntity.setObject("assignmentList", assignmentList);
+			session.setAttribute("assignmentListDataSet", assignmentList);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
@@ -48,20 +34,13 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 	public ParamEntity getAssignmentInfo(ParamEntity paramEntity) throws Exception {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		HttpSession session = paramEntity.getSession();
-		DataSet assignment = new DataSet(), asgInfo = new DataSet();
+		DataSet assignmentInfo = new DataSet();
 		String assignmentId = dsRequest.getValue("assignmentId");
-		int rowIndex = -1;
 
 		try {
-			assignment = (DataSet)session.getAttribute("assignmentListDataSet");
-			rowIndex = assignment.getRowIndex("assignmentId", assignmentId);
+			assignmentInfo = timesheetBizService.getAssignmentInfoDataSet((DataSet)session.getAttribute("assignmentListDataSet"), assignmentId);
 
-			asgInfo.addName(assignment.getNames());
-			asgInfo.addRow();
-			for (int i=0; i<assignment.getColumnCnt(); i++) {
-				asgInfo.setValue(asgInfo.getRowCnt()-1, assignment.getName(i), assignment.getValue(rowIndex, i));
-			}
-			paramEntity.setAjaxResponseDataSet(asgInfo);
+			paramEntity.setAjaxResponseDataSet(assignmentInfo);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
@@ -72,18 +51,13 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 	public ParamEntity getTimesheetPeriod(ParamEntity paramEntity) throws Exception {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		HttpSession session = paramEntity.getSession();
-		DataSet assignment = new DataSet(), timesheet = new DataSet();
+		DataSet timesheetPeriod = new DataSet();
 		String assignmentId = dsRequest.getValue("assignmentId");
-		String jsonArrayString = "";
-		int rowIndex = -1;
 
 		try {
-			assignment = (DataSet)session.getAttribute("assignmentListDataSet");
-			rowIndex = assignment.getRowIndex("assignmentId", assignmentId);
-			jsonArrayString = assignment.getValue(rowIndex, "timesheetPeriodDateList");
-			timesheet = JsonUtil.getDataSetFromJsonArrayString(jsonArrayString);
+			timesheetPeriod = timesheetBizService.getTimesheetPeriodDataSet((DataSet)session.getAttribute("assignmentListDataSet"), assignmentId);
 
-			paramEntity.setAjaxResponseDataSet(timesheet);
+			paramEntity.setAjaxResponseDataSet(timesheetPeriod);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
@@ -93,22 +67,16 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 
 	public ParamEntity getTimesheetDetail(ParamEntity paramEntity) throws Exception {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
-		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
 		HttpSession session = paramEntity.getSession();
-		DataSet assignment = new DataSet();
-		String providerUrl = ConfigUtil.getProperty("webService.perci.url");
-		String result = "", serviceUrl = "";
-		String LoginId = (String)session.getAttribute("LoginId");
+		DataSet timesheetDetailList = new DataSet();
+		String assignmentId = dsRequest.getValue("assignmentId");
+		String startDate = dsRequest.getValue("startDate");
+		String endDate = dsRequest.getValue("endDate");
 
 		try {
-			serviceUrl = "users/"+LoginId+"/alltimesheets";
-			result = RestServiceSupport.get(providerUrl, serviceUrl, "application/json", queryAdvisor);
-
-			paramEntity.setObjectFromJsonString(result);
-			assignment = JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("timesheetAssignmentList"));
-			paramEntity.setObject("assignmentList", assignment);
-
-			session.setAttribute("assignmentListDataSet", assignment);
+			timesheetDetailList = timesheetBizService.getTimesheetDetailListDataSet(paramEntity, assignmentId, startDate, endDate);
+			paramEntity.setObject("timesheetDetailList", timesheetDetailList);
+			session.setAttribute("timesheetDetailListDataSet", timesheetDetailList);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
