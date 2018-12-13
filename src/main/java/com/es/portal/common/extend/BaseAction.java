@@ -36,6 +36,8 @@ public class BaseAction extends Action {
 		String themeId = CommonUtil.lowerCase((String)session.getAttribute("themeId"));
 		String maxRowsPerPage = (String)session.getAttribute("maxRowsPerPage");
 		String pageNumsPerPage = (String)session.getAttribute("pageNumsPerPage");
+		String userAgent = request.getHeader("user-agent");
+		String device = (CommonUtil.containsIgnoreCase(userAgent, "Android") || CommonUtil.containsIgnoreCase(userAgent, "iPhone")) ? "m" : "w";
 
 		try {
 			languageCode = CommonUtil.lowerCase(CommonUtil.nvl(language, ConfigUtil.getProperty("etc.default.language")));
@@ -47,6 +49,7 @@ public class BaseAction extends Action {
 			session.setAttribute("projectName", ConfigUtil.getProperty("name.project"));
 			session.setAttribute("langCode", languageCode);
 			session.setAttribute("themeId", themeId);
+			session.setAttribute("device", device);
 			session.setAttribute("maxRowsPerPage", maxRowsPerPage);
 			session.setAttribute("pageNumsPerPage", pageNumsPerPage);
 		} catch (Exception ex) {

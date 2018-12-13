@@ -16,6 +16,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="icon" type="image/png" href="<mc:cp key="imgIcon"/>/faviconEO.png">
 <title><mc:msg key="main.system.title"/></title>
 <%/************************************************************************************************
@@ -39,7 +40,7 @@ html, body {height:100%;background:#FFFFFF;}
 .passwordLink {float:left;width:50%;text-align:left;}
 .registerLink {float:right;width:50%;text-align:right;}
 
-.divLoginFooter {position:absolute;bottom:0px;width:100%;background:#eeeeee;padding:20px 60px 20px 60px;color:#000000;font-weight:bold;font-size:11px;}
+.divLoginFooter {position:absolute;bottom:0px;width:100%;background:#eeeeee;padding:20px 20px 20px 20px;color:#000000;font-weight:bold;font-size:11px;}
 .divLoginFooterLeft {float:left;width:33%;}
 .divLoginFooterCenter {float:left;width:34%;}
 .divLoginFooterRight {float:right;width:33%;}

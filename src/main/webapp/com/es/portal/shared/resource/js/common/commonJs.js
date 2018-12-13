@@ -139,12 +139,8 @@ var commonJs = {
 			fxSpeed:"slow",
 			spacing_open:0,
 			spacing_closed:0,
-//			spacing_open:4,
-//			spacing_closed:4,
 			togglerLength_open:0,
 			togglerLength_closed:0,
-//			togglerLength_open:40,
-//			togglerLength_closed:40,
 			north__resizerClass:"northLayoutResizers",
 			south__resizerClass:"southLayoutResizers",
 			togglerClass:"layoutTogglers",
@@ -153,7 +149,7 @@ var commonJs = {
 			south__resizable:false,
 			south__initClosed:false,
 			onresize_end:function() {
-//				$(window).trigger("resize");
+				$(window).trigger("resize");
 			}
 		};
 
@@ -163,12 +159,8 @@ var commonJs = {
 				name:"defaultInnerLayoutOption",
 				fxName:"fade",
 				fxSpeed:"slow",
-//				spacing_open:0,
-//				spacing_closed:0,
 				spacing_open:4,
 				spacing_closed:4,
-//				togglerLength_open:0,
-//				togglerLength_closed:0,
 				togglerLength_open:40,
 				togglerLength_closed:40,
 				resizerClass:"layoutResizers",
@@ -187,12 +179,8 @@ var commonJs = {
 				name:"defaultInnerLayoutOption",
 				fxName:"fade",
 				fxSpeed:"slow",
-//				spacing_open:0,
-//				spacing_closed:0,
 				spacing_open:4,
 				spacing_closed:4,
-//				togglerLength_open:0,
-//				togglerLength_closed:0,
 				togglerLength_open:40,
 				togglerLength_closed:40,
 				resizerClass:"layoutResizers",

@@ -17,6 +17,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="icon" type="image/png" href="<mc:cp key="imgIcon"/>/faviconEO.png">
 <title><mc:msg key="main.system.title"/></title>
 <%/************************************************************************************************
@@ -155,8 +156,278 @@
 			</tr>
 		</thead>
 		<tbody id="tblGridBody">
+<!-- 			<tr> -->
+<!-- 				<td colspan="8" style="padding:0px;border-top:0px"><ul id="ulTimesheetHolder"></ul></td> -->
+<!-- 			</tr> -->
 			<tr>
-				<td colspan="8" style="padding:0px;border-top:0px"><ul id="ulTimesheetHolder"></ul></td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+			</tr>
+			<tr>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
+				<td class="tdGrid">Mon</td>
 			</tr>
 		</tbody>
 	</table>

@@ -559,13 +559,13 @@
 			params.height = this.height;
 			params.popupIframe = this.popupIframe;
 
-			$(this.popupHeaderCloseButton).bind("click", params, this._close);
+			$(this.popupHeaderCloseButton).bind("click touchstart", params, this._close);
 
 			if (params.popupMethod == "popupDialog") {
 				for (var i=0; i<this.buttons.length; i++) {
 					var button = this.buttons[i];
-					$("#btnPopupDialog_"+this.popupId+"_"+button.caption).bind("click", params, button.callback);
-					$("#btnPopupDialog_"+this.popupId+"_"+button.caption).bind("click", params, this._close);
+					$("#btnPopupDialog_"+this.popupId+"_"+button.caption).bind("click touchstart", params, button.callback);
+					$("#btnPopupDialog_"+this.popupId+"_"+button.caption).bind("click touchstart", params, this._close);
 				}
 			}
 
