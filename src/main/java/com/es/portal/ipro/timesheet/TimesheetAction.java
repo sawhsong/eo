@@ -36,9 +36,9 @@ public class TimesheetAction extends BaseAction {
 		return "ajaxResponse";
 	}
 
-	public String getTimesheetDetail() throws Exception {
+	public String getTimesheetDayList() throws Exception {
 		try {
-			biz.getTimesheetDetail(paramEntity);
+			biz.getTimesheetDayList(paramEntity);
 		} catch (Exception ex) {
 		}
 		setRequestAttribute("paramEntity", paramEntity);

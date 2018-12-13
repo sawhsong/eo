@@ -1,6 +1,9 @@
 /**
  * MyTimesheet.js
  */
+jsconfig.put("scrollablePanelHeightAdjust", 0);
+var delimiter = jsconfig.get("dataDelimiter");
+
 $(function() {
 	/*!
 	 * event
@@ -21,6 +24,7 @@ $(function() {
 
 	$("#timesheetPeriod").change(function() {
 		setTimesheetPeriodInfo();
+		doSearch();
 	});
 	/*!
 	 * process
@@ -57,11 +61,10 @@ $(function() {
 					var ds = result.dataSet;
 
 					if (ds.getRowCnt() > 0) {
-						$("#assignmentNumber").val(ds.getValue(0, "assignmentNumber"));
-						$("#billingOrganisation").val(ds.getValue(0, "billingOrganisation"));
-						$("#timesheetUnitsDesc").val(ds.getValue(0, "timesheetUnitsDesc"));
-						$("#assignmentStartDate").val(ds.getValue(0, "assignmentStartDate"));
-						$("#assignmentEndDate").val(ds.getValue(0, "assignmentEndDate"));
+						$("#assignmentNumber").html(ds.getValue(0, "assignmentNumber"));
+						$("#billingOrganisation").html(ds.getValue(0, "billingOrganisation"));
+						$("#assignmentPeriod").html(ds.getValue(0, "assignmentStartDate")+" - "+ds.getValue(0, "assignmentEndDate"));
+						$("#timesheetUnitsDesc").html(ds.getValue(0, "timesheetUnitsDesc"));
 					}
 				} else {
 					commonJs.error(result.message);
@@ -119,57 +122,119 @@ $(function() {
 		commonJs.showProcMessageOnElement("tblInform");
 
 		var values = $("#timesheetPeriod").val().split("_");
-		$("#timesheetPeriodInfo").val(values[1]+" - "+values[2]);
+		$("#timesheetPeriodInfo").html(values[1]+" - "+values[2]);
 
 		setTimeout(function() {
 			commonJs.hideProcMessageOnElement("tblInform");
 		}, 100);
+	};
+
+	setGridTable = function() {
+		$("#tblGrid").fixedHeaderTable({
+			attachTo:$("#divDataArea")
+		});
 	};
 
 	doSearch = function() {
 		if (commonJs.isEmpty($("#assignment").val())) {
 			return;
 		}
-		commonJs.showProcMessageOnElement("tblInform");
+		commonJs.showProcMessageOnElement("divScrollablePanel");
 
 		var values = $("#timesheetPeriod").val().split("_");
 
-		commonJs.ajaxSubmit({
-			url:"/ipro/timesheet/getTimesheetDetail",
-			dataType:"json",
-			data:{
-				assignmentId:$("#assignment").val(),
-				startDate:values[1],
-				endDate:values[2]
-			},
-			success:function(data, textStatus) {
-				var result = commonJs.parseAjaxResult(data, textStatus, "json");
-				if (result.isSuccess == true || result.isSuccess == "true") {
-					var ds = result.dataSet;
-
-					if (ds.getRowCnt() > 0) {
-
+		setTimeout(function() {
+			commonJs.ajaxSubmit({
+				url:"/ipro/timesheet/getTimesheetDayList",
+				dataType:"json",
+				data:{
+					assignmentId:$("#assignment").val(),
+					startDate:values[1],
+					endDate:values[2]
+				},
+				success:function(data, textStatus) {
+					var result = commonJs.parseAjaxResult(data, textStatus, "json");
+					if (result.isSuccess == true || result.isSuccess == "true") {
+						renderGridTable(result);
+					} else {
+						commonJs.error(result.message);
 					}
-				} else {
-					commonJs.error(result.message);
 				}
+			});
+		}, 200);
+	};
+
+	renderGridTable = function(result) {
+		var ds = result.dataSet;
+		var html = "";
+
+//		$("#tblGridBody").html("");
+
+		if (ds.getRowCnt() > 0) {
+			for (var i=0; i<ds.getRowCnt(); i++) {
+				var gridTr = new UiGridTr();
+
+				gridTr.setClassName("noStripe");
+
+//				gridTr.addChild(new UiGridTd().addClassName("Lt").addTextBeforeChild(space+"&nbsp;&nbsp;").addChild(uiAnc));
+//
+//				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "Mon")));
+//				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "Tue")));
+//				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "Wed")));
+//				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "Thu")));
+//				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "Fri")));
+//				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "Sat")));
+//				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "Sun")));
+
+//				html += gridTr.toHtmlString();
+				addRow(i, ds);
 			}
+		} else {
+			var gridTr = new UiGridTr();
+
+			gridTr.addChild(new UiGridTd().addClassName("Ct").setAttribute("colspan:7").setText(com.message.I001));
+			html += gridTr.toHtmlString();
+		}
+
+//		$("#tblGridBody").append($(html));
+
+//		setGridTable();
+
+		commonJs.hideProcMessageOnElement("divScrollablePanel");
+	};
+
+	addRow = function(idx, ds) {
+		var elem = $("#liDummy").clone(), elemId = $(elem).attr("id");
+
+		$(elem).css("display", "block").appendTo($("#ulTimesheetHolder"));
+console.log("elemId : "+elemId);
+		$("#ulTimesheetHolder").find(".dummyDetail").each(function(groupIndex) {
+			$(this).attr("index", groupIndex).attr("id", elemId+delimiter+groupIndex);
+
+			$(this).find("input, select").each(function(index) {
+				var id = $(this).attr("id"), name = $(this).attr("name");
+
+				if (!commonJs.isEmpty(id)) {id = (id.indexOf(delimiter) != -1) ? id.substring(0, id.indexOf(delimiter)) : id;}
+				else {id = "";}
+
+				if (!commonJs.isEmpty(name)) {name = (name.indexOf(delimiter) != -1) ? name.substring(0, name.indexOf(delimiter)) : name;}
+				else {name = "";}
+
+				$(this).attr("id", id+delimiter+groupIndex).attr("name", name+delimiter+groupIndex);
+console.log("id : "+$(this).attr("id"));
+				if ($(this).is("select")) {
+					setSelectBoxes($(this));
+				}
+			});
 		});
 
-		setTimeout(function() {
-			commonJs.hideProcMessageOnElement("tblInform");
-		}, 100);
+		setGridTable();
 	};
 	/*!
 	 * load event (document / window)
 	 */
 	$(window).load(function() {
 		setTimesheetPeriodSelectbox();
-
-		commonJs.setAccordion({
-			containerClass:"accordionInformArea",
-			expandAll:false,
-			icons:null
-		});
+		setGridTable();
 	});
 });

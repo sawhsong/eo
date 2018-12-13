@@ -10,6 +10,7 @@ import com.es.portal.common.module.bizservice.timesheet.TimesheetBizService;
 import zebra.data.DataSet;
 import zebra.data.ParamEntity;
 import zebra.exception.FrameworkException;
+import zebra.util.CommonUtil;
 
 public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 	@Autowired
@@ -65,18 +66,41 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 		return paramEntity;
 	}
 
-	public ParamEntity getTimesheetDetail(ParamEntity paramEntity) throws Exception {
+	public ParamEntity getTimesheetDayList(ParamEntity paramEntity) throws Exception {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		HttpSession session = paramEntity.getSession();
-		DataSet timesheetDetailList = new DataSet();
+		DataSet timesheetDayList = new DataSet(), dayListAsCalendar = new DataSet();
 		String assignmentId = dsRequest.getValue("assignmentId");
-		String startDate = dsRequest.getValue("startDate");
-		String endDate = dsRequest.getValue("endDate");
+		String startDateStr = dsRequest.getValue("startDate");
+		String endDateStr = dsRequest.getValue("endDate");
+		String header[] = new String[] {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
 
 		try {
-			timesheetDetailList = timesheetBizService.getTimesheetDetailListDataSet(paramEntity, assignmentId, startDate, endDate);
-			paramEntity.setObject("timesheetDetailList", timesheetDetailList);
-			session.setAttribute("timesheetDetailListDataSet", timesheetDetailList);
+			timesheetDayList = timesheetBizService.getTimesheetDayListDataSet(paramEntity, assignmentId, startDateStr, endDateStr);
+
+			dayListAsCalendar.addName(header);
+			for (int i=0; i<timesheetDayList.getRowCnt(); i++) {
+				String dayOfWeek = CommonUtil.getDayOfWeek(timesheetDayList.getValue(i, "workDate"), "dd/MM/yyyy");
+
+				if (i == 0) {
+					dayListAsCalendar.addRow();
+				}
+
+				for (int j=0; j<dayListAsCalendar.getColumnCnt(); j++) {
+					String thisDay = dayListAsCalendar.getName(j);
+
+					if (CommonUtil.equalsAnyIgnoreCase(dayOfWeek, thisDay)) {
+						dayListAsCalendar.setValue(dayListAsCalendar.getRowCnt()-1, j, timesheetDayList.getValue(i, "workDate"));
+
+						if (CommonUtil.equalsAnyIgnoreCase(thisDay, "Sun")) {
+							dayListAsCalendar.addRow();
+						}
+					}
+				}
+			}
+
+			paramEntity.setAjaxResponseDataSet(dayListAsCalendar);
+			session.setAttribute("timesheetDayListDataSet", timesheetDayList);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);

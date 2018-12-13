@@ -149,7 +149,7 @@ var commonJs = {
 			south__resizable:false,
 			south__initClosed:false,
 			onresize_end:function() {
-				$(window).trigger("resize");
+//				$(window).trigger("resize");
 			}
 		};
 
@@ -172,6 +172,7 @@ var commonJs = {
 				west__initHidden:true,
 				west__size:0,
 				onresize_end:function() {
+//					$(window).trigger("resize");
 				}
 			};
 		} else {

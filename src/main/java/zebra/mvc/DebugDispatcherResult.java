@@ -3,6 +3,7 @@ package zebra.mvc;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,9 +23,17 @@ public class DebugDispatcherResult extends StrutsResultSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		RequestDispatcher dispatcher = request.getRequestDispatcher(finalLocation);
+		HttpSession session = request.getSession();
+		String device = CommonUtil.nvl((String)session.getAttribute("device"));
 
 		if (CommonUtil.equalsIgnoreCase(ConfigUtil.getProperty("log.dispatcher.result"), "Y")) {
 			logger.debug("Execution Result : " + invocation.getAction().getClass().getName() + " => " + invocation.getResultCode() + " => " + finalLocation);
+			logger.debug("device : "+session.getAttribute("device"));
+		}
+
+		if (CommonUtil.toBoolean(ConfigUtil.getProperty("isMobileUse")) && CommonUtil.equalsAnyIgnoreCase(device, "m")) {
+			finalLocation = CommonUtil.substringBefore(finalLocation, ".")+device+".jsp";
+			dispatcher = request.getRequestDispatcher(finalLocation);
 		}
 
 		dispatcher.forward(request, response);

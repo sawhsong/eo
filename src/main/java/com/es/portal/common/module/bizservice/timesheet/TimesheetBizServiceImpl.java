@@ -55,9 +55,9 @@ public class TimesheetBizServiceImpl extends BaseBiz implements TimesheetBizServ
 		return timesheetPeriod;
 	}
 
-	public DataSet getTimesheetDetailListDataSet(ParamEntity paramEntity, String assignmentId, String startDate, String endDate) throws Exception {
+	public DataSet getTimesheetDayListDataSet(ParamEntity paramEntity, String assignmentId, String startDate, String endDate) throws Exception {
 		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
-		DataSet timesheetDetailList = new DataSet();
+		DataSet timesheetDayList = new DataSet();
 		String serviceUrl = "", result = "";
 
 		startDate = CommonUtil.remove(startDate, "/");
@@ -69,8 +69,8 @@ public class TimesheetBizServiceImpl extends BaseBiz implements TimesheetBizServ
 
 		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
 		paramEntity.setObjectFromJsonString(result);
-		timesheetDetailList = JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("timesheetAssignmentList"));
+		timesheetDayList = JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("timesheetDayList"));
 
-		return timesheetDetailList;
+		return timesheetDayList;
 	}
 }

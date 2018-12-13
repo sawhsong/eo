@@ -376,9 +376,16 @@ public class CommonUtil extends StringUtils {
 		return format.format(cal.getTime());
 	}
 	/**
-	 * getDateGap("20120101", "20121203") => 2
+	 * getDaysBetween("20120101", "20121203") => 2
 	 */
-	public static double getDateGap(String startDate, String endDate) throws Exception {
+	public static double getDaysBetween(String startDate, String endDate) throws Exception {
+		double dStartDate = toDouble(getLongDate(startDate));
+		double dEndDate = toDouble(getLongDate(endDate));
+
+		return (dEndDate - dStartDate) / (24*(60*(60*1000)));
+	}
+
+	public static double getDaysBetween(Date startDate, Date endDate) throws Exception {
 		double dStartDate = toDouble(getLongDate(startDate));
 		double dEndDate = toDouble(getLongDate(endDate));
 
@@ -389,12 +396,19 @@ public class CommonUtil extends StringUtils {
 	 */
 	public static String getDayOfWeek(String inputDate)throws Exception {
 		if (inputDate == null || inputDate.length() < 8) {return "";}
-
-		DateFormat df = new SimpleDateFormat("yyyyMMdd");
-		DateFormat ddf = new SimpleDateFormat("EEE");
-
-		return ddf.format(df.parse(inputDate));
+		return getDayOfWeek(toDate(inputDate, "yyyyMMdd"));
 	}
+
+	public static String getDayOfWeek(String inputDate, String format)throws Exception {
+		if (inputDate == null || inputDate.length() < 8) {return "";}
+		return getDayOfWeek(toDate(inputDate, format));
+	}
+
+	public static String getDayOfWeek(Date date)throws Exception {
+		DateFormat ddf = new SimpleDateFormat("EEE");
+		return remove(ddf.format(date), ".");
+	}
+
 	/**
 	 * change to long date
 	 */
@@ -416,6 +430,14 @@ public class CommonUtil extends StringUtils {
 			return "";
 		}
 		calendar.setTime(format.parse(sDate));
+
+		return toString(calendar.getTimeInMillis());
+	}
+
+	public static String getLongDate(Date date) throws Exception {
+		Calendar calendar = Calendar.getInstance();
+
+		calendar.setTime(date);
 
 		return toString(calendar.getTimeInMillis());
 	}

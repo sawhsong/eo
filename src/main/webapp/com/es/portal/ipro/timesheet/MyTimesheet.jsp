@@ -27,7 +27,7 @@
 <style type="text/css">
 .thGrid {border-bottom:0px;}
 .tblGrid tr:not(.default):not(.active):not(.info):not(.success):not(.warning):not(.danger):hover td {background:#FFFFFF;}
-.dummyDetail {list-style:none;}
+#divDummy {display:none;}
 /* .accordionInformArea h3.ui-state-default {background-color:#e4f3ed;padding-top:10px;padding-bottom:10px;} */
 /* .accordionInformArea h3.ui-accordion-header.ui-state-active {background:#e4f3ed;padding-top:10px;padding-bottom:10px;} */
 </style>
@@ -63,8 +63,8 @@
 	<table class="tblSearch">
 		<caption>Please select a contract assignment, then a timesheet period and click 'Search' button to view a timesheet</caption>
 		<colgroup>
-			<col width="50%"/>
-			<col width="50%"/>
+			<col width="30%"/>
+			<col width="*"/>
 		</colgroup>
 		<tr>
 			<td class="tdSearch">
@@ -91,38 +91,34 @@
 		</tr>
 	</table>
 </div>
-<div id="divInformArea" class="areaContainer accordionInformArea">
-	<div class="accordionGroup">
-		<h3>Selected Contract Assignment</h3>
-		<div class="accordionContents">
-			<table id="tblInform" class="tblInform">
-				<colgroup>
-					<col width="10%"/>
-					<col width="23%"/>
-					<col width="10%"/>
-					<col width="23%"/>
-					<col width="10%"/>
-					<col width="24%"/>
-				</colgroup>
-				<tr>
-					<th class="thInform rt">Contract Assignment Id</th>
-					<td class="tdInform"><ui:text name="assignmentNumber" status="display"/></td>
-					<th class="thInform rt">Organisation</th>
-					<td class="tdInform"><ui:text name="billingOrganisation" status="display"/></td>
-					<th class="thInform rt">Timesheet Units</th>
-					<td class="tdInform"><ui:text name="timesheetUnitsDesc" status="display"/></td>
-				</tr>
-				<tr>
-					<th class="thInform rt">Start Date</th>
-					<td class="tdInform"><ui:text name="assignmentStartDate" status="display"/></td>
-					<th class="thInform rt">End Date</th>
-					<td class="tdInform"><ui:text name="assignmentEndDate" status="display"/></td>
-					<th class="thInform rt">Selected Timesheet Period</th>
-					<td class="tdInform"><ui:text name="timesheetPeriodInfo" status="display"/></td>
-				</tr>
-			</table>
-		</div>
-	</div>
+<div id="divInformArea" class="areaContainer">
+	<table id="tblInform" class="tblInform">
+		<caption>Selected Contract Assignment</caption>
+		<colgroup>
+			<col width="9%"/>
+			<col width="15%"/>
+			<col width="6%"/>
+			<col width="18%"/>
+			<col width="8%"/>
+			<col width="9%"/>
+			<col width="7%"/>
+			<col width="12%"/>
+			<col width="7%"/>
+			<col width="*"/>
+		</colgroup>
+		<tr>
+			<th class="thInform rt">Contract Assignment Id</th>
+			<td class="tdInform" id="assignmentNumber"></td>
+			<th class="thInform rt">Organisation</th>
+			<td class="tdInform" id="billingOrganisation"></td>
+			<th class="thInform rt">Assignment Period</th>
+			<td class="tdInform" id="assignmentPeriod"></td>
+			<th class="thInform rt">Timesheet Units</th>
+			<td class="tdInform" id="timesheetUnitsDesc"></td>
+			<th class="thInform rt">Timesheet Period</th>
+			<td class="tdInform" id="timesheetPeriodInfo"><ui:text name="timesheetPeriodInfo" status="display"/></td>
+		</tr>
+	</table>
 </div>
 <%/************************************************************************************************
 * End of fixed panel
@@ -156,278 +152,8 @@
 			</tr>
 		</thead>
 		<tbody id="tblGridBody">
-<!-- 			<tr> -->
-<!-- 				<td colspan="8" style="padding:0px;border-top:0px"><ul id="ulTimesheetHolder"></ul></td> -->
-<!-- 			</tr> -->
 			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-			</tr>
-			<tr>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
-				<td class="tdGrid">Mon</td>
+				<td colspan="7" style="padding:0px;border-top:0px"><ul id="ulColumnDetailHolder"></ul></td>
 			</tr>
 		</tbody>
 	</table>
@@ -444,28 +170,11 @@
 <%/************************************************************************************************
 * Additional Elements
 ************************************************************************************************/%>
-<li id="liDummy" class="dummyDetail">
-	<table class="tblGrid" style="border:0px">
-		<colgroup>
-			<col width="14%"/>
-			<col width="14%"/>
-			<col width="14%"/>
-			<col width="14%"/>
-			<col width="14%"/>
-			<col width="14%"/>
-			<col width="*"/>
-		</colgroup>
-		<tr class="noBorderAll">
-			<td class="tdGrid Ct"><ui:text name="Mon" status="display"/></td>
-			<td class="tdGrid Ct"><ui:text name="Tue" status="display"/></td>
-			<td class="tdGrid Ct"><ui:text name="Wed" status="display"/></td>
-			<td class="tdGrid Ct"><ui:text name="Thu" status="display"/></td>
-			<td class="tdGrid Ct"><ui:text name="Fri" status="display"/></td>
-			<td class="tdGrid Ct"><ui:text name="Sat" status="display"/></td>
-			<td class="tdGrid Ct"><ui:text name="Sun" status="display"/></td>
-		</tr>
-	</table>
-</li>
+<div id="divDummy" class="dummyDetail">
+	<ui:text name="workDate" className="hor" style="width:80px"/>
+	<ui:text name="totalHours" className="hor" style="width:80px"/>
+	<ui:button id="editHours" caption="Edit" iconClass="fa-edit"/>
+</div>
 </form>
 <%/************************************************************************************************
 * Additional Form
