@@ -168,46 +168,60 @@ $(function() {
 		var ds = result.dataSet;
 		var html = "";
 
-//		$("#tblGridBody").html("");
+		$("#tblGridBody").html("");
 
 		if (ds.getRowCnt() > 0) {
 			for (var i=0; i<ds.getRowCnt(); i++) {
-				var gridTr = new UiGridTr();
+				var gridTr = $("<tr class=\"noStripe\"></tr>");
 
-				gridTr.setClassName("noStripe");
+				for (var j=0; j<ds.getColumnCnt(); j++) {
+					var gridTd = $("<td class=\"ct\"></td>");
+					var dsVal = ds.getValue(i, j);
 
-//				gridTr.addChild(new UiGridTd().addClassName("Lt").addTextBeforeChild(space+"&nbsp;&nbsp;").addChild(uiAnc));
-//
-//				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "Mon")));
-//				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "Tue")));
-//				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "Wed")));
-//				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "Thu")));
-//				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "Fri")));
-//				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "Sat")));
-//				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "Sun")));
+					if (!commonJs.isEmpty(dsVal)) {
+						var elem = $("#divDummy").clone(), elemId = $(elem).attr("id");
 
-//				html += gridTr.toHtmlString();
-				addRow(i, ds);
+						$(elem).css("display", "block").appendTo(gridTd);
+						$(elem).find("input, select").each(function(index) {
+							var dsVals = dsVal.split(delimeter);
+							var id = $(this).attr("id"), name = $(this).attr("name");
+							var workDate = dsVals[0], workDateFormatted = dsVals[1], totalHours = dsVals[2];
+
+							if (name == "workDate") {$(this).val(workDate);}
+							else if (name == "workDateFormatted") {$(this).val(workDateFormatted);}
+							else if (name == "totalHours") {$(this).val(totalHours);}
+
+							if (!commonJs.isEmpty(id)) {id = (id.indexOf(delimiter) != -1) ? id.substring(0, id.indexOf(delimiter)) : id;}
+							else {id = "";}
+
+							if (!commonJs.isEmpty(name)) {name = (name.indexOf(delimiter) != -1) ? name.substring(0, name.indexOf(delimiter)) : name;}
+							else {name = "";}
+
+							$(this).attr("id", id+delimiter+i+delimiter+j).attr("name", name+delimiter+i+delimiter+j);
+						});
+					}
+
+					gridTd.appendTo(gridTr);
+				}
+
+				$("#tblGridBody").append(gridTr);
 			}
 		} else {
 			var gridTr = new UiGridTr();
 
 			gridTr.addChild(new UiGridTd().addClassName("Ct").setAttribute("colspan:7").setText(com.message.I001));
 			html += gridTr.toHtmlString();
+
+			$("#tblGridBody").append($(html));
 		}
 
-//		$("#tblGridBody").append($(html));
-
-//		setGridTable();
+		$(".numeric").number(true, 0);
+		setGridTable();
 
 		commonJs.hideProcMessageOnElement("divScrollablePanel");
 	};
 
 	addRow = function(idx, ds) {
-		var elem = $("#liDummy").clone(), elemId = $(elem).attr("id");
-
-		$(elem).css("display", "block").appendTo($("#ulTimesheetHolder"));
-console.log("elemId : "+elemId);
 		$("#ulTimesheetHolder").find(".dummyDetail").each(function(groupIndex) {
 			$(this).attr("index", groupIndex).attr("id", elemId+delimiter+groupIndex);
 

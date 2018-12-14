@@ -11,6 +11,7 @@ import zebra.data.DataSet;
 import zebra.data.ParamEntity;
 import zebra.exception.FrameworkException;
 import zebra.util.CommonUtil;
+import zebra.util.ConfigUtil;
 
 public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 	@Autowired
@@ -70,6 +71,7 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		HttpSession session = paramEntity.getSession();
 		DataSet timesheetDayList = new DataSet(), dayListAsCalendar = new DataSet();
+		String dataDelimeter = ConfigUtil.getProperty("delimiter.data");
 		String assignmentId = dsRequest.getValue("assignmentId");
 		String startDateStr = dsRequest.getValue("startDate");
 		String endDateStr = dsRequest.getValue("endDate");
@@ -90,7 +92,11 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 					String thisDay = dayListAsCalendar.getName(j);
 
 					if (CommonUtil.equalsAnyIgnoreCase(dayOfWeek, thisDay)) {
-						dayListAsCalendar.setValue(dayListAsCalendar.getRowCnt()-1, j, timesheetDayList.getValue(i, "workDate"));
+						dayListAsCalendar.setValue(dayListAsCalendar.getRowCnt()-1, j,
+							timesheetDayList.getValue(i, "workDate")+dataDelimeter+
+							timesheetDayList.getValue(i, "workDateFormatted")+dataDelimeter+
+							timesheetDayList.getValue(i, "totalHours")
+						);
 
 						if (CommonUtil.equalsAnyIgnoreCase(thisDay, "Sun")) {
 							dayListAsCalendar.addRow();

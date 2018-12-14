@@ -25,11 +25,8 @@
 ************************************************************************************************/%>
 <%@ include file="/com/es/portal/shared/page/incCssJs.jsp"%>
 <style type="text/css">
-.thGrid {border-bottom:0px;}
 .tblGrid tr:not(.default):not(.active):not(.info):not(.success):not(.warning):not(.danger):hover td {background:#FFFFFF;}
 #divDummy {display:none;}
-/* .accordionInformArea h3.ui-state-default {background-color:#e4f3ed;padding-top:10px;padding-bottom:10px;} */
-/* .accordionInformArea h3.ui-accordion-header.ui-state-active {background:#e4f3ed;padding-top:10px;padding-bottom:10px;} */
 </style>
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
@@ -153,7 +150,7 @@
 		</thead>
 		<tbody id="tblGridBody">
 			<tr>
-				<td colspan="7" style="padding:0px;border-top:0px"><ul id="ulColumnDetailHolder"></ul></td>
+				<td class="tdGrid Ct" colspan="7"><mc:msg key="I002"/></td>
 			</tr>
 		</tbody>
 	</table>
@@ -171,9 +168,10 @@
 * Additional Elements
 ************************************************************************************************/%>
 <div id="divDummy" class="dummyDetail">
-	<ui:text name="workDate" className="hor" style="width:80px"/>
-	<ui:text name="totalHours" className="hor" style="width:80px"/>
-	<ui:button id="editHours" caption="Edit" iconClass="fa-edit"/>
+	<ui:hidden name="workDate" className="ct hor"/>
+	<ui:text name="workDateFormatted" style="width:90px" className="ct hor"/>
+	<ui:text name="totalHours" style="width:90px" className="ct hor numeric" checkName="Total Hours" options="mandatory" option="numeric" title="Number between 0 and 24"/>
+	<ui:button id="btnEdit" caption="Edit" iconClass="fa-edit"/>
 </div>
 </form>
 <%/************************************************************************************************
