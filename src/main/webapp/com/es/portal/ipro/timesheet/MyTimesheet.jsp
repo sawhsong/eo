@@ -7,8 +7,8 @@
 * Declare objects & variables
 ************************************************************************************************/%>
 <%
-	ParamEntity paramEntity = (ParamEntity)request.getAttribute("paramEntity");
-	DataSet assignmentList = (DataSet)paramEntity.getObject("assignmentList");
+	ParamEntity pe = (ParamEntity)request.getAttribute("paramEntity");
+	DataSet assignmentList = (DataSet)pe.getObject("assignmentList");
 %>
 <%/************************************************************************************************
 * HTML
@@ -105,15 +105,21 @@
 		</colgroup>
 		<tr>
 			<th class="thInform rt">Contract Assignment Id</th>
-			<td class="tdInform" id="assignmentNumber"></td>
+			<td class="tdInform"><ui:text name="assignmentNumber" status="display"/></td>
 			<th class="thInform rt">Organisation</th>
-			<td class="tdInform" id="billingOrganisation"></td>
+			<td class="tdInform"><ui:text name="billingOrganisation" status="display"/></td>
 			<th class="thInform rt">Assignment Period</th>
-			<td class="tdInform" id="assignmentPeriod"></td>
+			<td class="tdInform"><ui:text name="assignmentPeriod" status="display"/></td>
 			<th class="thInform rt">Timesheet Units</th>
-			<td class="tdInform" id="timesheetUnitsDesc"></td>
+			<td class="tdInform">
+				<ui:hidden name="timesheetUnits"/>
+				<ui:text name="timesheetUnitsDesc" status="display"/>
+			</td>
 			<th class="thInform rt">Timesheet Period</th>
-			<td class="tdInform" id="timesheetPeriodInfo"><ui:text name="timesheetPeriodInfo" status="display"/></td>
+			<td class="tdInform">
+				<ui:hidden name="timesheetStatus"/>
+				<ui:text name="timesheetPeriodInfo" status="display"/>
+			</td>
 		</tr>
 	</table>
 </div>
@@ -169,8 +175,8 @@
 ************************************************************************************************/%>
 <div id="divDummy" class="dummyDetail">
 	<ui:hidden name="workDate" className="ct hor"/>
-	<ui:text name="workDateFormatted" style="width:90px" className="ct hor"/>
-	<ui:text name="totalHours" style="width:90px" className="ct hor numeric" checkName="Total Hours" options="mandatory" option="numeric" title="Number between 0 and 24"/>
+	<ui:text name="formattedWorkDate" style="width:90px" className="ct hor" status="display"/>
+	<ui:text name="totalHours" style="width:90px" className="ct hor numeric" checkName="Total Hours" options="mandatory" option="numeric" maxlength="2" title="Number between 0 and 24"/>
 	<ui:button id="btnEdit" caption="Edit" iconClass="fa-edit"/>
 </div>
 </form>

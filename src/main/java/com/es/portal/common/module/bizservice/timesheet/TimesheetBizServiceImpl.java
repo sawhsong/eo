@@ -20,7 +20,7 @@ public class TimesheetBizServiceImpl extends BaseBiz implements TimesheetBizServ
 		DataSet assignmentList = new DataSet();
 		String serviceUrl = "users/"+loginId+"/alltimesheets";
 		String result = "";
-
+logger.debug("getAssignmentListDataSet : "+serviceUrl);
 		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
 		paramEntity.setObjectFromJsonString(result);
 		assignmentList = JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("timesheetAssignmentList"));
@@ -55,6 +55,10 @@ public class TimesheetBizServiceImpl extends BaseBiz implements TimesheetBizServ
 		return timesheetPeriod;
 	}
 
+	public DataSet getTimesheetRatesDataSet(DataSet timesheetPeriodDataSet) throws Exception {
+		return JsonUtil.getDataSetFromJsonArrayString(timesheetPeriodDataSet.getValue("timesheetRateList"));
+	}
+
 	public DataSet getTimesheetDayListDataSet(ParamEntity paramEntity, String assignmentId, String startDate, String endDate) throws Exception {
 		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
 		DataSet timesheetDayList = new DataSet();
@@ -66,11 +70,29 @@ public class TimesheetBizServiceImpl extends BaseBiz implements TimesheetBizServ
 
 		queryAdvisor.addVariable("startDate", startDate);
 		queryAdvisor.addVariable("endDate", endDate);
-
+logger.debug("getTimesheetDayListDataSet : "+serviceUrl+"?startDate="+startDate+"&endDate="+endDate);
 		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
 		paramEntity.setObjectFromJsonString(result);
 		timesheetDayList = JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("timesheetDayList"));
 
 		return timesheetDayList;
+	}
+
+	public DataSet getTimesheetDailyDetailDataSet(DataSet timesheetDayList, String workDate) throws Exception {
+		DataSet timesheetDailyDetail = new DataSet();
+		String dayListWorkDate = "", jsonArrayString = "";
+
+		for (int i=0; i<timesheetDayList.getRowCnt(); i++) {
+			dayListWorkDate = timesheetDayList.getValue(i, "workDate");
+
+			if (CommonUtil.equals(workDate, dayListWorkDate)) {
+				jsonArrayString = timesheetDayList.getValue(i, "timesheetDayDetailList");
+				timesheetDailyDetail = JsonUtil.getDataSetFromJsonArrayString(jsonArrayString);
+
+				break;
+			}
+		}
+
+		return timesheetDailyDetail;
 	}
 }

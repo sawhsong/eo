@@ -7,4 +7,6 @@ public interface TimesheetBiz {
 	public ParamEntity getAssignmentInfo(ParamEntity paramEntity) throws Exception;
 	public ParamEntity getTimesheetPeriod(ParamEntity paramEntity) throws Exception;
 	public ParamEntity getTimesheetDayList(ParamEntity paramEntity) throws Exception;
+	public ParamEntity getTimesheetDailyDetail(ParamEntity paramEntity) throws Exception;
+	public ParamEntity getTimesheetDailyDetailData(ParamEntity paramEntity) throws Exception;
 }

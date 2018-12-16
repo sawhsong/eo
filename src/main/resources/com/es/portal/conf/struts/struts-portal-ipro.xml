@@ -5,6 +5,8 @@
 		<default-interceptor-ref name="ZebraDefaultStack"/>
 		<action name="timesheet/*" class="com.es.portal.ipro.timesheet.TimesheetAction" method="{1}">
 			<result name="myTimesheet" type="debugDispatcherResult">/com/es/portal/ipro/timesheet/MyTimesheet.jsp</result>
+			<result name="timesheetDailyDetailSE" type="debugDispatcherResult">/com/es/portal/ipro/timesheet/TimesheetDailyDetailSE.jsp</result>
+			<result name="timesheetDailyDetail" type="debugDispatcherResult">/com/es/portal/ipro/timesheet/TimesheetDailyDetail.jsp</result>
 		</action>
 	</package>
 </struts>

@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.es.portal.common.extend.BaseAction;
 
+import zebra.data.DataSet;
+import zebra.util.CommonUtil;
+
 public class TimesheetAction extends BaseAction {
 	@Autowired
 	private TimesheetBiz biz;
@@ -39,6 +42,27 @@ public class TimesheetAction extends BaseAction {
 	public String getTimesheetDayList() throws Exception {
 		try {
 			biz.getTimesheetDayList(paramEntity);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
+
+	public String getTimesheetDailyDetail() throws Exception {
+		DataSet dsRequest = paramEntity.getRequestDataSet();
+		String timesheetUnits = dsRequest.getValue("timesheetUnits");
+
+		biz.getTimesheetDailyDetail(paramEntity);
+		if (CommonUtil.isIn(timesheetUnits, "HSE", "DSE")) {
+			return "timesheetDailyDetailSE";
+		} else {
+			return "timesheetDailyDetail";
+		}
+	}
+
+	public String getTimesheetDailyDetailData() throws Exception {
+		try {
+			biz.getTimesheetDailyDetailData(paramEntity);
 		} catch (Exception ex) {
 		}
 		setRequestAttribute("paramEntity", paramEntity);

@@ -1,6 +1,7 @@
 /**
  * MyTimesheet.js
  */
+var popup = null;
 jsconfig.put("scrollablePanelHeightAdjust", 0);
 var delimiter = jsconfig.get("dataDelimiter");
 
@@ -61,10 +62,11 @@ $(function() {
 					var ds = result.dataSet;
 
 					if (ds.getRowCnt() > 0) {
-						$("#assignmentNumber").html(ds.getValue(0, "assignmentNumber"));
-						$("#billingOrganisation").html(ds.getValue(0, "billingOrganisation"));
-						$("#assignmentPeriod").html(ds.getValue(0, "assignmentStartDate")+" - "+ds.getValue(0, "assignmentEndDate"));
-						$("#timesheetUnitsDesc").html(ds.getValue(0, "timesheetUnitsDesc"));
+						$("#assignmentNumber").val(ds.getValue(0, "assignmentNumber"));
+						$("#billingOrganisation").val(ds.getValue(0, "billingOrganisation"));
+						$("#assignmentPeriod").val(ds.getValue(0, "assignmentStartDate")+" - "+ds.getValue(0, "assignmentEndDate"));
+						$("#timesheetUnits").val(ds.getValue(0, "timesheetUnits"));
+						$("#timesheetUnitsDesc").val(ds.getValue(0, "timesheetUnitsDesc"));
 					}
 				} else {
 					commonJs.error(result.message);
@@ -122,7 +124,8 @@ $(function() {
 		commonJs.showProcMessageOnElement("tblInform");
 
 		var values = $("#timesheetPeriod").val().split("_");
-		$("#timesheetPeriodInfo").html(values[1]+" - "+values[2]);
+		$("#timesheetStatus").val(values[4]);
+		$("#timesheetPeriodInfo").val(values[1]+" - "+values[2]);
 
 		setTimeout(function() {
 			commonJs.hideProcMessageOnElement("tblInform");
@@ -180,16 +183,11 @@ $(function() {
 
 					if (!commonJs.isEmpty(dsVal)) {
 						var elem = $("#divDummy").clone(), elemId = $(elem).attr("id");
+						var dsVals = dsVal.split(delimiter);
 
-						$(elem).css("display", "block").appendTo(gridTd);
-						$(elem).find("input, select").each(function(index) {
-							var dsVals = dsVal.split(delimeter);
+						$(elem).find("input, select, a.btn").each(function(index) {
 							var id = $(this).attr("id"), name = $(this).attr("name");
-							var workDate = dsVals[0], workDateFormatted = dsVals[1], totalHours = dsVals[2];
-
-							if (name == "workDate") {$(this).val(workDate);}
-							else if (name == "workDateFormatted") {$(this).val(workDateFormatted);}
-							else if (name == "totalHours") {$(this).val(totalHours);}
+							var workDate = dsVals[0], formattedWorkDate = dsVals[1], totalHours = dsVals[2];
 
 							if (!commonJs.isEmpty(id)) {id = (id.indexOf(delimiter) != -1) ? id.substring(0, id.indexOf(delimiter)) : id;}
 							else {id = "";}
@@ -198,7 +196,28 @@ $(function() {
 							else {name = "";}
 
 							$(this).attr("id", id+delimiter+i+delimiter+j).attr("name", name+delimiter+i+delimiter+j);
+
+							if ($(this).prop("type") == "button") {
+								$(this).bind("click", function() {
+									openPopup({
+										paramData:{
+											assignmentId:parent.$("#assignment").val(),
+											workDate:workDate,
+											totalHours:totalHours,
+											timesheetUnits:$("#timesheetUnits").val()
+										}
+									});
+								});
+							}
+
+							if (commonJs.startsWith(name, "workDate")) {$(this).val(workDate);}
+							else if (commonJs.startsWith(name, "formattedWorkDate")) {$(this).val(formattedWorkDate);}
+							else if (commonJs.startsWith(name, "totalHours")) {
+								$(this).val(totalHours);
+								$(this).bind("focus", function() {$(this).select();});
+							}
 						});
+						$(elem).css("display", "block").appendTo(gridTd);
 					}
 
 					gridTd.appendTo(gridTr);
@@ -221,29 +240,19 @@ $(function() {
 		commonJs.hideProcMessageOnElement("divScrollablePanel");
 	};
 
-	addRow = function(idx, ds) {
-		$("#ulTimesheetHolder").find(".dummyDetail").each(function(groupIndex) {
-			$(this).attr("index", groupIndex).attr("id", elemId+delimiter+groupIndex);
+	openPopup = function(param) {
+		var width = 1200, height = 700;
 
-			$(this).find("input, select").each(function(index) {
-				var id = $(this).attr("id"), name = $(this).attr("name");
+		param.popupId = "timesheetDetail";
+		param.url = "/ipro/timesheet/getTimesheetDailyDetail";
+		param.header = "Timesheet Detail";
+		param.blind = true;
+		param.width = width;
+		param.height = height;
 
-				if (!commonJs.isEmpty(id)) {id = (id.indexOf(delimiter) != -1) ? id.substring(0, id.indexOf(delimiter)) : id;}
-				else {id = "";}
-
-				if (!commonJs.isEmpty(name)) {name = (name.indexOf(delimiter) != -1) ? name.substring(0, name.indexOf(delimiter)) : name;}
-				else {name = "";}
-
-				$(this).attr("id", id+delimiter+groupIndex).attr("name", name+delimiter+groupIndex);
-console.log("id : "+$(this).attr("id"));
-				if ($(this).is("select")) {
-					setSelectBoxes($(this));
-				}
-			});
-		});
-
-		setGridTable();
+		popup = commonJs.openPopup(param);
 	};
+
 	/*!
 	 * load event (document / window)
 	 */

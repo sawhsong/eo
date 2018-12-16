@@ -71,7 +71,7 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		HttpSession session = paramEntity.getSession();
 		DataSet timesheetDayList = new DataSet(), dayListAsCalendar = new DataSet();
-		String dataDelimeter = ConfigUtil.getProperty("delimiter.data");
+		String delimiter = ConfigUtil.getProperty("delimiter.data");
 		String assignmentId = dsRequest.getValue("assignmentId");
 		String startDateStr = dsRequest.getValue("startDate");
 		String endDateStr = dsRequest.getValue("endDate");
@@ -93,8 +93,8 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 
 					if (CommonUtil.equalsAnyIgnoreCase(dayOfWeek, thisDay)) {
 						dayListAsCalendar.setValue(dayListAsCalendar.getRowCnt()-1, j,
-							timesheetDayList.getValue(i, "workDate")+dataDelimeter+
-							timesheetDayList.getValue(i, "workDateFormatted")+dataDelimeter+
+							timesheetDayList.getValue(i, "workDate")+delimiter+
+							timesheetDayList.getValue(i, "workDateFormatted")+delimiter+
 							timesheetDayList.getValue(i, "totalHours")
 						);
 
@@ -107,6 +107,40 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 
 			paramEntity.setAjaxResponseDataSet(dayListAsCalendar);
 			session.setAttribute("timesheetDayListDataSet", timesheetDayList);
+			paramEntity.setSuccess(true);
+		} catch (Exception ex) {
+			throw new FrameworkException(paramEntity, ex);
+		}
+		return paramEntity;
+	}
+
+	public ParamEntity getTimesheetDailyDetail(ParamEntity paramEntity) throws Exception {
+		DataSet dsRequest = paramEntity.getRequestDataSet();
+		HttpSession session = paramEntity.getSession();
+		DataSet timesheetPeriod = new DataSet(), ratesDataSet = new DataSet();
+		String assignmentId = dsRequest.getValue("assignmentId");
+
+		try {
+			timesheetPeriod = timesheetBizService.getTimesheetPeriodDataSet((DataSet)session.getAttribute("assignmentListDataSet"), assignmentId);
+			ratesDataSet = timesheetBizService.getTimesheetRatesDataSet(timesheetPeriod);
+			paramEntity.setObject("ratesDataSet", ratesDataSet);
+			paramEntity.setSuccess(true);
+		} catch (Exception ex) {
+			throw new FrameworkException(paramEntity, ex);
+		}
+		return paramEntity;
+	}
+
+	public ParamEntity getTimesheetDailyDetailData(ParamEntity paramEntity) throws Exception {
+		DataSet dsRequest = paramEntity.getRequestDataSet();
+		HttpSession session = paramEntity.getSession();
+		DataSet timesheetDailyDetail = new DataSet();
+		String workDate = dsRequest.getValue("workDate");
+
+		try {
+			timesheetDailyDetail = timesheetBizService.getTimesheetDailyDetailDataSet((DataSet)session.getAttribute("timesheetDayListDataSet"), workDate);
+
+			paramEntity.setAjaxResponseDataSet(timesheetDailyDetail);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);

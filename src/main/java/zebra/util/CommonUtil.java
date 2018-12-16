@@ -207,7 +207,7 @@ public class CommonUtil extends StringUtils {
 
 	public static String toString(Date date, String formatTo) throws Exception {
 		if (date == null) {return "";}
-		return new SimpleDateFormat(formatTo).format(date);
+		return CommonUtil.remove(new SimpleDateFormat(formatTo).format(date), ".");
 	}
 
 	public static String toViewDateString(Date date) throws Exception {
