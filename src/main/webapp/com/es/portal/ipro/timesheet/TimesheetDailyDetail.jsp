@@ -148,7 +148,20 @@ var ratesDataSet = commonJs.getDataSetFromJavaDataSet("<%=ratesDataSet.toStringF
 		</colgroup>
 		<tr class="noBorderAll">
 			<th id="thDeleteButton" class="thGrid deleteButton" title="Click to delete row"><i id="iDeleteButton" class="fa fa-lg fa-times"></i></th>
-			<td class="tdGrid Ct"><ui:select name="rates"/></td>
+			<td class="tdGrid Ct">
+				<ui:select name="rates">
+					<ui:seloption value="" text="==Select=="/>
+<%
+				for (int i=0; i<ratesDataSet.getRowCnt(); i++) {
+%>
+					<option value="<%=ratesDataSet.getValue(i, "assignmentId")%>_<%=ratesDataSet.getValue(i, "preferred")%>_<%=ratesDataSet.getValue(i, "rateId")%>">
+						<%=ratesDataSet.getValue(i, "rateName")%>
+					</option>
+<%
+				}
+%>
+				</ui:select>
+			</td>
 			<td class="tdGrid Ct"><ui:text name="timeWorked"/></td>
 			<td class="tdGrid Ct"><ui:text name="description"/></td>
 		</tr>

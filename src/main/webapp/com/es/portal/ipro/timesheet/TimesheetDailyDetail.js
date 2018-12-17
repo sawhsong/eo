@@ -75,24 +75,6 @@ $(function() {
 	/*!
 	 * process
 	 */
-	setRatesSelectbox = function() {
-		$("#rates option").each(function(index) {
-			$(this).remove();
-		});
-
-		$("#rates").append("<option value=\"\">==Select==</option>");
-		for (var i=0; i<ratesDataSet.getRowCnt(); i++) {
-			$("#rates").append("<option value=\""
-				+ratesDataSet.getValue(i, "assignmentId")+"_"
-				+ratesDataSet.getValue(i, "preferred")+"_"
-				+ratesDataSet.getValue(i, "rateId")
-				+"\">"
-				+ratesDataSet.getValue(i, "rateName")
-				+"</option>"
-			)
-		}
-	};
-
 	getTimesheetDailyDetailData = function() {
 		commonJs.showProcMessageOnElement("divScrollablePanelPopup");
 
@@ -168,7 +150,6 @@ $(function() {
 	});
 
 	$(window).load(function() {
-		setRatesSelectbox();
 		getTimesheetDailyDetailData();
 	});
 });
