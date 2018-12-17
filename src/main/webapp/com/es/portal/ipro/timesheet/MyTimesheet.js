@@ -201,7 +201,6 @@ $(function() {
 								$(this).bind("click", function() {
 									openPopup({
 										paramData:{
-											assignmentId:parent.$("#assignment").val(),
 											workDate:workDate,
 											totalHours:totalHours,
 											timesheetUnits:$("#timesheetUnits").val()

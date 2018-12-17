@@ -55,8 +55,8 @@ logger.debug("getAssignmentListDataSet : "+serviceUrl);
 		return timesheetPeriod;
 	}
 
-	public DataSet getTimesheetRatesDataSet(DataSet timesheetPeriodDataSet) throws Exception {
-		return JsonUtil.getDataSetFromJsonArrayString(timesheetPeriodDataSet.getValue("timesheetRateList"));
+	public DataSet getTimesheetRateListDataSet(ParamEntity paramEntity) throws Exception {
+		return JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("timesheetRateList"));
 	}
 
 	public DataSet getTimesheetDayListDataSet(ParamEntity paramEntity, String assignmentId, String startDate, String endDate) throws Exception {

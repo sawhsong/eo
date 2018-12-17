@@ -107,6 +107,7 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 
 			paramEntity.setAjaxResponseDataSet(dayListAsCalendar);
 			session.setAttribute("timesheetDayListDataSet", timesheetDayList);
+			session.setAttribute("timesheetRateListDataSet", timesheetBizService.getTimesheetRateListDataSet(paramEntity));
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
@@ -115,15 +116,10 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 	}
 
 	public ParamEntity getTimesheetDailyDetail(ParamEntity paramEntity) throws Exception {
-		DataSet dsRequest = paramEntity.getRequestDataSet();
 		HttpSession session = paramEntity.getSession();
-		DataSet timesheetPeriod = new DataSet(), ratesDataSet = new DataSet();
-		String assignmentId = dsRequest.getValue("assignmentId");
 
 		try {
-			timesheetPeriod = timesheetBizService.getTimesheetPeriodDataSet((DataSet)session.getAttribute("assignmentListDataSet"), assignmentId);
-			ratesDataSet = timesheetBizService.getTimesheetRatesDataSet(timesheetPeriod);
-			paramEntity.setObject("ratesDataSet", ratesDataSet);
+			paramEntity.setObject("ratesDataSet", (DataSet)session.getAttribute("timesheetRateListDataSet"));
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);

@@ -38,11 +38,9 @@
 </style>
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
-var assignmentId = "<%=dsRequest.getValue("assignmentId")%>";
 var workDate = "<%=dsRequest.getValue("workDate")%>";
 var totalHours = "<%=dsRequest.getValue("totalHours")%>";
 var timesheetUnits = "<%=dsRequest.getValue("timesheetUnits")%>";
-var ratesDataSet = commonJs.getDataSetFromJavaDataSet("<%=ratesDataSet.toStringForJs()%>");
 </script>
 </head>
 <%/************************************************************************************************

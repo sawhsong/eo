@@ -102,19 +102,19 @@ $(function() {
 	renderGridTable = function(result) {
 		var ds = result.dataSet;
 
-		for (var i=0; i<ds.getRowCnt(); i++) {
-			var rowIdx = 0;
-
-			$("#btnAdd").trigger("click");
-			rowIdx = delimiter+(i-1);
-
-			$("[name=commonCodeDetail"+rowIdx+"]").val(ds.getValue(i, "COMMON_CODE"));
-			commonJs.setCheckboxValue("isActiveDetail"+rowIdx, ds.getValue(i, "IS_ACTIVE"));
-			$("[name=codeMeaningDetail"+rowIdx+"]").val(ds.getValue(i, "CODE_MEANING"));
-			$("[name=descriptionEnDetail"+rowIdx+"]").val(ds.getValue(i, "DESCRIPTION_EN"));
-			$("[name=descriptionKoDetail"+rowIdx+"]").val(ds.getValue(i, "DESCRIPTION_KO"));
-			$("[name=sortOrderDetail"+rowIdx+"]").val(ds.getValue(i, "SORT_ORDER"));
-		}
+//		for (var i=0; i<ds.getRowCnt(); i++) {
+//			var rowIdx = 0;
+//
+//			$("#btnAdd").trigger("click");
+//			rowIdx = delimiter+(i-1);
+//
+//			$("[name=commonCodeDetail"+rowIdx+"]").val(ds.getValue(i, "COMMON_CODE"));
+//			commonJs.setCheckboxValue("isActiveDetail"+rowIdx, ds.getValue(i, "IS_ACTIVE"));
+//			$("[name=codeMeaningDetail"+rowIdx+"]").val(ds.getValue(i, "CODE_MEANING"));
+//			$("[name=descriptionEnDetail"+rowIdx+"]").val(ds.getValue(i, "DESCRIPTION_EN"));
+//			$("[name=descriptionKoDetail"+rowIdx+"]").val(ds.getValue(i, "DESCRIPTION_KO"));
+//			$("[name=sortOrderDetail"+rowIdx+"]").val(ds.getValue(i, "SORT_ORDER"));
+//		}
 
 		commonJs.hideProcMessageOnElement("divScrollablePanelPopup");
 	};
