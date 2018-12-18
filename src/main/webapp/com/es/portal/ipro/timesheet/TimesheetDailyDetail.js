@@ -1,6 +1,8 @@
 /**
  * TimesheetDailyDetail.js
  */
+jsconfig.put("useJqSelectmenu", false);
+
 var delimiter = jsconfig.get("dataDelimiter");
 
 $(function() {
@@ -33,7 +35,7 @@ $(function() {
 				$(this).attr("index", groupIndex).attr("id", id+delimiter+groupIndex);
 			});
 
-			$(this).find("input").each(function(index) {
+			$(this).find("input, select").each(function(index) {
 				var id = $(this).attr("id"), name = $(this).attr("name");
 
 				if (!commonJs.isEmpty(id)) {id = (id.indexOf(delimiter) != -1) ? id.substring(0, id.indexOf(delimiter)) : id;}
@@ -43,6 +45,10 @@ $(function() {
 				else {name = "";}
 
 				$(this).attr("id", id+delimiter+groupIndex).attr("name", name+delimiter+groupIndex);
+
+				if ($(this).is("select")) {
+					setSelectBoxes($(this));
+				}
 			});
 		});
 
@@ -50,6 +56,14 @@ $(function() {
 			attachTo:$("#divDataArea")
 		});
 	});
+
+	setSelectBoxes = function(jqObj) {
+		$(jqObj).selectpicker({
+			width:"auto",
+			container:"body",
+			style:$(jqObj).attr("class")
+		});
+	};
 
 	$(document).keypress(function(event) {
 		if (event.which == 13) {

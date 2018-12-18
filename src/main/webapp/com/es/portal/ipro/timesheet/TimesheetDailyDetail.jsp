@@ -107,8 +107,8 @@ var timesheetUnits = "<%=dsRequest.getValue("timesheetUnits")%>";
 <div id="divDataArea" class="areaContainerPopup">
 	<table id="tblGrid" class="tblGrid">
 		<colgroup>
-			<col width="4%"/>
-			<col width="30%"/>
+			<col width="5%"/>
+			<col width="20%"/>
 			<col width="20%"/>
 			<col width="*"/>
 		</colgroup>
@@ -139,13 +139,13 @@ var timesheetUnits = "<%=dsRequest.getValue("timesheetUnits")%>";
 <li id="liDummy" class="dummyDetail">
 	<table class="tblGrid" style="border:0px">
 		<colgroup>
-			<col width="4%"/>
-			<col width="30%"/>
+			<col width="5%"/>
+			<col width="20%"/>
 			<col width="20%"/>
 			<col width="*"/>
 		</colgroup>
 		<tr class="noBorderAll">
-			<th id="thDeleteButton" class="thGrid deleteButton" title="Click to delete row"><i id="iDeleteButton" class="fa fa-lg fa-times"></i></th>
+			<th id="thDeleteButton" class="thGrid deleteButton" title="Click to delete row"><ui:icon id="iDeleteButton" className="fa-lg fa-times"/></th>
 			<td class="tdGrid Ct">
 				<ui:select name="rates">
 					<ui:seloption value="" text="==Select=="/>
@@ -160,7 +160,7 @@ var timesheetUnits = "<%=dsRequest.getValue("timesheetUnits")%>";
 %>
 				</ui:select>
 			</td>
-			<td class="tdGrid Ct"><ui:text name="timeWorked"/></td>
+			<td class="tdGrid Ct"><ui:text name="timeWorked" className="numeric" option="numeric" maxlength="2"/></td>
 			<td class="tdGrid Ct"><ui:text name="description"/></td>
 		</tr>
 	</table>

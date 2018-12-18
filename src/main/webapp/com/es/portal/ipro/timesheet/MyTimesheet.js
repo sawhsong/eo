@@ -240,7 +240,7 @@ $(function() {
 	};
 
 	openPopup = function(param) {
-		var width = 1200, height = 700;
+		var width = 850, height = 500;
 
 		param.popupId = "timesheetDetail";
 		param.url = "/ipro/timesheet/getTimesheetDailyDetail";
