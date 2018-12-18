@@ -18,17 +18,12 @@ $(function() {
 	$("#btnAdd").click(function(event) {
 		var elem = $("#liDummy").clone(), elemId = $(elem).attr("id");
 
-		$(elem).css("display", "block").appendTo($("#ulCommonCodeDetailHolder"));
+		$(elem).css("display", "block").appendTo($("#ulTimesheetDetailHolder"));
 
-		$("#ulCommonCodeDetailHolder").find(".dummyDetail").each(function(groupIndex) {
+		$("#ulTimesheetDetailHolder").find(".dummyDetail").each(function(groupIndex) {
 			$(this).attr("index", groupIndex).attr("id", elemId+delimiter+groupIndex);
 
 			$(this).find("i").each(function(index) {
-				var id = $(this).attr("id"), id = (id.indexOf(delimiter) != -1) ? id.substring(0, id.indexOf(delimiter)) : id;
-				$(this).attr("index", groupIndex).attr("id", id+delimiter+groupIndex);
-			});
-
-			$(this).find(".dragHandler").each(function(index) {
 				var id = $(this).attr("id"), id = (id.indexOf(delimiter) != -1) ? id.substring(0, id.indexOf(delimiter)) : id;
 				$(this).attr("index", groupIndex).attr("id", id+delimiter+groupIndex);
 			});
@@ -48,16 +43,6 @@ $(function() {
 				else {name = "";}
 
 				$(this).attr("id", id+delimiter+groupIndex).attr("name", name+delimiter+groupIndex);
-
-				if (groupIndex == ($("#ulCommonCodeDetailHolder .dummyDetail").length - 1)) {
-					if (name.indexOf("isActiveDetail") != -1) {
-						if ($(this).val() == "Y") {$(this).prop("checked", true);}
-					}
-
-					if (name.indexOf("sortOrderDetail") != -1) {
-						$(this).val(commonJs.lpad((groupIndex+1), 3, "0"));
-					}
-				}
 			});
 		});
 
@@ -102,10 +87,10 @@ $(function() {
 	renderGridTable = function(result) {
 		var ds = result.dataSet;
 
-//		for (var i=0; i<ds.getRowCnt(); i++) {
+		for (var i=0; i<ds.getRowCnt(); i++) {
 //			var rowIdx = 0;
 //
-//			$("#btnAdd").trigger("click");
+			$("#btnAdd").trigger("click");
 //			rowIdx = delimiter+(i-1);
 //
 //			$("[name=commonCodeDetail"+rowIdx+"]").val(ds.getValue(i, "COMMON_CODE"));
@@ -114,7 +99,7 @@ $(function() {
 //			$("[name=descriptionEnDetail"+rowIdx+"]").val(ds.getValue(i, "DESCRIPTION_EN"));
 //			$("[name=descriptionKoDetail"+rowIdx+"]").val(ds.getValue(i, "DESCRIPTION_KO"));
 //			$("[name=sortOrderDetail"+rowIdx+"]").val(ds.getValue(i, "SORT_ORDER"));
-//		}
+		}
 
 		commonJs.hideProcMessageOnElement("divScrollablePanelPopup");
 	};
