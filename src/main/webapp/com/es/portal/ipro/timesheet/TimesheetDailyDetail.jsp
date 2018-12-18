@@ -152,9 +152,10 @@ var timesheetUnits = "<%=dsRequest.getValue("timesheetUnits")%>";
 <%
 				for (int i=0; i<ratesDataSet.getRowCnt(); i++) {
 %>
-					<option value="<%=ratesDataSet.getValue(i, "assignmentId")%>_<%=ratesDataSet.getValue(i, "preferred")%>_<%=ratesDataSet.getValue(i, "rateId")%>">
-						<%=ratesDataSet.getValue(i, "rateName")%>
-					</option>
+					<ui:seloption value="<%=ratesDataSet.getValue(i, "rateId")%>" text="<%=ratesDataSet.getValue(i, "rateName")%>"/>
+<%-- 					<option value="<%//=ratesDataSet.getValue(i, "rateId")%>"> --%>
+<%-- 						<%//=ratesDataSet.getValue(i, "rateName")%> --%>
+<!-- 					</option> -->
 <%
 				}
 %>

@@ -102,17 +102,14 @@ $(function() {
 		var ds = result.dataSet;
 
 		for (var i=0; i<ds.getRowCnt(); i++) {
-//			var rowIdx = 0;
-//
+			var rowIdx = 0;
+
 			$("#btnAdd").trigger("click");
-//			rowIdx = delimiter+(i-1);
-//
-//			$("[name=commonCodeDetail"+rowIdx+"]").val(ds.getValue(i, "COMMON_CODE"));
-//			commonJs.setCheckboxValue("isActiveDetail"+rowIdx, ds.getValue(i, "IS_ACTIVE"));
-//			$("[name=codeMeaningDetail"+rowIdx+"]").val(ds.getValue(i, "CODE_MEANING"));
-//			$("[name=descriptionEnDetail"+rowIdx+"]").val(ds.getValue(i, "DESCRIPTION_EN"));
-//			$("[name=descriptionKoDetail"+rowIdx+"]").val(ds.getValue(i, "DESCRIPTION_KO"));
-//			$("[name=sortOrderDetail"+rowIdx+"]").val(ds.getValue(i, "SORT_ORDER"));
+			rowIdx = delimiter+(i-1);
+
+			$("[name=rates"+rowIdx+"]").val(ds.getValue(i, "rateId"));
+			$("[name=timeWorked"+rowIdx+"]").val(ds.getValue(i, "timeWorked"));
+			$("[name=description"+rowIdx+"]").val(ds.getValue(i, "description"));
 		}
 
 		commonJs.hideProcMessageOnElement("divScrollablePanelPopup");
@@ -127,7 +124,7 @@ $(function() {
 		var obj = event.target;
 
 		if ($(obj).hasClass("deleteButton") || ($(obj).is("i") && $(obj).parent("th").hasClass("deleteButton"))) {
-			$("#ulCommonCodeDetailHolder").find(".dummyDetail").each(function(index) {
+			$("#ulTimesheetDetailHolder").find(".dummyDetail").each(function(index) {
 				if ($(this).attr("index") == $(obj).attr("index")) {
 					$(this).remove();
 
@@ -135,15 +132,6 @@ $(function() {
 						attachTo:$("#divDataArea")
 					});
 				}
-			});
-
-			$("#ulCommonCodeDetailHolder").find(".dummyDetail").each(function(groupIndex) {
-				$(this).find("input[type=text]").each(function(index) {
-					var name = $(this).attr("name");
-					if (name.indexOf("sortOrderDetail") != -1) {
-						$(this).val(commonJs.lpad((groupIndex+1), 3, "0"));
-					}
-				});
 			});
 		}
 	});
