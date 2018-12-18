@@ -52,7 +52,6 @@
 	<div id="divButtonAreaRight">
 		<ui:buttonGroup id="buttonGroup">
 			<ui:button id="btnSearch" caption="button.com.search" iconClass="fa-search"/>
-			<ui:button id="btnClear" caption="button.com.clear" iconClass="fa-refresh"/>
 		</ui:buttonGroup>
 	</div>
 </div>
@@ -176,7 +175,7 @@
 <div id="divDummy" class="dummyDetail">
 	<ui:hidden name="workDate" className="ct hor"/>
 	<ui:text name="formattedWorkDate" style="width:90px" className="ct hor" status="display"/>
-	<ui:text name="totalHours" style="width:90px" className="ct hor numeric" checkName="Total Hours" options="mandatory" option="numeric" maxlength="2" title="Number between 0 and 24"/>
+	<ui:text name="totalHours" style="width:90px" className="ct hor" checkName="Total Hours" options="mandatory" option="numeric" title="Number between 0 and 24"/>
 	<ui:button id="btnEdit" caption="Edit" iconClass="fa-edit"/>
 </div>
 </form>

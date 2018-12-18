@@ -102,12 +102,27 @@ $(function() {
 		var ds = result.dataSet;
 
 		for (var i=0; i<ds.getRowCnt(); i++) {
-			var rowIdx = 0;
+			var rowIdx = 0,
+				startTime = ds.getValue(i, "startTime"),
+				endTime = ds.getValue(i, "endTime"),
+				nonWorkedTime = ds.getValue(i, "nonWorkedTime");
 
 			$("#btnAdd").trigger("click");
 			rowIdx = delimiter+i;
 
 			$("[name=rates"+rowIdx+"]").selectpicker("val", ds.getValue(i, "rateId"));
+			if (!commonJs.isEmpty(startTime)) {
+				$("[name=startTimeHH"+rowIdx+"]").selectpicker("val", startTime.split(":")[0]);
+				$("[name=startTimeMM"+rowIdx+"]").selectpicker("val", startTime.split(":")[1]);
+			}
+			if (!commonJs.isEmpty(endTime)) {
+				$("[name=endTimeHH"+rowIdx+"]").selectpicker("val", endTime.split(":")[0]);
+				$("[name=endTimeMM"+rowIdx+"]").selectpicker("val", endTime.split(":")[1]);
+			}
+			if (!commonJs.isEmpty(nonWorkedTime)) {
+				$("[name=nonWorkedTimeHH"+rowIdx+"]").selectpicker("val", nonWorkedTime.split(":")[0]);
+				$("[name=nonWorkedTimeMM"+rowIdx+"]").selectpicker("val", nonWorkedTime.split(":")[1]);
+			}
 			$("[name=hours"+rowIdx+"]").val(ds.getValue(i, "hours"));
 			$("[name=description"+rowIdx+"]").val(ds.getValue(i, "description"));
 		}

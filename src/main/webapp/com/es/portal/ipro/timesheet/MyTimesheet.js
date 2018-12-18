@@ -20,6 +20,7 @@ $(function() {
 	});
 
 	$("#assignment").change(function() {
+		$("#tblGridBody").html("");
 		setTimesheetPeriodSelectbox();
 	});
 
@@ -240,8 +241,12 @@ $(function() {
 	};
 
 	openPopup = function(param) {
+		var timesheetUnits = param.paramData.timesheetUnits;
 		var width = 850, height = 500;
 
+		if (timesheetUnits == "HSE" || timesheetUnits == "DSE") {
+			width = 1100;
+		}
 		param.popupId = "timesheetDetail";
 		param.url = "/ipro/timesheet/getTimesheetDailyDetail";
 		param.header = "Timesheet Detail";

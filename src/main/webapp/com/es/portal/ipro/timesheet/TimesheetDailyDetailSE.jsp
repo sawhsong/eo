@@ -67,7 +67,10 @@ var timesheetUnits = "<%=dsRequest.getValue("timesheetUnits")%>";
 <div id="divSearchCriteriaArea"></div>
 <div id="divInformArea" class="areaContainerPopup">
 	<table class="tblInform">
-		<caption>For Hourly Units, Time Worked Column input needs to be in between 0 to 24. It should not be more then 24 hours in a day</caption>
+		<caption>
+			For Daily Units with Start Time and End Time set, user should enter Start Time, End Time and Break Time and Time Worked columns in 24 hours format.<br/>
+			Time worked will denote units as Daily and the system will not allow to enter more than 1 day of work for any given working day.
+		</caption>
 		<colgroup>
 			<col width="13%"/>
 			<col width="18%"/>
@@ -107,22 +110,28 @@ var timesheetUnits = "<%=dsRequest.getValue("timesheetUnits")%>";
 <div id="divDataArea" class="areaContainerPopup">
 	<table id="tblGrid" class="tblGrid">
 		<colgroup>
-			<col width="5%"/>
-			<col width="20%"/>
-			<col width="17%"/>
+			<col width="3%"/>
+			<col width="15%"/>
+			<col width="14%"/>
+			<col width="14%"/>
+			<col width="14%"/>
+			<col width="11%"/>
 			<col width="*"/>
 		</colgroup>
 		<thead>
 			<tr>
 				<th class="thGrid"></th>
 				<th class="thGrid">Rates</th>
+				<th class="thGrid">Start Time(HH:mm)</th>
+				<th class="thGrid">End Time(HH:mm)</th>
+				<th class="thGrid">Break Time(HH:mm)</th>
 				<th class="thGrid">Time Worked</th>
 				<th class="thGrid">Description</th>
 			</tr>
 		</thead>
 		<tbody id="tblGridBody">
 			<tr>
-				<td colspan="4" style="padding:0px;border-top:0px"><ul id="ulTimesheetDetailHolder"></ul></td>
+				<td colspan="7" style="padding:0px;border-top:0px"><ul id="ulTimesheetDetailHolder"></ul></td>
 			</tr>
 		</tbody>
 	</table>
@@ -139,9 +148,12 @@ var timesheetUnits = "<%=dsRequest.getValue("timesheetUnits")%>";
 <li id="liDummy" class="dummyDetail">
 	<table class="tblGrid" style="border:0px">
 		<colgroup>
-			<col width="5%"/>
-			<col width="20%"/>
-			<col width="17%"/>
+			<col width="3%"/>
+			<col width="15%"/>
+			<col width="14%"/>
+			<col width="14%"/>
+			<col width="14%"/>
+			<col width="11%"/>
 			<col width="*"/>
 		</colgroup>
 		<tr class="noBorderAll">
@@ -158,7 +170,70 @@ var timesheetUnits = "<%=dsRequest.getValue("timesheetUnits")%>";
 %>
 				</ui:select>
 			</td>
-			<td class="tdGrid Ct"><ui:text name="hours" className="ct numeric" option="numeric" maxlength="2" title="Number between 0 and 24"/></td>
+			<td class="tdGrid Ct">
+				<ui:select name="startTimeHH">
+<%
+				for (int i=0; i<24; i++) {
+%>
+					<option value="<%=CommonUtil.leftPad(CommonUtil.toString(i), 2, "0")%>"><%=CommonUtil.leftPad(CommonUtil.toString(i), 2, "0")%></option>
+<%
+				}
+%>
+				</ui:select>
+				:
+				<ui:select name="startTimeMM">
+<%
+				for (int i=0; i<60; i+=15) {
+%>
+					<option value="<%=CommonUtil.leftPad(CommonUtil.toString(i), 2, "0")%>"><%=CommonUtil.leftPad(CommonUtil.toString(i), 2, "0")%></option>
+<%
+				}
+%>
+				</ui:select>
+			</td>
+			<td class="tdGrid Ct">
+				<ui:select name="endTimeHH">
+<%
+				for (int i=0; i<24; i++) {
+%>
+					<option value="<%=CommonUtil.leftPad(CommonUtil.toString(i), 2, "0")%>"><%=CommonUtil.leftPad(CommonUtil.toString(i), 2, "0")%></option>
+<%
+				}
+%>
+				</ui:select>
+				:
+				<ui:select name="endTimeMM">
+<%
+				for (int i=0; i<60; i+=15) {
+%>
+					<option value="<%=CommonUtil.leftPad(CommonUtil.toString(i), 2, "0")%>"><%=CommonUtil.leftPad(CommonUtil.toString(i), 2, "0")%></option>
+<%
+				}
+%>
+				</ui:select>
+			</td>
+			<td class="tdGrid Ct">
+				<ui:select name="nonWorkedTimeHH">
+<%
+				for (int i=0; i<24; i++) {
+%>
+					<option value="<%=CommonUtil.leftPad(CommonUtil.toString(i), 2, "0")%>"><%=CommonUtil.leftPad(CommonUtil.toString(i), 2, "0")%></option>
+<%
+				}
+%>
+				</ui:select>
+				:
+				<ui:select name="nonWorkedTimeMM">
+<%
+				for (int i=0; i<60; i+=15) {
+%>
+					<option value="<%=CommonUtil.leftPad(CommonUtil.toString(i), 2, "0")%>"><%=CommonUtil.leftPad(CommonUtil.toString(i), 2, "0")%></option>
+<%
+				}
+%>
+				</ui:select>
+			</td>
+			<td class="tdGrid Ct"><ui:text name="hours" className="ct numeric" option="numeric" maxlength="2"/></td>
 			<td class="tdGrid Ct"><ui:text name="description"/></td>
 		</tr>
 	</table>

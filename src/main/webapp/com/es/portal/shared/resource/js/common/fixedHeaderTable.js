@@ -336,7 +336,7 @@
 			var $scrollablePanel = $.nony.isPopup() ? $("#divScrollablePanelPopup") : $("#divScrollablePanel");
 			var $header = $table.find("thead").clone(true, true);
 			var $fixedTable = $("<table id=\""+systemGeneratedTableForFixedHeaderId+"\"/>").prop("class", $table.prop("class"))
-								.css({position:"fixed", "table-layout":"fixed", display:"none", "margin-top":"0px", "z-index":10000});
+								.css({position:"fixed", "table-layout":"fixed", display:"none", "margin-top":"0px", "z-index":500});
 
 			if ($.nony.browser.Chrome) {$fixedTable.width($table.width());}
 			else if ($.nony.browser.FireFox) {$fixedTable.width($table.width()+1);}

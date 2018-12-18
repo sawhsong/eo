@@ -70,7 +70,7 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 	public ParamEntity getTimesheetDayList(ParamEntity paramEntity) throws Exception {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		HttpSession session = paramEntity.getSession();
-		DataSet timesheetDayList = new DataSet(), dayListAsCalendar = new DataSet();
+		DataSet timesheetDayList, dayListAsCalendar = new DataSet();
 		String delimiter = ConfigUtil.getProperty("delimiter.data");
 		String assignmentId = dsRequest.getValue("assignmentId");
 		String startDateStr = dsRequest.getValue("startDate");
