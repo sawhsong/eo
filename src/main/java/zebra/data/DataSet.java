@@ -649,4 +649,28 @@ public class DataSet {
 
 		return sb.toString();
 	}
+
+	public String toJsonStringForEO() {
+		StringBuffer sb = new StringBuffer();
+
+		if (getRowCnt() <= 0) {
+			sb.append("{}");
+		} else {
+			for (int i=0; i<getRowCnt(); i++) {
+				sb.append("{");
+				for (int j=0; j<getColumnCnt(); j++) {
+					sb.append("\"").append(getName(j)).append("\":").append("\"").append(getValue(i, j)).append("\"");
+					if (j < getColumnCnt()-1) {
+						sb.append(",");
+					}
+				}
+				sb.append("}");
+				if (i < getRowCnt()-1) {
+					sb.append(",");
+				}
+			}
+		}
+
+		return sb.toString();
+	}
 }

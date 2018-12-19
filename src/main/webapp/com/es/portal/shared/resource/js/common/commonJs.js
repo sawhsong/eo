@@ -16,6 +16,8 @@ var commonJs = {
 	 */
 	submit : function(params) {$.nony.submit(params);},
 	doSubmit : function(params) {$.nony.doSubmit(params);},
+	serialiseForm : function(jqForm) {return $.nony.serialiseForm(jqForm);},
+	serialiseObject : function(jqObject) {return $.nony.serialiseObject(jqObject);},
 	/*!
 	 * ajax
 	 */

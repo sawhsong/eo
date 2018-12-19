@@ -1,9 +1,11 @@
 /**
  * MyTimesheet.js
  */
-var popup = null;
 jsconfig.put("scrollablePanelHeightAdjust", 0);
+
+var popup = null;
 var delimiter = jsconfig.get("dataDelimiter");
+var backupDataSet = null;
 
 $(function() {
 	/*!
@@ -150,6 +152,31 @@ $(function() {
 					startDate:values[1],
 					endDate:values[2]
 				},
+				success:function(data, textStatus) {
+					var result = commonJs.parseAjaxResult(data, textStatus, "json");
+					if (result.isSuccess == true || result.isSuccess == "true") {
+						renderGridTable(result);
+					} else {
+						commonJs.error(result.message);
+					}
+				}
+			});
+		}, 200);
+	};
+
+	doRefresh = function() {
+		if (commonJs.isEmpty($("#assignment").val())) {
+			return;
+		}
+		commonJs.showProcMessageOnElement("divScrollablePanel");
+
+		var values = $("#timesheetPeriod").val().split("_");
+
+		setTimeout(function() {
+			commonJs.ajaxSubmit({
+				url:"/ipro/timesheet/refreshTimesheetDayList",
+				dataType:"json",
+				data:{},
 				success:function(data, textStatus) {
 					var result = commonJs.parseAjaxResult(data, textStatus, "json");
 					if (result.isSuccess == true || result.isSuccess == "true") {

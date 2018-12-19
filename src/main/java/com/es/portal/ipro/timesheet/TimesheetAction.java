@@ -48,6 +48,15 @@ public class TimesheetAction extends BaseAction {
 		return "ajaxResponse";
 	}
 
+	public String refreshTimesheetDayList() throws Exception {
+		try {
+			biz.refreshTimesheetDayList(paramEntity);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
+
 	public String getTimesheetDailyDetail() throws Exception {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		String timesheetUnits = dsRequest.getValue("timesheetUnits");
@@ -69,9 +78,9 @@ public class TimesheetAction extends BaseAction {
 		return "ajaxResponse";
 	}
 
-	public String doUpdateTimesheetDailyDetail() throws Exception {
+	public String updateTimesheetDailyDetail() throws Exception {
 		try {
-			biz.doUpdateTimesheetDailyDetail(paramEntity);
+			biz.updateTimesheetDailyDetail(paramEntity);
 		} catch (Exception ex) {
 		}
 		setRequestAttribute("paramEntity", paramEntity);

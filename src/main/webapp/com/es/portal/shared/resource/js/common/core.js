@@ -146,6 +146,35 @@ var nony = {
 			}
 		}
 	},
+	serialiseForm : function(jqForm) {
+		if (typeof(jqForm) != "object") {
+			throw new Error("Form " + com.message.invalid);
+			return;
+		}
+
+		var arrTemp = $(jqForm).serializeArray(),
+			paramData = {};
+
+		$.each(arrTemp, function(i, data) {
+			paramData[data.name] = data.value;
+		});
+
+		return paramData;
+	},
+	serialiseObject : function(jqObject) {
+		if (typeof(jqObject) != "object") {
+			throw new Error("Object " + com.message.invalid);
+			return;
+		}
+
+		var paramData = {};
+
+		$(jqObject).find("input, select").each(function(index) {
+			paramData[$(this).attr("name")] = $(this).val();
+		});
+
+		return paramData;
+	},
 	/*!
 	 * number utilities
 	 */

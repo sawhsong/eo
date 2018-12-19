@@ -116,15 +116,16 @@ $(function() {
 	getTimesheetDailyDetailData = function() {
 		commonJs.showProcMessageOnElement("divScrollablePanelPopup");
 
+		var data = commonJs.serialiseObject(parent.$("#tblGridBody"));
+		data.workDate = workDate;
+		data.totalHours = totalHours;
+		data.timesheetUnits = timesheetUnits;
+
 		setTimeout(function() {
 			commonJs.ajaxSubmit({
 				url:"/ipro/timesheet/getTimesheetDailyDetailData",
 				dataType:"json",
-				data:{
-					workDate:workDate,
-					totalHours:totalHours,
-					timesheetUnits:timesheetUnits
-				},
+				data:data,
 				success:function(data, textStatus) {
 					var result = commonJs.parseAjaxResult(data, textStatus, "json");
 					if (result.isSuccess == true || result.isSuccess == "true") {
@@ -165,7 +166,7 @@ $(function() {
 		var detailLength = $("#ulTimesheetDetailHolder .dummyDetail").length;
 
 		commonJs.ajaxSubmit({
-			url:"/ipro/timesheet/doUpdateTimesheetDailyDetail",
+			url:"/ipro/timesheet/updateTimesheetDailyDetail",
 			dataType:"json",
 			formId:"fmDefault",
 			data:{
@@ -186,7 +187,7 @@ $(function() {
 							caption:com.caption.ok,
 							callback:function() {
 								parent.popup.close();
-								parent.doSearch();
+								parent.doRefresh();
 							}
 						}]
 					});

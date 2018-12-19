@@ -81,10 +81,10 @@ var timesheetUnits = "<%=dsRequest.getValue("timesheetUnits")%>";
 		<tr>
 			<th class="thInform rt">Date Worked</th>
 			<td class="tdInform">
-				<ui:text name="workDate" className="ct" status="display" value="<%=workDateToDisplay%>"/>
+				<ui:text name="workDateInform" className="ct" status="display" value="<%=workDateToDisplay%>"/>
 			</td>
 			<th class="thInform rt">Total Hours</th>
-			<td class="tdInform"><ui:text name="totalHours" className="ct" status="display" value="<%=totalHoursToDisplay%>"/></td>
+			<td class="tdInform"><ui:text name="totalHoursInform" className="ct" status="display" value="<%=totalHoursToDisplay%>"/></td>
 			<td class="tdInform"></td>
 		</tr>
 	</table>
@@ -159,7 +159,10 @@ var timesheetUnits = "<%=dsRequest.getValue("timesheetUnits")%>";
 		<tr class="noBorderAll">
 			<th id="thDeleteButton" class="thGrid deleteButton" title="Click to delete row">
 				<ui:icon id="iDeleteButton" className="fa-lg fa-times"/>
+				<ui:hidden name="deleted"/>
+				<ui:hidden name="preferred"/>
 				<ui:hidden name="rowId"/>
+				<ui:hidden name="timesheetLineId"/>
 			</th>
 			<td class="tdGrid Ct">
 				<ui:select name="rates">

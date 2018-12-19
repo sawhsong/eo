@@ -88,11 +88,28 @@ logger.debug("getTimesheetDayListDataSet : "+serviceUrl+"?startDate="+startDate+
 			if (CommonUtil.equals(workDate, dayListWorkDate)) {
 				jsonArrayString = timesheetDayList.getValue(i, "timesheetDayDetailList");
 				timesheetDailyDetail = JsonUtil.getDataSetFromJsonArrayString(jsonArrayString);
-
 				break;
 			}
 		}
 
 		return timesheetDailyDetail;
+	}
+
+	public DataSet updateTimesheetDailyDetail(DataSet timesheetDayList, DataSet updatedDailyDetail, String workDate, int totalHours) throws Exception {
+		String dayListWorkDate, jsonString = "";
+
+		for (int i=0; i<timesheetDayList.getRowCnt(); i++) {
+			dayListWorkDate = timesheetDayList.getValue(i, "workDate");
+
+			if (CommonUtil.equals(workDate, dayListWorkDate)) {
+				jsonString = updatedDailyDetail.toJsonStringForEO();
+				jsonString = "["+jsonString+"]";
+				timesheetDayList.setValue(i, "timesheetDayDetailList", jsonString);
+				timesheetDayList.setValue(i, "totalHours", CommonUtil.toString(totalHours));
+				break;
+			}
+		}
+
+		return timesheetDayList;
 	}
 }
