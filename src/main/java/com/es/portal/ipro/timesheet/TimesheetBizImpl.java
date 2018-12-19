@@ -143,4 +143,38 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 		}
 		return paramEntity;
 	}
+
+	public ParamEntity doUpdateTimesheetDailyDetail(ParamEntity paramEntity) throws Exception {
+		DataSet dsRequest = paramEntity.getRequestDataSet();
+		HttpSession session = paramEntity.getSession();
+		DataSet timesheetDailyDetail, updatedDailyDetail = new DataSet();
+		String delimiter = ConfigUtil.getProperty("delimiter.data");
+		String workDate = dsRequest.getValue("workDate");
+		String header[] = new String[] {"deleted", "description", "endTime", "hours", "nonWorkedTime", "preferred", "rateId", "rowId", "startTime", "timesheetLineId", "workDate"};
+		int detailLength = CommonUtil.toInt(dsRequest.getValue("detailLength"));
+
+		try {
+			timesheetDailyDetail = timesheetBizService.getTimesheetDailyDetailDataSet((DataSet)session.getAttribute("timesheetDayListDataSet"), workDate);
+
+			updatedDailyDetail.addName(header);
+			for (int i=0; i<detailLength; i++) {
+				updatedDailyDetail.addRow();
+				updatedDailyDetail.setValue(updatedDailyDetail.getRowCnt()-1, "deleted", CommonUtil.nvl(dsRequest.getValue("deleted"+delimiter+i), "N"));
+				updatedDailyDetail.setValue(updatedDailyDetail.getRowCnt()-1, "description", CommonUtil.nvl(dsRequest.getValue("description"+delimiter+i), ""));
+				updatedDailyDetail.setValue(updatedDailyDetail.getRowCnt()-1, "hours", CommonUtil.nvl(dsRequest.getValue("hours"+delimiter+i), "0"));
+				updatedDailyDetail.setValue(updatedDailyDetail.getRowCnt()-1, "nonWorkedTime", CommonUtil.nvl(dsRequest.getValue("nonWorkedTime"+delimiter+i), "0"));
+				updatedDailyDetail.setValue(updatedDailyDetail.getRowCnt()-1, "preferred", CommonUtil.nvl(dsRequest.getValue("preferred"+delimiter+i), ""));
+				updatedDailyDetail.setValue(updatedDailyDetail.getRowCnt()-1, "rateId", CommonUtil.nvl(dsRequest.getValue("rateId"+delimiter+i), ""));
+				updatedDailyDetail.setValue(updatedDailyDetail.getRowCnt()-1, "rowId", CommonUtil.nvl(dsRequest.getValue("rowId"+delimiter+i), "-1"));
+				updatedDailyDetail.setValue(updatedDailyDetail.getRowCnt()-1, "startTime", CommonUtil.nvl(dsRequest.getValue("startTime"+delimiter+i), ""));
+				updatedDailyDetail.setValue(updatedDailyDetail.getRowCnt()-1, "timesheetLineId", CommonUtil.nvl(dsRequest.getValue("timesheetLineId"+delimiter+i), "-1"));
+				updatedDailyDetail.setValue(updatedDailyDetail.getRowCnt()-1, "workDate", workDate);
+			}
+
+			paramEntity.setSuccess(true);
+		} catch (Exception ex) {
+			throw new FrameworkException(paramEntity, ex);
+		}
+		return paramEntity;
+	}
 }

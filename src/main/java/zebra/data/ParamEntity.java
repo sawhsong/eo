@@ -324,6 +324,7 @@ public class ParamEntity {
 		String rtn = "";
 		String searchCriteriaDataSetDebugMode = ConfigUtil.getProperty("log.debug.searchCriteriaDataSet");
 
+		rtn += "========== ParamEntity Log Start ==========\n";
 		rtn += "ParamEntity Success Flag [isSuccess] : " + isSuccess + "\n";
 		if (!(object == null || object.isEmpty())) {
 			for (Iterator keys = object.keySet().iterator(); keys.hasNext();) {
@@ -347,6 +348,7 @@ public class ParamEntity {
 			}
 		}
 		rtn += "\n";
+		rtn += "========== ParamEntity Log End ==========\n";
 
 		return rtn;
 	}

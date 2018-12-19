@@ -157,7 +157,10 @@ var timesheetUnits = "<%=dsRequest.getValue("timesheetUnits")%>";
 			<col width="*"/>
 		</colgroup>
 		<tr class="noBorderAll">
-			<th id="thDeleteButton" class="thGrid deleteButton" title="Click to delete row"><ui:icon id="iDeleteButton" className="fa-lg fa-times"/></th>
+			<th id="thDeleteButton" class="thGrid deleteButton" title="Click to delete row">
+				<ui:icon id="iDeleteButton" className="fa-lg fa-times"/>
+				<ui:hidden name="rowId"/>
+			</th>
 			<td class="tdGrid Ct">
 				<ui:select name="rates">
 					<ui:seloption value="" text="==Select=="/>

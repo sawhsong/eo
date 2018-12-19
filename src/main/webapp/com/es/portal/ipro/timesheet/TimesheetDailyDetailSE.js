@@ -110,18 +110,19 @@ $(function() {
 			$("#btnAdd").trigger("click");
 			rowIdx = delimiter+i;
 
+			$("[name=rowId"+rowIdx+"]").val(ds.getValue(i, "rowId"));
 			$("[name=rates"+rowIdx+"]").selectpicker("val", ds.getValue(i, "rateId"));
 			if (!commonJs.isEmpty(startTime)) {
-				$("[name=startTimeHH"+rowIdx+"]").selectpicker("val", startTime.split(":")[0]);
-				$("[name=startTimeMM"+rowIdx+"]").selectpicker("val", startTime.split(":")[1]);
+				$("[name=startTimeHH"+rowIdx+"]").selectpicker("val", commonJs.lpad(startTime.split(":")[0], 2, "0"));
+				$("[name=startTimeMM"+rowIdx+"]").selectpicker("val", commonJs.lpad(startTime.split(":")[1], 2, "0"));
 			}
 			if (!commonJs.isEmpty(endTime)) {
-				$("[name=endTimeHH"+rowIdx+"]").selectpicker("val", endTime.split(":")[0]);
-				$("[name=endTimeMM"+rowIdx+"]").selectpicker("val", endTime.split(":")[1]);
+				$("[name=endTimeHH"+rowIdx+"]").selectpicker("val", commonJs.lpad(endTime.split(":")[0], 2, "0"));
+				$("[name=endTimeMM"+rowIdx+"]").selectpicker("val", commonJs.lpad(endTime.split(":")[1], 2, "0"));
 			}
 			if (!commonJs.isEmpty(nonWorkedTime)) {
-				$("[name=nonWorkedTimeHH"+rowIdx+"]").selectpicker("val", nonWorkedTime.split(":")[0]);
-				$("[name=nonWorkedTimeMM"+rowIdx+"]").selectpicker("val", nonWorkedTime.split(":")[1]);
+				$("[name=nonWorkedTimeHH"+rowIdx+"]").selectpicker("val", commonJs.lpad(nonWorkedTime.split(":")[0], 2, "0"));
+				$("[name=nonWorkedTimeMM"+rowIdx+"]").selectpicker("val", commonJs.lpad(nonWorkedTime.split(":")[1], 2, "0"));
 			}
 			$("[name=hours"+rowIdx+"]").val(ds.getValue(i, "hours"));
 			$("[name=description"+rowIdx+"]").val(ds.getValue(i, "description"));

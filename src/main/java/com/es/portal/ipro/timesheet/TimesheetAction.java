@@ -68,4 +68,13 @@ public class TimesheetAction extends BaseAction {
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";
 	}
+
+	public String doUpdateTimesheetDailyDetail() throws Exception {
+		try {
+			biz.doUpdateTimesheetDailyDetail(paramEntity);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
 }

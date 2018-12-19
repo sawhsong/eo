@@ -9,4 +9,5 @@ public interface TimesheetBiz {
 	public ParamEntity getTimesheetDayList(ParamEntity paramEntity) throws Exception;
 	public ParamEntity getTimesheetDailyDetail(ParamEntity paramEntity) throws Exception;
 	public ParamEntity getTimesheetDailyDetailData(ParamEntity paramEntity) throws Exception;
+	public ParamEntity doUpdateTimesheetDailyDetail(ParamEntity paramEntity) throws Exception;
 }

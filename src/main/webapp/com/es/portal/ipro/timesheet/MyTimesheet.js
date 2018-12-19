@@ -9,12 +9,6 @@ $(function() {
 	/*!
 	 * event
 	 */
-	$(document).keypress(function(event) {
-		if (event.which == 13) {
-			var element = event.target;
-		}
-	});
-
 	$("#btnSearch").click(function() {
 		doSearch();
 	});
