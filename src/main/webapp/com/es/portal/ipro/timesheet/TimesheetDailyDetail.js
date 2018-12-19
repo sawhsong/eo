@@ -177,8 +177,19 @@ $(function() {
 				var result = commonJs.parseAjaxResult(data, textStatus, "json");
 
 				if (result.isSuccess == true || result.isSuccess == "true") {
-					parent.popup.close();
-					parent.doSearch();
+					commonJs.openDialog({
+						type:com.message.I000,
+						contents:result.message,
+						blind:true,
+						width:300,
+						buttons:[{
+							caption:com.caption.ok,
+							callback:function() {
+								parent.popup.close();
+								parent.doSearch();
+							}
+						}]
+					});
 				} else {
 					commonJs.error(result.message);
 				}
@@ -195,7 +206,13 @@ $(function() {
 		if ($(obj).hasClass("deleteButton") || ($(obj).is("i") && $(obj).parent("th").hasClass("deleteButton"))) {
 			$("#ulTimesheetDetailHolder").find(".dummyDetail").each(function(index) {
 				if ($(this).attr("index") == $(obj).attr("index")) {
-					$(this).remove();
+					$(this).find("[type=hidden]").each(function(index) {
+						if (commonJs.startsWith($(this).attr("name"), "deleted")) {
+							$(this).val("Y");
+						}
+					});
+
+					$(this).hide();
 
 					$("#tblGrid").fixedHeaderTable({
 						attachTo:$("#divDataArea")
