@@ -68,6 +68,7 @@ public class ConfigUtil {
 
 			else if (CommonUtil.equalsIgnoreCase(key, "ckEditor")) {rtnString = ConfigUtil.getProperty("path.plugin.ckeditor");}
 			else if (CommonUtil.equalsIgnoreCase(key, "slider")) {rtnString = ConfigUtil.getProperty("path.plugin.jssorSlider");}
+			else if (CommonUtil.equalsIgnoreCase(key, "fontas")) {rtnString = ConfigUtil.getProperty("path.plugin.fontawesome");}
 
 			else if (CommonUtil.equalsIgnoreCase(key, "defaultDateTime")) {rtnString = ConfigUtil.getProperty("format.default.dateTime");}
 			else if (CommonUtil.equalsIgnoreCase(key, "defaultDate")) {rtnString = ConfigUtil.getProperty("format.default.date");}

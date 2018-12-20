@@ -17,7 +17,7 @@ public class TimesheetAction extends BaseAction {
 	private TimesheetBiz biz;
 
 	public String mytimesheets() throws Exception {
-		biz.mytimesheets(paramEntity);
+		biz.myTimesheets(paramEntity);
 		return "myTimesheet";
 	}
 
@@ -30,38 +30,38 @@ public class TimesheetAction extends BaseAction {
 		return "ajaxResponse";
 	}
 
-	public String getTimesheetPeriod() throws Exception {
+	public String getPeriodByAssignmentId() throws Exception {
 		try {
-			biz.getTimesheetPeriod(paramEntity);
+			biz.getPeriodByAssignmentId(paramEntity);
 		} catch (Exception ex) {
 		}
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";
 	}
 
-	public String getTimesheetDayList() throws Exception {
+	public String getDayListByPeriod() throws Exception {
 		try {
-			biz.getTimesheetDayList(paramEntity);
+			biz.getDayListByPeriod(paramEntity);
 		} catch (Exception ex) {
 		}
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";
 	}
 
-	public String refreshTimesheetDayList() throws Exception {
+	public String refreshDayListByPeriod() throws Exception {
 		try {
-			biz.refreshTimesheetDayList(paramEntity);
+			biz.refreshDayListByPeriod(paramEntity);
 		} catch (Exception ex) {
 		}
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";
 	}
 
-	public String getTimesheetDailyDetail() throws Exception {
+	public String getDailyDetailScreen() throws Exception {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		String timesheetUnits = dsRequest.getValue("timesheetUnits");
 
-		biz.getTimesheetDailyDetail(paramEntity);
+		biz.getDailyDetailScreen(paramEntity);
 		if (CommonUtil.isIn(timesheetUnits, "HSE", "DSE")) {
 			return "timesheetDailyDetailSE";
 		} else {
@@ -69,18 +69,27 @@ public class TimesheetAction extends BaseAction {
 		}
 	}
 
-	public String getTimesheetDailyDetailData() throws Exception {
+	public String getDailyDetailData() throws Exception {
 		try {
-			biz.getTimesheetDailyDetailData(paramEntity);
+			biz.getDailyDetailData(paramEntity);
 		} catch (Exception ex) {
 		}
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";
 	}
 
-	public String updateTimesheetDailyDetail() throws Exception {
+	public String updateDailyDetail() throws Exception {
 		try {
-			biz.updateTimesheetDailyDetail(paramEntity);
+			biz.updateDailyDetail(paramEntity);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
+
+	public String postTimesheet() throws Exception {
+		try {
+			biz.postTimesheet(paramEntity);
 		} catch (Exception ex) {
 		}
 		setRequestAttribute("paramEntity", paramEntity);

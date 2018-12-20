@@ -52,6 +52,8 @@ public class Button extends TaglibSupport {
 					iconTag = "<i class=\"fa fa-lg "+iconClass+"\""+iconStyle+"></i>&nbsp;";
 				} else if (CommonUtil.startsWithIgnoreCase(iconClass, "glyphicon-")) {
 					iconTag = "<span class=\"glyphicon "+iconClass+"\""+iconStyle+" style=\"font-size:1.1em\"></span>&nbsp;";
+				} else {
+					iconTag = "<i class=\"fa-lg "+iconClass+"\""+iconStyle+"></i>&nbsp;";
 				}
 			}
 

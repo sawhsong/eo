@@ -2,6 +2,7 @@
 <link type="text/css" rel="stylesheet" href="<mc:cp key="cssJqUi"/>/jquery-ui.css"/>
 <link type="text/css" rel="stylesheet" href="<mc:cp key="cssBootstrap"/>/bootstrap.css"/>
 <link type="text/css" rel="stylesheet" href="<mc:cp key="cssBootstrap"/>/font-awesome.css"/>
+<%-- <link type="text/css" rel="stylesheet" href="<mc:cp key="fontas"/>/css/all.css"/> --%>
 <link type="text/css" rel="stylesheet" href="<mc:cp key="cssTheme"/>/default.css"/>
 
 <script type="text/javascript" src="<mc:cp key="jsJq"/>/jquery-2.1.4.js"></script>
@@ -27,6 +28,7 @@
 <script type="text/javascript" src="<mc:cp key="ckEditor"/>/ckeditor.js"></script>
 <script type="text/javascript" src="<mc:cp key="ckEditor"/>/adapters/jquery.js"></script>
 <script type="text/javascript" src="<mc:cp key="slider"/>/js/jssor.slider.min.js"></script>
+<%-- <script type="text/javascript" src="<mc:cp key="fontas"/>/js/all.js"></script> --%>
 
 <script type="text/javascript" src="<mc:cp key="jsCommon"/>/core.js"></script>
 <script type="text/javascript" src="<mc:cp key="jsCommon"/>/popup.js"></script>

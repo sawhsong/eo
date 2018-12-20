@@ -123,7 +123,7 @@ $(function() {
 
 		setTimeout(function() {
 			commonJs.ajaxSubmit({
-				url:"/ipro/timesheet/getTimesheetDailyDetailData",
+				url:"/ipro/timesheet/getDailyDetailData",
 				dataType:"json",
 				data:data,
 				success:function(data, textStatus) {
@@ -178,7 +178,7 @@ $(function() {
 		var detailLength = $("#ulTimesheetDetailHolder .dummyDetail").length;
 
 		commonJs.ajaxSubmit({
-			url:"/ipro/timesheet/updateTimesheetDailyDetail",
+			url:"/ipro/timesheet/updateDailyDetail",
 			dataType:"json",
 			formId:"fmDefault",
 			data:{

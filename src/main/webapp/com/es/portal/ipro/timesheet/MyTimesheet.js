@@ -11,6 +11,14 @@ $(function() {
 	/*!
 	 * event
 	 */
+	$("#btnSave").click(function() {
+		postTimesheet({status:"SA"});
+	});
+
+	$("#btnSubmit").click(function() {
+		postTimesheet({status:"SU"});
+	});
+
 	$("#btnSearch").click(function() {
 		doSearch();
 	});
@@ -27,6 +35,59 @@ $(function() {
 	/*!
 	 * process
 	 */
+	postTimesheet = function(param) {
+		var status = param.status,
+			dayCount = $("#tblGridBody .dummyDetail").length;
+
+		if (dayCount <= 0) {
+			commonJs.warn("There is no data to save or submit!");
+			return;
+		}
+
+		commonJs.showProcMessageOnElement("divScrollablePanel");
+
+		setTimeout(function() {
+			commonJs.ajaxSubmit({
+				url:"/ipro/timesheet/postTimesheet",
+				dataType:"json",
+				formId:"fmDefault",
+				data:{
+					status:status
+				},
+				success:function(data, textStatus) {
+					var result = commonJs.parseAjaxResult(data, textStatus, "json");
+					if (result.isSuccess == true || result.isSuccess == "true") {
+						commonJs.openDialog({
+							type:com.message.I000,
+							contents:result.message,
+							blind:true,
+							width:300,
+							buttons:[{
+								caption:com.caption.ok,
+								callback:function() {
+									doSearch();
+								}
+							}]
+						});
+					} else {
+//						commonJs.error(result.message);
+						commonJs.openDialog({
+							type:com.message.E000,
+							contents:result.message,
+							width:300,
+							buttons:[{
+								caption:com.caption.ok,
+								callback:function() {
+									commonJs.hideProcMessageOnElement("divScrollablePanel");
+								}
+							}]
+						});
+					}
+				}
+			});
+		}, 200);
+	};
+
 	setTimesheetPeriodSelectbox = function() {
 		if (commonJs.isEmpty($("#assignment").val())) {
 			return;
@@ -78,7 +139,7 @@ $(function() {
 		});
 
 		commonJs.ajaxSubmit({
-			url:"/ipro/timesheet/getTimesheetPeriod",
+			url:"/ipro/timesheet/getPeriodByAssignmentId",
 			dataType:"json",
 			data:{
 				assignmentId:$("#assignment").val()
@@ -145,7 +206,7 @@ $(function() {
 
 		setTimeout(function() {
 			commonJs.ajaxSubmit({
-				url:"/ipro/timesheet/getTimesheetDayList",
+				url:"/ipro/timesheet/getDayListByPeriod",
 				dataType:"json",
 				data:{
 					assignmentId:$("#assignment").val(),
@@ -174,7 +235,7 @@ $(function() {
 
 		setTimeout(function() {
 			commonJs.ajaxSubmit({
-				url:"/ipro/timesheet/refreshTimesheetDayList",
+				url:"/ipro/timesheet/refreshDayListByPeriod",
 				dataType:"json",
 				data:{},
 				success:function(data, textStatus) {
@@ -269,7 +330,7 @@ $(function() {
 			width = 1100;
 		}
 		param.popupId = "timesheetDetail";
-		param.url = "/ipro/timesheet/getTimesheetDailyDetail";
+		param.url = "/ipro/timesheet/getDailyDetailScreen";
 		param.header = "Timesheet Detail";
 		param.blind = true;
 		param.width = width;

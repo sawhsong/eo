@@ -53,6 +53,8 @@ public class TabList extends TaglibSupport {
 					iconTag = "<i class=\"fa fa-lg "+iconClass+"\"></i>";
 				} else if (CommonUtil.startsWithIgnoreCase(iconClass, "glyphicon-")) {
 					iconTag = "<span class=\"glyphicon "+iconClass+"\" style=\"font-size:1.1em\"></span>";
+				} else {
+					iconTag = "<i class=\"fa-lg "+iconClass+"\"></i>&nbsp;";
 				}
 
 				if (CommonUtil.equalsIgnoreCase(CommonUtil.deleteWhitespace(getIconPosition()), "left")) {
