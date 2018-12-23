@@ -55,13 +55,8 @@ logger.debug("getAssignmentListDataSet : "+serviceUrl);
 		return timesheetPeriod;
 	}
 
-	public DataSet getRateListDataSet(ParamEntity paramEntity) throws Exception {
-		return JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("timesheetRateList"));
-	}
-
-	public DataSet getDayListDataSetByPeriod(ParamEntity paramEntity, String assignmentId, String startDate, String endDate) throws Exception {
+	public ParamEntity getPeriodDetail(ParamEntity paramEntity, String assignmentId, String startDate, String endDate) throws Exception {
 		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
-		DataSet timesheetDayList = new DataSet();
 		String serviceUrl = "", result = "";
 
 		startDate = CommonUtil.remove(startDate, "/");
@@ -73,9 +68,33 @@ logger.debug("getAssignmentListDataSet : "+serviceUrl);
 logger.debug("getTimesheetDayListDataSet : "+serviceUrl+"?startDate="+startDate+"&endDate="+endDate);
 		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
 		paramEntity.setObjectFromJsonString(result);
-		timesheetDayList = JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("timesheetDayList"));
 
-		return timesheetDayList;
+		return paramEntity;
+	}
+
+	public DataSet getDayListDataSetByPeriod(ParamEntity paramEntity) throws Exception {
+		return JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("timesheetDayList"));
+	}
+
+	public DataSet getPeriodDetailAsDataSet(ParamEntity paramEntity) throws Exception {
+		DataSet periodDetail = new DataSet();
+
+		periodDetail.addName(new String[] {"assignmentId", "timesheetId", "isDaily", "isWithStartEndTime", "noOfWeeks", "periodStartDate", "periodEndDate", "status"});
+		periodDetail.addRow();
+		periodDetail.setValue(periodDetail.getRowCnt()-1, "assignmentId", paramEntity.getObject("assignmentId"));
+		periodDetail.setValue(periodDetail.getRowCnt()-1, "timesheetId", paramEntity.getObject("timesheetId"));
+		periodDetail.setValue(periodDetail.getRowCnt()-1, "isDaily", paramEntity.getObject("isDaily"));
+		periodDetail.setValue(periodDetail.getRowCnt()-1, "isWithStartEndTime", paramEntity.getObject("isWithStartEndTime"));
+		periodDetail.setValue(periodDetail.getRowCnt()-1, "noOfWeeks", paramEntity.getObject("noOfWeeks"));
+		periodDetail.setValue(periodDetail.getRowCnt()-1, "periodStartDate", paramEntity.getObject("periodStartDate"));
+		periodDetail.setValue(periodDetail.getRowCnt()-1, "periodEndDate", paramEntity.getObject("periodEndDate"));
+		periodDetail.setValue(periodDetail.getRowCnt()-1, "status", paramEntity.getObject("status"));
+
+		return periodDetail;
+	}
+
+	public DataSet getRateListDataSet(ParamEntity paramEntity) throws Exception {
+		return JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("timesheetRateList"));
 	}
 
 	public DataSet getDayListDataSetAsCalendar(DataSet timesheetDayList) throws Exception {
@@ -132,8 +151,8 @@ logger.debug("getTimesheetDayListDataSet : "+serviceUrl+"?startDate="+startDate+
 		String delimiter = ConfigUtil.getProperty("delimiter.data");
 		String timesheetUnits = requestDataSet.getValue("timesheetUnits");
 		String workDate = requestDataSet.getValue("workDate");
-		String rowIdx , startTimeHH, startTimeMM, endTimeHH, endTimeMM, nonWorkedTimeHH, nonWorkedTimeMM = "";
-		String dayListWorkDate, jsonString = "";
+		String rowIdx = "", startTimeHH = "", startTimeMM = "", endTimeHH = "", endTimeMM = "", nonWorkedTimeHH = "", nonWorkedTimeMM = "";
+		String dayListWorkDate = "", jsonString = "";
 		String header[] = new String[] {"deleted", "description", "endTime", "hours", "nonWorkedTime", "preferred", "rateId", "rowId", "startTime", "timesheetLineId", "workDate"};
 		int detailLength = CommonUtil.toInt(requestDataSet.getValue("detailLength"));
 		double totalHours = 0;
@@ -189,14 +208,55 @@ logger.debug("getTimesheetDayListDataSet : "+serviceUrl+"?startDate="+startDate+
 		return timesheetDayList;
 	}
 
-	public boolean postTimesheet(DataSet timesheetDayList, DataSet requestDataSet) throws Exception {
+	public boolean postTimesheet(DataSet timesheetPeriodDetail, DataSet timesheetDayList, DataSet requestDataSet) throws Exception {
 		boolean result = true;
-		DataSet timesheetPostM, timesheetPostD = new DataSet();
+		DataSet dailyDetail = new DataSet(), postM = new DataSet(), postD = new DataSet();
+		String serviceUrl = "", resultString = "";
+		String timesheetUnits = requestDataSet.getValue("timesheetUnits");
+		String dueDate = requestDataSet.getValue("dueDate");
 		String status = requestDataSet.getValue("status");
-		String headerM[] = new String[] {"assignmentId", "timesheetId", "periodStartDate", "periodEndDate", "dueDate", "status", "timesheetUnits"};
+		String headerM[] = new String[] {"assignmentId", "timesheetId", "periodStartDate", "periodEndDate", "dueDate", "status", "timesheetUnits", "timesheetDayDetailPostList"};
 		String headerD[] = new String[] {"timesheetLineId", "workDate", "rateId", "hours", "description", "deleted", "startTime", "endTime", "nonWorkedTime"};
 
-		
+		try {
+			serviceUrl = "timesheets/"+timesheetPeriodDetail.getValue("timesheetId")+"/save";
+
+			postM.addName(headerM);
+			postM.addRow();
+			postM.setValue(postM.getRowCnt()-1, "assignmentId", timesheetPeriodDetail.getValue("assignmentId"));
+			postM.setValue(postM.getRowCnt()-1, "timesheetId", timesheetPeriodDetail.getValue("timesheetId"));
+			postM.setValue(postM.getRowCnt()-1, "periodStartDate", CommonUtil.remove(timesheetPeriodDetail.getValue("periodStartDate"), "/"));
+			postM.setValue(postM.getRowCnt()-1, "periodEndDate", CommonUtil.remove(timesheetPeriodDetail.getValue("periodEndDate"), "/"));
+			postM.setValue(postM.getRowCnt()-1, "dueDate", CommonUtil.remove(dueDate, "/"));
+			postM.setValue(postM.getRowCnt()-1, "status", status);
+			postM.setValue(postM.getRowCnt()-1, "timesheetUnits", timesheetUnits);
+
+			postD.addName(headerD);
+			for (int i=0; i<timesheetDayList.getRowCnt(); i++) {
+				postD.addRow();
+
+				dailyDetail = JsonUtil.getDataSetFromJsonArrayString(timesheetDayList.getValue(i, "timesheetDayDetailList"));
+				for (int j=0; j<dailyDetail.getRowCnt(); j++) {
+					postD.setValue(postD.getRowCnt()-1, "timesheetLineId", dailyDetail.getValue(j, "timesheetLineId"));
+					postD.setValue(postD.getRowCnt()-1, "workDate", CommonUtil.remove(dailyDetail.getValue(j, "workDate"), "/"));
+					postD.setValue(postD.getRowCnt()-1, "rateId", dailyDetail.getValue(j, "rateId"));
+					postD.setValue(postD.getRowCnt()-1, "hours", CommonUtil.nvl(dailyDetail.getValue(j, "hours"), timesheetDayList.getValue(i, "totalHours")));
+					postD.setValue(postD.getRowCnt()-1, "description", dailyDetail.getValue(j, "description"));
+					postD.setValue(postD.getRowCnt()-1, "deleted", dailyDetail.getValue(j, "deleted"));
+					postD.setValue(postD.getRowCnt()-1, "startTime", dailyDetail.getValue(j, "startTime"));
+					postD.setValue(postD.getRowCnt()-1, "endTime", dailyDetail.getValue(j, "endTime"));
+					postD.setValue(postD.getRowCnt()-1, "nonWorkedTime", dailyDetail.getValue(j, "nonWorkedTime"));
+				}
+			}
+
+			postM.setValue(postM.getRowCnt()-1, "timesheetDayDetailPostList", "["+postD.toJsonStringForEO()+"]");
+
+			resultString = RestServiceSupport.post(providerUrl, serviceUrl, acceptTypeHeader, postM);
+logger.debug("resultString : "+resultString);
+		} catch(Exception e) {
+			logger.error(e.getMessage());
+			result = false;
+		}
 
 		return result;
 	}

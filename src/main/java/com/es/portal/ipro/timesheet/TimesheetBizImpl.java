@@ -23,7 +23,7 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 
 		try {
 			assignmentList = timesheetBizService.getAssignmentListDataSet(paramEntity, loginId);
-			session.setAttribute("assignmentListDataSet", assignmentList);
+			session.setAttribute("assignmentListDataSetForTimesheet", assignmentList);
 			paramEntity.setObject("assignmentList", assignmentList);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
@@ -39,7 +39,7 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 		String assignmentId = dsRequest.getValue("assignmentId");
 
 		try {
-			assignmentInfo = timesheetBizService.getAssignmentInfoDataSet((DataSet)session.getAttribute("assignmentListDataSet"), assignmentId);
+			assignmentInfo = timesheetBizService.getAssignmentInfoDataSet((DataSet)session.getAttribute("assignmentListDataSetForTimesheet"), assignmentId);
 
 			paramEntity.setAjaxResponseDataSet(assignmentInfo);
 			paramEntity.setSuccess(true);
@@ -56,9 +56,10 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 		String assignmentId = dsRequest.getValue("assignmentId");
 
 		try {
-			timesheetPeriod = timesheetBizService.getPeriodDataSetByAssignmentId((DataSet)session.getAttribute("assignmentListDataSet"), assignmentId);
+			timesheetPeriod = timesheetBizService.getPeriodDataSetByAssignmentId((DataSet)session.getAttribute("assignmentListDataSetForTimesheet"), assignmentId);
 
 			paramEntity.setAjaxResponseDataSet(timesheetPeriod);
+			session.setAttribute("timesheetPeriodListDataSetByAssignmentId", timesheetPeriod);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
@@ -69,18 +70,21 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 	public ParamEntity getDayListByPeriod(ParamEntity paramEntity) throws Exception {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		HttpSession session = paramEntity.getSession();
-		DataSet timesheetDayList, dayListAsCalendar = new DataSet();
+		DataSet timesheetDayList = new DataSet(), dayListAsCalendar = new DataSet();
 		String assignmentId = dsRequest.getValue("assignmentId");
 		String startDateStr = dsRequest.getValue("startDate");
 		String endDateStr = dsRequest.getValue("endDate");
 
 		try {
-			timesheetDayList = timesheetBizService.getDayListDataSetByPeriod(paramEntity, assignmentId, startDateStr, endDateStr);
+			paramEntity = timesheetBizService.getPeriodDetail(paramEntity, assignmentId, startDateStr, endDateStr);
+
+			timesheetDayList = timesheetBizService.getDayListDataSetByPeriod(paramEntity);
 			dayListAsCalendar = timesheetBizService.getDayListDataSetAsCalendar(timesheetDayList);
 
 			paramEntity.setAjaxResponseDataSet(dayListAsCalendar);
 			session.removeAttribute("timesheetDayListDataSetUpdated");
 			session.setAttribute("timesheetDayListDataSet", timesheetDayList);
+			session.setAttribute("timesheetPeriodDetailDataSet", timesheetBizService.getPeriodDetailAsDataSet(paramEntity));
 			session.setAttribute("timesheetRateListDataSet", timesheetBizService.getRateListDataSet(paramEntity));
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
@@ -119,7 +123,7 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 	public ParamEntity getDailyDetailData(ParamEntity paramEntity) throws Exception {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		HttpSession session = paramEntity.getSession();
-		DataSet timesheetDayList, timesheetDailyDetail = new DataSet();
+		DataSet timesheetDayList = new DataSet(), timesheetDailyDetail = new DataSet();
 		String workDate = dsRequest.getValue("workDate");
 
 		try {
@@ -159,13 +163,14 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 	public ParamEntity postTimesheet(ParamEntity paramEntity) throws Exception {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		HttpSession session = paramEntity.getSession();
-		DataSet timesheetDayList = new DataSet();
+		DataSet periodDetail = new DataSet(), timesheetDayList = new DataSet();
 
 		try {
+			periodDetail = (DataSet)session.getAttribute("timesheetPeriodDetailDataSet");
 			timesheetDayList = getDayListDataSetFromSession(session);
 			setDailyTotalHours(timesheetDayList, dsRequest);
 
-			timesheetBizService.postTimesheet(timesheetDayList, dsRequest);
+			timesheetBizService.postTimesheet(periodDetail, timesheetDayList, dsRequest);
 
 			paramEntity.setSuccess(true);
 			paramEntity.setMessage("I801", getMessage("I801"));

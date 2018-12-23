@@ -25,7 +25,7 @@ $(function() {
 
 	$("#assignment").change(function() {
 		$("#tblGridBody").html("");
-		setTimesheetPeriodSelectbox();
+		setPeriodSelectbox();
 	});
 
 	$("#timesheetPeriod").change(function() {
@@ -47,6 +47,8 @@ $(function() {
 		commonJs.showProcMessageOnElement("divScrollablePanel");
 
 		setTimeout(function() {
+			var periodValues = $("#timesheetPeriod").val().split("_");
+
 			commonJs.ajaxSubmit({
 				url:"/ipro/timesheet/postTimesheet",
 				dataType:"json",
@@ -88,14 +90,14 @@ $(function() {
 		}, 200);
 	};
 
-	setTimesheetPeriodSelectbox = function() {
+	setPeriodSelectbox = function() {
 		if (commonJs.isEmpty($("#assignment").val())) {
 			return;
 		}
 		commonJs.showProcMessageOnElement("tblInform");
 
 		setInformation();
-		renderTimesheetPeriodSelectbox();
+		renderPeriodSelectbox();
 		commonJs.refreshBootstrapSelectbox("timesheetPeriod");
 
 		setTimeout(function() {
@@ -133,7 +135,7 @@ $(function() {
 		});
 	};
 
-	renderTimesheetPeriodSelectbox = function() {
+	renderPeriodSelectbox = function() {
 		$("#timesheetPeriod option").each(function(index) {
 			$(this).remove();
 		});
@@ -182,6 +184,7 @@ $(function() {
 		commonJs.showProcMessageOnElement("tblInform");
 
 		var values = $("#timesheetPeriod").val().split("_");
+		$("#dueDate").val(values[3]);
 		$("#timesheetStatus").val(values[4]);
 		$("#timesheetPeriodInfo").val(values[1]+" - "+values[2]);
 
@@ -343,7 +346,7 @@ $(function() {
 	 * load event (document / window)
 	 */
 	$(window).load(function() {
-		setTimesheetPeriodSelectbox();
+		setPeriodSelectbox();
 		setGridTable();
 	});
 });

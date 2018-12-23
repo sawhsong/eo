@@ -90,7 +90,17 @@ public class RestServiceSupport {
 		}
 
 		WebClient webClient = WebClient.create(providerUrl);
-		Response wsResponse = webClient.path(serviceUrl).accept(new String[] {acceptTypeHeader}).post(paramEntity.toJsonString());
+		Response wsResponse = webClient.path(serviceUrl).type(acceptTypeHeader).accept(new String[] {acceptTypeHeader}).post(paramEntity.toJsonString());
+		return (String)wsResponse.readEntity(String.class);
+	}
+
+	public static String post(String providerUrl, String serviceUrl, String acceptTypeHeader, DataSet postDataSet) throws Exception {
+		if (CommonUtil.isBlank(providerUrl) || CommonUtil.isBlank(serviceUrl) || CommonUtil.isBlank(acceptTypeHeader) || postDataSet == null) {
+			return "";
+		}
+
+		WebClient webClient = WebClient.create(providerUrl);
+		Response wsResponse = webClient.path(serviceUrl).type(acceptTypeHeader).accept(new String[] {acceptTypeHeader}).post(postDataSet.toJsonStringForEO());
 		return (String)wsResponse.readEntity(String.class);
 	}
 

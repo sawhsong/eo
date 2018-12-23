@@ -118,6 +118,7 @@
 			</td>
 			<th class="thInform rt">Timesheet Period</th>
 			<td class="tdInform">
+				<ui:hidden name="dueDate"/>
 				<ui:hidden name="timesheetStatus"/>
 				<ui:text name="timesheetPeriodInfo" status="display"/>
 			</td>
