@@ -231,10 +231,10 @@ logger.debug("getTimesheetDayListDataSet : "+serviceUrl+"?startDate="+startDate+
 
 		postD.addName(headerD);
 		for (int i=0; i<timesheetDayList.getRowCnt(); i++) {
-			postD.addRow();
-
 			dailyDetail = JsonUtil.getDataSetFromJsonArrayString(timesheetDayList.getValue(i, "timesheetDayDetailList"));
 			for (int j=0; j<dailyDetail.getRowCnt(); j++) {
+				postD.addRow();
+
 				double hours = CommonUtil.toDouble(dailyDetail.getValue(j, "hours"));
 				postD.setValue(postD.getRowCnt()-1, "timesheetLineId", dailyDetail.getValue(j, "timesheetLineId"));
 				postD.setValue(postD.getRowCnt()-1, "workDate", CommonUtil.remove(dailyDetail.getValue(j, "workDate"), "/"));

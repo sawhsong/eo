@@ -67,8 +67,8 @@ $(function() {
 							buttons:[{
 								caption:com.caption.ok,
 								callback:function() {
-//									$("#divTimesheet-IPro").trigger("click");
-									doSearch();
+									$("#divTimesheet-IPro").trigger("click");
+//									doSearch();
 								}
 							}]
 						});
