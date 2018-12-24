@@ -8,7 +8,9 @@
 ************************************************************************************************/%>
 <%
 	ParamEntity pe = (ParamEntity)request.getAttribute("paramEntity");
+	DataSet dsRequest = pe.getRequestDataSet();
 	DataSet assignmentList = (DataSet)pe.getObject("assignmentList");
+	String timesheetPeriod = dsRequest.getValue("timesheetPeriod");
 %>
 <%/************************************************************************************************
 * HTML
@@ -30,6 +32,7 @@
 </style>
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
+var timesheetPeriod = "<%=timesheetPeriod%>";
 </script>
 </head>
 <%/************************************************************************************************

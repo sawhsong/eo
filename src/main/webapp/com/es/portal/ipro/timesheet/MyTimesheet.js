@@ -67,6 +67,7 @@ $(function() {
 							buttons:[{
 								caption:com.caption.ok,
 								callback:function() {
+//									$("#divTimesheet-IPro").trigger("click");
 									doSearch();
 								}
 							}]
@@ -153,19 +154,19 @@ $(function() {
 
 					if (ds.getRowCnt() > 0) {
 						for (var i=0; i<ds.getRowCnt(); i++) {
-							$("#timesheetPeriod").append("<option value=\""
-								+ds.getValue(i, "assignmentId")+"_"
-								+ds.getValue(i, "periodStartDate")+"_"
-								+ds.getValue(i, "periodEndDate")+"_"
-								+ds.getValue(i, "dueDate")+"_"
-								+ds.getValue(i, "timesheetStatus")+"_"
-								+ds.getValue(i, "timesheetStatusDescription")
-								+"\">"
-								+ds.getValue(i, "periodStartDate")+" - "
-								+ds.getValue(i, "periodEndDate")+" ("
-								+ds.getValue(i, "timesheetStatusDescription")+")"
-								+"</option>"
-							);
+							var selected = "", optValSel = "", periodSel = "",
+								optVal = ds.getValue(i, "assignmentId")+"_"+ds.getValue(i, "periodStartDate")+"_"+ds.getValue(i, "periodEndDate")+"_"+
+										ds.getValue(i, "dueDate")+"_"+ds.getValue(i, "timesheetStatus")+"_"+ds.getValue(i, "timesheetStatusDescription");
+								optText = ds.getValue(i, "periodStartDate")+" - "+ds.getValue(i, "periodEndDate")+" ("+ds.getValue(i, "timesheetStatusDescription")+")";
+
+							optValSel = optVal.split("_")[0]+"_"+optVal.split("_")[1]+"_"+optVal.split("_")[2]+"_"+optVal.split("_")[3];
+							periodSel = timesheetPeriod.split("_")[0]+"_"+timesheetPeriod.split("_")[1]+"_"+timesheetPeriod.split("_")[2]+"_"+timesheetPeriod.split("_")[3];
+
+							if (periodSel == optValSel) {
+								selected = " selected";
+							}
+
+							$("#timesheetPeriod").append("<option value=\""+optVal+"\""+selected+">"+optText+"</option>");
 						}
 
 						setTimesheetPeriodInfo();
@@ -348,5 +349,9 @@ $(function() {
 	$(window).load(function() {
 		setPeriodSelectbox();
 		setGridTable();
+
+		if (!commonJs.isEmpty(timesheetPeriod)) {
+			doSearch();
+		}
 	});
 });

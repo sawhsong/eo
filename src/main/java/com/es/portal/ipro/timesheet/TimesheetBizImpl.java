@@ -164,14 +164,20 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		HttpSession session = paramEntity.getSession();
 		DataSet periodDetail = new DataSet(), timesheetDayList = new DataSet();
+		String result = "";
 
 		try {
 			periodDetail = (DataSet)session.getAttribute("timesheetPeriodDetailDataSet");
 			timesheetDayList = getDayListDataSetFromSession(session);
 			setDailyTotalHours(timesheetDayList, dsRequest);
 
-			timesheetBizService.postTimesheet(periodDetail, timesheetDayList, dsRequest);
+			result = timesheetBizService.postTimesheet(periodDetail, timesheetDayList, dsRequest);
 
+			if (!CommonUtil.startsWith(result, "2")) {
+				throw new FrameworkException("E801", getMessage("E801", paramEntity));
+			}
+
+			session.removeAttribute("timesheetDayListDataSetUpdated");
 			paramEntity.setSuccess(true);
 			paramEntity.setMessage("I801", getMessage("I801"));
 		} catch (Exception ex) {

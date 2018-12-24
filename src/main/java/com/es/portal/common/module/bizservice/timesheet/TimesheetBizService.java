@@ -14,5 +14,5 @@ public interface TimesheetBizService {
 	public DataSet getDayListDataSetAsCalendar(DataSet timesheetDayList) throws Exception;
 	public DataSet getDailyDetailDataSet(DataSet timesheetDayList, String workDate) throws Exception;
 	public DataSet updateDailyDetail(DataSet timesheetDayList, DataSet requestDataSet) throws Exception;
-	public boolean postTimesheet(DataSet timesheetPeriodDetail, DataSet timesheetDayList, DataSet requestDataSet) throws Exception;
+	public String postTimesheet(DataSet timesheetPeriodDetail, DataSet timesheetDayList, DataSet requestDataSet) throws Exception;
 }

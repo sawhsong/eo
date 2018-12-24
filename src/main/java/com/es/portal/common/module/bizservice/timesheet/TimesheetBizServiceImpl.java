@@ -208,56 +208,49 @@ logger.debug("getTimesheetDayListDataSet : "+serviceUrl+"?startDate="+startDate+
 		return timesheetDayList;
 	}
 
-	public boolean postTimesheet(DataSet timesheetPeriodDetail, DataSet timesheetDayList, DataSet requestDataSet) throws Exception {
-		boolean result = true;
+	public String postTimesheet(DataSet timesheetPeriodDetail, DataSet timesheetDayList, DataSet requestDataSet) throws Exception {
 		DataSet dailyDetail = new DataSet(), postM = new DataSet(), postD = new DataSet();
-		String serviceUrl = "", resultString = "";
+		String serviceUrl = "", result = "";
 		String timesheetUnits = requestDataSet.getValue("timesheetUnits");
 		String dueDate = requestDataSet.getValue("dueDate");
 		String status = requestDataSet.getValue("status");
 		String headerM[] = new String[] {"assignmentId", "timesheetId", "periodStartDate", "periodEndDate", "dueDate", "status", "timesheetUnits", "timesheetDayDetailPostList"};
 		String headerD[] = new String[] {"timesheetLineId", "workDate", "rateId", "hours", "description", "deleted", "startTime", "endTime", "nonWorkedTime"};
 
-		try {
-			serviceUrl = "timesheets/"+timesheetPeriodDetail.getValue("timesheetId")+"/save";
+		serviceUrl = "timesheets/"+timesheetPeriodDetail.getValue("timesheetId")+"/save";
 
-			postM.addName(headerM);
-			postM.addRow();
-			postM.setValue(postM.getRowCnt()-1, "assignmentId", timesheetPeriodDetail.getValue("assignmentId"));
-			postM.setValue(postM.getRowCnt()-1, "timesheetId", timesheetPeriodDetail.getValue("timesheetId"));
-			postM.setValue(postM.getRowCnt()-1, "periodStartDate", CommonUtil.remove(timesheetPeriodDetail.getValue("periodStartDate"), "/"));
-			postM.setValue(postM.getRowCnt()-1, "periodEndDate", CommonUtil.remove(timesheetPeriodDetail.getValue("periodEndDate"), "/"));
-			postM.setValue(postM.getRowCnt()-1, "dueDate", CommonUtil.remove(dueDate, "/"));
-			postM.setValue(postM.getRowCnt()-1, "status", status);
-			postM.setValue(postM.getRowCnt()-1, "timesheetUnits", timesheetUnits);
+		postM.addName(headerM);
+		postM.addRow();
+		postM.setValue(postM.getRowCnt()-1, "assignmentId", timesheetPeriodDetail.getValue("assignmentId"));
+		postM.setValue(postM.getRowCnt()-1, "timesheetId", timesheetPeriodDetail.getValue("timesheetId"));
+		postM.setValue(postM.getRowCnt()-1, "periodStartDate", CommonUtil.remove(timesheetPeriodDetail.getValue("periodStartDate"), "/"));
+		postM.setValue(postM.getRowCnt()-1, "periodEndDate", CommonUtil.remove(timesheetPeriodDetail.getValue("periodEndDate"), "/"));
+		postM.setValue(postM.getRowCnt()-1, "dueDate", CommonUtil.remove(dueDate, "/"));
+		postM.setValue(postM.getRowCnt()-1, "status", status);
+		postM.setValue(postM.getRowCnt()-1, "timesheetUnits", timesheetUnits);
 
-			postD.addName(headerD);
-			for (int i=0; i<timesheetDayList.getRowCnt(); i++) {
-				postD.addRow();
+		postD.addName(headerD);
+		for (int i=0; i<timesheetDayList.getRowCnt(); i++) {
+			postD.addRow();
 
-				dailyDetail = JsonUtil.getDataSetFromJsonArrayString(timesheetDayList.getValue(i, "timesheetDayDetailList"));
-				for (int j=0; j<dailyDetail.getRowCnt(); j++) {
-					postD.setValue(postD.getRowCnt()-1, "timesheetLineId", dailyDetail.getValue(j, "timesheetLineId"));
-					postD.setValue(postD.getRowCnt()-1, "workDate", CommonUtil.remove(dailyDetail.getValue(j, "workDate"), "/"));
-					postD.setValue(postD.getRowCnt()-1, "rateId", dailyDetail.getValue(j, "rateId"));
-					postD.setValue(postD.getRowCnt()-1, "hours", CommonUtil.nvl(dailyDetail.getValue(j, "hours"), timesheetDayList.getValue(i, "totalHours")));
-					postD.setValue(postD.getRowCnt()-1, "description", dailyDetail.getValue(j, "description"));
-					postD.setValue(postD.getRowCnt()-1, "deleted", dailyDetail.getValue(j, "deleted"));
-					postD.setValue(postD.getRowCnt()-1, "startTime", dailyDetail.getValue(j, "startTime"));
-					postD.setValue(postD.getRowCnt()-1, "endTime", dailyDetail.getValue(j, "endTime"));
-					postD.setValue(postD.getRowCnt()-1, "nonWorkedTime", dailyDetail.getValue(j, "nonWorkedTime"));
-				}
+			dailyDetail = JsonUtil.getDataSetFromJsonArrayString(timesheetDayList.getValue(i, "timesheetDayDetailList"));
+			for (int j=0; j<dailyDetail.getRowCnt(); j++) {
+				double hours = CommonUtil.toDouble(dailyDetail.getValue(j, "hours"));
+				postD.setValue(postD.getRowCnt()-1, "timesheetLineId", dailyDetail.getValue(j, "timesheetLineId"));
+				postD.setValue(postD.getRowCnt()-1, "workDate", CommonUtil.remove(dailyDetail.getValue(j, "workDate"), "/"));
+				postD.setValue(postD.getRowCnt()-1, "rateId", dailyDetail.getValue(j, "rateId"));
+				postD.setValue(postD.getRowCnt()-1, "hours", (hours > 0) ? hours : timesheetDayList.getValue(i, "totalHours"));
+				postD.setValue(postD.getRowCnt()-1, "description", dailyDetail.getValue(j, "description"));
+				postD.setValue(postD.getRowCnt()-1, "deleted", dailyDetail.getValue(j, "deleted"));
+				postD.setValue(postD.getRowCnt()-1, "startTime", dailyDetail.getValue(j, "startTime"));
+				postD.setValue(postD.getRowCnt()-1, "endTime", dailyDetail.getValue(j, "endTime"));
+				postD.setValue(postD.getRowCnt()-1, "nonWorkedTime", dailyDetail.getValue(j, "nonWorkedTime"));
 			}
-
-			postM.setValue(postM.getRowCnt()-1, "timesheetDayDetailPostList", "["+postD.toJsonStringForEO()+"]");
-
-			resultString = RestServiceSupport.post(providerUrl, serviceUrl, acceptTypeHeader, postM);
-logger.debug("resultString : "+resultString);
-		} catch(Exception e) {
-			logger.error(e.getMessage());
-			result = false;
 		}
 
-		return result;
+		postM.setValue(postM.getRowCnt()-1, "timesheetDayDetailPostList", "["+postD.toJsonStringForEO()+"]");
+
+		result = RestServiceSupport.post(providerUrl, serviceUrl, acceptTypeHeader, postM);
+		return CommonUtil.removeString(result, "\"");
 	}
 }
