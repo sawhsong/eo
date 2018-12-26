@@ -13,6 +13,7 @@
 	Date workDate = CommonUtil.toDate(dsRequest.getValue("workDate"), "dd/MM/yyyy");
 	String workDateToDisplay = dsRequest.getValue("workDate")+" ("+CommonUtil.toString(workDate, "EEE")+")";
 	String totalHoursToDisplay = CommonUtil.getNumberMask(dsRequest.getValue("totalHours"), "#,###");
+	String timesheetStatus = dsRequest.getValue("timesheetStatus");
 %>
 <%/************************************************************************************************
 * HTML
@@ -41,6 +42,7 @@
 var workDate = "<%=dsRequest.getValue("workDate")%>";
 var totalHours = "<%=dsRequest.getValue("totalHours")%>";
 var timesheetUnits = "<%=dsRequest.getValue("timesheetUnits")%>";
+var timesheetStatus = "<%=dsRequest.getValue("timesheetStatus")%>";
 </script>
 </head>
 <%/************************************************************************************************

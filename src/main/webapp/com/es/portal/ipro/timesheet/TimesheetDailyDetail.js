@@ -10,6 +10,8 @@ $(function() {
 	 * event
 	 */
 	$("#btnSave").click(function(event) {
+		if ($(this).attr("disabled")) {return;}
+
 		var isValid = true;
 
 		$("#liDummy").find(":input").each(function(index) {
@@ -63,6 +65,8 @@ $(function() {
 	});
 
 	$("#btnAdd").click(function(event) {
+		if ($(this).attr("disabled")) {return;}
+
 		var elem = $("#liDummy").clone(), elemId = $(elem).attr("id");
 
 		$(elem).css("display", "block").appendTo($("#ulTimesheetDetailHolder"));
@@ -105,6 +109,13 @@ $(function() {
 	/*!
 	 * process
 	 */
+	setButtonStatus = function() {
+		if (!(timesheetStatus == "NS" || timesheetStatus == "SA")) {
+			$("#btnSave").attr("disabled", "disabled");
+			$("#btnAdd").attr("disabled", "disabled");
+		}
+	};
+
 	setSelectBoxes = function(jqObj) {
 		$(jqObj).selectpicker({
 			width:"auto",
@@ -225,5 +236,6 @@ $(function() {
 
 	$(window).load(function() {
 		getTimesheetDailyDetailData();
+		setButtonStatus();
 	});
 });

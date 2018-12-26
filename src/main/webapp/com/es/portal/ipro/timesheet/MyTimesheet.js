@@ -1,21 +1,20 @@
 /**
  * MyTimesheet.js
  */
-jsconfig.put("scrollablePanelHeightAdjust", 0);
-
 var popup = null;
 var delimiter = jsconfig.get("dataDelimiter");
-var backupDataSet = null;
 
 $(function() {
 	/*!
 	 * event
 	 */
 	$("#btnSave").click(function() {
+		if ($(this).attr("disabled")) {return;}
 		postTimesheet({status:"SA"});
 	});
 
 	$("#btnSubmit").click(function() {
+		if ($(this).attr("disabled")) {return;}
 		postTimesheet({status:"SU"});
 	});
 
@@ -37,12 +36,39 @@ $(function() {
 	 */
 	postTimesheet = function(param) {
 		var status = param.status,
+			message = "",
 			dayCount = $("#tblGridBody .dummyDetail").length;
 
 		if (dayCount <= 0) {
 			commonJs.warn("There is no data to save or submit!");
 			return;
 		}
+
+		if (status == "SA") {
+			message = "Are you sure to save the data?";
+		} else if (status == "SU") {
+			message = "Are you sure to submit the data?";
+		}
+
+		commonJs.confirm({
+			contents:message,
+			width:250,
+			buttons:[{
+				caption:com.caption.yes,
+				callback:function() {
+					doPostTimesheet(param);
+				}
+			}, {
+				caption:com.caption.no,
+				callback:function() {
+				}
+			}],
+			blind:true
+		});
+	};
+
+	doPostTimesheet = function(param) {
+		var status = param.status;
 
 		commonJs.showProcMessageOnElement("divScrollablePanel");
 
@@ -189,9 +215,21 @@ $(function() {
 		$("#timesheetStatus").val(values[4]);
 		$("#timesheetPeriodInfo").val(values[1]+" - "+values[2]);
 
+		setButtonStatus(values[4]);
+
 		setTimeout(function() {
 			commonJs.hideProcMessageOnElement("tblInform");
 		}, 100);
+	};
+
+	setButtonStatus = function(timesheetStatus) {
+		if (!(timesheetStatus == "NS" || timesheetStatus == "SA")) {
+			$("#btnSave").attr("disabled", "disabled");
+			$("#btnSubmit").attr("disabled", "disabled");
+		} else {
+			$("#btnSave").removeAttr("disabled");
+			$("#btnSubmit").removeAttr("disabled");
+		}
 	};
 
 	setGridTable = function() {
@@ -274,7 +312,9 @@ $(function() {
 
 						$(elem).find("input, select, a.btn").each(function(index) {
 							var id = $(this).attr("id"), name = $(this).attr("name");
-							var workDate = dsVals[0], formattedWorkDate = dsVals[1], totalHours = dsVals[2];
+							var workDate = dsVals[0], formattedWorkDate = dsVals[1], totalHours = dsVals[2], numberOfDailyDetail = dsVals[3];
+							var timesheetStatus = $("#timesheetStatus").val();
+							var timesheetUnits = $("#timesheetUnits").val();
 
 							if (!commonJs.isEmpty(id)) {id = (id.indexOf(delimiter) != -1) ? id.substring(0, id.indexOf(delimiter)) : id;}
 							else {id = "";}
@@ -285,12 +325,17 @@ $(function() {
 							$(this).attr("id", id+delimiter+i+delimiter+j).attr("name", name+delimiter+i+delimiter+j);
 
 							if ($(this).prop("type") == "button") {
+								if (!(timesheetStatus == "NS" || timesheetStatus == "SA")) {
+									$(this).html("<i class=\"fa fa-lg fa-list\"></i>&nbsp; View");
+								}
+
 								$(this).bind("click", function() {
 									openPopup({
 										paramData:{
 											workDate:workDate,
 											totalHours:totalHours,
-											timesheetUnits:$("#timesheetUnits").val()
+											timesheetUnits:$("#timesheetUnits").val(),
+											timesheetStatus:timesheetStatus
 										}
 									});
 								});
@@ -300,7 +345,15 @@ $(function() {
 							else if (commonJs.startsWith(name, "formattedWorkDate")) {$(this).val(formattedWorkDate);}
 							else if (commonJs.startsWith(name, "totalHours")) {
 								$(this).val(totalHours);
-								$(this).bind("focus", function() {$(this).select();});
+
+								if (timesheetUnits == "HSE" || timesheetUnits == "DSE" || numberOfDailyDetail > 1) {
+									$(this).removeAttr("title");
+									$(this).attr("readonly", "readonly");
+									$(this).removeClass("txtEn");
+									$(this).addClass("txtDis");
+								} else {
+									$(this).bind("focus", function() {$(this).select();});
+								}
 							}
 						});
 						$(elem).css("display", "block").appendTo(gridTd);
@@ -350,7 +403,7 @@ $(function() {
 		setPeriodSelectbox();
 		setGridTable();
 
-		if (!commonJs.isEmpty(timesheetPeriod)) {
+		if (!(commonJs.isEmpty(assignment) || commonJs.isEmpty(timesheetPeriod))) {
 			doSearch();
 		}
 	});

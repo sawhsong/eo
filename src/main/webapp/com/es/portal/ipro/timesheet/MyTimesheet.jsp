@@ -10,6 +10,7 @@
 	ParamEntity pe = (ParamEntity)request.getAttribute("paramEntity");
 	DataSet dsRequest = pe.getRequestDataSet();
 	DataSet assignmentList = (DataSet)pe.getObject("assignmentList");
+	String assignment = dsRequest.getValue("assignment");
 	String timesheetPeriod = dsRequest.getValue("timesheetPeriod");
 %>
 <%/************************************************************************************************
@@ -32,6 +33,7 @@
 </style>
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
+var assignment = "<%=assignment%>";
 var timesheetPeriod = "<%=timesheetPeriod%>";
 </script>
 </head>
@@ -55,7 +57,7 @@ var timesheetPeriod = "<%=timesheetPeriod%>";
 	<div id="divButtonAreaRight">
 		<ui:buttonGroup id="buttonGroup">
 			<ui:button id="btnSave" caption="button.com.save" iconClass="fa-save"/>
-			<ui:button id="btnSubmit" caption="Submit For Approval" iconClass="fa-external-link"/>
+			<ui:button id="btnSubmit" caption="Submit For Approval" iconClass="fa-check-circle-o"/>
 			<ui:button id="btnSearch" caption="button.com.search" iconClass="fa-search"/>
 		</ui:buttonGroup>
 	</div>
@@ -74,8 +76,9 @@ var timesheetPeriod = "<%=timesheetPeriod%>";
 					<ui:select name="assignment">
 <%
 					for (int i=0; i<assignmentList.getRowCnt(); i++) {
+						String selected = (CommonUtil.equals(assignment, assignmentList.getValue(i, "assignmentId"))) ? "selected" : "";
 %>
-						<ui:seloption value="<%=assignmentList.getValue(i, \"assignmentId\")%>" text="<%=assignmentList.getValue(i, \"assignmentName\")%>"/>
+						<option value="<%=assignmentList.getValue(i, "assignmentId")%>" <%=selected%>><%=assignmentList.getValue(i, "assignmentName")%></option>
 <%
 					}
 %>
@@ -180,8 +183,8 @@ var timesheetPeriod = "<%=timesheetPeriod%>";
 ************************************************************************************************/%>
 <div id="divDummy" class="dummyDetail">
 	<ui:hidden name="workDate" className="ct hor"/>
-	<ui:text name="formattedWorkDate" style="width:90px" className="ct hor" status="display"/>
-	<ui:text name="totalHours" style="width:90px" className="ct hor" checkName="Total Hours" options="mandatory" option="numeric" title="Number between 0 and 24"/>
+	<ui:text name="formattedWorkDate" style="width:87px" className="ct hor" status="display"/>
+	<ui:text name="totalHours" style="width:87px" className="ct hor" checkName="Total Hours" options="mandatory" option="numeric" title="Number between 0 and 24"/>
 	<ui:button id="btnEdit" caption="Edit" iconClass="fa-edit"/>
 </div>
 </form>

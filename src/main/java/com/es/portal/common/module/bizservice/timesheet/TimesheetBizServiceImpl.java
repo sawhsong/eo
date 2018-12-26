@@ -98,13 +98,15 @@ logger.debug("getTimesheetDayListDataSet : "+serviceUrl+"?startDate="+startDate+
 	}
 
 	public DataSet getDayListDataSetAsCalendar(DataSet timesheetDayList) throws Exception {
-		DataSet dayListAsCalendar = new DataSet();
+		DataSet dayListAsCalendar = new DataSet(), dailyDetail = new DataSet();
 		String delimiter = ConfigUtil.getProperty("delimiter.data");
 		String header[] = new String[] {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
 
 		dayListAsCalendar.addName(header);
 		for (int i=0; i<timesheetDayList.getRowCnt(); i++) {
 			String dayOfWeek = CommonUtil.getDayOfWeek(timesheetDayList.getValue(i, "workDate"), "dd/MM/yyyy");
+
+			dailyDetail = JsonUtil.getDataSetFromJsonArrayString(timesheetDayList.getValue(i, "timesheetDayDetailList"));
 
 			if (i == 0) {
 				dayListAsCalendar.addRow();
@@ -117,7 +119,8 @@ logger.debug("getTimesheetDayListDataSet : "+serviceUrl+"?startDate="+startDate+
 					dayListAsCalendar.setValue(dayListAsCalendar.getRowCnt()-1, j,
 						timesheetDayList.getValue(i, "workDate")+delimiter+
 						timesheetDayList.getValue(i, "workDateFormatted")+delimiter+
-						timesheetDayList.getValue(i, "totalHours")
+						timesheetDayList.getValue(i, "totalHours")+delimiter+
+						dailyDetail.getRowCnt()
 					);
 
 					if (CommonUtil.equalsAnyIgnoreCase(thisDay, "Sun")) {
@@ -142,7 +145,6 @@ logger.debug("getTimesheetDayListDataSet : "+serviceUrl+"?startDate="+startDate+
 				break;
 			}
 		}
-
 		return timesheetDailyDetail;
 	}
 
@@ -232,14 +234,15 @@ logger.debug("getTimesheetDayListDataSet : "+serviceUrl+"?startDate="+startDate+
 		postD.addName(headerD);
 		for (int i=0; i<timesheetDayList.getRowCnt(); i++) {
 			dailyDetail = JsonUtil.getDataSetFromJsonArrayString(timesheetDayList.getValue(i, "timesheetDayDetailList"));
-			for (int j=0; j<dailyDetail.getRowCnt(); j++) {
+
+			int dailyDetailRowCnt = dailyDetail.getRowCnt();
+			for (int j=0; j<dailyDetailRowCnt; j++) {
 				postD.addRow();
 
-				double hours = CommonUtil.toDouble(dailyDetail.getValue(j, "hours"));
 				postD.setValue(postD.getRowCnt()-1, "timesheetLineId", dailyDetail.getValue(j, "timesheetLineId"));
 				postD.setValue(postD.getRowCnt()-1, "workDate", CommonUtil.remove(dailyDetail.getValue(j, "workDate"), "/"));
 				postD.setValue(postD.getRowCnt()-1, "rateId", dailyDetail.getValue(j, "rateId"));
-				postD.setValue(postD.getRowCnt()-1, "hours", (hours > 0) ? hours : timesheetDayList.getValue(i, "totalHours"));
+				postD.setValue(postD.getRowCnt()-1, "hours", (dailyDetailRowCnt > 1) ? dailyDetail.getValue(j, "hours") : timesheetDayList.getValue(i, "totalHours"));
 				postD.setValue(postD.getRowCnt()-1, "description", dailyDetail.getValue(j, "description"));
 				postD.setValue(postD.getRowCnt()-1, "deleted", dailyDetail.getValue(j, "deleted"));
 				postD.setValue(postD.getRowCnt()-1, "startTime", dailyDetail.getValue(j, "startTime"));
