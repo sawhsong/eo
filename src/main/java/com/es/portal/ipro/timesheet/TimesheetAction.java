@@ -78,6 +78,15 @@ public class TimesheetAction extends BaseAction {
 		return "ajaxResponse";
 	}
 
+	public String calculateTimeWorked() throws Exception {
+		try {
+			biz.calculateTimeWorked(paramEntity);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
+
 	public String updateDailyDetail() throws Exception {
 		try {
 			biz.updateDailyDetail(paramEntity);

@@ -14,12 +14,17 @@ $(function() {
 
 		var isValid = true;
 
-		$("#liDummy").find(":input").each(function(index) {
+		$("#liDummy").find("input select").each(function(index) {
 			$(this).removeAttr("mandatory");
 			$(this).removeAttr("option");
 		});
 
 		if (!commonJs.doValidate("fmDefault")) {
+			isValid = false;
+			return;
+		}
+
+		if (!checkValidation()) {
 			isValid = false;
 			return;
 		}
@@ -35,11 +40,6 @@ $(function() {
 				else {name = "";}
 
 				$(this).attr("id", id+delimiter+groupIndex).attr("name", name+delimiter+groupIndex);
-
-				if (commonJs.containsIgnoreCase(name, "rates") && commonJs.isEmpty($(this).val())) {
-					isValid = false;
-					commonJs.doValidatorMessage($(this), "mandatory");
-				}
 			});
 		});
 
@@ -95,7 +95,7 @@ $(function() {
 
 				$(this).attr("id", id+delimiter+groupIndex).attr("name", name+delimiter+groupIndex);
 
-				if (commonJs.startsWith($(this).attr("name"), "hours")) {
+				if (commonJs.startsWith($(this).attr("name"), "hours") || commonJs.startsWith($(this).attr("name"), "description")) {
 					$(this).bind("focus", function() {$(this).select();});
 				}
 
@@ -125,6 +125,27 @@ $(function() {
 			width:"auto",
 			container:"body",
 			style:$(jqObj).attr("class")
+		});
+	};
+
+	hideDeletedRow = function() {
+		var rowIdx = 0, isDeleted = false;
+		$("#ulTimesheetDetailHolder").find(".dummyDetail").each(function(index) {
+			rowIdx = delimiter+index;
+			isDeleted = commonJs.toBoolean($("[name=deleted"+rowIdx+"]").val());
+
+			$(this).find("input select").each(function(index) {
+				$(this).removeAttr("mandatory");
+				$(this).removeAttr("option");
+			});
+
+			if (isDeleted) {
+				$(this).hide();
+			}
+		});
+
+		$("#tblGrid").fixedHeaderTable({
+			attachTo:$("#divDataArea")
 		});
 	};
 
@@ -170,9 +191,11 @@ $(function() {
 			$("[name=startTime"+rowIdx+"]").val(ds.getValue(i, "startTime"));
 			$("[name=timesheetLineId"+rowIdx+"]").val(ds.getValue(i, "timesheetLineId"));
 			$("[name=rates"+rowIdx+"]").selectpicker("val", ds.getValue(i, "rateId"));
-			$("[name=hours"+rowIdx+"]").val(ds.getValue(i, "hours"));
+			$("[name=hours"+rowIdx+"]").val(commonJs.getNumberMask(ds.getValue(i, "hours"), "##0.00"));
 			$("[name=description"+rowIdx+"]").val(ds.getValue(i, "description"));
 		}
+
+		hideDeletedRow();
 
 		commonJs.hideProcMessageOnElement("divScrollablePanelPopup");
 	};
@@ -213,6 +236,39 @@ $(function() {
 		});
 	};
 
+	checkValidation = function() {
+		var isValid = true;
+		var rowIdx = 0, isDeleted = false;
+
+		$("#ulTimesheetDetailHolder").find(".dummyDetail").each(function(index) {
+			rowIdx = delimiter+index;
+			isDeleted = commonJs.toBoolean($("[name=deleted"+rowIdx+"]").val());
+
+			var hoursObj = $("[name=hours"+rowIdx+"]"), hoursVal = $(hoursObj).val(),
+				ratesObj = $("[name=rates"+rowIdx+"]"), ratesVal = $(ratesObj).val();
+
+			if (!isDeleted) {
+				if (!commonJs.isNumber(hoursVal)) {
+					commonJs.doValidatorMessage($(hoursObj), "notValid");
+					isValid = false;
+					return false;
+				}
+
+				if (commonJs.isEmpty(hoursVal) || hoursVal < 0 || hoursVal > 24) {
+					commonJs.doValidatorMessage($(hoursObj), "notValid");
+					isValid = false;
+					return false;
+				}
+
+				if (commonJs.isEmpty(ratesVal)) {
+					commonJs.doValidatorMessage($(ratesObj), "notValid");
+					isValid = false;
+					return false;
+				}
+			}
+		});
+		return isValid;
+	};
 	/*!
 	 * load event (document / window)
 	 */
@@ -226,6 +282,11 @@ $(function() {
 						if (commonJs.startsWith($(this).attr("name"), "deleted")) {
 							$(this).val("Y");
 						}
+					});
+
+					$(this).find("input select").each(function(index) {
+						$(this).removeAttr("mandatory");
+						$(this).removeAttr("option");
 					});
 
 					$(this).hide();

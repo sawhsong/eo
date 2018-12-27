@@ -116,7 +116,7 @@ public class TimesheetBizServiceImpl extends BaseBiz implements TimesheetBizServ
 			for (int j=0; j<dayListAsCalendar.getColumnCnt(); j++) {
 				String thisDay = dayListAsCalendar.getName(j);
 
-				if (CommonUtil.equalsAnyIgnoreCase(dayOfWeek, thisDay)) {
+				if (CommonUtil.equalsIgnoreCase(dayOfWeek, thisDay)) {
 					dayListAsCalendar.setValue(dayListAsCalendar.getRowCnt()-1, j,
 						timesheetDayList.getValue(i, "workDate")+delimiter+
 						timesheetDayList.getValue(i, "workDateFormatted")+delimiter+
@@ -124,8 +124,10 @@ public class TimesheetBizServiceImpl extends BaseBiz implements TimesheetBizServ
 						dailyDetail.getRowCnt()
 					);
 
-					if (CommonUtil.equalsAnyIgnoreCase(thisDay, "Sun")) {
-						dayListAsCalendar.addRow();
+					if (CommonUtil.equalsIgnoreCase(thisDay, "Sun")) {
+						if (timesheetDayList.getRowCnt()-1 != i) {
+							dayListAsCalendar.addRow();
+						}
 					}
 				}
 			}

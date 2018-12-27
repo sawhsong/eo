@@ -391,6 +391,42 @@ public class CommonUtil extends StringUtils {
 
 		return (dEndDate - dStartDate) / (24*(60*(60*1000)));
 	}
+
+	public static String getTimeBetween(String start, String end, String format) throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		Date startDate = sdf.parse(start), endDate = sdf.parse(end);
+		long elapsed = endDate.getTime() - startDate.getTime();
+
+		int hours = (int) Math.floor(elapsed / 3600000);
+		int minutes = (int) Math.floor((elapsed - hours * 3600000) / 60000);
+		int seconds = (int) Math.floor((elapsed - hours * 3600000 - minutes * 60000) / 1000);
+
+		if (equalsIgnoreCase(format, "hh")) {
+			return leftPad(toString(hours), 2, "0");
+		} else if (equalsIgnoreCase(format, "hh:mm")) {
+			return leftPad(toString(hours), 2, "0")+":"+leftPad(toString(abs(minutes), "###"), 2, "0");
+		} else {
+			return leftPad(toString(hours), 2, "0")+":"+leftPad(toString(abs(minutes), "###"), 2, "0")+":"+leftPad(toString(abs(seconds), "###"), 2, "0");
+		}
+	}
+
+	public static double getMinutes(String time) throws Exception {
+		String[] t = split(time, ":");
+		return Double.valueOf(t[0]) * 60 + Double.valueOf(t[1]);
+	}
+
+	public static String getHourlyUnits(String hourMinutes) throws Exception {
+		String hStr = "", mStr = "";
+		double total = getMinutes(hourMinutes);
+		double minutes = total % 60;
+		double hours = ((total - minutes) / 60);
+		double minUnits = (minutes / 60) * 100;
+
+		hStr = toString(hours, "###");
+		mStr = rightPad(toString(abs(minUnits), "###"), 2, "0");
+
+		return hStr+"."+mStr;
+	}
 	/**
 	 * week name
 	 */

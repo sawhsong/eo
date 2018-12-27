@@ -12,7 +12,7 @@
 	DataSet ratesDataSet = (DataSet)pe.getObject("ratesDataSet");
 	Date workDate = CommonUtil.toDate(dsRequest.getValue("workDate"), "dd/MM/yyyy");
 	String workDateToDisplay = dsRequest.getValue("workDate")+" ("+CommonUtil.toString(workDate, "EEE")+")";
-	String totalHoursToDisplay = CommonUtil.getNumberMask(dsRequest.getValue("totalHours"), "#,###");
+	String totalHoursToDisplay = CommonUtil.getNumberMask(dsRequest.getValue("totalHours"), "##0.00");
 	String timesheetStatus = dsRequest.getValue("timesheetStatus");
 %>
 <%/************************************************************************************************
@@ -169,7 +169,7 @@ var timesheetStatus = "<%=dsRequest.getValue("timesheetStatus")%>";
 %>
 				</ui:select>
 			</td>
-			<td class="tdGrid Ct"><ui:text name="hours" className="ct" checkName="Hours" options="mandatory" title="Number between 0 and 24"/></td>
+			<td class="tdGrid Ct"><ui:text name="hours" className="ct" checkName="Hours" title="Number between 0 and 24"/></td>
 			<td class="tdGrid Ct"><ui:text name="description"/></td>
 		</tr>
 	</table>

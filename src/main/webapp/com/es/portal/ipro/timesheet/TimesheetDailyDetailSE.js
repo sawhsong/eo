@@ -14,12 +14,17 @@ $(function() {
 
 		var isValid = true;
 
-		$("#liDummy").find(":input").each(function(index) {
+		$("#liDummy").find("input select").each(function(index) {
 			$(this).removeAttr("mandatory");
 			$(this).removeAttr("option");
 		});
 
 		if (!commonJs.doValidate("fmDefault")) {
+			isValid = false;
+			return;
+		}
+
+		if (!checkValidation()) {
 			isValid = false;
 			return;
 		}
@@ -35,11 +40,6 @@ $(function() {
 				else {name = "";}
 
 				$(this).attr("id", id+delimiter+groupIndex).attr("name", name+delimiter+groupIndex);
-
-//				if (commonJs.containsIgnoreCase(name, "rates") && commonJs.isEmpty($(this).val())) {
-//					isValid = false;
-//					commonJs.doValidatorMessage($(this), "mandatory");
-//				}
 			});
 		});
 
@@ -95,6 +95,29 @@ $(function() {
 
 				$(this).attr("id", id+delimiter+groupIndex).attr("name", name+delimiter+groupIndex);
 
+				if (commonJs.startsWith(name, "startTime") || commonJs.startsWith(name, "endTime") || commonJs.startsWith(name, "nonWorkedTime")) {
+					if (timesheetUnits == "HSE") {
+						$(this).bind("change", function() {
+							calculateTimeWorked($(this));
+						});
+					}
+				}
+
+				if (commonJs.startsWith(name, "hours")) {
+					if (timesheetUnits == "HSE") {
+						$(this).removeAttr("title");
+						$(this).attr("readonly", "readonly");
+						$(this).removeClass("txtEn");
+						$(this).addClass("txtDis");
+					} else {
+						$(this).bind("focus", function() {$(this).select();});
+					}
+				}
+
+				if (commonJs.startsWith(name, "description")) {
+					$(this).bind("focus", function() {$(this).select();});
+				}
+
 				if ($(this).is("select")) {
 					setSelectBoxes($(this));
 				}
@@ -121,6 +144,27 @@ $(function() {
 			width:"auto",
 			container:"body",
 			style:$(jqObj).attr("class")
+		});
+	};
+
+	hideDeletedRow = function() {
+		var rowIdx = 0, isDeleted = false;
+		$("#ulTimesheetDetailHolder").find(".dummyDetail").each(function(index) {
+			rowIdx = delimiter+index;
+			isDeleted = commonJs.toBoolean($("[name=deleted"+rowIdx+"]").val());
+
+			$(this).find("input select").each(function(index) {
+				$(this).removeAttr("mandatory");
+				$(this).removeAttr("option");
+			});
+
+			if (isDeleted) {
+				$(this).hide();
+			}
+		});
+
+		$("#tblGrid").fixedHeaderTable({
+			attachTo:$("#divDataArea")
 		});
 	};
 
@@ -178,9 +222,12 @@ $(function() {
 				$("[name=nonWorkedTimeHH"+rowIdx+"]").selectpicker("val", commonJs.lpad(nonWorkedTime.split(":")[0], 2, "0"));
 				$("[name=nonWorkedTimeMM"+rowIdx+"]").selectpicker("val", commonJs.lpad(nonWorkedTime.split(":")[1], 2, "0"));
 			}
-			$("[name=hours"+rowIdx+"]").val(ds.getValue(i, "hours"));
+
+			$("[name=hours"+rowIdx+"]").val(commonJs.getNumberMask(ds.getValue(i, "hours"), "##0.00"));
 			$("[name=description"+rowIdx+"]").val(ds.getValue(i, "description"));
 		}
+
+		hideDeletedRow();
 
 		commonJs.hideProcMessageOnElement("divScrollablePanelPopup");
 	};
@@ -220,6 +267,78 @@ $(function() {
 			}
 		});
 	};
+
+	checkValidation = function() {
+		var isValid = true;
+		var rowIdx = 0, isDeleted = false;
+
+		$("#ulTimesheetDetailHolder").find(".dummyDetail").each(function(index) {
+			rowIdx = delimiter+index;
+			isDeleted = commonJs.toBoolean($("[name=deleted"+rowIdx+"]").val());
+
+			var hoursObj = $("[name=hours"+rowIdx+"]"), hoursVal = $(hoursObj).val(),
+				ratesObj = $("[name=rates"+rowIdx+"]"), ratesVal = $(ratesObj).val();
+
+			if (!isDeleted) {
+				if (!commonJs.isNumber(hoursVal)) {
+					commonJs.doValidatorMessage($(hoursObj), "notValid");
+					isValid = false;
+					return false;
+				}
+
+				if (timesheetUnits == "HSE") {
+					if (commonJs.isEmpty(hoursVal) || hoursVal < 0 || hoursVal > 24) {
+						commonJs.doValidatorMessage($(hoursObj), "notValid");
+						isValid = false;
+						return false;
+					}
+				}
+
+				if (timesheetUnits == "DSE") {
+					if (commonJs.isEmpty(hoursVal) || hoursVal < 0 || hoursVal > 1) {
+						commonJs.doValidatorMessage($(hoursObj), "notValid");
+						isValid = false;
+						return false;
+					}
+				}
+
+				if (commonJs.isEmpty(ratesVal)) {
+					commonJs.doValidatorMessage($(ratesObj), "notValid");
+					isValid = false;
+					return false;
+				}
+			}
+		});
+		return isValid;
+	};
+
+	calculateTimeWorked = function(obj) {
+		var ds;
+		var name = $(obj).attr("name"), rowIdx = delimiter+name.split(delimiter)[1];
+		var hoursObj = $("[name=hours"+rowIdx+"]");
+
+		commonJs.ajaxSubmit({
+			url:"/ipro/timesheet/calculateTimeWorked",
+			dataType:"json",
+			data:{
+				startTimeHH:$("[name=startTimeHH"+rowIdx+"]").val(),
+				startTimeMM:$("[name=startTimeMM"+rowIdx+"]").val(),
+				endTimeHH:$("[name=endTimeHH"+rowIdx+"]").val(),
+				endTimeMM:$("[name=endTimeMM"+rowIdx+"]").val(),
+				nonWorkedTimeHH:$("[name=nonWorkedTimeHH"+rowIdx+"]").val(),
+				nonWorkedTimeMM:$("[name=nonWorkedTimeMM"+rowIdx+"]").val()
+			},
+			success:function(data, textStatus) {
+				var result = commonJs.parseAjaxResult(data, textStatus, "json");
+				if (result.isSuccess == true || result.isSuccess == "true") {
+					ds = result.dataSet;
+					$(hoursObj).val(ds.getValue(0, "hoursWorked"));
+				} else {
+					commonJs.error(result.message);
+				}
+			}
+		});
+	};
 	/*!
 	 * load event (document / window)
 	 */
@@ -233,6 +352,11 @@ $(function() {
 						if (commonJs.startsWith($(this).attr("name"), "deleted")) {
 							$(this).val("Y");
 						}
+					});
+
+					$(this).find("input select").each(function(index) {
+						$(this).removeAttr("mandatory");
+						$(this).removeAttr("option");
 					});
 
 					$(this).hide();

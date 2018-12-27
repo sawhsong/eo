@@ -141,6 +141,30 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 		return paramEntity;
 	}
 
+	public ParamEntity calculateTimeWorked(ParamEntity paramEntity) throws Exception {
+		DataSet dsRequest = paramEntity.getRequestDataSet();
+		DataSet result = new DataSet(new String[] {"hoursWorked"});
+		String hourMinutes = "";
+		String startTimeHH = dsRequest.getValue("startTimeHH"), startTimeMM = dsRequest.getValue("startTimeMM");
+		String endTimeHH = dsRequest.getValue("endTimeHH"), endTimeMM = dsRequest.getValue("endTimeMM");
+		String nonWorkedTimeHH = dsRequest.getValue("nonWorkedTimeHH"), nonWorkedTimeMM = dsRequest.getValue("nonWorkedTimeMM");
+
+		try {
+			hourMinutes = CommonUtil.getTimeBetween(startTimeHH+":"+startTimeMM, endTimeHH+":"+endTimeMM, "HH:mm");
+			hourMinutes = CommonUtil.getTimeBetween(nonWorkedTimeHH+":"+nonWorkedTimeMM, hourMinutes, "HH:mm");
+			hourMinutes = CommonUtil.getHourlyUnits(hourMinutes);
+
+			result.addRow();
+			result.setValue(0, "hoursWorked", hourMinutes);
+
+			paramEntity.setAjaxResponseDataSet(result);
+			paramEntity.setSuccess(true);
+		} catch (Exception ex) {
+			throw new FrameworkException(paramEntity, ex);
+		}
+		return paramEntity;
+	}
+
 	public ParamEntity updateDailyDetail(ParamEntity paramEntity) throws Exception {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		HttpSession session = paramEntity.getSession();

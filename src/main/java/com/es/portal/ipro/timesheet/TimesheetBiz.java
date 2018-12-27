@@ -10,6 +10,7 @@ public interface TimesheetBiz {
 	public ParamEntity refreshDayListByPeriod(ParamEntity paramEntity) throws Exception;
 	public ParamEntity getDailyDetailScreen(ParamEntity paramEntity) throws Exception;
 	public ParamEntity getDailyDetailData(ParamEntity paramEntity) throws Exception;
+	public ParamEntity calculateTimeWorked(ParamEntity paramEntity) throws Exception;
 	public ParamEntity updateDailyDetail(ParamEntity paramEntity) throws Exception;
 	public ParamEntity postTimesheet(ParamEntity paramEntity) throws Exception;
 }
