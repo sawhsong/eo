@@ -184,7 +184,7 @@ var timesheetPeriod = "<%=timesheetPeriod%>";
 <div id="divDummy" class="dummyDetail">
 	<ui:hidden name="workDate" className="ct hor"/>
 	<ui:text name="formattedWorkDate" style="width:87px" className="ct hor" status="display"/>
-	<ui:text name="totalHours" style="width:87px" className="ct hor" checkName="Total Hours" options="mandatory" option="numeric" title="Number between 0 and 24"/>
+	<ui:text name="totalHours" style="width:87px" className="ct hor" checkName="Hours" options="mandatory" option="numeric" title="Number between 0 and 24"/>
 	<ui:button id="btnEdit" caption="Edit" iconClass="fa-edit"/>
 </div>
 </form>

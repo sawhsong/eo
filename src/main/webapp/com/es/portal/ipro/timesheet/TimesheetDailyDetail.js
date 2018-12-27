@@ -95,6 +95,10 @@ $(function() {
 
 				$(this).attr("id", id+delimiter+groupIndex).attr("name", name+delimiter+groupIndex);
 
+				if (commonJs.startsWith($(this).attr("name"), "hours")) {
+					$(this).bind("focus", function() {$(this).select();});
+				}
+
 				if ($(this).is("select")) {
 					setSelectBoxes($(this));
 				}

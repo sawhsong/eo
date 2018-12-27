@@ -201,13 +201,15 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 	}
 
 	private void setDailyTotalHours(DataSet timesheetDayList, DataSet requestDataSet) throws Exception {
+		String hoursFormat = "##0.00";
+
 		for (int i=0; i<timesheetDayList.getRowCnt(); i++) {
 			String date = timesheetDayList.getValue(i, "workDate");
 			for (int j=0; j<requestDataSet.getColumnCnt(); j++) {
 				String rqDate = requestDataSet.getValue(j);
 				if (CommonUtil.equals(date, rqDate)) {
 					String delimiter = CommonUtil.remove(requestDataSet.getName(j), "workDate");
-					timesheetDayList.setValue(i, "totalHours", requestDataSet.getValue("totalHours"+delimiter));
+					timesheetDayList.setValue(i, "totalHours", CommonUtil.getNumberMask(requestDataSet.getValue("totalHours"+delimiter), hoursFormat));
 				}
 			}
 		}

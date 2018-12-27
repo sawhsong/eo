@@ -158,7 +158,7 @@ var timesheetStatus = "<%=dsRequest.getValue("timesheetStatus")%>";
 				<ui:hidden name="timesheetLineId"/>
 			</th>
 			<td class="tdGrid Ct">
-				<ui:select name="rates">
+				<ui:select name="rates" checkName="Rates">
 					<ui:seloption value="" text="==Select=="/>
 <%
 				for (int i=0; i<ratesDataSet.getRowCnt(); i++) {
@@ -169,7 +169,7 @@ var timesheetStatus = "<%=dsRequest.getValue("timesheetStatus")%>";
 %>
 				</ui:select>
 			</td>
-			<td class="tdGrid Ct"><ui:text name="hours" className="ct numeric" option="numeric" maxlength="2" title="Number between 0 and 24"/></td>
+			<td class="tdGrid Ct"><ui:text name="hours" className="ct" checkName="Hours" options="mandatory" title="Number between 0 and 24"/></td>
 			<td class="tdGrid Ct"><ui:text name="description"/></td>
 		</tr>
 	</table>

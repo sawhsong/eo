@@ -10,12 +10,18 @@ $(function() {
 	 */
 	$("#btnSave").click(function() {
 		if ($(this).attr("disabled")) {return;}
-		postTimesheet({status:"SA"});
+
+		if (checkValidation()) {
+			postTimesheet({status:"SA"});
+		}
 	});
 
 	$("#btnSubmit").click(function() {
 		if ($(this).attr("disabled")) {return;}
-		postTimesheet({status:"SU"});
+
+		if (checkValidation()) {
+			postTimesheet({status:"SU"});
+		}
 	});
 
 	$("#btnSearch").click(function() {
@@ -352,6 +358,11 @@ $(function() {
 									$(this).removeClass("txtEn");
 									$(this).addClass("txtDis");
 								} else {
+									$(this).attr("title", "Number between 0 and 24");
+									$(this).removeAttr("readonly");
+									$(this).removeClass("txtDis");
+									$(this).addClass("txtEn");
+
 									$(this).bind("focus", function() {$(this).select();});
 								}
 							}
@@ -394,6 +405,29 @@ $(function() {
 		param.height = height;
 
 		popup = commonJs.openPopup(param);
+	};
+
+	checkValidation = function() {
+		var isValid = true;
+
+		$("#tblGridBody .dummyDetail").find("input").each(function(index) {
+			var name = $(this).attr("name"), val = $(this).val();
+
+			if (commonJs.startsWith(name, "totalHours")) {
+				if (!commonJs.isNumber(val)) {
+					commonJs.doValidatorMessage($(this), "notValid");
+					isValid = false;
+					return false;
+				}
+
+				if (commonJs.isEmpty(val) || val < 0 || val > 24) {
+					commonJs.doValidatorMessage($(this), "notValid");
+					isValid = false;
+					return false;
+				}
+			}
+		});
+		return isValid;
 	};
 
 	/*!
