@@ -10,6 +10,7 @@ import com.es.portal.conf.resource.ormapper.dao.HpPersonD.HpPersonDDao;
 import com.es.portal.conf.resource.ormapper.dao.SysUsers.SysUsersDao;
 import com.es.portal.conf.resource.ormapper.dto.oracle.HpPersonD;
 import com.es.portal.conf.resource.ormapper.dto.oracle.SysUsers;
+
 import zebra.data.DataSet;
 import zebra.data.ParamEntity;
 import zebra.exception.FrameworkException;
@@ -240,4 +241,32 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 		return paramEntity;
 	}
 */
+	public ParamEntity setSessionValuesForAdminTool(ParamEntity paramEntity) throws Exception {
+		DataSet requestDataSet = paramEntity.getRequestDataSet();
+		SysUsers sysUsers = new SysUsers();
+		HpPersonD hpPersonD = new HpPersonD();
+		String loginId = requestDataSet.getValue("loginId");
+		DataSet resultDataSet = new DataSet();
+
+		try {
+			sysUsers = sysUsersDao.getUserByLoginId(loginId);
+			hpPersonD = hpPersonDDao.getPersonByPersonId(CommonUtil.toString(sysUsers.getPersonId(), "#"));
+
+			paramEntity.setObject("sysUsersForAdminTool", sysUsers);
+			paramEntity.setObject("hpPersonDForAdminTool", hpPersonD);
+
+			resultDataSet.addName(new String[] {"user_id", "login_id", "user_full_name", "emp_org_id"});
+			resultDataSet.addRow();
+			resultDataSet.setValue("user_id", sysUsers.getUserId());
+			resultDataSet.setValue("login_id", sysUsers.getUserName()); // LoginId = UserName
+			resultDataSet.setValue("user_full_name", hpPersonD.getFullName());
+			resultDataSet.setValue("emp_org_id", hpPersonD.getEmploymentCompanyOrgId());
+
+			paramEntity.setAjaxResponseDataSet(resultDataSet);
+			paramEntity.setSuccess(true);
+		} catch (Exception ex) {
+			throw new FrameworkException(paramEntity, ex);
+		}
+		return paramEntity;
+	}
 }

@@ -62,6 +62,7 @@ var timesheetPeriod = "<%=timesheetPeriod%>";
 		</ui:buttonGroup>
 	</div>
 </div>
+<div id="divAdminToolArea"><%@ include file="/com/es/portal/common/include/bodyAdminToolArea.jsp"%></div>
 <div id="divSearchCriteriaArea" class="areaContainer">
 	<table class="tblSearch">
 		<caption>Please select a contract assignment, then a timesheet period and click 'Search' button to view a timesheet</caption>

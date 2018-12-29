@@ -11,4 +11,5 @@ public interface LoginBiz {
 	public ParamEntity getUserProfile(ParamEntity paramEntity) throws Exception;
 	public ParamEntity exeUpdate(ParamEntity paramEntity) throws Exception;
 */
+	public ParamEntity setSessionValuesForAdminTool(ParamEntity paramEntity) throws Exception;
 }

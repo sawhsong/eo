@@ -16,6 +16,8 @@
 	String selectedHeaderMenuHeaderPage = (String)session.getAttribute("headerMenuId");
 
 	DataSet dsMenuHeaderPage = MenuManager.getMenu(authGroupIdHeaderPage, "", "1", "1");
+
+	String loginIdForAdminToolHeaderPage = (String)session.getAttribute("LoginIdForAdminTool");
 %>
 <%/************************************************************************************************
 * Stylesheet & Javascript

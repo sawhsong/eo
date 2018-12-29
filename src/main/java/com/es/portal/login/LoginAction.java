@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.es.portal.common.extend.BaseAction;
 import com.es.portal.conf.resource.ormapper.dto.oracle.HpPersonD;
 import com.es.portal.conf.resource.ormapper.dto.oracle.SysUsers;
+
 import zebra.config.MemoryBean;
 import zebra.data.DataSet;
 import zebra.util.CommonUtil;
@@ -122,6 +123,42 @@ public class LoginAction extends BaseAction {
 
 		return "pageHandler";
 	}
+*/
+	public String setSessionValuesForAdminTool() throws Exception {
+		try {
+			biz.setSessionValuesForAdminTool(paramEntity);
+
+			if (paramEntity.isSuccess()) {
+				SysUsers sysUsersForAdminTool = (SysUsers)paramEntity.getObject("sysUsersForAdminTool");
+				HpPersonD hpPersonDForAdminTool = (HpPersonD)paramEntity.getObject("hpPersonDForAdminTool");
+
+				session.setAttribute("UserIdForAdminTool", sysUsersForAdminTool.getUserId());
+				session.setAttribute("LoginIdForAdminTool", sysUsersForAdminTool.getUserName()); // LoginId = UserName
+				session.setAttribute("UserFullNameForAdminTool", hpPersonDForAdminTool.getFullName());
+				session.setAttribute("EmpOrgIdForAdminTool", hpPersonDForAdminTool.getEmploymentCompanyOrgId());
+				session.setAttribute("SysUsersForAdminTool", sysUsersForAdminTool);
+				session.setAttribute("HpPersonDForAdminTool", hpPersonDForAdminTool);
+			}
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
+
+	public String removeSessionValuesForAdminTool() throws Exception {
+		try {
+			session.removeAttribute("UserIdForAdminTool");
+			session.removeAttribute("LoginIdForAdminTool");
+			session.removeAttribute("UserFullNameForAdminTool");
+			session.removeAttribute("EmpOrgIdForAdminTool");
+			session.removeAttribute("SysUsersForAdminTool");
+			session.removeAttribute("HpPersonDForAdminTool");
+			paramEntity.setSuccess(true);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
 
 	public String controlAdminTool() throws Exception {
 		DataSet requestDataSet = paramEntity.getRequestDataSet();
@@ -135,7 +172,7 @@ public class LoginAction extends BaseAction {
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";
 	}
-*/
+
 	public String logout() throws Exception {
 		MemoryBean.remove(session.getId());
 		session.invalidate();
