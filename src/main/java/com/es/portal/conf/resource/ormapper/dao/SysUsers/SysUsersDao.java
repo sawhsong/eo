@@ -6,6 +6,8 @@ package com.es.portal.conf.resource.ormapper.dao.SysUsers;
 
 import com.es.portal.conf.resource.ormapper.dto.oracle.SysUsers;
 import zebra.base.IDao;
+import zebra.data.DataSet;
+import zebra.data.QueryAdvisor;
 
 public interface SysUsersDao extends IDao {
 	/**
@@ -23,4 +25,5 @@ public interface SysUsersDao extends IDao {
 	 * @throws Exception
 	 */
 	public SysUsers getUserByLoginIdAndPassword(String loginId, String password) throws Exception;
+	public DataSet getSysUsersDataSetByLoginIdForAutoCompletion(QueryAdvisor queryAdvisor) throws Exception;
 }

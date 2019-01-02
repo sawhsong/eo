@@ -124,6 +124,19 @@ public class LoginAction extends BaseAction {
 		return "pageHandler";
 	}
 */
+	public String controlAdminTool() throws Exception {
+		DataSet requestDataSet = paramEntity.getRequestDataSet();
+		String flag = requestDataSet.getValue("flag");
+
+		try {
+			session.setAttribute("isVisibleAdminTool", flag);
+			paramEntity.setSuccess(true);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
+
 	public String setSessionValuesForAdminTool() throws Exception {
 		try {
 			biz.setSessionValuesForAdminTool(paramEntity);
@@ -135,7 +148,7 @@ public class LoginAction extends BaseAction {
 				session.setAttribute("UserIdForAdminTool", sysUsersForAdminTool.getUserId());
 				session.setAttribute("LoginIdForAdminTool", sysUsersForAdminTool.getUserName()); // LoginId = UserName
 				session.setAttribute("UserFullNameForAdminTool", hpPersonDForAdminTool.getFullName());
-				session.setAttribute("EmpOrgIdForAdminTool", hpPersonDForAdminTool.getEmploymentCompanyOrgId());
+				session.setAttribute("EmpOrgIdForAdminTool", CommonUtil.toString(hpPersonDForAdminTool.getEmploymentCompanyOrgId(), "#"));
 				session.setAttribute("SysUsersForAdminTool", sysUsersForAdminTool);
 				session.setAttribute("HpPersonDForAdminTool", hpPersonDForAdminTool);
 			}
@@ -153,19 +166,6 @@ public class LoginAction extends BaseAction {
 			session.removeAttribute("EmpOrgIdForAdminTool");
 			session.removeAttribute("SysUsersForAdminTool");
 			session.removeAttribute("HpPersonDForAdminTool");
-			paramEntity.setSuccess(true);
-		} catch (Exception ex) {
-		}
-		setRequestAttribute("paramEntity", paramEntity);
-		return "ajaxResponse";
-	}
-
-	public String controlAdminTool() throws Exception {
-		DataSet requestDataSet = paramEntity.getRequestDataSet();
-		String flag = requestDataSet.getValue("flag");
-
-		try {
-			session.setAttribute("isVisibleAdminTool", flag);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 		}

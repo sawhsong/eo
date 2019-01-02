@@ -3,5 +3,9 @@
 <struts>
 	<package name="common" extends="default" namespace="/common" strict-method-invocation="false">
 		<default-interceptor-ref name="ZebraDefaultStack"/>
+
+		<!--/* Auto Completion */-->
+		<action name="autoCompletion/*" class="com.es.portal.common.module.autocompletion.AutoCompletionAction" method="{1}">
+		</action>
 	</package>
 </struts>

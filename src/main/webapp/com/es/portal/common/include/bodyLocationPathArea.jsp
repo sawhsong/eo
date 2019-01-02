@@ -47,18 +47,20 @@ $(function() {
 	</c:if>
 
 <%
-	if (isVisibleAdminToolLocationPath && CommonUtil.equalsIgnoreCase(securityRoleAdminToolLocationPath, "administrator")) {
+	if (CommonUtil.equalsIgnoreCase(securityRoleAdminToolLocationPath, "administrator")) {
+		if (isVisibleAdminToolLocationPath) {
 %>
 	<div style="float:right;">
 		<a onclick="doControlAdminTool('false')" style="color:blue;">Hide Admin Tool</a>
 	</div>
 <%
-	} else {
+		} else {
 %>
 	<div style="float:right;">
 		<a onclick="doControlAdminTool('true')" style="color:blue;">Show Admin Tool</a>
 	</div>
 <%
+		}
 	}
 %>
 </div>

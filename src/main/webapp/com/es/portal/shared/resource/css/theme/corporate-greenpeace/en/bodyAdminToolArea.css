@@ -1,0 +1,10 @@
+/**************************************************************************************************
+* Admin Tool Area - for User Menus
+**************************************************************************************************/
+@charset "utf-8";
+
+/**
+ * Administrator Tool Bar Area Contents
+ */
+#divAdminToolContainer {}
+.adminToolContainer {padding:6px 8px 0px 8px;display:inline-block;width:100%;}

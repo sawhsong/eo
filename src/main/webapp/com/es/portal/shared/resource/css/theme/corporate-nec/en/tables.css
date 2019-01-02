@@ -100,6 +100,41 @@ table.tblInform caption {padding:8px 8px;font-size:1.0em;font-weight:bold;border
 .tblInform tfoot td {padding:6px 6px;}
 
 /**
+ * Admin Tool Tables
+ */
+.tblAdminTool {width:100%;border:1px solid #FFBFC2;}
+table.tblAdminTool caption {padding:8px 8px;font-size:1.0em;font-weight:bold;border-top-left-radius:4px;border-top-right-radius:4px;
+	color:#555555;
+	border:1px solid #FFBFC2;
+	border-bottom:0px;
+	background-color:#FFF4F4;
+}
+.thAdminTool {padding:3px 3px;
+	color:#555555;
+	border:1px solid #FFBFC2;
+	background:#FFF4F4;
+}
+.tblAdminTool td {padding:3px 3px;
+	border:1px solid #FFBFC2;
+}
+.tblAdminTool tfoot td {padding:3px 3px;}
+
+/* Admin Tool Grid */
+.tblAdminToolGrid {width:100%;
+	border-bottom:1px solid #DDDDDD;
+}
+.thAdminToolGrid {padding:3px 2px;text-align:center;
+	border:1px solid #DDDDDD;
+	background:#F5F5F5;
+}
+.tblAdminToolGrid td {padding:2px 2px;vertical-align:top;
+	border:1px solid #DDDDDD;
+}
+.tblAdminToolGrid tbody tr:last-child td {}
+.tblAdminToolGrid tfoot tr:first-child td {}
+.tblAdminToolGrid tfoot tr:last-child td {}
+
+/**
  * Edit Tables
  */
 .tblEdit {width:100%;}

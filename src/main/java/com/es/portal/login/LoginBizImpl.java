@@ -260,7 +260,7 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 			resultDataSet.setValue("user_id", sysUsers.getUserId());
 			resultDataSet.setValue("login_id", sysUsers.getUserName()); // LoginId = UserName
 			resultDataSet.setValue("user_full_name", hpPersonD.getFullName());
-			resultDataSet.setValue("emp_org_id", hpPersonD.getEmploymentCompanyOrgId());
+			resultDataSet.setValue("emp_org_id", CommonUtil.toString(hpPersonD.getEmploymentCompanyOrgId(), "#"));
 
 			paramEntity.setAjaxResponseDataSet(resultDataSet);
 			paramEntity.setSuccess(true);

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Deploy to Test" default="1.0.classes - All" basedir=".">
+	<property file="deployToTest.properties"/>
+
+	<target name="1.0.classes - All" description="Copy class files">
+		<ftp server="${server.ip}" userid="${server.ftpUser.id}" password="${server.ftpUser.pw}" ignoreNoncriticalErrors="true" verbose="true"
+			 action="mkdir"
+			 remotedir="${server.path.webRoot}/${server.path.classes}">
+		</ftp>
+		<ftp server="${server.ip}" userid="${server.ftpUser.id}" password="${server.ftpUser.pw}" ignoreNoncriticalErrors="true" verbose="true"
+			 remotedir="${server.path.webRoot}/${server.path.classes}">
+			<fileset dir="${local.path.classes}" excludes="config.properties, log4j2.xml"/>
+		</ftp>
+	</target>
+	<target name="1.1.project classes - project app" description="Copy class files">
+		<ftp server="${server.ip}" userid="${server.ftpUser.id}" password="${server.ftpUser.pw}" ignoreNoncriticalErrors="true" verbose="true"
+			 remotedir="${server.path.webRoot}/${server.path.classes}/${server.path.project}">
+			<fileset dir="${local.path.classes}/${local.path.project}" excludes="config.properties, log4j2.xml"/>
+		</ftp>
+	</target>
+
+</project>

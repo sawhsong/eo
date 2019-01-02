@@ -10,5 +10,9 @@
 		<property name="eoMenuAuthLinkDao" ref="eoMenuAuthLinkDao"/>
 	</bean>
 
+	<!--/* Auto Completion */-->
+	<bean id="autoCompletionAction" name="autoCompletionAction" class="${name.package.project}.common.module.autocompletion.AutoCompletionAction"/>
+	<bean id="autoCompletionBiz" name="autoCompletionBiz" class="${name.package.project}.common.module.autocompletion.AutoCompletionBizImpl" parent="baseBiz"/>
+
 	<bean id="timesheetBizService" name="timesheetBizService" class="${name.package.project}.common.module.bizservice.timesheet.TimesheetBizServiceImpl" parent="baseBiz"/>
 </beans>

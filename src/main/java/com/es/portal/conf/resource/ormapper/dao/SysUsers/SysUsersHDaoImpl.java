@@ -6,6 +6,8 @@ package com.es.portal.conf.resource.ormapper.dao.SysUsers;
 
 import com.es.portal.common.extend.BaseHDao;
 import com.es.portal.conf.resource.ormapper.dto.oracle.SysUsers;
+
+import zebra.data.DataSet;
 import zebra.data.QueryAdvisor;
 
 public class SysUsersHDaoImpl extends BaseHDao implements SysUsersDao {
@@ -24,5 +26,9 @@ public class SysUsersHDaoImpl extends BaseHDao implements SysUsersDao {
 		queryAdvisor.addWhereClause("password = '"+password+"'");
 
 		return (SysUsers)selectAllToDto(queryAdvisor, new SysUsers());
+	}
+
+	public DataSet getSysUsersDataSetByLoginIdForAutoCompletion(QueryAdvisor queryAdvisor) throws Exception {
+		return selectAsDataSet(queryAdvisor, "query.SysUsers.getSysUsersDataSetByLoginIdForAutoCompletion");
 	}
 }

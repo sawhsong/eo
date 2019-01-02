@@ -12,7 +12,7 @@
 	String startupUrlHeaderPage = (String)session.getAttribute("StartupUrl");
 
 	String userNameHeaderPage = hpPersonDHeaderPage.getFullName();
-	String userIdHeaderPage = sysUserHeaderPage.getUserName();
+	String loginIdHeaderPage = sysUserHeaderPage.getUserName();
 	String selectedHeaderMenuHeaderPage = (String)session.getAttribute("headerMenuId");
 
 	DataSet dsMenuHeaderPage = MenuManager.getMenu(authGroupIdHeaderPage, "", "1", "1");
@@ -26,7 +26,6 @@
 </style>
 <script type="text/javascript">
 var popupUserProfile;
-var authGroupIdHeaderPage = "<%=authGroupIdHeaderPage%>";
 var startupUrl = "<%=startupUrlHeaderPage%>";
 
 $(function() {
@@ -50,7 +49,7 @@ $(function() {
 	};
 
 	setLoginUserContextMenu = function() {
-		ctxMenu.loggedInUser[0].fun = function() {getMyProfile("<%=userIdHeaderPage%>");};
+		ctxMenu.loggedInUser[0].fun = function() {getMyProfile("<%=loginIdHeaderPage%>");};
 		ctxMenu.loggedInUser[1].fun = function() {logout();};
 		$("#btnLoggedInUser").contextMenu(ctxMenu.loggedInUser, {
 			classPrefix:com.constants.ctxClassPrefixHeader,
@@ -101,6 +100,22 @@ $(function() {
 		</div>
 		<div id="divGlobalMenuRight">
 			<div id="divGblMenuArea">
+<%
+				if (CommonUtil.isNotBlank(loginIdForAdminToolHeaderPage)) {
+%>
+				<div id="divUsingUserAs" class="headerGblMenus" style="color:#D92E24;cursor:default;top:50%;transform:translateY(50%)">
+					User Login ID As : ${sessionScope.LoginIdForAdminTool} / User Name As : ${sessionScope.UserFullNameForAdminTool} / User Emp Org ID As : ${sessionScope.EmpOrgIdForAdminTool}
+				</div>
+				&nbsp;&nbsp;&nbsp;
+<%
+				} else {
+%>
+				<div id="divUsingUserAs" class="headerGblMenus" style="color:#D92E24;cursor:default;">
+				</div>
+				&nbsp;&nbsp;&nbsp;
+<%
+				}
+%>
 				<ui:button id="btnLoggedInUser" caption="<%=userNameHeaderPage%>" iconClass="fa-user-md"/>
 			</div>
 		</div>

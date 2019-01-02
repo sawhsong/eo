@@ -19,7 +19,7 @@ public class TimesheetBizImpl extends BaseBiz implements TimesheetBiz {
 	public ParamEntity myTimesheets(ParamEntity paramEntity) throws Exception {
 		HttpSession session = paramEntity.getSession();
 		DataSet assignmentList = new DataSet();
-		String loginId = (String)session.getAttribute("LoginId");
+		String loginId = CommonUtil.nvl((String)session.getAttribute("LoginIdForAdminTool"), (String)session.getAttribute("LoginId"));
 
 		try {
 			assignmentList = timesheetBizService.getAssignmentListDataSet(paramEntity, loginId);
