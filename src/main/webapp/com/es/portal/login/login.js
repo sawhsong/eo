@@ -47,7 +47,7 @@ $(function() {
 					var result = commonJs.parseAjaxResult(data, textStatus, "json");
 					if (result.isSuccess == true || result.isSuccess == "true") {
 						var dataSet = result.dataSet;
-						var actionString = dataSet.getValue(0, "StartupUrl");
+						var actionString = commonJs.isEmpty(dataSet.getValue(0, "StartupUrl")) ? "/index/dashboard" : dataSet.getValue(0, "StartupUrl");
 
 						commonJs.openDialog({
 							type:com.message.I000,
