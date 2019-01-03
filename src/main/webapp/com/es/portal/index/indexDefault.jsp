@@ -48,6 +48,7 @@
 	<div id="divButtonAreaLeft"></div>
 	<div id="divButtonAreaRight"></div>
 </div>
+<div id="divAdminToolArea"><%@ include file="/com/es/portal/common/include/bodyAdminToolArea.jsp"%></div>
 <div id="divSearchCriteriaArea"></div>
 <div id="divInformArea"></div>
 <%/************************************************************************************************

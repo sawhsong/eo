@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import com.es.portal.login.LoginAction;
+import com.es.portal.serviceresource.ServiceResourceAction;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
@@ -54,7 +55,9 @@ public class LoginInterceptor implements Interceptor {
 			}
 		}
 
-		if (action instanceof LoginAction) {
+		if (action instanceof ServiceResourceAction) {
+			returnValue = invocation.getProxy().getMethod();
+		} else if (action instanceof LoginAction) {
 			if (CommonUtil.equalsIgnoreCase(invocation.getProxy().getMethod(), "getUserProfile")) {
 				userId = (String)sessionMap.get("LoginId");
 				if (CommonUtil.isBlank(userId)) {

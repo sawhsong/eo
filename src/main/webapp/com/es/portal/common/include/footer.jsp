@@ -2,12 +2,24 @@
 * Description
 * - 
 ************************************************************************************************/%>
+<script type="text/javascript">
+$(function() {
+	$("#aDisclaimer").click(function(event) {
+		window.open("/serviceresource/pages/disclaimer");
+	});
+
+	$("#aPrivacy").click(function(event) {
+		window.open("/serviceresource/pages/privacy");
+	});
+});
+</script>
+
 <div id="divFooterLeft">
-	<div class="clickablItems"><a onclick="window.open('http://10.14.35.40:7777/webcenter/portal/entity/disclaimer')">Disclaimer</a></div>
+	<div class="clickablItems"><a id="aDisclaimer">Disclaimer</a></div>
 	<div class="clickablItemsBreak"></div>
-	<div class="clickablItems"><a onclick="window.open('http://10.14.35.40:7777/webcenter/portal/entity/privacy')">Privacy</a></div>
+	<div class="clickablItems"><a id="aPrivacy">Privacy</a></div>
 	<div class="clickablItemsBreak"></div>
-	<div class="clickablItems"><a onclick="">Contact Us</a></div>
+	<div class="clickablItems"><a id="aContactUs">Contact Us</a></div>
 </div>
 <div id="divFooterCenter">
 	<div style="width:100%;text-align:center;">&copy; Entity Solutions</div>

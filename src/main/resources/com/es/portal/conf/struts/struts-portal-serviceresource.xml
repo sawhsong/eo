@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="serviceresource" extends="default" namespace="/serviceresource" strict-method-invocation="false">
+		<default-interceptor-ref name="ZebraDefaultStack"/>
+		<action name="pages/*" class="com.es.portal.serviceresource.ServiceResourceAction" method="{1}">
+			<result name="disclaimer" type="debugDispatcherResult">/com/es/portal/serviceresource/Disclaimer.jsp</result>
+			<result name="privacy" type="debugDispatcherResult">/com/es/portal/serviceresource/Privacy.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -30,6 +30,13 @@ $(function() {
 		doProcess({mode:"forgottenPassword"});
 	});
 
+	$("#aDisclaimer").click(function(event) {
+		window.open("/serviceresource/pages/disclaimer");
+	});
+
+	$("#aPrivacy").click(function(event) {
+		window.open("/serviceresource/pages/privacy");
+	});
 	/*!
 	 * process
 	 */

@@ -22,11 +22,8 @@
 <%/************************************************************************************************
 * Stylesheet & Javascript
 ************************************************************************************************/%>
-<style type="text/css">
-</style>
 <script type="text/javascript">
 var popupUserProfile;
-var startupUrl = "<%=startupUrlHeaderPage%>";
 
 $(function() {
 	$("#aLogo").click(function(event) {

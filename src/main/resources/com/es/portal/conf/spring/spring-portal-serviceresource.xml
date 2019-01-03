@@ -5,6 +5,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<bean id="iproTimesheetAction" name="iproTimesheetAction" class="${name.package.project}.ipro.timesheet.TimesheetAction"/>
-	<bean id="iproTimesheetBiz" name="iproTimesheetBiz" class="${name.package.project}.ipro.timesheet.TimesheetBizImpl" parent="baseBiz"/>
+	<bean id="serviceResourceAction" name="serviceResourceAction" class="${name.package.project}.serviceresource.ServiceResourceAction"/>
+	<bean id="serviceResourceBiz" name="serviceResourceBiz" class="${name.package.project}.serviceresource.ServiceResourceBizImpl" parent="baseBiz"/>
 </beans>

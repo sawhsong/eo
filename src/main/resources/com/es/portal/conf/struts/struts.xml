@@ -4,6 +4,7 @@
     <include file="com/es/portal/conf/struts/struts-common-module.xml"/>
     <include file="com/es/portal/conf/struts/struts-portal-login.xml"/>
     <include file="com/es/portal/conf/struts/struts-portal-index.xml"/>
+    <include file="com/es/portal/conf/struts/struts-portal-serviceresource.xml"/>
     <include file="com/es/portal/conf/struts/struts-portal-common.xml"/>
     <include file="com/es/portal/conf/struts/struts-portal-ipro.xml"/>
 </struts>
