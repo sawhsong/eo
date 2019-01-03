@@ -84,10 +84,10 @@ html, body {height:100%;background:#FFFFFF;}
 			</div>
 			<div class="additionalLink">
 				<div class="passwordLink">
-					<ui:anchor id="aResetPassword" caption="Reset Password"/>
+					<ui:anchor id="aForgottenUserId" caption="Forgotten User ID?"/>
 				</div>
 				<div class="registerLink">
-					<ui:anchor id="aRequestRegister" caption="Request Register"/>
+					<ui:anchor id="aForgottenPassword" caption="Forgotten Password?"/>
 				</div>
 			</div>
 		</div>

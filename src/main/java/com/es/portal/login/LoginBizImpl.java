@@ -38,12 +38,11 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 		return paramEntity;
 	}
 /*
-	public ParamEntity exeResetPassword(ParamEntity paramEntity) throws Exception {
+	public ParamEntity exeSendUserId(ParamEntity paramEntity) throws Exception {
 		DataSet requestDataSet = paramEntity.getRequestDataSet();
 		DataSet userDataSet = new DataSet();
-		SysUser sysUser = new SysUser();
-		String randomString = CommonUtil.getRandomAlphanumeric(12);
-		String loginId = requestDataSet.getValue("loginId");
+		SysUsers sysUsers = new SysUsers();
+		String email = requestDataSet.getValue("email");
 		int result = -1;
 
 		try {

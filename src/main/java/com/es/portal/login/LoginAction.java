@@ -24,17 +24,17 @@ public class LoginAction extends BaseAction {
 		biz.index(paramEntity);
 		return "loginPage";
 	}
-/*
-	public String resetPassword() throws Exception {
+
+	public String forgottenUserId() throws Exception {
 		biz.index(paramEntity);
-		return "resetPassword";
+		return "forgottenUserId";
 	}
 
-	public String requestRegister() throws Exception {
+	public String forgottenPassword() throws Exception {
 		biz.index(paramEntity);
-		return "requestRegister";
+		return "forgottenPassword";
 	}
-*/
+
 	public String login() throws Exception {
 		try {
 			biz.exeLogin(paramEntity);
@@ -68,9 +68,9 @@ public class LoginAction extends BaseAction {
 		return "ajaxResponse";
 	}
 /*
-	public String exeResetPassword() throws Exception {
+	public String exeSendUserId() throws Exception {
 		try {
-			biz.exeResetPassword(paramEntity);
+			biz.exeSendUserId(paramEntity);
 		} catch (Exception ex) {
 		}
 		setRequestAttribute("paramEntity", paramEntity);

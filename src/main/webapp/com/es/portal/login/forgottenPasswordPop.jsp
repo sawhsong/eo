@@ -47,28 +47,24 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<div class="input-group">
-				<div class="input-group-addon"><ui:icon className="fa-credit-card fa-lg addonIcon" status="display"/></div>
-				<ui:text name="userName" className="form-control" placeHolder="login.header.userName" checkName="login.header.userName" options="mandatory"/>
-			</div>
-			<div class="input-group">
 				<div class="input-group-addon"><ui:icon className="fa-user fa-lg addonIcon" status="display"/></div>
-				<ui:text name="loginId" className="form-control" placeHolder="login.header.loginId" checkName="login.header.loginId" options="mandatory"/>
+				<ui:text name="loginId" className="form-control" placeHolder="Login ID" checkName="Login ID" options="mandatory"/>
 			</div>
 			<div class="input-group">
 				<div class="input-group-addon"><ui:icon className="fa-lock fa-lg addonIcon" status="display"/></div>
-				<ui:password name="password" className="form-control" placeHolder="login.header.password" checkName="login.header.password" options="mandatory"/>
+				<ui:password name="password" className="form-control" placeHolder="Password" checkName="Password" options="mandatory"/>
 			</div>
 			<div class="input-group">
 				<div class="input-group-addon"><ui:icon className="fa-lock fa-lg addonIcon" status="display"/></div>
-				<ui:password id="passwordConfirm" name="passwordConfirm" className="form-control" placeHolder="Confirm Password" checkName="login.header.password" options="mandatory"/>
+				<ui:password id="passwordConfirm" name="passwordConfirm" className="form-control" placeHolder="Confirm Password" checkName="Password" options="mandatory"/>
 			</div>
 			<div class="input-group">
 				<div class="input-group-addon"><ui:icon className="fa-envelope fa-lg addonIcon" status="display"/></div>
-				<ui:text name="email" className="form-control" placeHolder="login.header.email" checkName="login.header.email" options="mandatory" option="email"/>
+				<ui:text name="email" className="form-control" placeHolder="Email" checkName="Email" options="mandatory" option="email"/>
 			</div>
 			<ui:check name="sendEmail" value="Y" text="login.label.sendMail" displayType="block" isChecked="true"/>
 			<div class="buttonDiv">
-				<ui:button id="btnRequest" type="primary" caption="login.button.requestRegister" iconClass="fa-bullhorn" buttonStyle="padding-top:8px;width:100%;height:40px;font-size:14px;"/>
+				<ui:button id="btnEmail" type="primary" caption="Submit" iconClass="fa-bullhorn" buttonStyle="padding-top:8px;width:100%;height:40px;font-size:14px;"/>
 			</div>
 		</div>
 	</div>

@@ -5,8 +5,8 @@
 		<default-interceptor-ref name="ZebraDefaultStack"/>
 		<action name="login/*" class="com.es.portal.login.LoginAction" method="{1}">
 			<result name="loginPage" type="debugDispatcherResult">/com/es/portal/login/login.jsp</result>
-			<result name="resetPassword" type="debugDispatcherResult">/com/es/portal/login/resetPasswordPop.jsp</result>
-			<result name="requestRegister" type="debugDispatcherResult">/com/es/portal/login/requestRegisterPop.jsp</result>
+			<result name="forgottenUserId" type="debugDispatcherResult">/com/es/portal/login/forgottenUserIdPop.jsp</result>
+			<result name="forgottenPassword" type="debugDispatcherResult">/com/es/portal/login/forgottenPasswordPop.jsp</result>
 			<result name="userProfile" type="debugDispatcherResult">/com/es/portal/login/userProfilePop.jsp</result>
 			<result name="updateUserProfile" type="debugDispatcherResult">/com/es/portal/login/updateUserProfilePop.jsp</result>
 		</action>

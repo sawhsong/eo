@@ -1,5 +1,5 @@
 /**
- * resetPasswordPop.js
+ * forgottenUserIdPop.js
  */
 var popup = null;
 
@@ -11,13 +11,15 @@ $(function() {
 		if (event.which == 13) {
 			var element = event.target;
 
-			if ($(element).is("[name=loginId]") || $(element).is("[name=email]")) {
+			if ($(element).is("[name=email]")) {
 				doProcess();
 			}
 		}
 	});
 
-	$("#btnReset").click(function() {
+	$("#btnEmail").click(function() {
+		commonJs.warn("Will be available soon.");
+		return;
 		doProcess();
 	});
 
@@ -30,7 +32,7 @@ $(function() {
 		}
 
 		commonJs.ajaxSubmit({
-			url:"/login/exeResetPassword.do",
+			url:"/login/exeSendUserId.do",
 			dataType:"json",
 			formId:"fmDefault",
 			success:function(data, textStatus) {
@@ -58,6 +60,6 @@ $(function() {
 	 * load event (document / window)
 	 */
 	$(window).load(function() {
-		$("[name=loginId]").focus();
+		$("[name=email]").focus();
 	});
 });

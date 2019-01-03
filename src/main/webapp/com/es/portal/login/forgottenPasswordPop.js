@@ -1,5 +1,5 @@
 /**
- * requestRegisterPop.js
+ * forgottenPasswordPop.js
  */
 var popup = null;
 
@@ -12,7 +12,9 @@ $(function() {
 		}
 	});
 
-	$("#btnRequest").click(function() {
+	$("#btnEmail").click(function() {
+		commonJs.warn("Will be available soon.");
+		return;
 		doProcess();
 	});
 
@@ -25,7 +27,7 @@ $(function() {
 		}
 
 		if ($("#password").val() != $("#passwordConfirm").val()) {
-			commonJs.error(login.message.confirmPassword);
+			commonJs.error("Password is not matching.");
 		} else {
 			commonJs.ajaxSubmit({
 				url:"/login/exeRequestRegister.do",
@@ -58,6 +60,6 @@ $(function() {
 	 * load event (document / window)
 	 */
 	$(window).load(function() {
-		$("[name=userName]").focus();
+		$("[name=loginId]").focus();
 	});
 });

@@ -46,15 +46,11 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<div class="input-group">
-				<div class="input-group-addon"><ui:icon className="fa-user fa-lg addonIcon" status="display"/></div>
-				<ui:text name="loginId" className="form-control" placeHolder="login.header.loginId" checkName="login.header.loginId" options="mandatory"/>
-			</div>
-			<div class="input-group">
 				<div class="input-group-addon"><ui:icon className="fa-envelope fa-lg addonIcon" status="display"/></div>
-				<ui:text name="email" className="form-control" placeHolder="login.header.email" checkName="login.header.email" options="mandatory" option="email"/>
+				<ui:text name="email" className="form-control" placeHolder="Email" checkName="Email" options="mandatory" option="email"/>
 			</div>
 			<div class="buttonDiv">
-				<ui:button id="btnReset" type="warning" caption="login.button.emailResetpassword" iconClass="fa-send" buttonStyle="padding-top:8px;width:100%;height:40px;font-size:14px;"/>
+				<ui:button id="btnEmail" type="warning" caption="Submit" iconClass="fa-send" buttonStyle="padding-top:8px;width:100%;height:40px;font-size:14px;"/>
 			</div>
 		</div>
 	</div>

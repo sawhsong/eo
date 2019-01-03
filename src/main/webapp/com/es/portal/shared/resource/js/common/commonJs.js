@@ -38,7 +38,7 @@ var commonJs = {
 	 * string utilities
 	 */
 	isEmpty : function(val) {return $.nony.isEmpty(val);},
-	nvl : function(val) {return $.nony.nvl(val);},
+	nvl : function(val, defaultVal) {return $.nony.nvl(val, defaultVal);},
 	trim : function(val) {return $.nony.trim(val);},
 	upperCase : function(val) {return $.nony.upperCase(val);},
 	lowerCase : function(val) {return $.nony.lowerCase(val);},

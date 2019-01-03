@@ -233,9 +233,16 @@ var nony = {
 		if (null == val || "" == val || "undefined" == val || undefined == val) {return true;}
 		else {return false;}
 	},
-	nvl : function(val) {
-		if ($.nony.isEmpty(val)) {return "";}
-		else {return val;}
+	nvl : function(val, defaultVal) {
+		if ($.nony.isEmpty(val)) {
+			if ($.nony.isEmpty(defaultVal)) {
+				return "";
+			} else {
+				return defaultVal;
+			}
+		} else {
+			return val;
+		}
 	},
 	trim : function(txt) {
 		while (txt.indexOf(" ") != -1) {

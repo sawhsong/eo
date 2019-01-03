@@ -22,12 +22,12 @@ $(function() {
 		doProcess({mode:"login"});
 	});
 
-	$("#aResetPassword").click(function(event) {
-		doProcess({mode:"resetPassword"});
+	$("#aForgottenUserId").click(function(event) {
+		doProcess({mode:"forgottenUserId"});
 	});
 
-	$("#aRequestRegister").click(function(event) {
-		doProcess({mode:"requestRegister"});
+	$("#aForgottenPassword").click(function(event) {
+		doProcess({mode:"forgottenPassword"});
 	});
 
 	/*!
@@ -47,7 +47,7 @@ $(function() {
 					var result = commonJs.parseAjaxResult(data, textStatus, "json");
 					if (result.isSuccess == true || result.isSuccess == "true") {
 						var dataSet = result.dataSet;
-						var actionString = commonJs.isEmpty(dataSet.getValue(0, "StartupUrl")) ? "/index/dashboard" : dataSet.getValue(0, "StartupUrl");
+						var actionString = commonJs.nvl(dataSet.getValue(0, "StartupUrl"), "/index/dashboard");
 
 						commonJs.openDialog({
 							type:com.message.I000,
@@ -71,27 +71,27 @@ $(function() {
 				}
 			});
 		} else {
-			if (params.mode == "resetPassword") {
+			if (params.mode == "forgottenUserId") {
 				params = {
-					popupId:"ResetPassword",
-					url:"/login/resetPassword",
+					popupId:"forgottenUserId",
+					url:"/login/forgottenUserId",
 					paramData:{},
-					header:login.header.resetPassword,
+					header:"Forgotten User ID",
 					blind:false,
 					draggable:false,
 					width:400,
-					height:266
+					height:250
 				};
-			} else if (params.mode == "requestRegister") {
+			} else if (params.mode == "forgottenPassword") {
 				params = {
-					popupId:"Request Register",
-					url:"/login/requestRegister",
+					popupId:"forgottenPassword",
+					url:"/login/forgottenPassword",
 					paramData:{},
-					header:login.header.requestRegister,
+					header:"Forgotten Password",
 					blind:false,
 					draggable:false,
 					width:400,
-					height:406
+					height:370
 				};
 			}
 
