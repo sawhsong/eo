@@ -13,6 +13,32 @@ $(function() {
 		if ($(this).attr("disabled")) {return;}
 
 		var isValid = true;
+		var detailLength = 0;
+
+		$("#ulTimesheetDetailHolder").find(".dummyDetail").each(function(index) {
+			$(this).find("[type=hidden]").each(function(index) {
+				if (commonJs.startsWith($(this).attr("name"), "deleted")) {
+					if ($(this).val() != "Y") {
+						detailLength++;
+					}
+				}
+			});
+		});
+
+		if (detailLength < 1) {
+			commonJs.openDialog({
+				type:com.message.E000,
+				contents:"Please select at least one rate item.",
+				blind:true,
+				width:300,
+				buttons:[{
+					caption:com.caption.ok,
+					callback:function() {
+					}
+				}]
+			});
+			return;
+		}
 
 		$("#liDummy").find("input select").each(function(index) {
 			$(this).removeAttr("mandatory");
