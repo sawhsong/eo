@@ -190,7 +190,7 @@ ul>li, ul .depth2 {list-style:none;margin-left:22px;}
 ************************************************************************************************/%>
 </div>
 </div>
-<div id="divBodyRight" class="ui-layout-east"></div>
+<div id="divBodyRight" class="ui-layout-east"><%@ include file="/com/es/portal/common/include/bodyRight.jsp"%></div>
 </div>
 <div id="divFooterHolder" class="ui-layout-south"><%@ include file="/com/es/portal/common/include/footer.jsp"%></div>
 <%/************************************************************************************************

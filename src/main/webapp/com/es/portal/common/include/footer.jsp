@@ -18,8 +18,6 @@ $(function() {
 	<div class="clickablItems"><a id="aDisclaimer">Disclaimer</a></div>
 	<div class="clickablItemsBreak"></div>
 	<div class="clickablItems"><a id="aPrivacy">Privacy</a></div>
-	<div class="clickablItemsBreak"></div>
-	<div class="clickablItems"><a id="aContactUs">Contact Us</a></div>
 </div>
 <div id="divFooterCenter">
 	<div style="width:100%;text-align:center;">&copy; Entity Solutions</div>

@@ -11,7 +11,7 @@ values (sys_users_s.nextval,'admdustin','dsa@entitysolutions.com.au','admdustin'
 alter table sys_users add(startup_url varchar2(100));
 
 update sys_users
-   set startup_url = '/index/dashboard'
+   set startup_url = '/index/main/dashboard'
 ;
 
 

@@ -11,8 +11,8 @@
 * Stylesheet & Javascript
 ************************************************************************************************/%>
 <style type="text/css">
-#divGlobalMenuHeaderGroup {padding:40px 10px 40px 30px;}
-#aLogo {padding:40px 0px 40px 170px;background-size:110px 60px;cursor:default;}
+#divGlobalMenuHeaderGroup {padding:35px 10px 35px 30px;}
+#aLogo {padding:35px 0px 22px 170px;background-size:110px 60px;cursor:default;}
 </style>
 <script type="text/javascript">
 $(function() {

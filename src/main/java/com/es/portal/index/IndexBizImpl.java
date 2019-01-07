@@ -23,4 +23,13 @@ public class IndexBizImpl extends BaseBiz implements IndexBiz {
 		}
 		return paramEntity;
 	}
+
+	public ParamEntity contactus(ParamEntity paramEntity) throws Exception {
+		try {
+			paramEntity.setObject("resultDataSet", new DataSet());
+		} catch (Exception ex) {
+			throw new FrameworkException(paramEntity, ex);
+		}
+		return paramEntity;
+	}
 }

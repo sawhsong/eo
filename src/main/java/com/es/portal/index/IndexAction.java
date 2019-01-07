@@ -22,4 +22,9 @@ public class IndexAction extends BaseAction {
 		biz.dashboard(paramEntity);
 		return "dashboard";
 	}
+
+	public String contactus() throws Exception {
+		biz.contactus(paramEntity);
+		return "contactus";
+	}
 }
