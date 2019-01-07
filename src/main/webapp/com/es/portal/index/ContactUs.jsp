@@ -24,12 +24,12 @@
 ************************************************************************************************/%>
 <%@ include file="/com/es/portal/shared/page/incCssJs.jsp"%>
 <style type="text/css">
+#divDataArea {padding:30px 150px 30px 150px !important;}
 #divDataArea * {font-size:12px;}
 #divDataArea a {color:#f07031;cursor:pointer;}
 #divDataArea a:hover, #divDataArea a:visit, {color:#f07031;}
 h1 {font-size:24px !important;}
 
-.areaContainer {padding:30px 150px 30px 150px !important;}
 .noBorder {border:0px;box-shadow:0px 0px 0px;}
 .caption {padding:14px 8px 14px 8px;border:0px;font-size:13px !important;}
 
@@ -106,6 +106,13 @@ h1 {font-size:24px !important;}
 									<th class="thDefault">Email</th>
 									<td class="tdDefault"><a href="mailto:enquiries@entitysolutions.com.au">enquiries@entitysolutions.com.au</a></td>
 								</tr>
+								<tr>
+									<td class="tdDefault" colspan="3" style="height:10px;"></td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<td class="thDefault" colspan="2"><button type="button" id="btnContactUs_melbourne" class="btn btn-primary"><i class="fa fa-envelope-o fa-4x"></i> Contact Us</button></td>
+								</tr>
 							</table>
 						</td>
 						<td class="tdDefault">
@@ -157,6 +164,13 @@ h1 {font-size:24px !important;}
 									<th class="thDefault">Email</th>
 									<td class="tdDefault"><a href="mailto:enquiries@entitysolutions.com.au">enquiries@entitysolutions.com.au</a></td>
 								</tr>
+								<tr>
+									<td class="tdDefault" colspan="3" style="height:10px;"></td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<td class="thDefault" colspan="2"><button type="button" id="btnContactUs_sydney" class="btn btn-primary"><i class="fa fa-envelope-o fa-4x"></i> Contact Us</button></td>
+								</tr>
 							</table>
 						</td>
 						<td class="tdDefault">
@@ -169,7 +183,419 @@ h1 {font-size:24px !important;}
 									<td class="tdDefault">
 										<div class="mapouter">
 											<div class="gmap_canvas">
-												<iframe style="width:100%;height:270px;" id="gmap_canvas_sysney" src="https://maps.google.com/maps?q=EntitySolutions Level 2, Kyle House 27-31 Macquarie Place, Sydney NSW 2000&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+												<iframe style="width:100%;height:270px;" id="gmap_canvas_sydney" src="https://maps.google.com/maps?q=EntitySolutions Level 2, Kyle House 27-31 Macquarie Place, Sydney NSW 2000&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+											</div>
+										</div>
+									</td>
+									<td class="tdDefault"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+				<table class="tblDefault withPadding">
+					<caption class="caption">Brisbane Office</caption>
+					<colgroup>
+						<col width="50%"/>
+						<col width="50%"/>
+					</colgroup>
+					<tr>
+						<td class="tdDefault" style="vertical-align:top;">
+							<table class="tblDefault withPadding">
+								<colgroup>
+									<col width="10%"/>
+									<col width="20%"/>
+									<col width="*"/>
+								</colgroup>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Street Address</th>
+									<td class="tdDefault">Level 17, 167 Eagle Street, Brisbane QLD 4000</td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Phone</th>
+									<td class="tdDefault">+61 73229 5193</td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Email</th>
+									<td class="tdDefault"><a href="mailto:enquiries@entitysolutions.com.au">enquiries@entitysolutions.com.au</a></td>
+								</tr>
+								<tr>
+									<td class="tdDefault" colspan="3" style="height:10px;"></td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<td class="thDefault" colspan="2"><button type="button" id="btnContactUs_brisbane" class="btn btn-primary"><i class="fa fa-envelope-o fa-4x"></i> Contact Us</button></td>
+								</tr>
+							</table>
+						</td>
+						<td class="tdDefault">
+							<table class="tblDefault withPadding">
+								<colgroup>
+									<col width="*"/>
+									<col width="10%"/>
+								</colgroup>
+								<tr>
+									<td class="tdDefault">
+										<div class="mapouter">
+											<div class="gmap_canvas">
+												<iframe style="width:100%;height:270px;" id="gmap_canvas_brisbane" src="https://maps.google.com/maps?q=EntitySolutions Level 17, 167 Eagle Street, Brisbane QLD 4000&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+											</div>
+										</div>
+									</td>
+									<td class="tdDefault"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+				<table class="tblDefault withPadding">
+					<caption class="caption">Perth Office</caption>
+					<colgroup>
+						<col width="50%"/>
+						<col width="50%"/>
+					</colgroup>
+					<tr>
+						<td class="tdDefault" style="vertical-align:top;">
+							<table class="tblDefault withPadding">
+								<colgroup>
+									<col width="10%"/>
+									<col width="20%"/>
+									<col width="*"/>
+								</colgroup>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Street Address</th>
+									<td class="tdDefault">Level 3, 28 The Esplanade, Perth WA 6000</td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Phone</th>
+									<td class="tdDefault">+61 89463 9333</td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Email</th>
+									<td class="tdDefault"><a href="mailto:enquiries@entitysolutions.com.au">enquiries@entitysolutions.com.au</a></td>
+								</tr>
+								<tr>
+									<td class="tdDefault" colspan="3" style="height:10px;"></td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<td class="thDefault" colspan="2"><button type="button" id="btnContactUs_perth" class="btn btn-primary"><i class="fa fa-envelope-o fa-4x"></i> Contact Us</button></td>
+								</tr>
+							</table>
+						</td>
+						<td class="tdDefault">
+							<table class="tblDefault withPadding">
+								<colgroup>
+									<col width="*"/>
+									<col width="10%"/>
+								</colgroup>
+								<tr>
+									<td class="tdDefault">
+										<div class="mapouter">
+											<div class="gmap_canvas">
+												<iframe style="width:100%;height:270px;" id="gmap_canvas_perth" src="https://maps.google.com/maps?q=EntitySolutions Level 3, 28 The Esplanade, Perth WA 6000&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+											</div>
+										</div>
+									</td>
+									<td class="tdDefault"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+				<table class="tblDefault withPadding">
+					<caption class="caption">New Zealand Office</caption>
+					<colgroup>
+						<col width="50%"/>
+						<col width="50%"/>
+					</colgroup>
+					<tr>
+						<td class="tdDefault" style="vertical-align:top;">
+							<table class="tblDefault withPadding">
+								<colgroup>
+									<col width="10%"/>
+									<col width="20%"/>
+									<col width="*"/>
+								</colgroup>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Street Address</th>
+									<td class="tdDefault">Level 1, Crowe Horwath House, 57 Willis Street, Wellington 6011</td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Phone</th>
+									<td class="tdDefault">+61 89463 9333</td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Email</th>
+									<td class="tdDefault"><a href="mailto:enquiries@entitysolutions.com.au">enquiries@entitysolutions.com.au</a></td>
+								</tr>
+								<tr>
+									<td class="tdDefault" colspan="3" style="height:10px;"></td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<td class="thDefault" colspan="2"><button type="button" id="btnContactUs_nz" class="btn btn-primary"><i class="fa fa-envelope-o fa-4x"></i> Contact Us</button></td>
+								</tr>
+							</table>
+						</td>
+						<td class="tdDefault">
+							<table class="tblDefault withPadding">
+								<colgroup>
+									<col width="*"/>
+									<col width="10%"/>
+								</colgroup>
+								<tr>
+									<td class="tdDefault">
+										<div class="mapouter">
+											<div class="gmap_canvas">
+												<iframe style="width:100%;height:270px;" id="gmap_canvas_nz" src="https://maps.google.com/maps?q=EntitySolutions Level 1, Crowe Horwath House, 57 Willis Street, Wellington 6011&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+											</div>
+										</div>
+									</td>
+									<td class="tdDefault"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="panel-heading"><h1 class="panel-title">ASIA PACIFIC</h1></div>
+			<div id="divDataTablePanel2" class="panel-body">
+				<table class="tblDefault withPadding">
+					<caption class="caption">Singapore Office</caption>
+					<colgroup>
+						<col width="50%"/>
+						<col width="50%"/>
+					</colgroup>
+					<tr>
+						<td class="tdDefault" style="vertical-align:top;">
+							<table class="tblDefault withPadding">
+								<colgroup>
+									<col width="10%"/>
+									<col width="20%"/>
+									<col width="*"/>
+								</colgroup>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Street Address</th>
+									<td class="tdDefault">11 Collyer Quay, #17-00 The Arcade (Suite 1716) Singapore 049317</td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Phone</th>
+									<td class="tdDefault">+65 6532 2141</td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Email</th>
+									<td class="tdDefault"><a href="mailto:enquiries@entitysolutions.com.sg">enquiries@entitysolutions.com.sg</a></td>
+								</tr>
+								<tr>
+									<td class="tdDefault" colspan="3" style="height:10px;"></td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<td class="thDefault" colspan="2"><button type="button" id="btnContactUs_sg" class="btn btn-primary"><i class="fa fa-envelope-o fa-4x"></i> Contact Us</button></td>
+								</tr>
+							</table>
+						</td>
+						<td class="tdDefault">
+							<table class="tblDefault withPadding">
+								<colgroup>
+									<col width="*"/>
+									<col width="10%"/>
+								</colgroup>
+								<tr>
+									<td class="tdDefault">
+										<div class="mapouter">
+											<div class="gmap_canvas">
+												<iframe style="width:100%;height:270px;" id="gmap_canvas_sg" src="https://maps.google.com/maps?q=11%20Collyer%20Quay%2C%20%2317-00%20The%20Arcade%20(Suite%201716)%20Singapore%20049317&t=&z=16&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+											</div>
+										</div>
+									</td>
+									<td class="tdDefault"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+				<table class="tblDefault withPadding">
+					<caption class="caption">Hong Kong Office</caption>
+					<colgroup>
+						<col width="50%"/>
+						<col width="50%"/>
+					</colgroup>
+					<tr>
+						<td class="tdDefault" style="vertical-align:top;">
+							<table class="tblDefault withPadding">
+								<colgroup>
+									<col width="10%"/>
+									<col width="20%"/>
+									<col width="*"/>
+								</colgroup>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Street Address</th>
+									<td class="tdDefault">1F SOHO 77, 77 Bonham Strand, Sheung Wan, Hong Kong</td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Phone</th>
+									<td class="tdDefault">+65 6532 2141</td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Email</th>
+									<td class="tdDefault"><a href="mailto:enquiries@entitysolutions.com.hk">enquiries@entitysolutions.com.hk</a></td>
+								</tr>
+								<tr>
+									<td class="tdDefault" colspan="3" style="height:10px;"></td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<td class="thDefault" colspan="2"><button type="button" id="btnContactUs_hk" class="btn btn-primary"><i class="fa fa-envelope-o fa-4x"></i> Contact Us</button></td>
+								</tr>
+							</table>
+						</td>
+						<td class="tdDefault">
+							<table class="tblDefault withPadding">
+								<colgroup>
+									<col width="*"/>
+									<col width="10%"/>
+								</colgroup>
+								<tr>
+									<td class="tdDefault">
+										<div class="mapouter">
+											<div class="gmap_canvas">
+												<iframe style="width:100%;height:270px;" id="gmap_canvas_hk" src="https://maps.google.com/maps?q=1F%20SOHO%2077%2C%2077%20Bonham%20Strand%2C%20Sheung%20Wan%2C%20Hong%20Kong&t=&z=16&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+											</div>
+										</div>
+									</td>
+									<td class="tdDefault"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+				<table class="tblDefault withPadding">
+					<caption class="caption">Malaysia Office</caption>
+					<colgroup>
+						<col width="50%"/>
+						<col width="50%"/>
+					</colgroup>
+					<tr>
+						<td class="tdDefault" style="vertical-align:top;">
+							<table class="tblDefault withPadding">
+								<colgroup>
+									<col width="10%"/>
+									<col width="20%"/>
+									<col width="*"/>
+								</colgroup>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Street Address</th>
+									<td class="tdDefault">Suite 2B-11-3, Block 2B, Plaza Sentral, Jalan Stesen Sentral 5 Kuala Lumpur Sentral, 50470 Kuala Lumpur, Malaysia</td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Phone</th>
+									<td class="tdDefault">+60 32711 7723</td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Email</th>
+									<td class="tdDefault"><a href="mailto:enquiries@entitysolutions.com.my">enquiries@entitysolutions.com.my</a></td>
+								</tr>
+								<tr>
+									<td class="tdDefault" colspan="3" style="height:10px;"></td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<td class="thDefault" colspan="2"><button type="button" id="btnContactUs_my" class="btn btn-primary"><i class="fa fa-envelope-o fa-4x"></i> Contact Us</button></td>
+								</tr>
+							</table>
+						</td>
+						<td class="tdDefault">
+							<table class="tblDefault withPadding">
+								<colgroup>
+									<col width="*"/>
+									<col width="10%"/>
+								</colgroup>
+								<tr>
+									<td class="tdDefault">
+										<div class="mapouter">
+											<div class="gmap_canvas">
+												<iframe style="width:100%;height:270px;" id="gmap_canvas_my" src="https://maps.google.com/maps?q=Suite 2B-11-3, Block 2B, Plaza Sentral, Jalan Stesen Sentral 5 Kuala Lumpur Sentral, 50470 Kuala Lumpur, Malaysia&t=&z=16&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+											</div>
+										</div>
+									</td>
+									<td class="tdDefault"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="panel-heading"><h1 class="panel-title">UNITED KINGDOM</h1></div>
+			<div id="divDataTablePanel2" class="panel-body">
+				<table class="tblDefault withPadding">
+					<caption class="caption">London Office</caption>
+					<colgroup>
+						<col width="50%"/>
+						<col width="50%"/>
+					</colgroup>
+					<tr>
+						<td class="tdDefault" style="vertical-align:top;">
+							<table class="tblDefault withPadding">
+								<colgroup>
+									<col width="10%"/>
+									<col width="20%"/>
+									<col width="*"/>
+								</colgroup>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Street Address</th>
+									<td class="tdDefault">163 Welcomes Rd, Kenley, Greater London CR8 5HB, UK</td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Phone</th>
+									<td class="tdDefault">+61 39600 0333</td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<th class="thDefault">Email</th>
+									<td class="tdDefault"><a href="mailto:enquiries@entitysolutions.org.uk">enquiries@entitysolutions.org.uk</a></td>
+								</tr>
+								<tr>
+									<td class="tdDefault" colspan="3" style="height:10px;"></td>
+								</tr>
+								<tr>
+									<td class="tdDefault"></td>
+									<td class="thDefault" colspan="2"><button type="button" id="btnContactUs_uk" class="btn btn-primary"><i class="fa fa-envelope-o fa-4x"></i> Contact Us</button></td>
+								</tr>
+							</table>
+						</td>
+						<td class="tdDefault">
+							<table class="tblDefault withPadding">
+								<colgroup>
+									<col width="*"/>
+									<col width="10%"/>
+								</colgroup>
+								<tr>
+									<td class="tdDefault">
+										<div class="mapouter">
+											<div class="gmap_canvas">
+												<iframe style="width:100%;height:270px;" id="gmap_canvas_uk" src="https://maps.google.com/maps?q=163 Welcomes Rd, Kenley, Greater London CR8 5HB, UK&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
 											</div>
 										</div>
 									</td>

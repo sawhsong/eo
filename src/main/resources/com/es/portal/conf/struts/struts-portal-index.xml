@@ -9,6 +9,7 @@
 		</action>
 		<action name="contact/*" class="com.es.portal.index.IndexAction" method="{1}">
 			<result name="contactus" type="debugDispatcherResult">/com/es/portal/index/ContactUs.jsp</result>
+			<result name="contactuspop" type="debugDispatcherResult">/com/es/portal/index/ContactUsPop.jsp</result>
 		</action>
 	</package>
 </struts>

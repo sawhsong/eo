@@ -27,4 +27,9 @@ public class IndexAction extends BaseAction {
 		biz.contactus(paramEntity);
 		return "contactus";
 	}
+
+	public String contactuspop() throws Exception {
+		biz.contactuspop(paramEntity);
+		return "contactuspop";
+	}
 }
