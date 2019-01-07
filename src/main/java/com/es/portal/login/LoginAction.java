@@ -44,12 +44,13 @@ public class LoginAction extends BaseAction {
 				HpPersonD hpPersonD = (HpPersonD)paramEntity.getObject("hpPersonD");
 				DataSet resultDataset = (DataSet)paramEntity.getObject("resultDataset");
 
-				session.setAttribute("UserId", CommonUtil.toString(sysUsers.getUserId()));
+				session.setAttribute("UserId", CommonUtil.toString(sysUsers.getUserId(), "#"));
 				session.setAttribute("LoginId", sysUsers.getUserName()); // LoginId = UserName
+				session.setAttribute("PersonId", CommonUtil.toString(sysUsers.getPersonId(), "#"));
 				session.setAttribute("UserSurname", hpPersonD.getSurname());
 				session.setAttribute("UserFirstName", hpPersonD.getFirstName());
 				session.setAttribute("UserFullName", hpPersonD.getFullName());
-				session.setAttribute("EmploymentOrgId", hpPersonD.getEmploymentCompanyOrgId());
+				session.setAttribute("EmploymentOrgId", CommonUtil.toString(hpPersonD.getEmploymentCompanyOrgId(), "#"));
 				session.setAttribute("SecurityRole", sysUsers.getPortalSecurityRole());
 				session.setAttribute("StartupUrl", sysUsers.getStartupUrl());
 
@@ -85,7 +86,7 @@ public class LoginAction extends BaseAction {
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";
 	}
-
+*/
 	public String getUserProfile() throws Exception {
 		biz.getUserProfile(paramEntity);
 		return "userProfile";
@@ -96,34 +97,15 @@ public class LoginAction extends BaseAction {
 		return "updateUserProfile";
 	}
 
-	public String exeUpdate() throws Exception {
-//		try {
-//			biz.exeUpdate(paramEntity);
-//		} catch (Exception ex) {
-//			return "ajaxResponse";
-//		} finally {
-//			setRequestAttribute("paramEntity", paramEntity);
-//		}
-//		return "ajaxResponse";
-
+	public String exeUpdateUserProfile() throws Exception {
 		try {
-			biz.exeUpdate(paramEntity);
-
-			paramEntity.setObject("messageCode", paramEntity.getMessageCode());
-			paramEntity.setObject("message", paramEntity.getMessage());
-			if (paramEntity.isSuccess()) {
-				paramEntity.setObject("action", "/login/logout.do");
-				paramEntity.setObject("message", paramEntity.getMessage()+"<br/>"+getMessage("login.message.restart", paramEntity));
-			} else {
-				paramEntity.setObject("script", "history.go(-1);");
-			}
+			biz.exeUpdateUserProfile(paramEntity);
 		} catch (Exception ex) {
-			paramEntity.setObject("script", "history.go(-1);");
 		}
-
-		return "pageHandler";
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
 	}
-*/
+
 	public String controlAdminTool() throws Exception {
 		DataSet requestDataSet = paramEntity.getRequestDataSet();
 		String flag = requestDataSet.getValue("flag");
@@ -145,8 +127,9 @@ public class LoginAction extends BaseAction {
 				SysUsers sysUsersForAdminTool = (SysUsers)paramEntity.getObject("sysUsersForAdminTool");
 				HpPersonD hpPersonDForAdminTool = (HpPersonD)paramEntity.getObject("hpPersonDForAdminTool");
 
-				session.setAttribute("UserIdForAdminTool", sysUsersForAdminTool.getUserId());
+				session.setAttribute("UserIdForAdminTool", CommonUtil.toString(sysUsersForAdminTool.getUserId(), "#"));
 				session.setAttribute("LoginIdForAdminTool", sysUsersForAdminTool.getUserName()); // LoginId = UserName
+				session.setAttribute("PersonIdForAdminTool", CommonUtil.toString(sysUsersForAdminTool.getPersonId(), "#"));
 				session.setAttribute("UserFullNameForAdminTool", hpPersonDForAdminTool.getFullName());
 				session.setAttribute("EmpOrgIdForAdminTool", CommonUtil.toString(hpPersonDForAdminTool.getEmploymentCompanyOrgId(), "#"));
 				session.setAttribute("SysUsersForAdminTool", sysUsersForAdminTool);
@@ -162,6 +145,7 @@ public class LoginAction extends BaseAction {
 		try {
 			session.removeAttribute("UserIdForAdminTool");
 			session.removeAttribute("LoginIdForAdminTool");
+			session.removeAttribute("PersonIdForAdminTool");
 			session.removeAttribute("UserFullNameForAdminTool");
 			session.removeAttribute("EmpOrgIdForAdminTool");
 			session.removeAttribute("SysUsersForAdminTool");

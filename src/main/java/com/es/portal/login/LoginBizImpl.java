@@ -6,21 +6,26 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.es.portal.common.extend.BaseBiz;
+import com.es.portal.common.module.bizservice.userprofile.UserProfileBizService;
 import com.es.portal.conf.resource.ormapper.dao.HpPersonD.HpPersonDDao;
 import com.es.portal.conf.resource.ormapper.dao.SysUsers.SysUsersDao;
 import com.es.portal.conf.resource.ormapper.dto.oracle.HpPersonD;
 import com.es.portal.conf.resource.ormapper.dto.oracle.SysUsers;
 
+import net.sf.json.JSONArray;
 import zebra.data.DataSet;
 import zebra.data.ParamEntity;
 import zebra.exception.FrameworkException;
 import zebra.util.CommonUtil;
+import zebra.util.JsonUtil;
 
 public class LoginBizImpl extends BaseBiz implements LoginBiz {
 	@Autowired
 	private SysUsersDao sysUsersDao;
 	@Autowired
 	private HpPersonDDao hpPersonDDao;
+	@Autowired
+	private UserProfileBizService userProfileBizService;
 	@Autowired
 	private LoginMessageSender loginMessageSender;
 
@@ -169,22 +174,24 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 		}
 		return paramEntity;
 	}
-/*
+
 	public ParamEntity getUserProfile(ParamEntity paramEntity) throws Exception {
-		DataSet requestDataSet = paramEntity.getRequestDataSet();
-		SysUser sysUser = new SysUser();
-		String userId = requestDataSet.getValue("userId");
-		String maxRowPerPage[], pageNumPerPage[];
+		HttpSession session = paramEntity.getSession();
+		DataSet userDetails = new DataSet();
+		String loginId = CommonUtil.nvl((String)session.getAttribute("PersonIdForAdminTool"), (String)session.getAttribute("PersonId"));
+		String header[] = new String[] {"personId", "prefixCode", "prefix", "surName", "firstName", "middleName", "preferredName", "dateOfBirth", "email",
+				"stateCode", "street", "suburb", "state", "postCode", "mobile", "landLine", "", "country",
+				"emergencyContactEmail", "emergencyContactName", "emergencyContactPhone", "emergencyContactRelationship"};
 
 		try {
-			sysUser = sysUserDao.getUserByUserId(userId);
+			userDetails.addName(header);
 
-			maxRowPerPage = CommonUtil.split(ConfigUtil.getProperty("view.data.maxRowsPerPage"), ConfigUtil.getProperty("delimiter.data"));
-			pageNumPerPage = CommonUtil.split(ConfigUtil.getProperty("view.data.pageNumsPerPage"), ConfigUtil.getProperty("delimiter.data"));
+			userProfileBizService.getPersonProfileService(paramEntity, loginId);
+			paramEntity.setDataSetValueFromJsonResultset(userDetails);
 
-			paramEntity.setObject("sysUser", sysUser);
-			paramEntity.setObject("maxRowPerPage", maxRowPerPage);
-			paramEntity.setObject("pageNumPerPage", pageNumPerPage);
+			paramEntity.setObject("prefixLookupList", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("prefixLookupList")));
+			paramEntity.setObject("stateLookupList", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("stateLookupList")));
+			paramEntity.setObject("userDetails", userDetails);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
@@ -192,46 +199,8 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 		return paramEntity;
 	}
 
-	public ParamEntity exeUpdate(ParamEntity paramEntity) throws Exception {
-		DataSet requestDataSet = paramEntity.getRequestDataSet();
-		DataSet dsFile = paramEntity.getRequestFileDataSet();
-		String userId = requestDataSet.getValue("userId");
-		String rootPath = (String)MemoryBean.get("applicationRealPath");
-		String pathToSave = ConfigUtil.getProperty("path.image.photo");
-		SysUser sysUser = new SysUser();
-		HttpSession session = paramEntity.getSession();
-		int result = -1;
-
+	public ParamEntity exeUpdateUserProfile(ParamEntity paramEntity) throws Exception {
 		try {
-			sysUser = sysUserDao.getUserByUserId(userId);
-
-			sysUser.setUserName(requestDataSet.getValue("userName"));
-			sysUser.setLoginId(requestDataSet.getValue("loginId"));
-			sysUser.setLoginPassword(requestDataSet.getValue("loginPassword"));
-			sysUser.setLanguage(requestDataSet.getValue("language"));
-			sysUser.setThemeType(requestDataSet.getValue("themeType"));
-			sysUser.setMaxRowPerPage(CommonUtil.toDouble(requestDataSet.getValue("maxRowsPerPage")));
-			sysUser.setPageNumPerPage(CommonUtil.toDouble(requestDataSet.getValue("pageNumsPerPage")));
-			sysUser.setEmail(requestDataSet.getValue("email"));
-			sysUser.setUpdateUserId((String)session.getAttribute("UserId"));
-			sysUser.setUpdateDate(CommonUtil.toDate(CommonUtil.getSysdate()));
-
-			if (dsFile.getRowCnt() > 0) {
-				String fileName = dsFile.getValue("NEW_NAME"), fullPath = "";
-
-				fileName = userId+"_"+fileName;
-				fullPath = rootPath+pathToSave+"/"+fileName;
-				FileUtil.moveFile(dsFile, fullPath);
-
-				sysUser.setPhotoPath(pathToSave+"/"+fileName);
-			}
-
-			sysUser.addUpdateColumnFromField();
-			result = sysUserDao.update(userId, sysUser);
-			if (result <= 0) {
-				throw new FrameworkException("E801", getMessage("E801", paramEntity));
-			}
-
 			paramEntity.setSuccess(true);
 			paramEntity.setMessage("I801", getMessage("I801", paramEntity));
 		} catch (Exception ex) {
@@ -239,7 +208,7 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 		}
 		return paramEntity;
 	}
-*/
+
 	public ParamEntity setSessionValuesForAdminTool(ParamEntity paramEntity) throws Exception {
 		DataSet requestDataSet = paramEntity.getRequestDataSet();
 		SysUsers sysUsers = new SysUsers();

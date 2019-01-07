@@ -303,6 +303,7 @@ public class DataSet {
 
 	public String getValue(int row, String name) throws Exception {
 		Integer idx = (Integer)fieldNameIdx.get(name);
+		String rtn = "";
 
 		if (idx == null) {return "";}
 
@@ -310,7 +311,10 @@ public class DataSet {
 			logger.error("Out of Row index : "+row);
 			throw new Exception("[DataSet : getValue(int, String)] Exception : Out of Row index : "+row);
 		}
-		return CommonUtil.nvl(getValue(row, idx.intValue()));
+
+		rtn = CommonUtil.nvl(getValue(row, idx.intValue()));
+
+		return CommonUtil.equalsIgnoreCase(rtn, "null") ? "" : rtn;
 	}
 
 	public String getValue(int row, int col) {

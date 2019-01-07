@@ -15,4 +15,5 @@
 	<bean id="autoCompletionBiz" name="autoCompletionBiz" class="${name.package.project}.common.module.autocompletion.AutoCompletionBizImpl" parent="baseBiz"/>
 
 	<bean id="timesheetBizService" name="timesheetBizService" class="${name.package.project}.common.module.bizservice.timesheet.TimesheetBizServiceImpl" parent="baseBiz"/>
+	<bean id="userprofileBizService" name="userprofileBizService" class="${name.package.project}.common.module.bizservice.userprofile.UserProfileBizServiceImpl" parent="baseBiz"/>
 </beans>

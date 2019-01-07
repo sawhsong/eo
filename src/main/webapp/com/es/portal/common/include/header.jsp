@@ -12,7 +12,6 @@
 	String startupUrlHeaderPage = (String)session.getAttribute("StartupUrl");
 
 	String userNameHeaderPage = hpPersonDHeaderPage.getFullName();
-	String loginIdHeaderPage = sysUserHeaderPage.getUserName();
 	String selectedHeaderMenuHeaderPage = (String)session.getAttribute("headerMenuId");
 
 	DataSet dsMenuHeaderPage = MenuManager.getMenu(authGroupIdHeaderPage, "", "1", "1");
@@ -46,7 +45,7 @@ $(function() {
 	};
 
 	setLoginUserContextMenu = function() {
-		ctxMenu.loggedInUser[0].fun = function() {getMyProfile("<%=loginIdHeaderPage%>");};
+		ctxMenu.loggedInUser[0].fun = function() {getMyProfile();};
 		ctxMenu.loggedInUser[1].fun = function() {logout();};
 		$("#btnLoggedInUser").contextMenu(ctxMenu.loggedInUser, {
 			classPrefix:com.constants.ctxClassPrefixHeader,
@@ -61,17 +60,15 @@ $(function() {
 		});
 	};
 
-	getMyProfile = function(userId) {
+	getMyProfile = function() {
 		popupUserProfile = commonJs.openPopup({
 			popupId:"UserProfile",
 			url:"/login/getUserProfile",
-			paramData:{
-				userId:userId
-			},
-			header:"User Profile Detail",
+			paramData:{},
+			header:"User Profile",
 			blind:true,
-			width:720,
-			height:340
+			width:1100,
+			height:600
 		});
 	};
 
@@ -107,8 +104,7 @@ $(function() {
 <%
 				} else {
 %>
-				<div id="divUsingUserAs" class="headerGblMenus" style="color:#D92E24;cursor:default;">
-				</div>
+				<div id="divUsingUserAs" class="headerGblMenus" style="color:#D92E24;cursor:default;"></div>
 				&nbsp;&nbsp;&nbsp;
 <%
 				}

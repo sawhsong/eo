@@ -294,6 +294,15 @@ public class ParamEntity {
 		}
 	}
 
+	public void setDataSetValueFromJsonResultset(DataSet dataSet) throws Exception {
+		if (dataSet != null && dataSet.getNames() != null) {
+			dataSet.addRow();
+			for (int i=0; i<dataSet.getColumnCnt(); i++) {
+				dataSet.setValue(dataSet.getRowCnt()-1, dataSet.getName(i), getObject(dataSet.getName(i)));
+			}
+		}
+	}
+
 	private boolean isDataSet(Node node) {
 		NodeList nodeList = node.getChildNodes();
 
