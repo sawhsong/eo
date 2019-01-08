@@ -14,6 +14,11 @@
 	<bean id="autoCompletionAction" name="autoCompletionAction" class="${name.package.project}.common.module.autocompletion.AutoCompletionAction"/>
 	<bean id="autoCompletionBiz" name="autoCompletionBiz" class="${name.package.project}.common.module.autocompletion.AutoCompletionBizImpl" parent="baseBiz"/>
 
+	<!--/* Common Service */-->
+	<bean id="comServiceAction" name="comServiceAction" class="${name.package.project}.common.module.comservice.ComServiceAction"/>
+	<bean id="comServiceBiz" name="comServiceBiz" class="${name.package.project}.common.module.comservice.ComServiceBizImpl" parent="baseBiz"/>
+
+	<!--/* Biz Logic Service */-->
 	<bean id="timesheetBizService" name="timesheetBizService" class="${name.package.project}.common.module.bizservice.timesheet.TimesheetBizServiceImpl" parent="baseBiz"/>
 	<bean id="userprofileBizService" name="userprofileBizService" class="${name.package.project}.common.module.bizservice.userprofile.UserProfileBizServiceImpl" parent="baseBiz"/>
 </beans>

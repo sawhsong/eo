@@ -225,9 +225,13 @@
 			if (this.shadowEffect) {$(this.calendarBase).addClass("shadowForDivNonyCalendarBase");}
 		},
 		_setPosition : function(params) {
-			var correctionValueX = params.adjustX || 8, correctionValueY = params.adjustY || 18;
+			var positionX = params.positionX || "left", correctionValueX = params.adjustX || 8, correctionValueY = params.adjustY || 18;
 
-			$(this.calendarBase).css("left", ($(this.clickedImg).offset().left + correctionValueX - this.width) + "px");
+			if (positionX == "right" || positionX == "Right") {
+				$(this.calendarBase).css("left", ($(this.clickedImg).offset().left + correctionValueX) + "px");
+			} else {
+				$(this.calendarBase).css("left", ($(this.clickedImg).offset().left + correctionValueX - this.width) + "px");
+			}
 			$(this.calendarBase).css("top", ($(this.clickedImg).offset().top + correctionValueY) + "px");
 		},
 		_setHeader : function(argYear, argMonth) {

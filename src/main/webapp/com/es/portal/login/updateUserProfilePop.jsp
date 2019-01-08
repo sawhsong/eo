@@ -8,10 +8,9 @@
 ************************************************************************************************/%>
 <%
 	ParamEntity pe = (ParamEntity)request.getAttribute("paramEntity");
-	DataSet dsRequest = (DataSet)pe.getRequestDataSet();
-	SysUser sysUser = (SysUser)pe.getObject("sysUser");
-	String maxRowPerPage[] = (String[])pe.getObject("maxRowPerPage");
-	String pageNumPerPage[] = (String[])pe.getObject("pageNumPerPage");
+	DataSet dsUser = (DataSet)pe.getObject("userDetails");
+	DataSet dsPrefix = (DataSet)pe.getObject("prefixLookupList");
+	DataSet dsState = (DataSet)pe.getObject("stateLookupList");
 %>
 <%/************************************************************************************************
 * HTML
@@ -28,8 +27,12 @@
 ************************************************************************************************/%>
 <%@ include file="/com/es/portal/shared/page/incCssJs.jsp"%>
 <style type="text/css">
+ul {margin-left:20px}
+li {margin-top:6px;line-height:170%;}
+li:first-child {margin-top:0px;}
 </style>
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbo3Ogz4PpHbVSIhpExPrwe0H7zU82vWo&libraries=places&callback=initAutoComplete" async defer></script>
 <script type="text/javascript">
 </script>
 </head>
@@ -56,7 +59,19 @@
 	</div>
 </div>
 <div id="divSearchCriteriaArea"></div>
-<div id="divInformArea">
+<div id="divInformArea" class="areaContainerPopup">
+	<table class="tblInform">
+		<caption>Note</caption>
+		<tr>
+			<td class="tdInform">
+				<ul>
+					<li>Please note that you cannot make changes to your profile while a task flow that requests your personal details is pending completion. Updates submitted via the task flow will supersede changes made to your profile.</li>
+					<li>Changes to your First, Middle or Surname must be supported by proper documentation. Please contact your Customer Relationship Manager to report a change in your name.</li>
+					<li>One contact number is mandatory. The email address provided will be your Entity Online email address, and can be separate from the email your payslips are sent to.</li>
+				</ul>
+			</td>
+		</tr>
+	</table>
 </div>
 <%/************************************************************************************************
 * End of fixed panel
@@ -68,95 +83,144 @@
 * Real Contents - scrollable panel(data, paging)
 ************************************************************************************************/%>
 <div id="divDataArea" class="areaContainerPopup">
-	<div class="panel panel-default" style="width:120px;height:110px;">
-		<div class="panel-body">
-			<table class="tblDefault">
-				<tr>
-					<td class="tdDefaultCt">
-						<img id="img<%=sysUser.getUserId()%>" src="<%=sysUser.getPhotoPath()%>" class="imgDis" style="width:90px;height:90px;" title="<%=sysUser.getUserName()%>"/>
-					</td>
-				</tr>
-			</table>
-		</div>
+	<div style="float:left;width:49%;">
+		<table class="tblEdit">
+			<caption>Personal Details</caption>
+			<colgroup>
+				<col width="26%"/>
+				<col width="*"/>
+			</colgroup>
+			<tr>
+				<th class="thEdit rt">Prefix</th>
+				<td class="tdEdit">
+					<ui:select name="prefix">
+<%
+						for (int i=0; i<dsPrefix.getRowCnt(); i++) {
+							String selected = (CommonUtil.equals(dsPrefix.getValue(i, "code"), dsUser.getValue("prefixCode"))) ? "selected" : "";
+%>
+							<option value="<%=dsPrefix.getValue(i, "code")%>" <%=selected%>><%=dsPrefix.getValue(i, "meaning")%></option>
+<%
+						}
+%>
+					</ui:select>
+				</td>
+			</tr>
+			<tr>
+				<th class="thEdit rt">First Name</th>
+				<td class="tdEdit"><ui:text name="firstName" value="<%=dsUser.getValue(\"firstName\")%>" status="display"/></td>
+			</tr>
+			<tr>
+				<th class="thEdit rt">Middle Name</th>
+				<td class="tdEdit"><ui:text name="middleName" value="<%=dsUser.getValue(\"middleName\")%>" status="display"/></td>
+			</tr>
+			<tr>
+				<th class="thEdit rt">Surname</th>
+				<td class="tdEdit"><ui:text name="surname" value="<%=dsUser.getValue(\"surName\")%>" status="display"/></td>
+			</tr>
+			<tr>
+				<th class="thEdit rt">Preferred Name</th>
+				<td class="tdEdit"><ui:text name="preferredName" value="<%=dsUser.getValue(\"preferredName\")%>"/></td>
+			</tr>
+			<tr>
+				<th class="thEdit rt">Date of Birth</th>
+				<td class="tdEdit">
+					<ui:text name="dateOfBirth" className="Ct hor" style="width:100px" value="<%=dsUser.getValue(\"dateOfBirth\")%>" option="date"/>
+					<ui:icon id="icnDateOfBirth" className="fa-calendar hor"/>
+				</td>
+			</tr>
+		</table>
 	</div>
-	<table class="tblEdit">
-		<colgroup>
-			<col width="22%"/>
-			<col width="28%"/>
-			<col width="22%"/>
-			<col width="28%"/>
-		</colgroup>
-		<tr>
-			<th class="thEdit"><mc:msg key="login.header.changePhoto"/></th>
-			<td class="tdEdit" colspan="3">
-				<input type="file" id="filePhotoPath" name="filePhotoPath" class="file" value="" style="width:540px;" checkName="<mc:msg key="login.header.changePhoto"/>"/>
-			</td>
-		</tr>
-		<tr>
-			<th class="thEdit"><mc:msg key="login.header.userId"/></th>
-			<td class="tdEdit">
-				<input type="text" id="userId" name="userId" value="<%=sysUser.getUserId()%>" class="txtDpl" readonly/>
-			</td>
-			<th class="thEdit"><mc:msg key="login.header.loginId"/></th>
-			<td class="tdEdit">
-				<input type="text" id="loginId" name="loginId" value="<%=sysUser.getLoginId()%>" class="txtEn" checkName="<mc:msg key="login.header.loginId"/>" mandatory/>
-			</td>
-		</tr>
-		<tr>
-			<th class="thEdit"><mc:msg key="login.header.userName"/></th>
-			<td class="tdEdit">
-				<input type="text" id="userName" name="userName" value="<%=sysUser.getUserName()%>" class="txtEn" checkName="<mc:msg key="login.header.userName"/>" mandatory/>
-			</td>
-			<th class="thEdit"><mc:msg key="login.header.password"/></th>
-			<td class="tdEdit">
-				<input type="text" id="loginPassword" name="loginPassword" value="<%=sysUser.getLoginPassword()%>" class="txtEn" checkName="<mc:msg key="login.header.password"/>" mandatory/>
-			</td>
-		</tr>
-		<tr>
-			<th class="thEdit"><mc:msg key="login.header.language"/></th>
-			<td class="tdEdit">
-				<ui:ccselect name="language" codeType="LANGUAGE_TYPE" options="mandatory" selectedValue="<%=sysUser.getLanguage()%>"/>
-			</td>
-			<th class="thEdit"><mc:msg key="login.header.themeType"/></th>
-			<td class="tdEdit">
-				<ui:ccselect name="themeType" codeType="USER_THEME_TYPE" options="mandatory" selectedValue="<%=sysUser.getThemeType()%>"/>
-			</td>
-		</tr>
-		<tr>
-			<th class="thEdit"><mc:msg key="login.header.maxRowsPerPage"/></th>
-			<td class="tdEdit">
-				<select id="maxRowsPerPage" name="maxRowsPerPage" class="bootstrapSelect">
+	<div style="float:right;width:50%;">
+		<table class="tblEdit">
+			<caption>Address</caption>
+			<colgroup>
+				<col width="26%"/>
+				<col width="*"/>
+			</colgroup>
+			<tr>
+				<th class="thEdit rt"><font style="color:#f07031;">Search Address</font></th>
+				<td class="tdEdit"><ui:text name="searchAddress"/></td>
+			</tr>
+			<tr>
+				<th class="thEdit rt">Street</th>
+				<td class="tdEdit"><ui:text name="street" value="<%=dsUser.getValue(\"street\")%>"/></td>
+			</tr>
+			<tr>
+				<th class="thEdit rt">Suburb</th>
+				<td class="tdEdit"><ui:text name="suburb" value="<%=dsUser.getValue(\"suburb\")%>"/></td>
+			</tr>
+			<tr>
+				<th class="thEdit rt">State</th>
+				<td class="tdEdit">
+					<ui:select name="state">
 <%
-				for (int i=0; i<maxRowPerPage.length; i++) {
-					String selected = (CommonUtil.equals(maxRowPerPage[i], CommonUtil.toString(sysUser.getMaxRowPerPage(), "###"))) ? "selected" : "";
+						for (int i=0; i<dsState.getRowCnt(); i++) {
+							String selected = (CommonUtil.equals(dsState.getValue(i, "code"), dsUser.getValue("stateCode"))) ? "selected" : "";
 %>
-					<option value="<%=maxRowPerPage[i]%>" <%=selected%>><%=maxRowPerPage[i]%></option>
+							<option value="<%=dsState.getValue(i, "code")%>" <%=selected%>><%=dsState.getValue(i, "meaning")%></option>
 <%
-				}
+						}
 %>
-				</select>
-			</td>
-			<th class="thEdit"><mc:msg key="login.header.pageNumsPerPage"/></th>
-			<td class="tdEdit">
-				<select id="pageNumsPerPage" name="pageNumsPerPage" class="bootstrapSelect">
-<%
-				for (int i=0; i<pageNumPerPage.length; i++) {
-					String selected = (CommonUtil.equals(pageNumPerPage[i], CommonUtil.toString(sysUser.getPageNumPerPage(), "###"))) ? "selected" : "";
-%>
-					<option value="<%=pageNumPerPage[i]%>" <%=selected%>><%=pageNumPerPage[i]%></option>
-<%
-				}
-%>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<th class="thEdit"><mc:msg key="login.header.email"/></th>
-			<td class="tdEdit" colspan="3">
-				<input type="text" id="email" name="email" value="<%=sysUser.getEmail()%>" class="txtEn" checkName="<mc:msg key="login.header.email"/>" mandatory option="email"/>
-			</td>
-		</tr>
-	</table>
+					</ui:select>
+				</td>
+			</tr>
+			<tr>
+				<th class="thEdit rt">Postcode</th>
+				<td class="tdEdit"><ui:text name="postCode" value="<%=dsUser.getValue(\"postCode\")%>"/></td>
+			</tr>
+			<tr>
+				<th class="thEdit rt">Country</th>
+				<td class="tdEdit"><ui:text name="country" value="<%=dsUser.getValue(\"country\")%>"/></td>
+			</tr>
+		</table>
+	</div>
+	<div class="verGap20"></div>
+	<div style="float:left;width:49%;">
+		<table class="tblEdit">
+			<caption>Contact Details</caption>
+			<colgroup>
+				<col width="26%"/>
+				<col width="*"/>
+			</colgroup>
+			<tr>
+				<th class="thEdit rt">Mobile</th>
+				<td class="tdEdit"><ui:text name="mobile" value="<%=dsUser.getValue(\"mobile\")%>"/></td>
+			</tr>
+			<tr>
+				<th class="thEdit rt">Landline</th>
+				<td class="tdEdit"><ui:text name="landLine" value="<%=dsUser.getValue(\"landLine\")%>"/></td>
+			</tr>
+			<tr>
+				<th class="thEdit rt mandatory">Email</th>
+				<td class="tdEdit"><ui:text name="email" value="<%=dsUser.getValue(\"email\")%>" option="email" options="mandatory"/></td>
+			</tr>
+		</table>
+	</div>
+	<div style="float:right;width:50%;">
+		<table class="tblEdit">
+			<caption>Emergency Contact Details</caption>
+			<colgroup>
+				<col width="26%"/>
+				<col width="*"/>
+			</colgroup>
+			<tr>
+				<th class="thEdit rt">Name</th>
+				<td class="tdEdit"><ui:text name="emergencyContactName" value="<%=dsUser.getValue(\"emergencyContactName\")%>"/></td>
+			</tr>
+			<tr>
+				<th class="thEdit rt">Relationship</th>
+				<td class="tdEdit"><ui:text name="emergencyContactRelationship" value="<%=dsUser.getValue(\"emergencyContactRelationship\")%>"/></td>
+			</tr>
+			<tr>
+				<th class="thEdit rt">Phone</th>
+				<td class="tdEdit"><ui:text name="emergencyContactPhone" value="<%=dsUser.getValue(\"emergencyContactPhone\")%>"/></td>
+			</tr>
+			<tr>
+				<th class="thEdit rt">Email</th>
+				<td class="tdEdit"><ui:text name="emergencyContactEmail" value="<%=dsUser.getValue(\"emergencyContactEmail\")%>"/></td>
+			</tr>
+		</table>
+	</div>
 </div>
 <div id="divPagingArea"></div>
 <%/************************************************************************************************

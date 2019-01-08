@@ -7,5 +7,9 @@
 		<!--/* Auto Completion */-->
 		<action name="autoCompletion/*" class="com.es.portal.common.module.autocompletion.AutoCompletionAction" method="{1}">
 		</action>
+
+		<!--/* Common Service */-->
+		<action name="comService/*" class="com.es.portal.common.module.comservice.ComServiceAction" method="{1}">
+		</action>
 	</package>
 </struts>

@@ -6,14 +6,12 @@ $(function() {
 	 * event
 	 */
 	$("#btnEdit").click(function(event) {
-		parent.popupUserProfile.resizeTo(0, 116);
+		parent.popupUserProfile.resizeTo(0, 140);
 
 		commonJs.doSubmit({
 			form:"fmDefault",
-			action:"/login/getUpdateUserProfile.do",
-			data:{
-				userId:userId
-			}
+			action:"/login/getUpdateUserProfile",
+			data:{}
 		});
 	});
 

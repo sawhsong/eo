@@ -1,6 +1,7 @@
 package zebra.config;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class MemoryBean {
@@ -37,5 +38,20 @@ public class MemoryBean {
 	@SuppressWarnings("rawtypes")
 	public static Map getObject() {
 		return MemoryBean.getInstance().map;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public String toString() {
+		String rtn = "";
+
+		if (!(map == null || map.isEmpty())) {
+			for (Iterator keys = map.keySet().iterator(); keys.hasNext();) {
+				String key = (String)keys.next();
+				rtn += "ParamEntity Object - [" + (String)keys.next() + "] : " + map.get(key) + "\n";
+			}
+		}
+		rtn += "\n";
+
+		return rtn;
 	}
 }

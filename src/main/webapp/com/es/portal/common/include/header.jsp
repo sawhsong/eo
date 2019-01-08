@@ -23,6 +23,7 @@
 ************************************************************************************************/%>
 <script type="text/javascript">
 var popupUserProfile;
+var startupUrl = "<%=startupUrlHeaderPage%>";
 
 $(function() {
 	$("#aLogo").click(function(event) {
@@ -68,7 +69,7 @@ $(function() {
 			header:"User Profile",
 			blind:true,
 			width:1100,
-			height:600
+			height:560
 		});
 	};
 

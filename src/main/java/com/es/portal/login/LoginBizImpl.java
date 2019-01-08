@@ -178,7 +178,7 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 	public ParamEntity getUserProfile(ParamEntity paramEntity) throws Exception {
 		HttpSession session = paramEntity.getSession();
 		DataSet userDetails = new DataSet();
-		String loginId = CommonUtil.nvl((String)session.getAttribute("PersonIdForAdminTool"), (String)session.getAttribute("PersonId"));
+		String personId = CommonUtil.nvl((String)session.getAttribute("PersonIdForAdminTool"), (String)session.getAttribute("PersonId"));
 		String header[] = new String[] {"personId", "prefixCode", "prefix", "surName", "firstName", "middleName", "preferredName", "dateOfBirth", "email",
 				"stateCode", "street", "suburb", "state", "postCode", "mobile", "landLine", "", "country",
 				"emergencyContactEmail", "emergencyContactName", "emergencyContactPhone", "emergencyContactRelationship"};
@@ -186,7 +186,7 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 		try {
 			userDetails.addName(header);
 
-			userProfileBizService.getPersonProfileService(paramEntity, loginId);
+			userProfileBizService.getPersonProfileService(paramEntity, personId);
 			paramEntity.setDataSetValueFromJsonResultset(userDetails);
 
 			paramEntity.setObject("prefixLookupList", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("prefixLookupList")));
@@ -200,9 +200,20 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 	}
 
 	public ParamEntity exeUpdateUserProfile(ParamEntity paramEntity) throws Exception {
+		DataSet dsRequest = paramEntity.getRequestDataSet();
+		HttpSession session = paramEntity.getSession();
+		String personId = CommonUtil.nvl((String)session.getAttribute("PersonIdForAdminTool"), (String)session.getAttribute("PersonId"));
+		String result = "";
+
 		try {
+			result = userProfileBizService.postUserProfile(personId, dsRequest);
+
+			if (!CommonUtil.startsWith(result, "2")) {
+				throw new FrameworkException("E801", getMessage("E801", paramEntity));
+			}
+
 			paramEntity.setSuccess(true);
-			paramEntity.setMessage("I801", getMessage("I801", paramEntity));
+			paramEntity.setMessage("I801", getMessage("I801"));
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
 		}

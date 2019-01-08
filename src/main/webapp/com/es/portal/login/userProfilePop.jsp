@@ -9,8 +9,6 @@
 <%
 	ParamEntity pe = (ParamEntity)request.getAttribute("paramEntity");
 	DataSet dsUser = (DataSet)pe.getObject("userDetails");
-	DataSet dsPrefix = (DataSet)pe.getObject("prefixLookupList");
-	DataSet dsState = (DataSet)pe.getObject("stateLookupList");
 %>
 <%/************************************************************************************************
 * HTML
@@ -85,7 +83,7 @@ li:first-child {margin-top:0px;}
 		<table class="tblEdit">
 			<caption>Personal Details</caption>
 			<colgroup>
-				<col width="30%"/>
+				<col width="26%"/>
 				<col width="*"/>
 			</colgroup>
 			<tr>
@@ -114,11 +112,11 @@ li:first-child {margin-top:0px;}
 			</tr>
 		</table>
 	</div>
-	<div style="float:right;width:49%;">
+	<div style="float:right;width:50%;">
 		<table class="tblEdit">
 			<caption>Address</caption>
 			<colgroup>
-				<col width="30%"/>
+				<col width="26%"/>
 				<col width="*"/>
 			</colgroup>
 			<tr>
@@ -148,7 +146,7 @@ li:first-child {margin-top:0px;}
 		<table class="tblEdit">
 			<caption>Contact Details</caption>
 			<colgroup>
-				<col width="30%"/>
+				<col width="26%"/>
 				<col width="*"/>
 			</colgroup>
 			<tr>
@@ -165,11 +163,11 @@ li:first-child {margin-top:0px;}
 			</tr>
 		</table>
 	</div>
-	<div style="float:right;width:49%;">
+	<div style="float:right;width:50%;">
 		<table class="tblEdit">
 			<caption>Emergency Contact Details</caption>
 			<colgroup>
-				<col width="30%"/>
+				<col width="26%"/>
 				<col width="*"/>
 			</colgroup>
 			<tr>
