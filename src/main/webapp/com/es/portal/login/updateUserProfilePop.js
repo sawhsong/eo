@@ -36,7 +36,7 @@ $(function() {
 
 	$("#btnBack").click(function(event) {
 		history.go(-1);
-		parent.popupUserProfile.resizeTo(0, -140);
+		resizeWindow();
 	});
 
 	$("#btnClose").click(function(event) {
@@ -156,7 +156,12 @@ $(function() {
 						buttons:[{
 							caption:com.caption.ok,
 							callback:function() {
-								parent.popupUserProfile.close();
+//								parent.popupUserProfile.close();
+								resizeWindow();
+								commonJs.doSubmit({
+									formId:"fmDefault",
+									action:"/login/getUserProfile"
+								});
 							}
 						}]
 					});
@@ -165,6 +170,10 @@ $(function() {
 				}
 			}
 		});
+	};
+
+	resizeWindow = function() {
+		parent.popupUserProfile.resizeTo(0, -140);
 	};
 
 	/*!

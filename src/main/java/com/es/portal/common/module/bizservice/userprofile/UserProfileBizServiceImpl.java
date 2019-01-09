@@ -45,7 +45,7 @@ public class UserProfileBizServiceImpl extends BaseBiz implements UserProfileBiz
 		post.setValue(post.getRowCnt()-1, "email", requestDataSet.getValue("email"));
 		post.setValue(post.getRowCnt()-1, "street", requestDataSet.getValue("street"));
 		post.setValue(post.getRowCnt()-1, "suburb", requestDataSet.getValue("suburb"));
-		post.setValue(post.getRowCnt()-1, "stateCode", requestDataSet.getValue("stateCode"));
+		post.setValue(post.getRowCnt()-1, "stateCode", requestDataSet.getValue("state"));
 		post.setValue(post.getRowCnt()-1, "postCode", requestDataSet.getValue("postCode"));
 		post.setValue(post.getRowCnt()-1, "country", requestDataSet.getValue("country"));
 		post.setValue(post.getRowCnt()-1, "emergencyContactName", requestDataSet.getValue("emergencyContactName"));
