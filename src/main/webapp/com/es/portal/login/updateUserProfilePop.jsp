@@ -192,7 +192,7 @@ li:first-child {margin-top:0px;}
 			</tr>
 			<tr>
 				<th class="thEdit rt mandatory">Email</th>
-				<td class="tdEdit"><ui:text name="email" value="<%=dsUser.getValue(\"email\")%>" option="email" options="mandatory"/></td>
+				<td class="tdEdit"><ui:text name="email" value="<%=dsUser.getValue(\"email\")%>" checkName="Email" option="email" options="mandatory"/></td>
 			</tr>
 		</table>
 	</div>

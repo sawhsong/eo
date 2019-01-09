@@ -67,7 +67,11 @@ $(function() {
 								callback:function() {
 									commonJs.doSubmit({
 										formId:"fmDefault",
-										action:actionString
+										action:actionString,
+										data:{
+											hdnHeaderMenuId:"HOME",
+											hdnHeaderMenuName:"Home"
+										}
 									});
 								}
 							}]

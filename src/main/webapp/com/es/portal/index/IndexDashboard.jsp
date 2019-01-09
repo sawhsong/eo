@@ -1,22 +1,5 @@
 <%/************************************************************************************************
 * Description
-* - Layout order(Normal page)
-*	#divHeaderHolder
-*	#divBodyHolder
-*		#divBodyLeft
-*		#divBodyCenter - Each 'Area' in Body Center must set this class('areaContainer') when it has its contents
-*			#divFixedPanel
-*				#divLocationPathArea
-*				#divTabArea
-*				#divButtonArea(Left & Right)
-*				#divSearchCriteriaArea
-*				#divInformArea
-*				#breaker
-*			#divScrollablePanel
-*				#divDataArea
-*				#divPagingArea
-*		#divBodyRight
-*	#divFooterHolder
 ************************************************************************************************/%>
 <%@ include file="/com/es/portal/shared/page/incCommon.jsp"%>
 <%/************************************************************************************************

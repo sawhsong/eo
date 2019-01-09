@@ -27,8 +27,8 @@ var startupUrl = "<%=startupUrlHeaderPage%>";
 
 $(function() {
 	$("#aLogo").click(function(event) {
-		$("#hdnHeaderMenuId").val("");
-		$("#hdnHeaderMenuName").val("");
+		$("#hdnHeaderMenuId").val("HOME");
+		$("#hdnHeaderMenuName").val("Home");
 		$("#hdnHeaderMenuUrl").val("");
 
 		commonJs.doSubmit({form:$("form:eq(0)"), action:startupUrl});
