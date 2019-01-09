@@ -47,4 +47,16 @@ public class IndexBizImpl extends BaseBiz implements IndexBiz {
 		}
 		return paramEntity;
 	}
+
+	public ParamEntity postContactUs(ParamEntity paramEntity) throws Exception {
+		HttpSession session = paramEntity.getSession();
+		String loginId = CommonUtil.nvl((String)session.getAttribute("LoginIdForAdminTool"), (String)session.getAttribute("LoginId"));
+
+		try {
+			paramEntity.setObject("resultDataSet", new DataSet());
+		} catch (Exception ex) {
+			throw new FrameworkException(paramEntity, ex);
+		}
+		return paramEntity;
+	}
 }

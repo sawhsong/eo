@@ -1,9 +1,12 @@
-package com.es.portal.common.module.bizservice.timesheet;
+package com.es.portal.common.module.bizservice.webserviceclient;
 
 import zebra.data.DataSet;
 import zebra.data.ParamEntity;
 
-public interface TimesheetBizService {
+public interface WebServiceClientBizService {
+	/*
+	 * Timesheet
+	 */
 	public DataSet getAssignmentListDataSet(ParamEntity paramEntity, String loginId) throws Exception;
 	public DataSet getAssignmentInfoDataSet(DataSet assignmentList, String assignmentId) throws Exception;
 	public DataSet getPeriodDataSetByAssignmentId(DataSet assignmentList, String assignmentId) throws Exception;
@@ -15,4 +18,10 @@ public interface TimesheetBizService {
 	public DataSet getDailyDetailDataSet(DataSet timesheetDayList, String workDate) throws Exception;
 	public DataSet updateDailyDetail(DataSet timesheetDayList, DataSet requestDataSet) throws Exception;
 	public String postTimesheet(DataSet timesheetPeriodDetail, DataSet timesheetDayList, DataSet requestDataSet) throws Exception;
+
+	/*
+	 * User Profile
+	 */
+	public void getPersonProfileService(ParamEntity paramEntity, String personId) throws Exception;
+	public String postUserProfile(String personId, DataSet requestDataSet) throws Exception;
 }

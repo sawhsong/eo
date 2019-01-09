@@ -19,6 +19,5 @@
 	<bean id="comServiceBiz" name="comServiceBiz" class="${name.package.project}.common.module.comservice.ComServiceBizImpl" parent="baseBiz"/>
 
 	<!--/* Biz Logic Service */-->
-	<bean id="timesheetBizService" name="timesheetBizService" class="${name.package.project}.common.module.bizservice.timesheet.TimesheetBizServiceImpl" parent="baseBiz"/>
-	<bean id="userprofileBizService" name="userprofileBizService" class="${name.package.project}.common.module.bizservice.userprofile.UserProfileBizServiceImpl" parent="baseBiz"/>
+	<bean id="webServiceClientBizService" name="webServiceClientBizService" class="${name.package.project}.common.module.bizservice.webserviceclient.WebServiceClientBizServiceImpl" parent="baseBiz"/>
 </beans>

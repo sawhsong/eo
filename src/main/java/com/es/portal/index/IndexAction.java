@@ -32,4 +32,13 @@ public class IndexAction extends BaseAction {
 		biz.contactuspop(paramEntity);
 		return "contactuspop";
 	}
+
+	public String postContactUs() throws Exception {
+		try {
+			biz.postContactUs(paramEntity);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
 }

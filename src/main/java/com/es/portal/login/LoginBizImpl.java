@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.es.portal.common.extend.BaseBiz;
-import com.es.portal.common.module.bizservice.userprofile.UserProfileBizService;
+import com.es.portal.common.module.bizservice.webserviceclient.WebServiceClientBizService;
 import com.es.portal.conf.resource.ormapper.dao.HpPersonD.HpPersonDDao;
 import com.es.portal.conf.resource.ormapper.dao.SysUsers.SysUsersDao;
 import com.es.portal.conf.resource.ormapper.dto.oracle.HpPersonD;
@@ -25,7 +25,7 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 	@Autowired
 	private HpPersonDDao hpPersonDDao;
 	@Autowired
-	private UserProfileBizService userProfileBizService;
+	private WebServiceClientBizService wsClient;
 	@Autowired
 	private LoginMessageSender loginMessageSender;
 
@@ -186,7 +186,7 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 		try {
 			userDetails.addName(header);
 
-			userProfileBizService.getPersonProfileService(paramEntity, personId);
+			wsClient.getPersonProfileService(paramEntity, personId);
 			paramEntity.setDataSetValueFromJsonResultset(userDetails);
 
 			paramEntity.setObject("prefixLookupList", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("prefixLookupList")));
@@ -206,7 +206,7 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 		String result = "";
 
 		try {
-			result = userProfileBizService.postUserProfile(personId, dsRequest);
+			result = wsClient.postUserProfile(personId, dsRequest);
 
 			if (!CommonUtil.startsWith(result, "2")) {
 				throw new FrameworkException("E801", getMessage("E801", paramEntity));
