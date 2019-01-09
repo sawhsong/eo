@@ -9,6 +9,7 @@
 <%
 	ParamEntity pe = (ParamEntity)request.getAttribute("paramEntity");
 	DataSet dsUser = (DataSet)pe.getObject("userDetails");
+	String dateOfBirth = CommonUtil.replace(dsUser.getValue("dateOfBirth"), "/", "-");
 %>
 <%/************************************************************************************************
 * HTML
@@ -88,27 +89,27 @@ li:first-child {margin-top:0px;}
 			</colgroup>
 			<tr>
 				<th class="thEdit rt">Prefix</th>
-				<td class="tdEdit"><%=dsUser.getValue("prefix")%></td>
+				<td class="tdEdit"><ui:text name="prefix" value="<%=dsUser.getValue(\"prefix\")%>" status="display"/></td>
 			</tr>
 			<tr>
 				<th class="thEdit rt">First Name</th>
-				<td class="tdEdit"><%=dsUser.getValue("firstName")%></td>
+				<td class="tdEdit"><ui:text name="firstName" value="<%=dsUser.getValue(\"firstName\")%>" status="display"/></td>
 			</tr>
 			<tr>
 				<th class="thEdit rt">Middle Name</th>
-				<td class="tdEdit"><%=dsUser.getValue("middleName")%></td>
+				<td class="tdEdit"><ui:text name="middleName" value="<%=dsUser.getValue(\"middleName\")%>" status="display"/></td>
 			</tr>
 			<tr>
 				<th class="thEdit rt">Surname</th>
-				<td class="tdEdit"><%=dsUser.getValue("surName")%></td>
+				<td class="tdEdit"><ui:text name="surname" value="<%=dsUser.getValue(\"surName\")%>" status="display"/></td>
 			</tr>
 			<tr>
 				<th class="thEdit rt">Preferred Name</th>
-				<td class="tdEdit"><%=dsUser.getValue("preferredName")%></td>
+				<td class="tdEdit"><ui:text name="preferredName" value="<%=dsUser.getValue(\"preferredName\")%>" status="display"/></td>
 			</tr>
 			<tr>
 				<th class="thEdit rt">Date of Birth</th>
-				<td class="tdEdit"><%=dsUser.getValue("dateOfBirth")%></td>
+				<td class="tdEdit"><ui:text name="dateOfBirth" value="<%=dateOfBirth%>" status="display"/></td>
 			</tr>
 		</table>
 	</div>
@@ -121,23 +122,23 @@ li:first-child {margin-top:0px;}
 			</colgroup>
 			<tr>
 				<th class="thEdit rt">Street</th>
-				<td class="tdEdit"><%=dsUser.getValue("street")%></td>
+				<td class="tdEdit"><ui:text name="street" value="<%=dsUser.getValue(\"street\")%>" status="display"/></td>
 			</tr>
 			<tr>
 				<th class="thEdit rt">Suburb</th>
-				<td class="tdEdit"><%=dsUser.getValue("suburb")%></td>
+				<td class="tdEdit"><ui:text name="suburb" value="<%=dsUser.getValue(\"suburb\")%>" status="display"/></td>
 			</tr>
 			<tr>
 				<th class="thEdit rt">State</th>
-				<td class="tdEdit"><%=dsUser.getValue("state")%></td>
+				<td class="tdEdit"><ui:text name="state" value="<%=dsUser.getValue(\"state\")%>" status="display"/></td>
 			</tr>
 			<tr>
 				<th class="thEdit rt">Postcode</th>
-				<td class="tdEdit"><%=dsUser.getValue("postCode")%></td>
+				<td class="tdEdit"><ui:text name="postCode" value="<%=dsUser.getValue(\"postCode\")%>" status="display"/></td>
 			</tr>
 			<tr>
 				<th class="thEdit rt">Country</th>
-				<td class="tdEdit"><%=dsUser.getValue("country")%></td>
+				<td class="tdEdit"><ui:text name="country" value="<%=dsUser.getValue(\"country\")%>" status="display"/></td>
 			</tr>
 		</table>
 	</div>
@@ -151,15 +152,15 @@ li:first-child {margin-top:0px;}
 			</colgroup>
 			<tr>
 				<th class="thEdit rt">Mobile</th>
-				<td class="tdEdit"><%=dsUser.getValue("mobile")%></td>
+				<td class="tdEdit"><ui:text name="mobile" value="<%=dsUser.getValue(\"mobile\")%>" status="display"/></td>
 			</tr>
 			<tr>
 				<th class="thEdit rt">Landline</th>
-				<td class="tdEdit"><%=dsUser.getValue("landLine")%></td>
+				<td class="tdEdit"><ui:text name="landLine" value="<%=dsUser.getValue(\"landLine\")%>" status="display"/></td>
 			</tr>
 			<tr>
 				<th class="thEdit rt">Email</th>
-				<td class="tdEdit"><%=dsUser.getValue("email")%></td>
+				<td class="tdEdit"><ui:text name="email" value="<%=dsUser.getValue(\"email\")%>" status="display"/></td>
 			</tr>
 		</table>
 	</div>
@@ -172,19 +173,19 @@ li:first-child {margin-top:0px;}
 			</colgroup>
 			<tr>
 				<th class="thEdit rt">Name</th>
-				<td class="tdEdit"><%=dsUser.getValue("emergencyContactName")%></td>
+				<td class="tdEdit"><ui:text name="emergencyContactName" value="<%=dsUser.getValue(\"emergencyContactName\")%>" status="display"/></td>
 			</tr>
 			<tr>
 				<th class="thEdit rt">Relationship</th>
-				<td class="tdEdit"><%=dsUser.getValue("emergencyContactRelationship")%></td>
+				<td class="tdEdit"><ui:text name="emergencyContactRelationship" value="<%=dsUser.getValue(\"emergencyContactRelationship\")%>" status="display"/></td>
 			</tr>
 			<tr>
 				<th class="thEdit rt">Phone</th>
-				<td class="tdEdit"><%=dsUser.getValue("emergencyContactPhone")%></td>
+				<td class="tdEdit"><ui:text name="emergencyContactPhone" value="<%=dsUser.getValue(\"emergencyContactPhone\")%>" status="display"/></td>
 			</tr>
 			<tr>
 				<th class="thEdit rt">Email</th>
-				<td class="tdEdit"><%=dsUser.getValue("emergencyContactEmail")%></td>
+				<td class="tdEdit"><ui:text name="emergencyContactEmail" value="<%=dsUser.getValue(\"emergencyContactEmail\")%>" status="display"/></td>
 			</tr>
 		</table>
 	</div>

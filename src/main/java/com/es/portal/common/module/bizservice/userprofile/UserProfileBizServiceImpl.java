@@ -39,7 +39,7 @@ public class UserProfileBizServiceImpl extends BaseBiz implements UserProfileBiz
 		post.setValue(post.getRowCnt()-1, "middleName", requestDataSet.getValue("middleName"));
 		post.setValue(post.getRowCnt()-1, "surName", requestDataSet.getValue("surname"));
 		post.setValue(post.getRowCnt()-1, "preferredName", requestDataSet.getValue("preferredName"));
-		post.setValue(post.getRowCnt()-1, "dateOfBirth", requestDataSet.getValue("dateOfBirth"));
+		post.setValue(post.getRowCnt()-1, "dateOfBirth", CommonUtil.replace(requestDataSet.getValue("dateOfBirth"), "-", ""));
 		post.setValue(post.getRowCnt()-1, "mobile", requestDataSet.getValue("mobile"));
 		post.setValue(post.getRowCnt()-1, "landLine", requestDataSet.getValue("landLine"));
 		post.setValue(post.getRowCnt()-1, "email", requestDataSet.getValue("email"));

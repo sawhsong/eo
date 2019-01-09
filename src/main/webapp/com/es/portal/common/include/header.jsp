@@ -69,7 +69,7 @@ $(function() {
 			header:"User Profile",
 			blind:true,
 			width:1100,
-			height:560
+			height:700
 		});
 	};
 
