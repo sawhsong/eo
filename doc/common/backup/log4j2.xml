@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration name="entityonline" status="OFF">
+	<!-- Log Level : TRACE, DEBUG, INFO, WARN, ERROR and FATAL -->
+	<appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss} %p] - %C.%M(%L) - %m%n"/>
+		</Console>
+		<RollingFile name="RollingFile" fileName="C:/apache-tomcat-9.0.10/logs/entityonlineRollingFile.log" filePattern="C:/apache-tomcat-9.0.10/logs/$${date:yyyy-MM}/entityonlineRollingFile-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss} %p] - %C.%M(%L) - %m%n"/>
+			<TimeBasedTriggeringPolicy />
+		</RollingFile>
+		<File name="File" fileName="C:/apache-tomcat-9.0.10/logs/entityonlineFile.log" append="false">
+			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss} %p] - %C.%M(%L) - %m%n" />
+		</File>
+	</appenders>
+	<loggers>
+		<logger name="org.springframework" level="warn">
+			<appender-ref ref="Console"/>
+		</logger>
+		<logger name="org.apache.commons.configuration" level="warn">
+			<appender-ref ref="Console"/>
+		</logger>
+		<logger name="org.apache.struts2" level="warn" additivity="false">
+			<appender-ref ref="Console"/>
+		</logger>
+		<logger name="com.opensymphony" level="warn" additivity="false">
+			<appender-ref ref="Console"/>
+		</logger>
+		<logger name="org.apache.ibatis" level="warn">
+			<appender-ref ref="Console"/>
+		</logger>
+		<logger name="org.hibernate" level="warn">
+			<appender-ref ref="Console"/>
+		</logger>
+		<logger name="org.hibernate.SQL" level="warn">
+			<appender-ref ref="Console"/>
+		</logger>
+		<logger name="org.hibernate.type" level="warn">
+			<appender-ref ref="Console"/>
+		</logger>
+		<logger name="org.quartz" level="warn">
+			<appender-ref ref="Console"/>
+		</logger>
+		<logger name="java.sql.Connection" level="warn">
+			<appender-ref ref="Console"/>
+		</logger>
+		<logger name="java.sql.Statement" level="warn">
+			<appender-ref ref="Console"/>
+		</logger>
+		<logger name="java.sql.PreparedStatement" level="warn">
+			<appender-ref ref="Console"/>
+		</logger>
+		<logger name="java.sql.ResultSet" level="warn">
+			<appender-ref ref="Console"/>
+		</logger>
+		<!-- log4jdbc begin -->
+		<!-- log SQL (pre-execution) plus exceptions caused by SQL -->
+		<logger name="jdbc.sqlonly" level="warn" additivity="false">
+			<appender-ref ref="Console"/>
+		</logger>
+		<!-- log SQL with timing information, post execution -->
+		<logger name="jdbc.sqltiming" level="warn" additivity="false">
+			<appender-ref ref="Console"/>
+		</logger>
+		<!-- only use the two logs below to trace ALL JDBC information, NOTE: This can be very voluminous! -->
+		<!-- log all jdbc calls except ResultSet calls -->
+		<logger name="jdbc.audit" level="warn" additivity="false">
+			<appender-ref ref="Console"/>
+		</logger>
+		<!-- log the jdbc ResultSet calls -->
+		<logger name="jdbc.resultset" level="warn" additivity="false">
+			<appender-ref ref="Console"/>
+		</logger>
+		<!-- log connection open/close events and dump of all open connection numbers -->
+		<logger name="jdbc.connection" level="warn" additivity="false">
+			<appender-ref ref="Console"/>
+		</logger>
+		<!-- debug logging for log4jdbc itself -->
+		<logger name="log4jdbc.debug" level="warn" additivity="false">
+			<appender-ref ref="Console"/>
+		</logger>
+		<!-- log4jdbc end -->
+		<logger name="alpaca" level="debug">
+			<appender-ref ref="Console"/>
+		</logger>
+
+		<root level="debug">
+			<appender-ref ref="Console"/>
+			<appender-ref ref="RollingFile"/>
+			<appender-ref ref="File"/>
+		</root>
+	</loggers>
+</configuration>

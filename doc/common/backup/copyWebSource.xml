@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="EO Web Sources" default="0.All" basedir=".">
+	<property file="copyWebSource.properties"/>
+
+	<target name="0.All"
+		depends="1.project app,
+				 2.project common,
+				 3.shared,
+				 4.project conf"
+		description="Run All Targets"
+	/>
+
+	<target name="1.project app" description="Copy project app sources">
+		<copy todir="${target.project.app}">
+			<fileset dir="${src.project.app}"/>
+		</copy>
+	</target>
+
+	<target name="2.project common" description="Copy project common sources">
+		<copy todir="${target.project.common}">
+			<fileset dir="${src.project.common}"/>
+		</copy>
+	</target>
+
+	<target name="3.shared" description="Copy shared sources">
+		<copy todir="${target.shared}">
+			<fileset dir="${src.shared}"/>
+		</copy>
+	</target>
+
+	<target name="4.project conf" description="Copy project conf">
+		<copy todir="${target.project.conf}">
+			<fileset dir="${src.project.conf}"/>
+		</copy>
+	</target>
+</project>
