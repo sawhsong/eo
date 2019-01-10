@@ -5,7 +5,7 @@ import zebra.data.ParamEntity;
 
 public interface WebServiceClientBizService {
 	/*
-	 * Timesheet
+	 * Ipro - Timesheet
 	 */
 	public DataSet getAssignmentListDataSet(ParamEntity paramEntity, String loginId) throws Exception;
 	public DataSet getAssignmentInfoDataSet(DataSet assignmentList, String assignmentId) throws Exception;
@@ -20,8 +20,18 @@ public interface WebServiceClientBizService {
 	public String postTimesheet(DataSet timesheetPeriodDetail, DataSet timesheetDayList, DataSet requestDataSet) throws Exception;
 
 	/*
-	 * User Profile
+	 * Corporate - IPro
+	 */
+	public DataSet getIproListDataSet(ParamEntity paramEntity, String orgId) throws Exception;
+
+	/*
+	 * Login - User Profile
 	 */
 	public void getPersonProfileService(ParamEntity paramEntity, String personId) throws Exception;
 	public String postUserProfile(String personId, DataSet requestDataSet) throws Exception;
+
+	/*
+	 * Index - Contact Us
+	 */
+	public String postContactUs(DataSet postDataSet) throws Exception;
 }

@@ -99,7 +99,7 @@ h1 {font-size:24px !important;}
 								<tr>
 									<td class="tdDefault"></td>
 									<th class="thDefault">Phone</th>
-									<td class="tdDefault">+61 39600 0333</td>
+									<td class="tdDefault">+61 3 9600 0333</td>
 								</tr>
 								<tr>
 									<td class="tdDefault"></td>
@@ -157,7 +157,7 @@ h1 {font-size:24px !important;}
 								<tr>
 									<td class="tdDefault"></td>
 									<th class="thDefault">Phone</th>
-									<td class="tdDefault">+61 29225 8700</td>
+									<td class="tdDefault">+61 2 9225 8700</td>
 								</tr>
 								<tr>
 									<td class="tdDefault"></td>
@@ -215,7 +215,7 @@ h1 {font-size:24px !important;}
 								<tr>
 									<td class="tdDefault"></td>
 									<th class="thDefault">Phone</th>
-									<td class="tdDefault">+61 73229 5193</td>
+									<td class="tdDefault">+61 7 3229 5193</td>
 								</tr>
 								<tr>
 									<td class="tdDefault"></td>
@@ -273,7 +273,7 @@ h1 {font-size:24px !important;}
 								<tr>
 									<td class="tdDefault"></td>
 									<th class="thDefault">Phone</th>
-									<td class="tdDefault">+61 89463 9333</td>
+									<td class="tdDefault">+61 8 9463 9333</td>
 								</tr>
 								<tr>
 									<td class="tdDefault"></td>
@@ -331,7 +331,7 @@ h1 {font-size:24px !important;}
 								<tr>
 									<td class="tdDefault"></td>
 									<th class="thDefault">Phone</th>
-									<td class="tdDefault">+61 89463 9333</td>
+									<td class="tdDefault">+61 8 9463 9333</td>
 								</tr>
 								<tr>
 									<td class="tdDefault"></td>
@@ -508,7 +508,7 @@ h1 {font-size:24px !important;}
 								<tr>
 									<td class="tdDefault"></td>
 									<th class="thDefault">Phone</th>
-									<td class="tdDefault">+60 32711 7723</td>
+									<td class="tdDefault">+60 3 2711 7723</td>
 								</tr>
 								<tr>
 									<td class="tdDefault"></td>
@@ -569,7 +569,7 @@ h1 {font-size:24px !important;}
 								<tr>
 									<td class="tdDefault"></td>
 									<th class="thDefault">Phone</th>
-									<td class="tdDefault">+61 39600 0333</td>
+									<td class="tdDefault">+61 3 9600 0333</td>
 								</tr>
 								<tr>
 									<td class="tdDefault"></td>

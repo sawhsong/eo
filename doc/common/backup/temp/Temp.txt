@@ -1,0 +1,11 @@
+System.getenv().forEach((key, object)->{
+	logger.debug("systemEnv - [" + key + "] : " + object + "");
+});
+for (Enumeration emAttr = request.getHeaderNames(); emAttr.hasMoreElements();) {
+	String s = (String)emAttr.nextElement();
+	logger.debug("request.getHeader[" + s + "] : " + request.getHeader(s));
+}
+for (Enumeration emAttr = request.getAttributeNames(); emAttr.hasMoreElements();) {
+	String s = (String)emAttr.nextElement();
+	logger.debug("request.getAttribute[" + s + "] : " + request.getAttribute(s));
+}

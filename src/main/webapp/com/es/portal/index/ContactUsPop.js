@@ -13,7 +13,7 @@ $(function() {
 				caption:com.caption.yes,
 				callback:function() {
 					commonJs.ajaxSubmit({
-						url:"/index/contactus/postContactUs",
+						url:"/index/contact/postContactUs",
 						dataType:"json",
 						formId:"fmDefault",
 						data:{

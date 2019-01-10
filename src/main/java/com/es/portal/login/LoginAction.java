@@ -43,6 +43,7 @@ public class LoginAction extends BaseAction {
 				SysUsers sysUsers = (SysUsers)paramEntity.getObject("sysUsers");
 				HpPersonD hpPersonD = (HpPersonD)paramEntity.getObject("hpPersonD");
 				DataSet resultDataset = (DataSet)paramEntity.getObject("resultDataset");
+				String userPortalType = sysUsers.getPortalSecurityRole();
 
 				session.setAttribute("UserId", CommonUtil.toString(sysUsers.getUserId(), "#"));
 				session.setAttribute("LoginId", sysUsers.getUserName()); // LoginId = UserName
@@ -53,6 +54,14 @@ public class LoginAction extends BaseAction {
 				session.setAttribute("EmploymentOrgId", CommonUtil.toString(hpPersonD.getEmploymentCompanyOrgId(), "#"));
 				session.setAttribute("SecurityRole", sysUsers.getPortalSecurityRole());
 				session.setAttribute("StartupUrl", sysUsers.getStartupUrl());
+				if (CommonUtil.contains(userPortalType, "CORPORATE")) {
+					userPortalType = "Corporate";
+				} else if (CommonUtil.contains(userPortalType, "IPRO")) {
+					userPortalType = "IPro";
+				} else {
+					userPortalType = "";
+				}
+				session.setAttribute("UserPortalType", userPortalType);
 
 				session.setAttribute("themeId", CommonUtil.nvl(CommonUtil.lowerCase(sysUsers.getPortalSkin()), ConfigUtil.getProperty("view.theme.default"))); // ThemeId = PortalSkin
 				session.setAttribute("maxRowsPerPage", CommonUtil.split(ConfigUtil.getProperty("view.data.maxRowsPerPage"), ConfigUtil.getProperty("delimiter.data"))[2]);
@@ -126,12 +135,22 @@ public class LoginAction extends BaseAction {
 			if (paramEntity.isSuccess()) {
 				SysUsers sysUsersForAdminTool = (SysUsers)paramEntity.getObject("sysUsersForAdminTool");
 				HpPersonD hpPersonDForAdminTool = (HpPersonD)paramEntity.getObject("hpPersonDForAdminTool");
+				String userPortalType = sysUsersForAdminTool.getPortalSecurityRole();
 
 				session.setAttribute("UserIdForAdminTool", CommonUtil.toString(sysUsersForAdminTool.getUserId(), "#"));
 				session.setAttribute("LoginIdForAdminTool", sysUsersForAdminTool.getUserName()); // LoginId = UserName
 				session.setAttribute("PersonIdForAdminTool", CommonUtil.toString(sysUsersForAdminTool.getPersonId(), "#"));
 				session.setAttribute("UserFullNameForAdminTool", hpPersonDForAdminTool.getFullName());
 				session.setAttribute("EmpOrgIdForAdminTool", CommonUtil.toString(hpPersonDForAdminTool.getEmploymentCompanyOrgId(), "#"));
+				session.setAttribute("SecurityRoleForAdminTool", sysUsersForAdminTool.getPortalSecurityRole());
+				if (CommonUtil.contains(userPortalType, "CORPORATE")) {
+					userPortalType = "Corporate";
+				} else if (CommonUtil.contains(userPortalType, "IPRO")) {
+					userPortalType = "IPro";
+				} else {
+					userPortalType = "";
+				}
+				session.setAttribute("UserPortalTypeForAdminTool", userPortalType);
 				session.setAttribute("SysUsersForAdminTool", sysUsersForAdminTool);
 				session.setAttribute("HpPersonDForAdminTool", hpPersonDForAdminTool);
 			}
@@ -148,6 +167,7 @@ public class LoginAction extends BaseAction {
 			session.removeAttribute("PersonIdForAdminTool");
 			session.removeAttribute("UserFullNameForAdminTool");
 			session.removeAttribute("EmpOrgIdForAdminTool");
+			session.removeAttribute("SecurityRoleForAdminTool");
 			session.removeAttribute("SysUsersForAdminTool");
 			session.removeAttribute("HpPersonDForAdminTool");
 			paramEntity.setSuccess(true);

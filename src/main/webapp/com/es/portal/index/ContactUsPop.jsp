@@ -12,6 +12,9 @@
 		sysUsers = (SysUsers)session.getAttribute("SysUsers");
 	}
 	String userEmail = sysUsers.getEmail();
+	String portalType = CommonUtil.nvl((String)session.getAttribute("UserPortalTypeForAdminTool"), (String)session.getAttribute("UserPortalType"));
+	String height = CommonUtil.equalsIgnoreCase(portalType, "corporate") ? "280" : "314";
+	pageContext.setAttribute("height", height);
 %>
 <%/************************************************************************************************
 * HTML
@@ -62,16 +65,54 @@
 			<col width="25%"/>
 			<col width="*"/>
 		</colgroup>
+<%
+		if (CommonUtil.equalsIgnoreCase(portalType, "corporate")) {
+%>
 		<tr>
 			<th class="thInform rt">Customer Delivery Manager</th>
 			<td class="tdInform">
 				<table class="tblDefault withPadding">
 					<tr>
-						<td id="myContacts" class="tdDefault">Fatima Rizwi (<a href="mailto:jknowles@entitysolutions.com.au">jknowles@entitysolutions.com.au</a>)</td>
+						<td id="myContacts" class="tdDefault">
+							Sailakshmi Sethuraman (<a href="mailto:test@entitysolutions.com.au">test@entitysolutions.com.au</a>)
+							03 9600 0333
+						</td>
 					</tr>
 				</table>
 			</td>
 		</tr>
+		<tr>
+			<th class="thInform rt">Customer Account Director</th>
+			<td class="tdInform">
+				<table class="tblDefault withPadding">
+					<tr>
+						<td id="myContacts" class="tdDefault">
+							Sophie Burchell (<a href="mailto:test@entitysolutions.com.au">test@entitysolutions.com.au</a>)
+							03 9600 0333
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+<%
+		} else {
+%>
+		<tr>
+			<th class="thInform rt">Customer Delivery Manager</th>
+			<td class="tdInform">
+				<table class="tblDefault withPadding">
+					<tr>
+						<td id="myContacts" class="tdDefault">
+							Fatima Rizwi (<a href="mailto:test@entitysolutions.com.au">test@entitysolutions.com.au</a>)
+							03 9600 0333
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+<%
+		}
+%>
 	</table>
 </div>
 <%/************************************************************************************************
@@ -100,14 +141,14 @@
 		</tr>
 		<tr>
 			<th class="thEdit Rt">Phone Number</th>
-			<td class="tdEdit"><ui:text name="phoneNumber" placeHolder="Phone Number" checkName="Phone Number" option="numeric"/></td>
+			<td class="tdEdit"><ui:text name="phoneNumber" placeHolder="Phone Number"/></td>
 			<th class="thEdit Rt">Your Email</th>
 			<td class="tdEdit"><ui:text name="email" value="<%=userEmail%>" status="display"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit Rt mandatory">Your Message</th>
 			<td class="tdEdit" colspan="3">
-				<ui:txa name="message" style="height:314px;" checkName="Message" options="mandatory"/>
+				<ui:txa name="message" style="height:${height}px;" checkName="Message" options="mandatory"/>
 			</td>
 		</tr>
 	</table>

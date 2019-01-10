@@ -17,7 +17,7 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 	private String hoursFormat = "##0.00";
 
 	/*
-	 * Timesheet
+	 * Ipro - Timesheet
 	 */
 	public DataSet getAssignmentListDataSet(ParamEntity paramEntity, String loginId) throws Exception {
 		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
@@ -264,7 +264,23 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 	}
 
 	/*
-	 * User Profile
+	 * Corporate - IPro
+	 */
+	public DataSet getIproListDataSet(ParamEntity paramEntity, String orgId) throws Exception {
+		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
+		DataSet corporateIproList = new DataSet();
+		String serviceUrl = "corporate/"+orgId+"/ipros";
+		String result = "";
+
+		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
+		paramEntity.setObjectFromJsonString(result);
+		corporateIproList = JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("corporateIproList"));
+
+		return corporateIproList;
+	}
+
+	/*
+	 * Login - User Profile
 	 */
 	public void getPersonProfileService(ParamEntity paramEntity, String personId) throws Exception {
 		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
@@ -307,6 +323,16 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		post.setValue(post.getRowCnt()-1, "emergencyContactEmail", requestDataSet.getValue("emergencyContactEmail"));
 
 		result = RestServiceSupport.post(providerUrl, serviceUrl, acceptTypeHeader, post);
+		return CommonUtil.removeString(result, "\"");
+	}
+
+	/*
+	 * Index - Contact Us
+	 */
+	public String postContactUs(DataSet postDataSet) throws Exception {
+		String result = "", serviceUrl = "website/contactus/";
+
+		result = RestServiceSupport.post(providerUrl, serviceUrl, acceptTypeHeader, postDataSet);
 		return CommonUtil.removeString(result, "\"");
 	}
 }
