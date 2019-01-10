@@ -17,6 +17,15 @@ public class IproBizImpl extends BaseBiz implements IproBiz {
 	private WebServiceClientBizService wsClient;
 
 	public ParamEntity myIpros(ParamEntity paramEntity) throws Exception {
+		try {
+			paramEntity.setSuccess(true);
+		} catch (Exception ex) {
+			throw new FrameworkException(paramEntity, ex);
+		}
+		return paramEntity;
+	}
+
+	public ParamEntity getIproList(ParamEntity paramEntity) throws Exception {
 		HttpSession session = paramEntity.getSession();
 		DataSet iproList = new DataSet(), orgInfo = new DataSet(new String[] {"organisationId", "organisationName"});
 		String orgId = CommonUtil.nvl((String)session.getAttribute("EmpOrgIdForAdminTool"), (String)session.getAttribute("EmploymentOrgId"));
@@ -25,8 +34,7 @@ public class IproBizImpl extends BaseBiz implements IproBiz {
 			iproList = wsClient.getIproListDataSet(paramEntity, orgId);
 			paramEntity.setDataSetValueFromJsonResultset(orgInfo);
 
-			paramEntity.setObject("iproList", iproList);
-			paramEntity.setObject("orgInfo", orgInfo);
+			paramEntity.setAjaxResponseDataSet(iproList);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);

@@ -17,4 +17,13 @@ public class IproAction extends BaseAction {
 		biz.myIpros(paramEntity);
 		return "myIpro";
 	}
+
+	public String getIproList() throws Exception {
+		try {
+			biz.getIproList(paramEntity);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
 }

@@ -9,8 +9,6 @@
 <%
 	ParamEntity pe = (ParamEntity)request.getAttribute("paramEntity");
 	DataSet dsRequest = pe.getRequestDataSet();
-	DataSet iproList = (DataSet)pe.getObject("iproList");
-	DataSet orgInfo = (DataSet)pe.getObject("orgInfo");
 %>
 <%/************************************************************************************************
 * HTML
@@ -54,9 +52,9 @@ li:first-child {margin-top:0px;}
 	<div id="divButtonAreaLeft"></div>
 	<div id="divButtonAreaRight">
 		<ui:buttonGroup id="buttonGroup">
-			<ui:button id="btnNew" caption="New IPro" iconClass="fa-plus"/>
+			<ui:button id="btnNew" caption="New IPro" iconClass="fa-user-circle"/>
 			<ui:button id="btnExport" caption="Download CSV" iconClass="fa-download"/>
-			<ui:button id="btnSearch" caption="Existing IPros" iconClass="fa-search"/>
+			<ui:button id="btnSearch" caption="Search Existing IPros" iconClass="fa-search"/>
 		</ui:buttonGroup>
 	</div>
 </div>
@@ -85,57 +83,35 @@ li:first-child {margin-top:0px;}
 * Real Contents - scrollable panel(data, paging)
 ************************************************************************************************/%>
 <div id="divDataArea" class="areaContainer">
-	<table id="tblGrid" class="tblGrid">
+	<table id="tblGrid" class="tblGrid sort autosort">
 		<colgroup>
-			<col width="10%"/>
-			<col width="10%"/>
-			<col width="10%"/>
-			<col width="10%"/>
-			<col width="10%"/>
-			<col width="10%"/>
-			<col width="10%"/>
-			<col width="10%"/>
+			<col width="13%"/>
+			<col width="13%"/>
+			<col width="14%"/>
+			<col width="7%"/>
+			<col width="7%"/>
+			<col width="9%"/>
+			<col width="9%"/>
 			<col width="*"/>
+			<col width="11%"/>
 		</colgroup>
 		<thead>
 			<tr>
-				<th class="thGrid">IPro Name</th>
+				<th class="thGrid sortable:alphanumeric">IPro Name</th>
 				<th class="thGrid">Position Title</th>
 				<th class="thGrid">Email Address</th>
 				<th class="thGrid">Last Invoice Date</th>
 				<th class="thGrid">Last Pay Date</th>
-				<th class="thGrid">Assignment Start Date</th>
-				<th class="thGrid">Assignment End Date</th>
-				<th class="thGrid">End User Organisation</th>
+				<th class="thGrid sortable:date">Assignment Start Date</th>
+				<th class="thGrid sortable:date">Assignment End Date</th>
+				<th class="thGrid sortable:alphanumeric">End User Organisation</th>
 				<th class="thGrid">Working State</th>
 			</tr>
 		</thead>
 		<tbody id="tblGridBody">
-<%
-		if (iproList.getRowCnt() > 0) {
-			for (int i=0; i<iproList.getRowCnt(); i++) {
-%>
 			<tr>
-				<td class="tdGrid"><%=iproList.getValue(i, "personFullName")%></td>
-				<td class="tdGrid"><%=iproList.getValue(i, "jobTitle")%></td>
-				<td class="tdGrid"><%=iproList.getValue(i, "email")%></td>
-				<td class="tdGrid"><%=iproList.getValue(i, "lastInvoiceDate")%></td>
-				<td class="tdGrid"><%=iproList.getValue(i, "lastPayDate")%></td>
-				<td class="tdGrid"><%=iproList.getValue(i, "startDate")%></td>
-				<td class="tdGrid"><%=iproList.getValue(i, "endDate")%></td>
-				<td class="tdGrid"><%=iproList.getValue(i, "endUserOrganisationName")%></td>
-				<td class="tdGrid"><%=iproList.getValue(i, "workingState")%></td>
+				<td class="tdGrid Ct" colspan="9"><mc:msg key="I002"/></td>
 			</tr>
-<%
-			}
-		} else {
-%>
-			<tr>
-				<td class="tdGrid Ct" colspan="9"><mc:msg key="I001"/></td>
-			</tr>
-<%
-		}
-%>
 		</tbody>
 	</table>
 </div>
