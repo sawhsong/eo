@@ -2,11 +2,47 @@
  * 
  */
 var popup = null;
+var searchResultDataCount;
 
 $(function() {
 	/*!
 	 * event
 	 */
+	$("#btnNew").click(function() {
+		doSearch();
+	});
+
+	$("#btnExport").click(function() {
+		if (searchResultDataCount <= 0) {
+			commonJs.warn("There is no data to download.");
+			return;
+		}
+
+		commonJs.confirm({
+			contents:com.message.Q003,
+			buttons:[{
+				caption:com.caption.yes,
+				callback:function() {
+					popup = commonJs.openPopup({
+						popupId:"exportFile",
+						url:"/corporate/ipro/exeExport",
+						paramData:{},
+						header:"Download as File",
+						blind:false,
+						width:200,
+						height:100
+					});
+					setTimeout(function() {popup.close();}, 3000);
+				}
+			}, {
+				caption:com.caption.no,
+				callback:function() {
+				}
+			}],
+			blind:true
+		});
+	});
+
 	$("#btnSearch").click(function() {
 		doSearch();
 	});
@@ -42,6 +78,7 @@ $(function() {
 	renderGridTable = function(result) {
 		var ds = result.dataSet, html = "";
 
+		searchResultDataCount = ds.getRowCnt();
 		$("#tblGridBody").html("");
 
 		if (ds.getRowCnt() > 0) {

@@ -19,6 +19,7 @@ public abstract class ExportHelper {
 	protected String fileNameGenerated;
 	protected String pageTitle;
 	protected String columnHeader[];
+	protected String fileHeader[];
 	protected int pdfWidth;
 
 	/**
@@ -80,6 +81,14 @@ public abstract class ExportHelper {
 		this.columnHeader = columnHeader;
 	}
 
+	public String[] getFileHeader() {
+		return fileHeader;
+	}
+
+	public void setFileHeader(String[] fileHeader) {
+		this.fileHeader = fileHeader;
+	}
+
 	public int getPdfWidth() {
 		return pdfWidth;
 	}
@@ -117,6 +126,10 @@ public abstract class ExportHelper {
 						}
 					}
 				}
+			}
+
+			if (!(fileHeader == null || fileHeader.length <= 0)) {
+				dsToExport.updateNames(fileHeader);
 			}
 			return dsToExport;
 		} else {

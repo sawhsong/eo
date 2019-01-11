@@ -97,7 +97,7 @@ public class ExcelExportHelper extends ExportHelper {
 			cell = row.createCell(i);
 			cell.setCellValue(dataSet.getName(i));
 			cell.setCellStyle(styles.get("columnHeader"));
-//			sheet.trackColumnForAutoSizing(i);
+			sheet.trackColumnForAutoSizing(i);
 		}
 
 		// Data Rows
@@ -111,7 +111,7 @@ public class ExcelExportHelper extends ExportHelper {
 				cell.setCellStyle(styles.get("dataRows"));
 
 				if (i == (dataSet.getRowCnt()-1)) {
-//					sheet.autoSizeColumn(j);
+					sheet.autoSizeColumn(j);
 				}
 			}
 		}

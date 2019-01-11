@@ -120,6 +120,20 @@ public class DataSet {
 		}
 	}
 
+	public void updateName(String from, String to) {
+		for (int i=0; i<fieldName.size(); i++) {
+			if (from.equals(fieldName.get(i))) {
+				fieldName.set(i, to);
+			}
+		}
+	}
+
+	public void updateNames(String names[]) {
+		for (int i=0; i<fieldName.size(); i++) {
+			fieldName.set(i, names[i]);
+		}
+	}
+
 	public void addRow(int value) {
 		List<String> row = new ArrayList<String>();
 		for (int i=0; i<value; i++) {

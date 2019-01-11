@@ -26,4 +26,10 @@ public class IproAction extends BaseAction {
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";
 	}
+
+	public String exeExport() throws Exception {
+		biz.exeExport(paramEntity);
+		setRequestAttribute("paramEntity", paramEntity);
+		return "export";
+	}
 }
