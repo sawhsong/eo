@@ -44,6 +44,8 @@ public class Text extends TaglibSupport {
 			} else if (CommonUtil.containsIgnoreCase(status, "display")) {
 				options += (CommonUtil.isBlank(options)) ? "readonly" : " readonly";
 				classNamePrefix = "txtDpl";
+			} else if (CommonUtil.containsIgnoreCase(status, "spinner")) {
+				classNamePrefix = "txtSpinner";
 			} else {
 				classNamePrefix = "txtEn";
 			}

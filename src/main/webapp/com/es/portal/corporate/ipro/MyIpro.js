@@ -9,7 +9,14 @@ $(function() {
 	 * event
 	 */
 	$("#btnNew").click(function() {
-		doSearch();
+		popup = commonJs.openPopup({
+			popupId:"NewIPro",
+			url:"/corporate/ipro/newIpro",
+			paramData:{},
+			header:"New IPro",
+			width:1100,
+			height:800
+		});
 	});
 
 	$("#btnExport").click(function() {

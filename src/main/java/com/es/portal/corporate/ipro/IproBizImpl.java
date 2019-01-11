@@ -44,6 +44,15 @@ public class IproBizImpl extends BaseBiz implements IproBiz {
 		return paramEntity;
 	}
 
+	public ParamEntity newIpro(ParamEntity paramEntity) throws Exception {
+		try {
+			paramEntity.setSuccess(true);
+		} catch (Exception ex) {
+			throw new FrameworkException(paramEntity, ex);
+		}
+		return paramEntity;
+	}
+
 	public ParamEntity exeExport(ParamEntity paramEntity) throws Exception {
 		HttpSession session = paramEntity.getSession();
 		DataSet iproList = new DataSet();

@@ -173,6 +173,15 @@ label.block {display:block;padding-top:4px;padding-bottom:4px;width:5px;white-sp
 }
 .txtDis:focus {outline:0px;}
 
+/* Textbox in Spinner control */
+.txtSpinner {display:block;padding:4px 0px;width:100%;border-radius:3px;
+	color:#555555;
+	border:0px solid #cccccc;
+	background-color:transparent;
+	background-image:none;
+}
+.txtSpinner:focus {outline:0px;}
+
 /**
  * Textarea
  */

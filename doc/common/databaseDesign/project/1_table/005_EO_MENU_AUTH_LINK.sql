@@ -51,18 +51,10 @@ select 'ENTITY_SOLUTIONS_STAFF' as group_id,
        null as update_date
   from eo_menu
  where menu_id in ('HOME',
-                   'Taskflow',
-                   'Document',
-                   'Payslip',
-                   'Timesheet-IPro',
-                   'Timesheet-Corp',
                    'Form',
-                   'Expense',
-                   'Service',
-                   'IPro',
-                   'Invoice',
-                   'Contract',
-                   'Contactus'
+                   'Contactus',
+                   'Leave',
+                   'Expense-Emp'
                   )
 )
 ;
@@ -76,14 +68,14 @@ select 'PREMIUM_IPRO_PORTAL_USER' as group_id,
        null as update_date
   from eo_menu
  where menu_id in ('HOME',
+                   'Form',
+                   'Contactus',
                    'Taskflow',
                    'Document',
                    'Payslip',
                    'Timesheet-IPro',
-                   'Form',
-                   'Expense',
-                   'Service',
-                   'Contactus'
+                   'Expense-IPro',
+                   'Service'
                   )
 )
 ;
@@ -97,13 +89,13 @@ select 'TEMPORARY_IPRO_PORTAL_USER' as group_id,
        null as update_date
   from eo_menu
  where menu_id in ('HOME',
+                   'Form',
+                   'Contactus',
                    'Taskflow',
                    'Document',
                    'Payslip',
                    'Timesheet-IPro',
-                   'Form',
-                   'Service',
-                   'Contactus'
+                   'Service'
                   )
 )
 ;
@@ -117,12 +109,12 @@ select 'GENERAL_CORPORATE_USER' as group_id,
        null as update_date
   from eo_menu
  where menu_id in ('HOME',
-                   'Timesheet-Corp',
                    'Form',
+                   'Contactus',
                    'IPro',
                    'Invoice',
                    'Contract',
-                   'Contactus'
+                   'Timesheet-Corp'
                   )
 )
 ;

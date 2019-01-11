@@ -14,6 +14,12 @@ update sys_users
    set startup_url = '/index/main/dashboard'
 ;
 
+/**
+ * SYS_USERS.PORTAL_SECURITY_ROLE is coming from SYS_COMMON_LOOKUPS
+ * 		Employee Portal user's role = SYS_COMMON_LOOKUPS.ENTITY_SOLUTIONS_STAFF
+ */
+
+
 
 /**
 * Table Name  : 

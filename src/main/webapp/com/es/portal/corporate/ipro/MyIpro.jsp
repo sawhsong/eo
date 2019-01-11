@@ -105,7 +105,7 @@ li:first-child {margin-top:0px;}
 				<th class="thGrid sortable:date">Assignment Start Date</th>
 				<th class="thGrid sortable:date">Assignment End Date</th>
 				<th class="thGrid sortable:alphanumeric">End User Organisation</th>
-				<th class="thGrid">Working State</th>
+				<th class="thGrid sortable:alphanumeric">Working State</th>
 			</tr>
 		</thead>
 		<tbody id="tblGridBody">

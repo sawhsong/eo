@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="employee" extends="default" namespace="/employee" strict-method-invocation="false">
+		<default-interceptor-ref name="ZebraDefaultStack"/>
+		<action name="leave/*" class="com.es.portal.employee.leave.LeaveAction" method="{1}">
+			<result name="myLeave" type="debugDispatcherResult">/com/es/portal/employee/leave/MyLeave.jsp</result>
+			<result name="newLeave" type="debugDispatcherResult">/com/es/portal/employee/leave/NewLeave.jsp</result>
+		</action>
+	</package>
+</struts>

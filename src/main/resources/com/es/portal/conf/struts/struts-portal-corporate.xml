@@ -5,6 +5,7 @@
 		<default-interceptor-ref name="ZebraDefaultStack"/>
 		<action name="ipro/*" class="com.es.portal.corporate.ipro.IproAction" method="{1}">
 			<result name="myIpro" type="debugDispatcherResult">/com/es/portal/corporate/ipro/MyIpro.jsp</result>
+			<result name="newIpro" type="debugDispatcherResult">/com/es/portal/corporate/ipro/NewIpro.jsp</result>
 		</action>
 	</package>
 </struts>
