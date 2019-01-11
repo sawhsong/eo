@@ -32,7 +32,7 @@ $(function() {
 						width:200,
 						height:100
 					});
-					setTimeout(function() {popup.close();}, 10000);
+					setTimeout(function() {popup.close();}, 8000);
 				}
 			}, {
 				caption:com.caption.no,
