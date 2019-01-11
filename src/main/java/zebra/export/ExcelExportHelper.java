@@ -1,5 +1,6 @@
 package zebra.export;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.HashMap;
@@ -8,14 +9,17 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.PrintSetup;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFColor;
 
 import zebra.data.DataSet;
 import zebra.util.CommonUtil;
@@ -121,31 +125,37 @@ public class ExcelExportHelper extends ExportHelper {
 
 	private Map<String, CellStyle> createStyles(SXSSFWorkbook wb) throws Exception {
 		Map<String, CellStyle> styles = new HashMap<String, CellStyle>();
-		CellStyle style;
+		XSSFCellStyle style;
 
 		// Title
 		Font titleFont = wb.createFont();
 		titleFont.setFontHeightInPoints((short)14);
 
-		style = wb.createCellStyle();
+		style = (XSSFCellStyle)wb.createCellStyle();
 		style.setFont(titleFont);
+		style.setAlignment(HorizontalAlignment.CENTER);
+		style.setFillForegroundColor(new XSSFColor(new Color(207, 218, 233)));
+		style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 		styles.put("pageTitle", style);
 
 		// Column Header
 		Font headerFont = wb.createFont();
 		headerFont.setFontHeightInPoints((short)10);
 
-		style = wb.createCellStyle();
-		style.setFillForegroundColor(IndexedColors.PALE_BLUE.getIndex());
+		style = (XSSFCellStyle)wb.createCellStyle();
+
 		style.setFont(headerFont);
 		style.setWrapText(true);
+		style.setAlignment(HorizontalAlignment.CENTER);
+		style.setFillForegroundColor(new XSSFColor(new Color(252, 248, 227)));
+		style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 		styles.put("columnHeader", style);
 
-		// Column Header
+		// Data
 		Font dataFont = wb.createFont();
 		dataFont.setFontHeightInPoints((short)10);
 
-		style = wb.createCellStyle();
+		style = (XSSFCellStyle)wb.createCellStyle();
 		style.setFont(dataFont);
 		style.setWrapText(true);
 		styles.put("dataRows", style);
