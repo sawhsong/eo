@@ -14,8 +14,8 @@ $(function() {
 			url:"/corporate/ipro/newIpro",
 			paramData:{},
 			header:"New IPro",
-			width:1100,
-			height:800
+			width:1500,
+			height:870
 		});
 	});
 

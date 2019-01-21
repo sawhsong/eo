@@ -45,16 +45,16 @@ $(function() {
 	/*!
 	 * google address search
 	 */
-	var autocompleteHome = null;
+	var autocompleteAddr = null;
 
 	initAutoComplete = function() {
-		autocompleteHome = new google.maps.places.Autocomplete($("#searchAddress")[0], {types : ["geocode"]});
-		autocompleteHome.addListener("place_changed", fillInAddress);
+		autocompleteAddr = new google.maps.places.Autocomplete($("#searchAddress")[0], {types : ["geocode"]});
+		autocompleteAddr.addListener("place_changed", fillInAddress);
 	};
 
 	fillInAddress = function () {
 		var addrLine = "", suburb = "", state = "", postCode = "", country = "";
-		var place = autocompleteHome.getPlace();
+		var place = autocompleteAddr.getPlace();
 		var placeType = place.types[0];
 
 		for (var i=0; i<place.address_components.length; i++) {

@@ -30,11 +30,15 @@ public class IproBizImpl extends BaseBiz implements IproBiz {
 
 	public ParamEntity getIproList(ParamEntity paramEntity) throws Exception {
 		HttpSession session = paramEntity.getSession();
-		DataSet iproList = new DataSet();
+		DataSet iproList = new DataSet(), myOrgInfo = new DataSet(new String[] {"organisationId", "organisationName"});
 		String orgId = CommonUtil.nvl((String)session.getAttribute("EmpOrgIdForAdminTool"), (String)session.getAttribute("EmploymentOrgId"));
 
 		try {
 			iproList = wsClient.getIproListDataSet(paramEntity, orgId);
+
+			paramEntity.setDataSetValueFromJsonResultset(myOrgInfo);
+			session.setAttribute("ClientOrgId", myOrgInfo.getValue("organisationId"));
+			session.setAttribute("ClientOrgName", myOrgInfo.getValue("organisationName"));
 
 			paramEntity.setAjaxResponseDataSet(iproList);
 			paramEntity.setSuccess(true);

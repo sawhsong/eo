@@ -13,10 +13,11 @@ public class ComServiceBizImpl extends BaseBiz implements ComServiceBiz {
 		DataSet result = new DataSet(new String[] {"code", "meaning"});
 		String stateMeaning = dsRequest.getValue("state");
 		String country = dsRequest.getValue("country");
+		String flag = CommonUtil.nvl(dsRequest.getValue("flag"));
 
 		try {
 			result.addRow();
-			result.setValue("code", getStateCode(stateMeaning, country));
+			result.setValue("code", getStateCode(stateMeaning, country, flag));
 			result.setValue("meaning", stateMeaning);
 
 			paramEntity.setAjaxResponseDataSet(result);
@@ -27,7 +28,7 @@ public class ComServiceBizImpl extends BaseBiz implements ComServiceBiz {
 		return paramEntity;
 	}
 
-	private String getStateCode(String meaning, String country) throws Exception {
+	private String getStateCode(String meaning, String country, String flag) throws Exception {
 		String rtn = "";
 
 		if (CommonUtil.equalsIgnoreCase(meaning, "New South Wales")) {
@@ -47,18 +48,22 @@ public class ComServiceBizImpl extends BaseBiz implements ComServiceBiz {
 		} else if (CommonUtil.equalsIgnoreCase(meaning, "South Australia")) {
 			rtn = "SA_08";
 		} else {
-			if (CommonUtil.equalsIgnoreCase(country, "New Zealand")) {
-				rtn = "NZ_01";
-			} else if (CommonUtil.equalsIgnoreCase(country, "Singapore")) {
-				rtn = "SG_09";
-			} else if (CommonUtil.equalsIgnoreCase(country, "Malaysia")) {
-				rtn = "MY_09";
-			} else if (CommonUtil.equalsIgnoreCase(country, "Hong Kong")) {
-				rtn = "HK_09";
-			} else if (CommonUtil.equalsIgnoreCase(country, "United Kingdom")) {
-				rtn = "UK_09";
-			} else {
+			if (CommonUtil.equalsAnyIgnoreCase(flag, "AUONLY")) {
 				rtn = "OS_01";
+			} else {
+				if (CommonUtil.equalsIgnoreCase(country, "New Zealand")) {
+					rtn = "NZ_01";
+				} else if (CommonUtil.equalsIgnoreCase(country, "Singapore")) {
+					rtn = "SG_09";
+				} else if (CommonUtil.equalsIgnoreCase(country, "Malaysia")) {
+					rtn = "MY_09";
+				} else if (CommonUtil.equalsIgnoreCase(country, "Hong Kong")) {
+					rtn = "HK_09";
+				} else if (CommonUtil.equalsIgnoreCase(country, "United Kingdom")) {
+					rtn = "UK_09";
+				} else {
+					rtn = "OS_01";
+				}
 			}
 		}
 
