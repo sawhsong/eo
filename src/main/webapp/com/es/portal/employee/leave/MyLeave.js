@@ -21,6 +21,7 @@ $(function() {
 	$("#btnSearch").click(function() {
 		doSearch();
 	});
+
 	/*!
 	 * process
 	 */
@@ -35,9 +36,11 @@ $(function() {
 
 		setTimeout(function() {
 			commonJs.ajaxSubmit({
-				url:"/corporate/ipro/getIproList",
+				url:"/employee/leave/getLeaveList",
 				dataType:"json",
-				data:{},
+				data:{
+					assignmentId:$("#assignment").val()
+				},
 				success:function(data, textStatus) {
 					var result = commonJs.parseAjaxResult(data, textStatus, "json");
 					if (result.isSuccess == true || result.isSuccess == "true") {
@@ -60,22 +63,24 @@ $(function() {
 			for (var i=0; i<ds.getRowCnt(); i++) {
 				var gridTr = new UiGridTr();
 
-				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "personFullName")));
-				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "jobTitle")));
-				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "email")));
-				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "lastInvoiceDate")));
-				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "lastPayDate")));
+				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "leaveTypeDesc")));
+				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "leaveCategoryDesc")));
+
+				var uiAnc = new UiAnchor();
+				uiAnc.setText(ds.getValue(i, "assignmentId")).setScript("getLeaveDetail('"+ds.getValue(i, "leaveRequestId")+"')");
+				gridTr.addChild(new UiGridTd().addClassName("Lt").addChild(uiAnc));
+
+				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "duration")+" "+ds.getValue(i, "durationUnitDesc")));
 				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "startDate")));
 				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "endDate")));
-				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "endUserOrganisationName")));
-				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "workingState")));
+				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "statusDesc")));
 
 				html += gridTr.toHtmlString();
 			}
 		} else {
 			var gridTr = new UiGridTr();
 
-			gridTr.addChild(new UiGridTd().addClassName("Ct").setAttribute("colspan:9").setText(com.message.I001));
+			gridTr.addChild(new UiGridTd().addClassName("Ct").setAttribute("colspan:7").setText(com.message.I001));
 			html += gridTr.toHtmlString();
 		}
 
@@ -85,10 +90,23 @@ $(function() {
 		commonJs.hideProcMessageOnElement("divScrollablePanel");
 	};
 
+	getLeaveDetail = function(leaveRequestId) {
+		popup = commonJs.openPopup({
+			popupId:"leaveDetail",
+			url:"/employee/leave/getLeaveDetail",
+			paramData:{
+				leaveRequestId:leaveRequestId
+			},
+			header:"Leave Detail",
+			width:800,
+			height:560
+		});
+	};
+
 	/*!
 	 * load event (document / window)
 	 */
 	$(window).load(function() {
-//		doSearch();
+		doSearch();
 	});
 });

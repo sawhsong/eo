@@ -1,16 +1,15 @@
 package com.es.portal.employee.leave;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.es.portal.common.extend.BaseBiz;
 import com.es.portal.common.module.bizservice.webserviceclient.WebServiceClientBizService;
 
+import net.sf.json.JSONArray;
 import zebra.data.DataSet;
 import zebra.data.ParamEntity;
 import zebra.exception.FrameworkException;
-import zebra.util.CommonUtil;
+import zebra.util.JsonUtil;
 
 public class LeaveBizImpl extends BaseBiz implements LeaveBiz {
 	@Autowired
@@ -26,14 +25,38 @@ public class LeaveBizImpl extends BaseBiz implements LeaveBiz {
 	}
 
 	public ParamEntity getLeaveList(ParamEntity paramEntity) throws Exception {
-		HttpSession session = paramEntity.getSession();
+		DataSet dsRequest = paramEntity.getRequestDataSet();
 		DataSet iproList = new DataSet();
-		String orgId = CommonUtil.nvl((String)session.getAttribute("EmpOrgIdForAdminTool"), (String)session.getAttribute("EmploymentOrgId"));
+		String assignmentId = dsRequest.getValue("assignmentId");
 
 		try {
-			iproList = wsClient.getIproListDataSet(paramEntity, orgId);
+			iproList = wsClient.getLeaveListDataSet(paramEntity, assignmentId);
 
 			paramEntity.setAjaxResponseDataSet(iproList);
+			paramEntity.setSuccess(true);
+		} catch (Exception ex) {
+			throw new FrameworkException(paramEntity, ex);
+		}
+		return paramEntity;
+	}
+
+	public ParamEntity getLeaveDetail(ParamEntity paramEntity) throws Exception {
+		DataSet dsRequest = paramEntity.getRequestDataSet();
+		DataSet leaveDetails = new DataSet();
+		String leaveRequestId = dsRequest.getValue("leaveRequestId");
+		String header[] = new String[] {"leaveRequestId", "assignmentId", "assignmentNumber", "leaveType", "leaveTypeDesc", "leaveCategory", "leaveCategoryDesc",
+				"duration", "durationUnit", "durationUnitDesc", "startDate", "endDate", "reason", "status", "statusDesc"};
+
+		try {
+			leaveDetails.addName(header);
+
+			wsClient.getLeaveDetailService(paramEntity, leaveRequestId);
+			paramEntity.setDataSetValueFromJsonResultset(leaveDetails);
+
+			paramEntity.setObject("leaveCategoryLookup", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("leaveCategoryList")));
+			paramEntity.setObject("leaveTypeLookup", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("leaveTypeList")));
+			paramEntity.setObject("durationUnitLookup", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("durationUnitList")));
+			paramEntity.setObject("leaveDetails", leaveDetails);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);

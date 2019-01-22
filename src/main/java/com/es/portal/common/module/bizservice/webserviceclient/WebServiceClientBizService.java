@@ -25,6 +25,12 @@ public interface WebServiceClientBizService {
 	public DataSet getIproListDataSet(ParamEntity paramEntity, String orgId) throws Exception;
 
 	/*
+	 * Employee - Leave
+	 */
+	public DataSet getLeaveListDataSet(ParamEntity paramEntity, String assignmentId) throws Exception;
+	public void getLeaveDetailService(ParamEntity paramEntity, String leaveRequestId) throws Exception;
+
+	/*
 	 * Login - User Profile
 	 */
 	public void getPersonProfileService(ParamEntity paramEntity, String personId) throws Exception;

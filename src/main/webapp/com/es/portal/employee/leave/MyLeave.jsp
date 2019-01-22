@@ -87,30 +87,28 @@
 <div id="divDataArea" class="areaContainer">
 	<table id="tblGrid" class="tblGrid">
 		<colgroup>
+			<col width="15%"/>
+			<col width="15%"/>
+			<col width="15%"/>
 			<col width="12%"/>
-			<col width="12%"/>
-			<col width="12%"/>
-			<col width="12%"/>
-			<col width="12%"/>
-			<col width="12%"/>
-			<col width="12%"/>
+			<col width="9%"/>
+			<col width="9%"/>
 			<col width="*"/>
 		</colgroup>
 		<thead>
 			<tr>
-				<th class="thGrid">Type</th>
-				<th class="thGrid">Category</th>
-				<th class="thGrid">Assignment Id</th>
-				<th class="thGrid">Assignment Number</th>
+				<th class="thGrid sortable:alphanumeric">Type</th>
+				<th class="thGrid sortable:alphanumeric">Category</th>
+				<th class="thGrid sortable:alphanumeric">Assignment Number</th>
 				<th class="thGrid">Duration</th>
-				<th class="thGrid">Start Date</th>
-				<th class="thGrid">End Date</th>
-				<th class="thGrid">Status</th>
+				<th class="thGrid sortable:date">Start Date</th>
+				<th class="thGrid sortable:date">End Date</th>
+				<th class="thGrid sortable:alphanumeric">Status</th>
 			</tr>
 		</thead>
 		<tbody id="tblGridBody">
 			<tr>
-				<td class="tdGrid Ct" colspan="8"><mc:msg key="I002"/></td>
+				<td class="tdGrid Ct" colspan="7"><mc:msg key="I002"/></td>
 			</tr>
 		</tbody>
 	</table>
