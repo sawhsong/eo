@@ -55,9 +55,26 @@
 	</div>
 </div>
 <div id="divAdminToolArea"><%@ include file="/com/es/portal/common/include/bodyAdminToolArea.jsp"%></div>
-<div id="divSearchCriteriaArea"></div>
-<div id="divInformArea">
+<div id="divSearchCriteriaArea" class="areaContainer">
+	<table class="tblSearch">
+		<caption>Please select a assignment and click 'Search' button to view a list of Leaves</caption>
+		<colgroup>
+			<col width="30%"/>
+			<col width="*"/>
+		</colgroup>
+		<tr>
+			<td class="tdSearch">
+				<label for="assignment" class="lblEn hor mandatory">Assignment</label>
+				<div style="float:left;padding-right:4px;">
+					<ui:select name="assignment">
+						<ui:seloption value="" text="==Select=="/>
+					</ui:select>
+				</div>
+			</td>
+		</tr>
+	</table>
 </div>
+<div id="divInformArea"></div>
 <%/************************************************************************************************
 * End of fixed panel
 ************************************************************************************************/%>
@@ -68,6 +85,35 @@
 * Real Contents - scrollable panel(data, paging)
 ************************************************************************************************/%>
 <div id="divDataArea" class="areaContainer">
+	<table id="tblGrid" class="tblGrid">
+		<colgroup>
+			<col width="12%"/>
+			<col width="12%"/>
+			<col width="12%"/>
+			<col width="12%"/>
+			<col width="12%"/>
+			<col width="12%"/>
+			<col width="12%"/>
+			<col width="*"/>
+		</colgroup>
+		<thead>
+			<tr>
+				<th class="thGrid">Type</th>
+				<th class="thGrid">Category</th>
+				<th class="thGrid">Assignment Id</th>
+				<th class="thGrid">Assignment Number</th>
+				<th class="thGrid">Duration</th>
+				<th class="thGrid">Start Date</th>
+				<th class="thGrid">End Date</th>
+				<th class="thGrid">Status</th>
+			</tr>
+		</thead>
+		<tbody id="tblGridBody">
+			<tr>
+				<td class="tdGrid Ct" colspan="8"><mc:msg key="I002"/></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 <div id="divPagingArea"></div>
 <%/************************************************************************************************
