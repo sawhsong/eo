@@ -5,6 +5,8 @@
 		<default-interceptor-ref name="ZebraDefaultStack"/>
 		<action name="leave/*" class="com.es.portal.employee.leave.LeaveAction" method="{1}">
 			<result name="myLeave" type="debugDispatcherResult">/com/es/portal/employee/leave/MyLeave.jsp</result>
+			<result name="leaveDetail" type="debugDispatcherResult">/com/es/portal/employee/leave/LeaveDetail.jsp</result>
+			<result name="updateLeave" type="debugDispatcherResult">/com/es/portal/employee/leave/UpdateLeave.jsp</result>
 			<result name="newLeave" type="debugDispatcherResult">/com/es/portal/employee/leave/NewLeave.jsp</result>
 		</action>
 	</package>

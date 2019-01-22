@@ -27,6 +27,10 @@ $(function() {
 		});
 	});
 
+	$("#btnBack").click(function(event) {
+		history.go(-1);
+	});
+
 	$("#btnClose").click(function(event) {
 		parent.popup.close();
 	});
@@ -75,7 +79,13 @@ $(function() {
 						buttons:[{
 							caption:com.caption.ok,
 							callback:function() {
-								parent.popup.close();
+								commonJs.doSubmit({
+									formId:"fmDefault",
+									action:"/employee/leave/getLeaveDetail",
+									data:{
+										leaveRequestId:leaveRequestId
+									},
+								});
 							}
 						}]
 					});

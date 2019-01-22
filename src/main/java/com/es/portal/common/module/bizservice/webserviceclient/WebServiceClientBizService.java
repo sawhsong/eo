@@ -29,6 +29,7 @@ public interface WebServiceClientBizService {
 	 */
 	public DataSet getLeaveListDataSet(ParamEntity paramEntity, String assignmentId) throws Exception;
 	public void getLeaveDetailService(ParamEntity paramEntity, String leaveRequestId) throws Exception;
+	public String postLeaveRequest(String leaveRequestId, DataSet requestDataSet) throws Exception;
 
 	/*
 	 * Login - User Profile

@@ -11,10 +11,12 @@ $(function() {
 		popup = commonJs.openPopup({
 			popupId:"NewLeave",
 			url:"/employee/leave/newLeave",
-			paramData:{},
+			paramData:{
+				leaveRequestId:"-1"
+			},
 			header:"New Leave",
-			width:800,
-			height:500
+			width:860,
+			height:400
 		});
 	});
 
@@ -98,8 +100,8 @@ $(function() {
 				leaveRequestId:leaveRequestId
 			},
 			header:"Leave Detail",
-			width:800,
-			height:560
+			width:860,
+			height:400
 		});
 	};
 

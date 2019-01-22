@@ -304,6 +304,29 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		paramEntity.setObjectFromJsonString(result);
 	}
 
+	public String postLeaveRequest(String leaveRequestId, DataSet requestDataSet) throws Exception {
+		DataSet post = new DataSet();
+		String serviceUrl = "", result = "";
+		String header[] = new String[] {"leaveRequestId", "assignmentId", "startDate", "endDate", "leaveType", "leaveCategory", "duration", "durationUnit", "reason"};
+
+		serviceUrl = "leave/apply";
+
+		post.addName(header);
+		post.addRow();
+		post.setValue(post.getRowCnt()-1, "leaveRequestId", leaveRequestId);
+		post.setValue(post.getRowCnt()-1, "assignmentId", requestDataSet.getValue("assignmentId"));
+		post.setValue(post.getRowCnt()-1, "startDate", CommonUtil.replace(requestDataSet.getValue("startDate"), "-", ""));
+		post.setValue(post.getRowCnt()-1, "endDate", CommonUtil.replace(requestDataSet.getValue("endDate"), "-", ""));
+		post.setValue(post.getRowCnt()-1, "leaveType", requestDataSet.getValue("type"));
+		post.setValue(post.getRowCnt()-1, "leaveCategory", requestDataSet.getValue("category"));
+		post.setValue(post.getRowCnt()-1, "duration", requestDataSet.getValue("duration"));
+		post.setValue(post.getRowCnt()-1, "durationUnit", requestDataSet.getValue("durationUnits"));
+		post.setValue(post.getRowCnt()-1, "reason", requestDataSet.getValue("reason"));
+
+		result = RestServiceSupport.post(providerUrl, serviceUrl, acceptTypeHeader, post);
+		return CommonUtil.removeString(result, "\"");
+	}
+
 	/*
 	 * Login - User Profile
 	 */

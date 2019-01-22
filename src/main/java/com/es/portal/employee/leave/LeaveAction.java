@@ -32,8 +32,22 @@ public class LeaveAction extends BaseAction {
 		return "leaveDetail";
 	}
 
+	public String getUpdateLeaveRequest() throws Exception {
+		biz.getLeaveDetail(paramEntity);
+		return "updateLeave";
+	}
+
+	public String saveLeave() throws Exception {
+		try {
+			biz.saveLeave(paramEntity);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
+
 	public String newLeave() throws Exception {
-		biz.newLeave(paramEntity);
+		biz.getLeaveDetail(paramEntity);
 		return "newLeave";
 	}
 }

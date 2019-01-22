@@ -9,13 +9,7 @@
 <%
 	ParamEntity pe = (ParamEntity)request.getAttribute("paramEntity");
 	DataSet leaveDetail = (DataSet)pe.getObject("leaveDetail");
-	DataSet typeLookup = (DataSet)pe.getObject("leaveTypeLookup");
-	DataSet categoryLookup = (DataSet)pe.getObject("leaveCategoryLookup");
-	DataSet durationUnitLookup = (DataSet)pe.getObject("durationUnitLookup");
-	String dateFormat = ConfigUtil.getProperty("format.date.java");
-	String timeFormat = "HH:mm:ss";
-	String defaultDate = CommonUtil.getSysdate(dateFormat);
-	String defaultDateTime = CommonUtil.getSysdate(dateFormat+" "+timeFormat);
+	String status = leaveDetail.getValue("status");
 %>
 <%/************************************************************************************************
 * HTML
@@ -35,8 +29,7 @@
 </style>
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
-var leaveRequestId = "-1";
-var assignmentId = "-1";
+var leaveRequestId = "<%=leaveDetail.getValue("leaveRequestId")%>";
 </script>
 </head>
 <%/************************************************************************************************
@@ -55,7 +48,13 @@ var assignmentId = "-1";
 	<div id="divButtonAreaLeft"></div>
 	<div id="divButtonAreaRight">
 		<ui:buttonGroup id="buttonGroup">
-			<ui:button id="btnSave" caption="button.com.save" iconClass="fa-save"/>
+<%
+		if (CommonUtil.isIn(status, "SA", "RE")) {
+%>
+			<ui:button id="btnEdit" caption="button.com.edit" iconClass="fa-edit"/>
+<%
+		}
+%>
 			<ui:button id="btnClose" caption="button.com.close" iconClass="fa-times"/>
 		</ui:buttonGroup>
 	</div>
@@ -81,74 +80,41 @@ var assignmentId = "-1";
 		</colgroup>
 		<tr>
 			<th class="thEdit rt">Assignment Number</th>
-			<td class="tdEdit"><ui:text name="assignmentNumber" status="display"/></td>
+			<td class="tdEdit"><ui:text name="assignmentNumber" value="<%=leaveDetail.getValue(\"assignmentNumber\")%>" status="display"/></td>
 			<th class="thEdit rt">Status</th>
-			<td class="tdEdit"><ui:text name="status" status="display"/></td>
+			<td class="tdEdit"><ui:text name="status" value="<%=leaveDetail.getValue(\"statusDesc\")%>" status="display"/></td>
 		</tr>
 		<tr>
-			<th class="thEdit rt mandatory">Type</th>
-			<td class="tdEdit">
-				<ui:select name="type" checkName="Leave Type" options="mandatory">
-<%
-				for (int i=0; i<typeLookup.getRowCnt(); i++) {
-%>
-					<option value="<%=typeLookup.getValue(i, "code")%>"><%=typeLookup.getValue(i, "meaning")%></option>
-<%
-				}
-%>
-				</ui:select>
-			</td>
-			<th class="thEdit rt mandatory">Category</th>
-			<td class="tdEdit">
-				<ui:select name="category" checkName="Leave Category" options="mandatory">
-<%
-				for (int i=0; i<categoryLookup.getRowCnt(); i++) {
-%>
-					<option value="<%=categoryLookup.getValue(i, "code")%>"><%=categoryLookup.getValue(i, "meaning")%></option>
-<%
-				}
-%>
-				</ui:select>
-			</td>
+			<th class="thEdit rt">Type</th>
+			<td class="tdEdit"><ui:text name="type" value="<%=leaveDetail.getValue(\"leaveTypeDesc\")%>" status="display"/></td>
+			<th class="thEdit rt">Category</th>
+			<td class="tdEdit"><ui:text name="category" value="<%=leaveDetail.getValue(\"leaveCategoryDesc\")%>" status="display"/></td>
 		</tr>
 		<tr>
-			<th class="thEdit rt mandatory">Start Date</th>
-			<td class="tdEdit">
-				<ui:text name="startDate" value="<%=defaultDate%>" className="Ct hor" style="width:100px" checkName="Start Date" options="mandatory" option="date"/>
-				<ui:icon id="icnStartDate" className="fa-calendar hor"/>
-			</td>
-			<th class="thEdit rt mandatory">End Date</th>
-			<td class="tdEdit">
-				<ui:text name="endDate" value="<%=defaultDate%>" className="Ct hor" style="width:100px" checkName="End Date" options="mandatory" option="date"/>
-				<ui:icon id="icnEndDate" className="fa-calendar hor"/>
-			</td>
+			<th class="thEdit rt">Start Date</th>
+			<td class="tdEdit"><ui:text name="startDate" value="<%=leaveDetail.getValue(\"startDate\")%>" status="display"/></td>
+			<th class="thEdit rt">End Date</th>
+			<td class="tdEdit"><ui:text name="endDate" value="<%=leaveDetail.getValue(\"endDate\")%>" status="display"/></td>
 		</tr>
 		<tr>
-			<th class="thEdit rt mandatory">Duration</th>
-			<td class="tdEdit"><ui:text name="duration" status="spinner" checkName="Leave Duration" options="mandatory"/></td>
-			<th class="thEdit rt mandatory">Units</th>
-			<td class="tdEdit">
-				<ui:select name="durationUnits" checkName="Duration Units" options="mandatory">
-					<option value="D">Day(s)</option>
-<%
-				for (int i=0; i<durationUnitLookup.getRowCnt(); i++) {
-%>
-					<option value="<%=durationUnitLookup.getValue(i, "code")%>"><%=durationUnitLookup.getValue(i, "meaning")%></option>
-<%
-				}
-%>
-				</ui:select>
-			</td>
+			<th class="thEdit rt">Duration</th>
+			<td class="tdEdit"><ui:text name="duration" value="<%=leaveDetail.getValue(\"duration\")%>" status="display"/></td>
+			<th class="thEdit rt">Units</th>
+			<td class="tdEdit"><ui:text name="durationUnits" value="<%=leaveDetail.getValue(\"durationUnitDesc\")%>" status="display"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit rt">Reason</th>
-			<td class="tdEdit" colspan="3"><ui:txa name="reason" style="height:40px;"/></td>
+			<td class="tdEdit" colspan="3"><ui:txa name="reason" value="<%=leaveDetail.getValue(\"reason\")%>" status="display" style="height:40px;"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit rt">Submitted Date</th>
-			<td class="tdEdit"><ui:text name="submittedDate" value="<%=defaultDateTime%>" status="display"/></td>
-			<th class="thEdit rt"></th>
-			<td class="tdEdit"></td>
+			<td class="tdEdit"><ui:text name="submittedDate" value="<%=leaveDetail.getValue(\"submittedDate\")%>" status="display"/></td>
+			<th class="thEdit rt">Approver</th>
+			<td class="tdEdit"><ui:text name="approver" value="<%=leaveDetail.getValue(\"approverName\")%>" status="display"/></td>
+		</tr>
+		<tr>
+			<th class="thEdit rt">Rejected Reason</th>
+			<td class="tdEdit" colspan="3"><ui:txa name="rejectedReason" value="<%=leaveDetail.getValue(\"rejectedReason\")%>" status="display" style="height:40px;"/></td>
 		</tr>
 	</table>
 </div>
