@@ -10,19 +10,20 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-<!-- 	<http pattern="/**/**" security="none"/> -->
-	<http pattern="/login/userlogin" security="none"/>
-	<http pattern="/login/login" security="none"/>
+	<http pattern="/**/**" security="none"/>
+
 	<http auto-config="true" use-expressions="true">
 		<headers>
 			<frame-options policy="SAMEORIGIN"/>
 		</headers>
-<!-- 		<intercept-url pattern="/**" access="hasRole('ROLE_USER')"/> -->
+
+<!-- 		<form-login login-page="/login/userlogin" -->
+<!-- 			login-processing-url="/login/login" -->
+<!-- 			username-parameter="loginId" -->
+<!-- 			password-parameter="password"/> -->
+
+<!-- 		<intercept-url pattern="/**" access="permitAll"/> -->
 		<session-management session-fixation-protection="newSession"/>
-		<form-login login-page="/login/userlogin"
-			login-processing-url="/login/login"
-			username-parameter="loginId"
-			password-parameter="password"/>
 	</http>
 
 	<authentication-manager>

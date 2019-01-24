@@ -1,12 +1,12 @@
 package zebra.aop;
 
-import zebra.util.CommonUtil;
-import zebra.util.ConfigUtil;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.util.StopWatch;
+
+import zebra.util.CommonUtil;
+import zebra.util.ConfigUtil;
 
 public class LoggingAdvice {
 	private Logger logger = LogManager.getLogger(this.getClass());
