@@ -5,7 +5,15 @@
  *************************************************************************************************/
 package com.es.portal.login;
 
+import java.security.Principal;
+import java.util.Collection;
+import java.util.Iterator;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.es.portal.common.extend.BaseAction;
 import com.es.portal.conf.resource.ormapper.dto.oracle.HpPersonD;
@@ -37,6 +45,16 @@ public class LoginAction extends BaseAction {
 
 	public String login() throws Exception {
 		try {
+//			Principal principal = ServletActionContext.getRequest().getUserPrincipal();
+//			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//			System.out.println("username: " + userDetails.getUsername());
+//			System.out.println("password: " + userDetails.getPassword());
+//			Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) userDetails.getAuthorities();
+//			for (Iterator it = authorities.iterator(); it.hasNext();) {
+//				SimpleGrantedAuthority authority = (SimpleGrantedAuthority) it.next();
+//				System.out.println("Role: " + authority.getAuthority());
+//			}
+
 			biz.exeLogin(paramEntity);
 
 			if (paramEntity.isSuccess()) {
@@ -73,6 +91,7 @@ public class LoginAction extends BaseAction {
 				paramEntity.setAjaxResponseDataSet(resultDataset);
 			}
 		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";
