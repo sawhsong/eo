@@ -109,6 +109,6 @@ $(function() {
 	 * load event (document / window)
 	 */
 	$(window).load(function() {
-		doSearch();
+//		doSearch();
 	});
 });

@@ -282,7 +282,20 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 	/*
 	 * Employee - Leave
 	 */
-	public DataSet getLeaveListDataSet(ParamEntity paramEntity, String assignmentId) throws Exception {
+	public DataSet getLeaveAssignmentListDataSet(ParamEntity paramEntity, String personId) throws Exception {
+		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
+		DataSet assignmentList = new DataSet();
+		String serviceUrl = "leave/"+personId+"/assignmentList";
+		String result = "";
+
+		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
+		paramEntity.setObjectFromJsonString(result);
+		assignmentList = JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("leaveAssignmentList"));
+
+		return assignmentList;
+	}
+
+	public DataSet getLeaveListDataSet(ParamEntity paramEntity, String personId) throws Exception {
 		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
 		DataSet leaveList = new DataSet();
 		String serviceUrl = "leave/"+"281856"+"/list";

@@ -225,19 +225,26 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 		SysUsers sysUsers = new SysUsers();
 		HpPersonD hpPersonD = new HpPersonD();
 		String loginId = requestDataSet.getValue("loginId");
+		String personId = requestDataSet.getValue("personId");
 		DataSet resultDataSet = new DataSet();
 
 		try {
-			sysUsers = sysUsersDao.getUserByLoginId(loginId);
+			if (CommonUtil.isNotBlank(loginId)) {
+				sysUsers = sysUsersDao.getUserByLoginId(loginId);
+			} else if (CommonUtil.isNotBlank(personId)) {
+				sysUsers = sysUsersDao.getUserByPersonId(personId);
+			}
+
 			hpPersonD = hpPersonDDao.getPersonByPersonId(CommonUtil.toString(sysUsers.getPersonId(), "#"));
 
 			paramEntity.setObject("sysUsersForAdminTool", sysUsers);
 			paramEntity.setObject("hpPersonDForAdminTool", hpPersonD);
 
-			resultDataSet.addName(new String[] {"user_id", "login_id", "user_full_name", "emp_org_id"});
+			resultDataSet.addName(new String[] {"user_id", "login_id", "person_id", "user_full_name", "emp_org_id"});
 			resultDataSet.addRow();
 			resultDataSet.setValue("user_id", sysUsers.getUserId());
 			resultDataSet.setValue("login_id", sysUsers.getUserName()); // LoginId = UserName
+			resultDataSet.setValue("person_id", CommonUtil.toString(sysUsers.getPersonId(), "#"));
 			resultDataSet.setValue("user_full_name", hpPersonD.getFullName());
 			resultDataSet.setValue("emp_org_id", CommonUtil.toString(hpPersonD.getEmploymentCompanyOrgId(), "#"));
 

@@ -99,7 +99,7 @@ $(function() {
 				if (CommonUtil.isNotBlank(loginIdForAdminToolHeaderPage)) {
 %>
 				<div id="divUsingUserAs" class="headerGblMenus" style="color:#D92E24;cursor:default;top:50%;transform:translateY(50%)">
-					User Login ID As : ${sessionScope.LoginIdForAdminTool} / User Name As : ${sessionScope.UserFullNameForAdminTool} / User Emp Org ID As : ${sessionScope.EmpOrgIdForAdminTool}
+					User Login ID As : ${sessionScope.LoginIdForAdminTool} / User Person ID As : ${sessionScope.PersonIdForAdminTool} / User Name As : ${sessionScope.UserFullNameForAdminTool} / User Emp Org ID As : ${sessionScope.EmpOrgIdForAdminTool}
 				</div>
 				&nbsp;&nbsp;&nbsp;
 <%

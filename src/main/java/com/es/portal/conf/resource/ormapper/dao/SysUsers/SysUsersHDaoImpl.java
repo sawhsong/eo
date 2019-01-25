@@ -28,7 +28,19 @@ public class SysUsersHDaoImpl extends BaseHDao implements SysUsersDao {
 		return (SysUsers)selectAllToDto(queryAdvisor, new SysUsers());
 	}
 
+	public SysUsers getUserByPersonId(String personId) throws Exception {
+		QueryAdvisor queryAdvisor = new QueryAdvisor();
+
+		queryAdvisor.addWhereClause("person_id = '"+personId+"'");
+
+		return (SysUsers)selectAllToDto(queryAdvisor, new SysUsers());
+	}
+
 	public DataSet getSysUsersDataSetByLoginIdForAutoCompletion(QueryAdvisor queryAdvisor) throws Exception {
 		return selectAsDataSet(queryAdvisor, "query.SysUsers.getSysUsersDataSetByLoginIdForAutoCompletion");
+	}
+
+	public DataSet getSysUsersDataSetByPersonIdForAutoCompletion(QueryAdvisor queryAdvisor) throws Exception {
+		return selectAsDataSet(queryAdvisor, "query.SysUsers.getSysUsersDataSetByPersonIdForAutoCompletion");
 	}
 }

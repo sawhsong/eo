@@ -25,5 +25,9 @@ public interface SysUsersDao extends IDao {
 	 * @throws Exception
 	 */
 	public SysUsers getUserByLoginIdAndPassword(String loginId, String password) throws Exception;
+
+	public SysUsers getUserByPersonId(String personId) throws Exception;
+
 	public DataSet getSysUsersDataSetByLoginIdForAutoCompletion(QueryAdvisor queryAdvisor) throws Exception;
+	public DataSet getSysUsersDataSetByPersonIdForAutoCompletion(QueryAdvisor queryAdvisor) throws Exception;
 }

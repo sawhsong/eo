@@ -1,5 +1,7 @@
 package com.es.portal.employee.leave;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.es.portal.common.extend.BaseBiz;
@@ -17,7 +19,14 @@ public class LeaveBizImpl extends BaseBiz implements LeaveBiz {
 	private WebServiceClientBizService wsClient;
 
 	public ParamEntity myLeaves(ParamEntity paramEntity) throws Exception {
+		HttpSession session = paramEntity.getSession();
+		String personId = CommonUtil.nvl((String)session.getAttribute("PersonIdForAdminTool"), (String)session.getAttribute("PersonId"));
+		DataSet assignmentList = new DataSet();
+
 		try {
+			assignmentList = wsClient.getLeaveAssignmentListDataSet(paramEntity, personId);
+
+			paramEntity.setObject("assignmentList", assignmentList);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
@@ -26,12 +35,13 @@ public class LeaveBizImpl extends BaseBiz implements LeaveBiz {
 	}
 
 	public ParamEntity getLeaveList(ParamEntity paramEntity) throws Exception {
+		HttpSession session = paramEntity.getSession();
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		DataSet iproList = new DataSet();
-		String assignmentId = dsRequest.getValue("assignmentId");
+		String personId = CommonUtil.nvl((String)session.getAttribute("PersonIdForAdminTool"), (String)session.getAttribute("PersonId"));
 
 		try {
-			iproList = wsClient.getLeaveListDataSet(paramEntity, assignmentId);
+			iproList = wsClient.getLeaveListDataSet(paramEntity, personId);
 
 			paramEntity.setAjaxResponseDataSet(iproList);
 			paramEntity.setSuccess(true);

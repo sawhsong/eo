@@ -8,7 +8,7 @@
 ************************************************************************************************/%>
 <%
 	ParamEntity pe = (ParamEntity)request.getAttribute("paramEntity");
-	DataSet dsRequest = pe.getRequestDataSet();
+	DataSet dsAssignment = (DataSet)pe.getObject("assignmentList");
 %>
 <%/************************************************************************************************
 * HTML
@@ -68,6 +68,13 @@
 				<div style="float:left;padding-right:4px;">
 					<ui:select name="assignment">
 						<ui:seloption value="" text="==Select=="/>
+<%
+					for (int i=0; i<dsAssignment.getRowCnt(); i++) {
+%>
+						<ui:seloption value="<%=dsAssignment.getValue(i, \"assignmentId\")%>" text="<%=dsAssignment.getValue(i, \"assignmentName\")%>"/>
+<%
+					}
+%>
 					</ui:select>
 				</div>
 			</td>
@@ -85,7 +92,7 @@
 * Real Contents - scrollable panel(data, paging)
 ************************************************************************************************/%>
 <div id="divDataArea" class="areaContainer">
-	<table id="tblGrid" class="tblGrid">
+	<table id="tblGrid" class="tblGrid sort autosort">
 		<colgroup>
 			<col width="15%"/>
 			<col width="15%"/>

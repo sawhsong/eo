@@ -16,4 +16,13 @@ public class AutoCompletionAction extends BaseAction {
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";
 	}
+
+	public String getSysUsersByPersonId() throws Exception {
+		try {
+			biz.getSysUsersByPersonId(paramEntity);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
 }

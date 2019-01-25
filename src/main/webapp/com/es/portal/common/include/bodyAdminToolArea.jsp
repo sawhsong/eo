@@ -20,20 +20,24 @@ $(function() {
 	});
 
 	setSessionValuesForAdminTool = function() {
-		if (commonJs.isEmpty($("#loginIdAsAdminTool").val())) {return;}
+		if (commonJs.isEmpty($("#loginIdAsAdminTool").val()) && commonJs.isEmpty($("#personIdAsAdminTool").val())) {return;}
 
 		commonJs.ajaxSubmit({
 			url:"/login/setSessionValuesForAdminTool",
 			dataType:"json",
-			data:{loginId:$("#loginIdAsAdminTool").val()},
+			data:{
+				loginId:$("#loginIdAsAdminTool").val(),
+				personId:$("#personIdAsAdminTool").val()
+			},
 			success:function(data, textStatus) {
 				var result = commonJs.parseAjaxResult(data, textStatus, "json");
 				if (result.isSuccess == true || result.isSuccess == "true") {
 					var ds = result.dataSet;
 
 					$("#loginIdAsAdminTool").val(ds.getValue(0, "login_id"));
+					$("#personIdAsAdminTool").val(ds.getValue(0, "person_id"));
 					$("#userFullNameAsAdminTool").val(ds.getValue(0, "user_full_name"));
-					$("#divUsingUserAs").html("User Login ID As : "+ds.getValue(0, "login_id")+" / User Name As : "+ds.getValue(0, "user_full_name")+" / User Emp Org ID As : "+ds.getValue(0, "emp_org_id"));
+					$("#divUsingUserAs").html("User Login ID As : "+ds.getValue(0, "login_id")+" / User Person ID As : "+ds.getValue(0, "person_id")+" / User Name As : "+ds.getValue(0, "user_full_name")+" / User Emp Org ID As : "+ds.getValue(0, "emp_org_id"));
 
 					try {
 						goMenu('${sessionScope.headerMenuId}', '${sessionScope.headerMenuName}', '${sessionScope.headerMenuUrl}', '${sessionScope.leftMenuId}', '${sessionScope.leftMenuName}', '${sessionScope.leftMenuUrl}');
@@ -74,16 +78,41 @@ $(function() {
 			value:"user_name",
 			minLength:2,
 			focus:function(event, ui) {
+				$("#personIdAsAdminTool").val("");
 				$("#loginIdAsAdminTool").val(ui.item.label);
 				return false;
 			},
 			change:function(event, ui) {
 				if (commonJs.isEmpty($("#loginIdAsAdminTool").val())) {
+					$("#personIdAsAdminTool").val("");
 					$("#userFullNameAsAdminTool").val("");
 				}
 			},
 			select:function(event, ui) {
 				$("#loginIdAsAdminTool").val(ui.item.value);
+				setSessionValuesForAdminTool();
+				return false;
+			}
+		});
+
+		commonJs.setAutoComplete($("#personIdAsAdminTool"), {
+			method:"getSysUsersByPersonId",
+			label:"person_id",
+			value:"person_id",
+			minLength:2,
+			focus:function(event, ui) {
+				$("#loginIdAsAdminTool").val("");
+				$("#personIdAsAdminTool").val(ui.item.label);
+				return false;
+			},
+			change:function(event, ui) {
+				if (commonJs.isEmpty($("#personIdAsAdminTool").val())) {
+					$("#loginIdAsAdminTool").val("");
+					$("#userFullNameAsAdminTool").val("");
+				}
+			},
+			select:function(event, ui) {
+				$("#personIdAsAdminTool").val(ui.item.value);
 				setSessionValuesForAdminTool();
 				return false;
 			}
@@ -99,10 +128,10 @@ if (CommonUtil.equalsIgnoreCase(securityRoleAdminToolArea, "administrator") && i
 	<table class="tblAdminTool">
 		<caption>Admin Tool</caption>
 		<tr>
-			<td class="tdAdminTool Rt">
+			<td class="tdAdminTool">
 				<table class="tblDefault withPadding">
 					<colgroup>
-						<col width="50%"/>
+						<col width="70%"/>
 						<col width="*"/>
 					</colgroup>
 					<tr>
@@ -110,8 +139,13 @@ if (CommonUtil.equalsIgnoreCase(securityRoleAdminToolArea, "administrator") && i
 							<label for="loginIdAsAdminTool" class="lblEn hor">Login ID</label>
 							<div style="float:left;padding-right:4px;">
 								<ui:text name="loginIdAsAdminTool" className="hor" value="${sessionScope.LoginIdForAdminTool}" style="width:180px"/>
-								<ui:text name="userFullNameAsAdminTool" className="hor" status="display" value="${sessionScope.UserFullNameForAdminTool}" style="width:400px"/>
 							</div>
+							<div class="horGap20"></div>
+							<label for="loginIdAsAdminTool" class="lblEn hor">Person ID</label>
+							<div style="float:left;padding-right:4px;">
+								<ui:text name="personIdAsAdminTool" className="hor" value="${sessionScope.PersonIdForAdminTool}" style="width:180px"/>
+							</div>
+							<ui:text name="userFullNameAsAdminTool" className="hor" status="display" value="${sessionScope.UserFullNameForAdminTool}" style="width:350px"/>
 						</td>
 						<td class="tdDefault Rt">
 							<ui:buttonGroup id="buttonGroup">

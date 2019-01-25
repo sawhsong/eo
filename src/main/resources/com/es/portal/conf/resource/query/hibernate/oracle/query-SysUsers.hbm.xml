@@ -15,4 +15,15 @@
 		 ${frameworkGeneratedOrderBy}
 	]]>
 	</sql-query>
+
+	<sql-query name="query.SysUsers.getSysUsersDataSetByPersonIdForAutoCompletion">
+	<![CDATA[
+		select person_id
+		  from sys_users
+		 where 1 = 1
+		 ${auto_fill}
+		 ${frameworkGeneratedWhere}
+		 ${frameworkGeneratedOrderBy}
+	]]>
+	</sql-query>
 </hibernate-mapping>

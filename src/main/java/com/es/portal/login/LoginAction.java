@@ -91,7 +91,6 @@ public class LoginAction extends BaseAction {
 				paramEntity.setAjaxResponseDataSet(resultDataset);
 			}
 		} catch (Exception ex) {
-			ex.printStackTrace();
 		}
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";

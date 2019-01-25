@@ -29,4 +29,20 @@ public class AutoCompletionBizImpl extends BaseBiz implements AutoCompletionBiz 
 		}
 		return paramEntity;
 	}
+
+	public ParamEntity getSysUsersByPersonId(ParamEntity paramEntity) throws Exception {
+		DataSet requestDataSet = paramEntity.getRequestDataSet();
+		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
+		String inputValue = requestDataSet.getValue("inputValue");
+
+		try {
+			queryAdvisor.addAutoFillCriteria(inputValue, "lower(person_id) like lower('"+inputValue+"%')");
+			queryAdvisor.addOrderByClause("person_id");
+			paramEntity.setAjaxResponseDataSet(sysUsersDao.getSysUsersDataSetByPersonIdForAutoCompletion(queryAdvisor));
+			paramEntity.setSuccess(true);
+		} catch (Exception ex) {
+			throw new FrameworkException(paramEntity, ex);
+		}
+		return paramEntity;
+	}
 }
