@@ -295,10 +295,10 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		return assignmentList;
 	}
 
-	public DataSet getLeaveListDataSet(ParamEntity paramEntity, String personId) throws Exception {
+	public DataSet getLeaveListDataSet(ParamEntity paramEntity, String personId, String assignmentId) throws Exception {
 		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
 		DataSet leaveList = new DataSet();
-		String serviceUrl = "leave/"+"281856"+"/list";
+		String serviceUrl = "leave/"+personId+"/"+assignmentId+"/list";
 		String result = "";
 
 		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
@@ -306,6 +306,19 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		leaveList = JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("leaveList"));
 
 		return leaveList;
+	}
+
+	public DataSet getAccrualListDataSet(ParamEntity paramEntity, String assignmentId) throws Exception {
+		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
+		DataSet accrualList = new DataSet();
+		String serviceUrl = "leave/"+assignmentId+"/accruals";
+		String result = "";
+
+		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
+		paramEntity.setObjectFromJsonString(result);
+		accrualList = JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("accrualList"));
+
+		return accrualList;
 	}
 
 	public void getLeaveDetailService(ParamEntity paramEntity, String leaveRequestId) throws Exception {
@@ -320,20 +333,21 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 	public String postLeaveRequest(String leaveRequestId, DataSet requestDataSet) throws Exception {
 		DataSet post = new DataSet();
 		String serviceUrl = "", result = "";
-		String header[] = new String[] {"leaveRequestId", "assignmentId", "startDate", "endDate", "leaveType", "leaveCategory", "duration", "durationUnit", "reason"};
+		String header[] = new String[] {"leaveRequestId", "assignmentId", "startDate", "endDate", "leaveType", "leaveCategory", "duration", "durationUnit", "status", "reason"};
 
 		serviceUrl = "leave/apply";
 
 		post.addName(header);
 		post.addRow();
 		post.setValue(post.getRowCnt()-1, "leaveRequestId", leaveRequestId);
-		post.setValue(post.getRowCnt()-1, "assignmentId", requestDataSet.getValue("assignmentId"));
+		post.setValue(post.getRowCnt()-1, "assignmentId", requestDataSet.getValue("assignment"));
 		post.setValue(post.getRowCnt()-1, "startDate", CommonUtil.replace(requestDataSet.getValue("startDate"), "-", ""));
 		post.setValue(post.getRowCnt()-1, "endDate", CommonUtil.replace(requestDataSet.getValue("endDate"), "-", ""));
 		post.setValue(post.getRowCnt()-1, "leaveType", requestDataSet.getValue("type"));
 		post.setValue(post.getRowCnt()-1, "leaveCategory", requestDataSet.getValue("category"));
 		post.setValue(post.getRowCnt()-1, "duration", requestDataSet.getValue("duration"));
 		post.setValue(post.getRowCnt()-1, "durationUnit", requestDataSet.getValue("durationUnits"));
+		post.setValue(post.getRowCnt()-1, "status", requestDataSet.getValue("status"));
 		post.setValue(post.getRowCnt()-1, "reason", requestDataSet.getValue("reason"));
 
 		result = RestServiceSupport.post(providerUrl, serviceUrl, acceptTypeHeader, post);

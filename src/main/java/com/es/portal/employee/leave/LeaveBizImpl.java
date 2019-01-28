@@ -37,13 +37,14 @@ public class LeaveBizImpl extends BaseBiz implements LeaveBiz {
 	public ParamEntity getLeaveList(ParamEntity paramEntity) throws Exception {
 		HttpSession session = paramEntity.getSession();
 		DataSet dsRequest = paramEntity.getRequestDataSet();
-		DataSet iproList = new DataSet();
+		DataSet leaveList = new DataSet();
 		String personId = CommonUtil.nvl((String)session.getAttribute("PersonIdForAdminTool"), (String)session.getAttribute("PersonId"));
+		String assignmentId = CommonUtil.nvl(dsRequest.getValue("assignmentId"), "-1");
 
 		try {
-			iproList = wsClient.getLeaveListDataSet(paramEntity, personId);
+			leaveList = wsClient.getLeaveListDataSet(paramEntity, personId, assignmentId);
 
-			paramEntity.setAjaxResponseDataSet(iproList);
+			paramEntity.setAjaxResponseDataSet(leaveList);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
@@ -52,22 +53,45 @@ public class LeaveBizImpl extends BaseBiz implements LeaveBiz {
 	}
 
 	public ParamEntity getLeaveDetail(ParamEntity paramEntity) throws Exception {
+		HttpSession session = paramEntity.getSession();
 		DataSet dsRequest = paramEntity.getRequestDataSet();
-		DataSet leaveDetail = new DataSet();
+		DataSet leaveDetail = new DataSet(), assignmentList = new DataSet();
+		String personId = CommonUtil.nvl((String)session.getAttribute("PersonIdForAdminTool"), (String)session.getAttribute("PersonId"));
 		String leaveRequestId = dsRequest.getValue("leaveRequestId");
-		String header[] = new String[] {"leaveRequestId", "assignmentId", "assignmentNumber", "leaveType", "leaveTypeDesc", "leaveCategory", "leaveCategoryDesc",
-				"duration", "durationUnit", "durationUnitDesc", "startDate", "endDate", "reason", "status", "statusDesc"};
+		String header[] = new String[] {"leaveRequestId", "assignmentId", "assignmentNumber", "assignmentName", "leaveType", "leaveTypeDesc", "leaveCategory", "leaveCategoryDesc",
+				"startDate", "endDate", "duration", "durationUnit", "durationUnitDesc", "reason", "status", "statusDesc", "submittedDate", "approveRejectDate",
+				"approveRejectPersonFullName", "approveRejectComments"};
 
 		try {
 			leaveDetail.addName(header);
 
+			assignmentList = wsClient.getLeaveAssignmentListDataSet(paramEntity, personId);
+
 			wsClient.getLeaveDetailService(paramEntity, leaveRequestId);
 			paramEntity.setDataSetValueFromJsonResultset(leaveDetail);
 
+			paramEntity.setObject("assignmentList", assignmentList);
 			paramEntity.setObject("leaveTypeLookup", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("leaveTypeList")));
 			paramEntity.setObject("leaveCategoryLookup", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("leaveCategoryList")));
-			paramEntity.setObject("durationUnitLookup", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("durationUnitList")));
+			paramEntity.setObject("durationUnitLookup", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("leaveDurationUnitList")));
 			paramEntity.setObject("leaveDetail", leaveDetail);
+			paramEntity.setObject("accrualList", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("accrualList")));
+			paramEntity.setSuccess(true);
+		} catch (Exception ex) {
+			throw new FrameworkException(paramEntity, ex);
+		}
+		return paramEntity;
+	}
+
+	public ParamEntity loadAccrual(ParamEntity paramEntity) throws Exception {
+		DataSet dsRequest = paramEntity.getRequestDataSet();
+		DataSet accrualList = new DataSet();
+		String assignmentId = dsRequest.getValue("assignmentId");
+
+		try {
+			accrualList = wsClient.getAccrualListDataSet(paramEntity, assignmentId);
+
+			paramEntity.setAjaxResponseDataSet(accrualList);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);

@@ -8,7 +8,9 @@
 ************************************************************************************************/%>
 <%
 	ParamEntity pe = (ParamEntity)request.getAttribute("paramEntity");
+	DataSet assignmentList = (DataSet)pe.getObject("assignmentList");
 	DataSet leaveDetail = (DataSet)pe.getObject("leaveDetail");
+	DataSet accrualList = (DataSet)pe.getObject("accrualList");
 	DataSet typeLookup = (DataSet)pe.getObject("leaveTypeLookup");
 	DataSet categoryLookup = (DataSet)pe.getObject("leaveCategoryLookup");
 	DataSet durationUnitLookup = (DataSet)pe.getObject("durationUnitLookup");
@@ -32,7 +34,7 @@
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
 var leaveRequestId = "<%=leaveDetail.getValue("leaveRequestId")%>";
-var assignmentId = "<%=leaveDetail.getValue("assignmentId")%>";
+var accrualListCnt = 0;
 </script>
 </head>
 <%/************************************************************************************************
@@ -52,13 +54,49 @@ var assignmentId = "<%=leaveDetail.getValue("assignmentId")%>";
 	<div id="divButtonAreaRight">
 		<ui:buttonGroup id="buttonGroup">
 			<ui:button id="btnSave" caption="button.com.save" iconClass="fa-save"/>
-			<ui:button id="btnBack" caption="button.com.back" iconClass="fa-arrow-left"/>
 			<ui:button id="btnClose" caption="button.com.close" iconClass="fa-times"/>
 		</ui:buttonGroup>
 	</div>
 </div>
 <div id="divSearchCriteriaArea"></div>
-<div id="divInformArea"></div>
+<div id="divInformArea" class="areaContainerPopup">
+	<table class="tblInform sort autosort">
+		<caption>Accruals</caption>
+		<colgroup>
+			<col width="*"/>
+			<col width="30%"/>
+			<col width="30%"/>
+		</colgroup>
+		<thead>
+			<tr>
+				<th class="thInform Ct">Accrual Name</th>
+				<th class="thInform Ct">Number of Hours</th>
+				<th class="thInform Ct">Balance</th>
+			</tr>
+		</thead>
+		<tbody id="tblInformBody">
+<%
+		if (accrualList != null && accrualList.getRowCnt() > 0) {
+			for (int i=0; i<accrualList.getRowCnt(); i++) {
+%>
+			<tr>
+				<td class="tdInform Lt"><%=accrualList.getValue(i, "displayName")%></td>
+				<td class="tdInform Rt"><%=CommonUtil.getNumberMask(accrualList.getValue(i, "noOfHours"), "#,##0.00")%></td>
+				<td class="tdInform Rt"><%=CommonUtil.getNumberMask(accrualList.getValue(i, "balance"), "#,##0.00")%></td>
+			</tr>
+<%
+			}
+		} else {
+%>
+			<tr>
+				<td class="tdInform Ct" colspan="3"><mc:msg key="I001"/></td>
+			</tr>
+<%
+		}
+%>
+		</tbody>
+	</table>
+</div>
 <%/************************************************************************************************
 * End of fixed panel
 ************************************************************************************************/%>
@@ -71,16 +109,30 @@ var assignmentId = "<%=leaveDetail.getValue("assignmentId")%>";
 <div id="divDataArea" class="areaContainerPopup">
 	<table class="tblEdit">
 		<colgroup>
-			<col width="18%"/>
-			<col width="32%"/>
-			<col width="18%"/>
-			<col width="32%"/>
+			<col width="16%"/>
+			<col width="36%"/>
+			<col width="15%"/>
+			<col width="33%"/>
 		</colgroup>
 		<tr>
-			<th class="thEdit rt">Assignment Number</th>
-			<td class="tdEdit"><ui:text name="assignmentNumber" value="<%=leaveDetail.getValue(\"assignmentNumber\")%>" status="display"/></td>
+			<th class="thEdit rt mandatory">Assignment</th>
+			<td class="tdEdit">
+				<ui:select name="assignment" checkName="Assignment" options="mandatory">
+<%
+				for (int i=0; i<assignmentList.getRowCnt(); i++) {
+					String selected = CommonUtil.equals(leaveDetail.getValue("assignmentId"), assignmentList.getValue(i, "assignmentId")) ? "selected" : "";
+%>
+					<option value="<%=assignmentList.getValue(i, "assignmentId")%>" <%=selected%>><%=assignmentList.getValue(i, "assignmentName")%></option>
+<%
+				}
+%>
+				</ui:select>
+			</td>
 			<th class="thEdit rt">Status</th>
-			<td class="tdEdit"><ui:text name="status" value="<%=leaveDetail.getValue(\"statusDesc\")%>" status="display"/></td>
+			<td class="tdEdit">
+				<ui:hidden name="status" value="<%=leaveDetail.getValue(\"status\")%>"/>
+				<ui:text name="statusDesc" value="<%=leaveDetail.getValue(\"statusDesc\")%>" status="display"/>
+			</td>
 		</tr>
 		<tr>
 			<th class="thEdit rt mandatory">Type</th>
@@ -128,7 +180,6 @@ var assignmentId = "<%=leaveDetail.getValue("assignmentId")%>";
 			<th class="thEdit rt mandatory">Units</th>
 			<td class="tdEdit">
 				<ui:select name="durationUnits" checkName="Duration Units" options="mandatory">
-					<option value="D">Day(s)</option>
 <%
 				for (int i=0; i<durationUnitLookup.getRowCnt(); i++) {
 					String selected = CommonUtil.equals(leaveDetail.getValue("durationUnit"), durationUnitLookup.getValue(i, "code")) ? "selected" : "";
@@ -142,17 +193,17 @@ var assignmentId = "<%=leaveDetail.getValue("assignmentId")%>";
 		</tr>
 		<tr>
 			<th class="thEdit rt">Reason</th>
-			<td class="tdEdit" colspan="3"><ui:txa name="reason" value="<%=leaveDetail.getValue(\"reason\")%>" style="height:40px;"/></td>
+			<td class="tdEdit" colspan="3"><ui:txa name="reason" value="<%=leaveDetail.getValue(\"reason\")%>" style="height:60px;"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit rt">Submitted Date</th>
 			<td class="tdEdit"><ui:text name="submittedDate" value="<%=leaveDetail.getValue(\"submittedDate\")%>" status="display"/></td>
 			<th class="thEdit rt">Approver</th>
-			<td class="tdEdit"><ui:text name="approver" value="<%=leaveDetail.getValue(\"approverName\")%>" status="display"/></td>
+			<td class="tdEdit"><ui:text name="approver" value="<%=leaveDetail.getValue(\"approveRejectPersonFullName\")%>" status="display"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit rt">Rejected Reason</th>
-			<td class="tdEdit" colspan="3"><ui:txa name="rejectedReason" value="<%=leaveDetail.getValue(\"rejectedReason\")%>" status="display" style="height:40px;"/></td>
+			<td class="tdEdit" colspan="3"><ui:txa name="rejectedReason" value="<%=leaveDetail.getValue(\"approveRejectComments\")%>" status="display" style="height:60px;"/></td>
 		</tr>
 	</table>
 </div>

@@ -84,7 +84,7 @@
 							buttons:[{
 								caption:com.caption.ok,
 								callback:function() {
-									location.replace("/index/index.do");
+									location.replace("/login/userlogin");
 								}
 							}],
 							width:330,

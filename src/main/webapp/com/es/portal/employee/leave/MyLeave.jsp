@@ -57,14 +57,14 @@
 <div id="divAdminToolArea"><%@ include file="/com/es/portal/common/include/bodyAdminToolArea.jsp"%></div>
 <div id="divSearchCriteriaArea" class="areaContainer">
 	<table class="tblSearch">
-		<caption>Please select a assignment and click 'Search' button to view a list of Leaves</caption>
+		<caption>Please select an assignment to filter leave list</caption>
 		<colgroup>
 			<col width="30%"/>
 			<col width="*"/>
 		</colgroup>
 		<tr>
 			<td class="tdSearch">
-				<label for="assignment" class="lblEn hor mandatory">Assignment</label>
+				<label for="assignment" class="lblEn hor">Assignment</label>
 				<div style="float:left;padding-right:4px;">
 					<ui:select name="assignment">
 						<ui:seloption value="" text="==Select=="/>
@@ -94,28 +94,32 @@
 <div id="divDataArea" class="areaContainer">
 	<table id="tblGrid" class="tblGrid sort autosort">
 		<colgroup>
-			<col width="15%"/>
-			<col width="15%"/>
-			<col width="15%"/>
-			<col width="12%"/>
-			<col width="9%"/>
-			<col width="9%"/>
 			<col width="*"/>
+			<col width="12%"/>
+			<col width="17%"/>
+			<col width="12%"/>
+			<col width="8%"/>
+			<col width="8%"/>
+			<col width="12%"/>
+			<col width="8%"/>
+			<col width="8%"/>
 		</colgroup>
 		<thead>
 			<tr>
 				<th class="thGrid sortable:alphanumeric">Type</th>
 				<th class="thGrid sortable:alphanumeric">Category</th>
-				<th class="thGrid sortable:alphanumeric">Assignment Number</th>
+				<th class="thGrid sortable:alphanumeric">Assignment Name</th>
 				<th class="thGrid">Duration</th>
 				<th class="thGrid sortable:date">Start Date</th>
 				<th class="thGrid sortable:date">End Date</th>
 				<th class="thGrid sortable:alphanumeric">Status</th>
+				<th class="thGrid">Date Submitted</th>
+				<th class="thGrid">Date Processed</th>
 			</tr>
 		</thead>
 		<tbody id="tblGridBody">
 			<tr>
-				<td class="tdGrid Ct" colspan="7"><mc:msg key="I002"/></td>
+				<td class="tdGrid Ct" colspan="9"><mc:msg key="I002"/></td>
 			</tr>
 		</tbody>
 	</table>

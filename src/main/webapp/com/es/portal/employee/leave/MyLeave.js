@@ -16,11 +16,15 @@ $(function() {
 			},
 			header:"New Leave",
 			width:860,
-			height:400
+			height:529
 		});
 	});
 
 	$("#btnSearch").click(function() {
+		doSearch();
+	});
+
+	$("#assignment").change(function() {
 		doSearch();
 	});
 
@@ -69,20 +73,22 @@ $(function() {
 				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "leaveCategoryDesc")));
 
 				var uiAnc = new UiAnchor();
-				uiAnc.setText(ds.getValue(i, "assignmentId")).setScript("getLeaveDetail('"+ds.getValue(i, "leaveRequestId")+"')");
+				uiAnc.setText(ds.getValue(i, "assignmentName")).setScript("getLeaveDetail('"+ds.getValue(i, "leaveRequestId")+"')");
 				gridTr.addChild(new UiGridTd().addClassName("Lt").addChild(uiAnc));
 
 				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "duration")+" "+ds.getValue(i, "durationUnitDesc")));
 				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "startDate")));
 				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "endDate")));
 				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "statusDesc")));
+				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "submittedDate")));
+				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "approveRejectDate")));
 
 				html += gridTr.toHtmlString();
 			}
 		} else {
 			var gridTr = new UiGridTr();
 
-			gridTr.addChild(new UiGridTd().addClassName("Ct").setAttribute("colspan:7").setText(com.message.I001));
+			gridTr.addChild(new UiGridTd().addClassName("Ct").setAttribute("colspan:9").setText(com.message.I001));
 			html += gridTr.toHtmlString();
 		}
 
@@ -97,11 +103,12 @@ $(function() {
 			popupId:"leaveDetail",
 			url:"/employee/leave/getLeaveDetail",
 			paramData:{
+				mode:"detail",
 				leaveRequestId:leaveRequestId
 			},
 			header:"Leave Detail",
 			width:860,
-			height:400
+			height:529
 		});
 	};
 
@@ -109,6 +116,6 @@ $(function() {
 	 * load event (document / window)
 	 */
 	$(window).load(function() {
-//		doSearch();
+		doSearch();
 	});
 });

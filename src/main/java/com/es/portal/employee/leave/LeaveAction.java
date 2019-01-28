@@ -37,6 +37,15 @@ public class LeaveAction extends BaseAction {
 		return "updateLeave";
 	}
 
+	public String loadAccrual() throws Exception {
+		try {
+			biz.loadAccrual(paramEntity);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
+
 	public String saveLeave() throws Exception {
 		try {
 			biz.saveLeave(paramEntity);

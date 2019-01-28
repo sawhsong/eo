@@ -22,10 +22,16 @@ $(function() {
 	/*!
 	 * process
 	 */
+	setWindowSize = function() {
+		if (mode == "detail" && accrualListCnt > 0) {
+			parent.popup.resizeTo(0, ((accrualListCnt-1) * 27));
+		}
+	};
 
 	/*!
 	 * load event (document / window)
 	 */
 	$(window).load(function() {
+		setWindowSize();
 	});
 });

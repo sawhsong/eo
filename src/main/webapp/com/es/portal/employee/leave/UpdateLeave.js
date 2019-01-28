@@ -8,9 +8,18 @@ $(function() {
 	 * event
 	 */
 	$("#btnSave").click(function(event) {
+		var isValid = true;
+
 		if (!commonJs.doValidate("fmDefault")) {
 			return;
 		}
+
+		if (!checkValidation()) {
+			isValid = false;
+			return;
+		}
+
+		if (!isValid) {return;}
 
 		commonJs.confirm({
 			contents:com.message.Q001,
@@ -27,21 +36,19 @@ $(function() {
 		});
 	});
 
-	$("#btnBack").click(function(event) {
-		history.go(-1);
-	});
-
 	$("#btnClose").click(function(event) {
 		parent.popup.close();
+	});
+
+	$("#assignment").change(function(event) {
+		loadAccrual();
 	});
 
 	$("#icnStartDate").click(function(event) {
 		commonJs.openCalendar(event, "startDate", {
 			statusBar:false,
 			weekNumber:false,
-			adjustX:15,
-			adjustY:-50,
-			positionX:"right"
+			adjustY:-10
 		});
 	});
 
@@ -49,9 +56,7 @@ $(function() {
 		commonJs.openCalendar(event, "endDate", {
 			statusBar:false,
 			weekNumber:false,
-			adjustX:-1,
-			adjustY:-50,
-			positionX:"left"
+			adjustY:-10
 		});
 	});
 
@@ -64,8 +69,7 @@ $(function() {
 			dataType:"json",
 			formId:"fmDefault",
 			data:{
-				leaveRequestId:leaveRequestId,
-				assignmentId:assignmentId
+				leaveRequestId:leaveRequestId
 			},
 			success:function(data, textStatus) {
 				var result = commonJs.parseAjaxResult(data, textStatus, "json");
@@ -86,6 +90,8 @@ $(function() {
 										leaveRequestId:leaveRequestId
 									},
 								});
+
+								parent.doSearch();
 							}
 						}]
 					});
@@ -96,13 +102,104 @@ $(function() {
 		});
 	};
 
+	checkValidation = function() {
+		var isValid = true;
+		var startDate = moment($("#startDate").val(), "DD-MM-YYYY");
+		var endDate = moment($("#endDate").val(), "DD-MM-YYYY");
+		var typeCode = $("#type").val(), accrualVal;
+
+		if (endDate.diff(startDate, "days") < 0) {
+			commonJs.error("Date values are invalid.");
+			isValid = false;
+			return false;
+		}
+
+		if (typeCode == "A" || typeCode == "P") {
+			var duration = $("#duration").val();
+			var balance = 0;
+
+			$("#tblInformBody tr").each(function(rowIndex) {
+				$(this).find("td").each(function(colIndex) {
+					if (colIndex == 2) {
+						balance += commonJs.toNumber($(this).html());
+					}
+				});
+			});
+
+			if (duration > balance) {
+				commonJs.error("Duration value is invalid.");
+				isValid = false;
+				return false;
+			}
+		}
+
+		return isValid;
+	};
+
+	loadAccrual = function() {
+		commonJs.showProcMessageOnElement("divInformArea");
+
+		setTimeout(function() {
+			commonJs.ajaxSubmit({
+				url:"/employee/leave/loadAccrual",
+				dataType:"json",
+				data:{
+					assignmentId:$("#assignment").val()
+				},
+				success:function(data, textStatus) {
+					var result = commonJs.parseAjaxResult(data, textStatus, "json");
+					if (result.isSuccess == true || result.isSuccess == "true") {
+						renderAccrual(result);
+					} else {
+						commonJs.error(result.message);
+					}
+				}
+			});
+		}, 200);
+	};
+
+	renderAccrual = function(result) {
+		var ds = result.dataSet, html = "";
+
+		$("#tblInformBody").html("");
+
+		if (ds.getRowCnt() > 0) {
+			for (var i=0; i<ds.getRowCnt(); i++) {
+				var gridTr = new UiGridTr();
+
+				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "displayName")));
+				gridTr.addChild(new UiGridTd().addClassName("Rt").setText(commonJs.getNumberMask(ds.getValue(i, "noOfHours"), "#,###.##")));
+				gridTr.addChild(new UiGridTd().addClassName("Rt").setText(commonJs.getNumberMask(ds.getValue(i, "balance"), "#,###.##")));
+
+				html += gridTr.toHtmlString();
+			}
+		} else {
+			var gridTr = new UiGridTr();
+
+			gridTr.addChild(new UiGridTd().addClassName("Ct").setAttribute("colspan:3").setText(com.message.I001));
+			html += gridTr.toHtmlString();
+		}
+
+		$("#tblInformBody").append($(html));
+		setWindowSize(ds.getRowCnt());
+
+		commonJs.hideProcMessageOnElement("divInformArea");
+	};
+
+	setWindowSize = function(rowCnt) {
+		if (rowCnt != accrualListCnt) {
+			parent.popup.resizeTo(0, ((accrualListCnt-1) * 27));
+		}
+	};
 	/*!
 	 * load event (document / window)
 	 */
 	$(window).load(function() {
 		commonJs.setFieldDateMask("startDate");
 		commonJs.setFieldDateMask("endDate");
-		spinner = $("#duration").spinner();
-		$("#duration").number(true, 0, "", "");
+		spinner = $("#duration").spinner({
+			step:0.5
+		});
+		$("#duration").number(true, 1);
 	});
 });
