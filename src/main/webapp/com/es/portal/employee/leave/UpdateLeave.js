@@ -187,10 +187,9 @@ $(function() {
 	};
 
 	setWindowSize = function(rowCnt) {
-		if (rowCnt != accrualListCnt) {
-			parent.popup.resizeTo(0, ((accrualListCnt-1) * 27));
-		}
+		parent.popup.resizeTo(0, ((rowCnt-1) * 27));
 	};
+
 	/*!
 	 * load event (document / window)
 	 */

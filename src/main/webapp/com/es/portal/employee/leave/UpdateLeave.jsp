@@ -34,7 +34,6 @@
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
 var leaveRequestId = "<%=leaveDetail.getValue("leaveRequestId")%>";
-var accrualListCnt = 0;
 </script>
 </head>
 <%/************************************************************************************************

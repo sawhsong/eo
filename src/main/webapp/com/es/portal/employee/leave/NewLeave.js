@@ -134,6 +134,10 @@ $(function() {
 	};
 
 	loadAccrual = function() {
+		var assignmentId = $("#assignment").val();
+
+		if (commonJs.isEmpty(assignmentId)) {return;}
+
 		commonJs.showProcMessageOnElement("divInformArea");
 
 		setTimeout(function() {
@@ -141,7 +145,7 @@ $(function() {
 				url:"/employee/leave/loadAccrual",
 				dataType:"json",
 				data:{
-					assignmentId:$("#assignment").val()
+					assignmentId:assignmentId
 				},
 				success:function(data, textStatus) {
 					var result = commonJs.parseAjaxResult(data, textStatus, "json");
@@ -184,9 +188,7 @@ $(function() {
 	};
 
 	setWindowSize = function(rowCnt) {
-		if (rowCnt != accrualListCnt) {
-			parent.popup.resizeTo(0, ((accrualListCnt-1) * 27));
-		}
+		parent.popup.resizeTo(0, ((rowCnt-1) * 27));
 	};
 
 	/*!
