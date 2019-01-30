@@ -456,7 +456,7 @@
 	</tag>
 	<tag>
 		<name>ccselect</name>
-		<tag-class>zebra.taglib.CommonCodeSelectbox</tag-class>
+		<tag-class>zebra.taglib.CommonLookupSelectbox</tag-class>
 		<body-content>empty</body-content>
 		<description>Render Select box from Common Code</description>
 		<attribute>
@@ -513,7 +513,7 @@
 	</tag>
 	<tag>
 		<name>ccradio</name>
-		<tag-class>zebra.taglib.CommonCodeRadio</tag-class>
+		<tag-class>zebra.taglib.CommonLookupRadio</tag-class>
 		<body-content>empty</body-content>
 		<description>Render Radio button from Common Code</description>
 		<attribute>
@@ -567,7 +567,7 @@
 	</tag>
 	<tag>
 		<name>cccheck</name>
-		<tag-class>zebra.taglib.CommonCodeCheckbox</tag-class>
+		<tag-class>zebra.taglib.CommonLookupCheckbox</tag-class>
 		<body-content>empty</body-content>
 		<description>Render Checkbox from Common Code</description>
 		<attribute>

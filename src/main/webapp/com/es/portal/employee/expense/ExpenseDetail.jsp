@@ -8,13 +8,10 @@
 ************************************************************************************************/%>
 <%
 	ParamEntity pe = (ParamEntity)request.getAttribute("paramEntity");
-	DataSet assignmentList = (DataSet)pe.getObject("assignmentList");
+	DataSet dsRequest = pe.getRequestDataSet();
 	DataSet leaveDetail = (DataSet)pe.getObject("leaveDetail");
 	DataSet accrualList = (DataSet)pe.getObject("accrualList");
-	String dateFormat = ConfigUtil.getProperty("format.date.java");
-	String timeFormat = "HH:mm:ss";
-	String defaultDate = CommonUtil.getSysdate(dateFormat);
-	String defaultDateTime = CommonUtil.getSysdate(dateFormat+" "+timeFormat);
+	String status = leaveDetail.getValue("status");
 %>
 <%/************************************************************************************************
 * HTML
@@ -34,7 +31,9 @@
 </style>
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
-var leaveRequestId = "-1";
+var leaveRequestId = "<%=leaveDetail.getValue("leaveRequestId")%>";
+var accrualListCnt = <%=accrualList.getRowCnt()%>;
+var mode = "<%=dsRequest.getValue("mode")%>";
 </script>
 </head>
 <%/************************************************************************************************
@@ -53,7 +52,13 @@ var leaveRequestId = "-1";
 	<div id="divButtonAreaLeft"></div>
 	<div id="divButtonAreaRight">
 		<ui:buttonGroup id="buttonGroup">
-			<ui:button id="btnSave" caption="button.com.save" iconClass="fa-save"/>
+<%
+		if (CommonUtil.isIn(status, "SA", "RE")) {
+%>
+			<ui:button id="btnEdit" caption="button.com.edit" iconClass="fa-edit"/>
+<%
+		}
+%>
 			<ui:button id="btnClose" caption="button.com.close" iconClass="fa-times"/>
 		</ui:buttonGroup>
 	</div>
@@ -74,7 +79,7 @@ var leaveRequestId = "-1";
 				<th class="thInform Ct">Balance</th>
 			</tr>
 		</thead>
-		<tbody id="tblInformBody">
+		<tbody>
 <%
 		if (accrualList != null && accrualList.getRowCnt() > 0) {
 			for (int i=0; i<accrualList.getRowCnt(); i++) {
@@ -115,64 +120,42 @@ var leaveRequestId = "-1";
 			<col width="32%"/>
 		</colgroup>
 		<tr>
-			<th class="thEdit rt mandatory">Assignment</th>
-			<td class="tdEdit">
-				<ui:select name="assignment" checkName="Assignment" options="mandatory">
-<%
-				for (int i=0; i<assignmentList.getRowCnt(); i++) {
-					String selected = CommonUtil.equals(leaveDetail.getValue("assignmentId"), assignmentList.getValue(i, "assignmentId")) ? "selected" : "";
-%>
-					<option value="<%=assignmentList.getValue(i, "assignmentId")%>" <%=selected%>><%=assignmentList.getValue(i, "assignmentName")%></option>
-<%
-				}
-%>
-				</ui:select>
-			</td>
+			<th class="thEdit rt">Assignment Name</th>
+			<td class="tdEdit"><ui:text name="assignmentName" value="<%=leaveDetail.getValue(\"assignmentName\")%>" status="display"/></td>
 			<th class="thEdit rt">Status</th>
-			<td class="tdEdit">
-				<ui:hidden name="status" value="SA"/>
-				<ui:text name="statusDesc" value="In Progress" status="display"/>
-			</td>
+			<td class="tdEdit"><ui:text name="status" value="<%=leaveDetail.getValue(\"statusDesc\")%>" status="display"/></td>
 		</tr>
 		<tr>
-			<th class="thEdit rt mandatory">Type</th>
-			<td class="tdEdit">
-				<ui:ccselect codeType="LEAVE_TYPE" name="type" checkName="Leave Type" options="mandatory"/>
-			</td>
-			<th class="thEdit rt mandatory">Category</th>
-			<td class="tdEdit">
-				<ui:ccselect codeType="LEAVE_CATEGORY" name="category" checkName="Leave Category" options="mandatory"/>
-			</td>
+			<th class="thEdit rt">Type</th>
+			<td class="tdEdit"><ui:text name="type" value="<%=leaveDetail.getValue(\"leaveTypeDesc\")%>" status="display"/></td>
+			<th class="thEdit rt">Category</th>
+			<td class="tdEdit"><ui:text name="category" value="<%=leaveDetail.getValue(\"leaveCategoryDesc\")%>" status="display"/></td>
 		</tr>
 		<tr>
-			<th class="thEdit rt mandatory">Start Date</th>
-			<td class="tdEdit">
-				<ui:text name="startDate" value="<%=defaultDate%>" className="Ct hor" style="width:100px" checkName="Start Date" options="mandatory" option="date"/>
-				<ui:icon id="icnStartDate" className="fa-calendar hor"/>
-			</td>
-			<th class="thEdit rt mandatory">End Date</th>
-			<td class="tdEdit">
-				<ui:text name="endDate" value="<%=defaultDate%>" className="Ct hor" style="width:100px" checkName="End Date" options="mandatory" option="date"/>
-				<ui:icon id="icnEndDate" className="fa-calendar hor"/>
-			</td>
+			<th class="thEdit rt">Start Date</th>
+			<td class="tdEdit"><ui:text name="startDate" value="<%=leaveDetail.getValue(\"startDate\")%>" status="display"/></td>
+			<th class="thEdit rt">End Date</th>
+			<td class="tdEdit"><ui:text name="endDate" value="<%=leaveDetail.getValue(\"endDate\")%>" status="display"/></td>
 		</tr>
 		<tr>
-			<th class="thEdit rt mandatory">Duration</th>
-			<td class="tdEdit"><ui:text name="duration" status="spinner" checkName="Leave Duration" options="mandatory"/></td>
-			<th class="thEdit rt mandatory">Units</th>
-			<td class="tdEdit">
-				<ui:ccselect codeType="LEAVE_DURATION" name="durationUnits" checkName="Duration Units" options="mandatory"/>
-			</td>
+			<th class="thEdit rt">Duration</th>
+			<td class="tdEdit"><ui:text name="duration" value="<%=leaveDetail.getValue(\"duration\")%>" status="display"/></td>
+			<th class="thEdit rt">Units</th>
+			<td class="tdEdit"><ui:text name="durationUnits" value="<%=leaveDetail.getValue(\"durationUnitDesc\")%>" status="display"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit rt">Reason</th>
-			<td class="tdEdit" colspan="3"><ui:txa name="reason" style="height:60px;"/></td>
+			<td class="tdEdit" colspan="3"><ui:txa name="reason" value="<%=leaveDetail.getValue(\"reason\")%>" status="display" style="height:60px;"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit rt">Submitted Date</th>
-			<td class="tdEdit"><ui:text name="submittedDate" value="<%=defaultDateTime%>" status="display"/></td>
-			<th class="thEdit rt"></th>
-			<td class="tdEdit"></td>
+			<td class="tdEdit"><ui:text name="submittedDate" value="<%=leaveDetail.getValue(\"submittedDate\")%>" status="display"/></td>
+			<th class="thEdit rt">Approver</th>
+			<td class="tdEdit"><ui:text name="approver" value="<%=leaveDetail.getValue(\"approveRejectPersonFullName\")%>" status="display"/></td>
+		</tr>
+		<tr>
+			<th class="thEdit rt">Rejected Reason</th>
+			<td class="tdEdit" colspan="3"><ui:txa name="approveRejectComments" value="<%=leaveDetail.getValue(\"approveRejectComments\")%>" status="display" style="height:60px;"/></td>
 		</tr>
 	</table>
 </div>

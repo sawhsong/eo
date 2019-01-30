@@ -7,4 +7,7 @@
 
 	<bean id="employeeLeaveAction" name="employeeLeaveAction" class="${name.package.project}.employee.leave.LeaveAction"/>
 	<bean id="employeeLeaveBiz" name="employeeLeaveBiz" class="${name.package.project}.employee.leave.LeaveBizImpl" parent="baseBiz"/>
+
+	<bean id="employeeExpenseAction" name="employeeExpenseAction" class="${name.package.project}.employee.expense.ExpenseAction"/>
+	<bean id="employeeExpenseBiz" name="employeeExpenseBiz" class="${name.package.project}.employee.expense.ExpenseBizImpl" parent="baseBiz"/>
 </beans>

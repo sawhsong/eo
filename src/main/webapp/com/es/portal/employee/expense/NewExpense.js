@@ -188,9 +188,7 @@ $(function() {
 	};
 
 	setWindowSize = function(rowCnt) {
-		if (rowCnt > 0) {
-			parent.popup.resizeTo(0, ((rowCnt-1) * 27));
-		}
+		parent.popup.resizeTo(0, ((rowCnt-1) * 27));
 	};
 
 	/*!

@@ -11,6 +11,9 @@
 	DataSet assignmentList = (DataSet)pe.getObject("assignmentList");
 	DataSet leaveDetail = (DataSet)pe.getObject("leaveDetail");
 	DataSet accrualList = (DataSet)pe.getObject("accrualList");
+	DataSet typeLookup = (DataSet)pe.getObject("leaveTypeLookup");
+	DataSet categoryLookup = (DataSet)pe.getObject("leaveCategoryLookup");
+	DataSet durationUnitLookup = (DataSet)pe.getObject("durationUnitLookup");
 	String dateFormat = ConfigUtil.getProperty("format.date.java");
 	String timeFormat = "HH:mm:ss";
 	String defaultDate = CommonUtil.getSysdate(dateFormat);
@@ -137,11 +140,27 @@ var leaveRequestId = "-1";
 		<tr>
 			<th class="thEdit rt mandatory">Type</th>
 			<td class="tdEdit">
-				<ui:ccselect codeType="LEAVE_TYPE" name="type" checkName="Leave Type" options="mandatory"/>
+				<ui:select name="type" checkName="Leave Type" options="mandatory">
+<%
+				for (int i=0; i<typeLookup.getRowCnt(); i++) {
+%>
+					<option value="<%=typeLookup.getValue(i, "code")%>"><%=typeLookup.getValue(i, "meaning")%></option>
+<%
+				}
+%>
+				</ui:select>
 			</td>
 			<th class="thEdit rt mandatory">Category</th>
 			<td class="tdEdit">
-				<ui:ccselect codeType="LEAVE_CATEGORY" name="category" checkName="Leave Category" options="mandatory"/>
+				<ui:select name="category" checkName="Leave Category" options="mandatory">
+<%
+				for (int i=0; i<categoryLookup.getRowCnt(); i++) {
+%>
+					<option value="<%=categoryLookup.getValue(i, "code")%>"><%=categoryLookup.getValue(i, "meaning")%></option>
+<%
+				}
+%>
+				</ui:select>
 			</td>
 		</tr>
 		<tr>
@@ -161,7 +180,15 @@ var leaveRequestId = "-1";
 			<td class="tdEdit"><ui:text name="duration" status="spinner" checkName="Leave Duration" options="mandatory"/></td>
 			<th class="thEdit rt mandatory">Units</th>
 			<td class="tdEdit">
-				<ui:ccselect codeType="LEAVE_DURATION" name="durationUnits" checkName="Duration Units" options="mandatory"/>
+				<ui:select name="durationUnits" checkName="Duration Units" options="mandatory">
+<%
+				for (int i=0; i<durationUnitLookup.getRowCnt(); i++) {
+%>
+					<option value="<%=durationUnitLookup.getValue(i, "code")%>"><%=durationUnitLookup.getValue(i, "meaning")%></option>
+<%
+				}
+%>
+				</ui:select>
 			</td>
 		</tr>
 		<tr>

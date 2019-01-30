@@ -5,9 +5,15 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
+	<!--/* Menu */-->
 	<bean id="menuManager" name="menuManager" class="${name.package.project}.common.module.menu.MenuManager" parent="baseBiz">
 		<property name="eoMenuDao" ref="eoMenuDao"/>
 		<property name="eoMenuAuthLinkDao" ref="eoMenuAuthLinkDao"/>
+	</bean>
+
+	<!--/* CommonLookup */-->
+	<bean id="commonLookupManager" name="commonLookupManager" class="${name.package.project}.common.module.commonlookup.CommonLookupManager" parent="baseBiz">
+		<property name="webServiceClientBizService" ref="webServiceClientBizService"/>
 	</bean>
 
 	<!--/* Auto Completion */-->

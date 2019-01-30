@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.es.portal.common.module.commonlookup.CommonLookupManager;
 import com.es.portal.common.module.menu.MenuManager;
 
 public class AppLoader extends HttpServlet {
@@ -23,5 +24,6 @@ public class AppLoader extends HttpServlet {
 
 	private void executeWorks() throws Exception {
 		MenuManager.loadMenu();
+		CommonLookupManager.loadCommonLookup();
 	}
 }

@@ -17,6 +17,21 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 	private String hoursFormat = "##0.00";
 
 	/*
+	 * Common Services
+	 */
+	public DataSet getCommonLookupDataSet(String lookupType) throws Exception {
+		QueryAdvisor queryAdvisor = new QueryAdvisor();
+		DataSet lookupDataSet = new DataSet();
+		String serviceUrl = "entity/lookups/"+lookupType;
+		String result = "";
+
+		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
+		lookupDataSet = JsonUtil.getDataSetFromJsonArrayString(result);
+
+		return lookupDataSet;
+	}
+
+	/*
 	 * Ipro - Timesheet
 	 */
 	public DataSet getAssignmentListDataSet(ParamEntity paramEntity, String loginId) throws Exception {

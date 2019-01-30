@@ -5,6 +5,11 @@ import zebra.data.ParamEntity;
 
 public interface WebServiceClientBizService {
 	/*
+	 * Common Services
+	 */
+	public DataSet getCommonLookupDataSet(String lookupType) throws Exception;
+
+	/*
 	 * Ipro - Timesheet
 	 */
 	public DataSet getAssignmentListDataSet(ParamEntity paramEntity, String loginId) throws Exception;

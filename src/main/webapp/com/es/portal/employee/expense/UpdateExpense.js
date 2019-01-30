@@ -48,9 +48,7 @@ $(function() {
 		commonJs.openCalendar(event, "startDate", {
 			statusBar:false,
 			weekNumber:false,
-			adjustX:15,
-			adjustY:-10,
-			positionX:"right"
+			adjustY:-10
 		});
 	});
 
@@ -58,9 +56,7 @@ $(function() {
 		commonJs.openCalendar(event, "endDate", {
 			statusBar:false,
 			weekNumber:false,
-			adjustX:-1,
-			adjustY:-10,
-			positionX:"left"
+			adjustY:-10
 		});
 	});
 
@@ -87,8 +83,15 @@ $(function() {
 						buttons:[{
 							caption:com.caption.ok,
 							callback:function() {
+								commonJs.doSubmit({
+									formId:"fmDefault",
+									action:"/employee/leave/getLeaveDetail",
+									data:{
+										leaveRequestId:leaveRequestId
+									},
+								});
+
 								parent.doSearch();
-								parent.popup.close();
 							}
 						}]
 					});
@@ -134,10 +137,6 @@ $(function() {
 	};
 
 	loadAccrual = function() {
-		var assignmentId = $("#assignment").val();
-
-		if (commonJs.isEmpty(assignmentId)) {return;}
-
 		commonJs.showProcMessageOnElement("divInformArea");
 
 		setTimeout(function() {
@@ -145,7 +144,7 @@ $(function() {
 				url:"/employee/leave/loadAccrual",
 				dataType:"json",
 				data:{
-					assignmentId:assignmentId
+					assignmentId:$("#assignment").val()
 				},
 				success:function(data, textStatus) {
 					var result = commonJs.parseAjaxResult(data, textStatus, "json");
@@ -188,9 +187,7 @@ $(function() {
 	};
 
 	setWindowSize = function(rowCnt) {
-		if (rowCnt > 0) {
-			parent.popup.resizeTo(0, ((rowCnt-1) * 27));
-		}
+		parent.popup.resizeTo(0, ((rowCnt-1) * 27));
 	};
 
 	/*!
@@ -203,7 +200,5 @@ $(function() {
 			step:0.5
 		});
 		$("#duration").number(true, 1);
-
-		loadAccrual();
 	});
 });

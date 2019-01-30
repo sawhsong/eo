@@ -11,10 +11,9 @@
 	DataSet assignmentList = (DataSet)pe.getObject("assignmentList");
 	DataSet leaveDetail = (DataSet)pe.getObject("leaveDetail");
 	DataSet accrualList = (DataSet)pe.getObject("accrualList");
-	String dateFormat = ConfigUtil.getProperty("format.date.java");
-	String timeFormat = "HH:mm:ss";
-	String defaultDate = CommonUtil.getSysdate(dateFormat);
-	String defaultDateTime = CommonUtil.getSysdate(dateFormat+" "+timeFormat);
+	DataSet typeLookup = (DataSet)pe.getObject("leaveTypeLookup");
+	DataSet categoryLookup = (DataSet)pe.getObject("leaveCategoryLookup");
+	DataSet durationUnitLookup = (DataSet)pe.getObject("durationUnitLookup");
 %>
 <%/************************************************************************************************
 * HTML
@@ -34,7 +33,7 @@
 </style>
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
-var leaveRequestId = "-1";
+var leaveRequestId = "<%=leaveDetail.getValue("leaveRequestId")%>";
 </script>
 </head>
 <%/************************************************************************************************
@@ -109,10 +108,10 @@ var leaveRequestId = "-1";
 <div id="divDataArea" class="areaContainerPopup">
 	<table class="tblEdit">
 		<colgroup>
-			<col width="18%"/>
-			<col width="32%"/>
-			<col width="18%"/>
-			<col width="32%"/>
+			<col width="16%"/>
+			<col width="36%"/>
+			<col width="15%"/>
+			<col width="33%"/>
 		</colgroup>
 		<tr>
 			<th class="thEdit rt mandatory">Assignment</th>
@@ -130,49 +129,80 @@ var leaveRequestId = "-1";
 			</td>
 			<th class="thEdit rt">Status</th>
 			<td class="tdEdit">
-				<ui:hidden name="status" value="SA"/>
-				<ui:text name="statusDesc" value="In Progress" status="display"/>
+				<ui:hidden name="status" value="<%=leaveDetail.getValue(\"status\")%>"/>
+				<ui:text name="statusDesc" value="<%=leaveDetail.getValue(\"statusDesc\")%>" status="display"/>
 			</td>
 		</tr>
 		<tr>
 			<th class="thEdit rt mandatory">Type</th>
 			<td class="tdEdit">
-				<ui:ccselect codeType="LEAVE_TYPE" name="type" checkName="Leave Type" options="mandatory"/>
+				<ui:select name="type" checkName="Leave Type" options="mandatory">
+<%
+				for (int i=0; i<typeLookup.getRowCnt(); i++) {
+					String selected = CommonUtil.equals(leaveDetail.getValue("leaveType"), typeLookup.getValue(i, "code")) ? "selected" : "";
+%>
+					<option value="<%=typeLookup.getValue(i, "code")%>" <%=selected%>><%=typeLookup.getValue(i, "meaning")%></option>
+<%
+				}
+%>
+				</ui:select>
 			</td>
 			<th class="thEdit rt mandatory">Category</th>
 			<td class="tdEdit">
-				<ui:ccselect codeType="LEAVE_CATEGORY" name="category" checkName="Leave Category" options="mandatory"/>
+				<ui:select name="category" checkName="Leave Category" options="mandatory">
+<%
+				for (int i=0; i<categoryLookup.getRowCnt(); i++) {
+					String selected = CommonUtil.equals(leaveDetail.getValue("leaveCategory"), categoryLookup.getValue(i, "code")) ? "selected" : "";
+%>
+					<option value="<%=categoryLookup.getValue(i, "code")%>" <%=selected%>><%=categoryLookup.getValue(i, "meaning")%></option>
+<%
+				}
+%>
+				</ui:select>
 			</td>
 		</tr>
 		<tr>
 			<th class="thEdit rt mandatory">Start Date</th>
 			<td class="tdEdit">
-				<ui:text name="startDate" value="<%=defaultDate%>" className="Ct hor" style="width:100px" checkName="Start Date" options="mandatory" option="date"/>
+				<ui:text name="startDate" value="<%=leaveDetail.getValue(\"startDate\")%>" className="Ct hor" style="width:100px" checkName="Start Date" options="mandatory" option="date"/>
 				<ui:icon id="icnStartDate" className="fa-calendar hor"/>
 			</td>
 			<th class="thEdit rt mandatory">End Date</th>
 			<td class="tdEdit">
-				<ui:text name="endDate" value="<%=defaultDate%>" className="Ct hor" style="width:100px" checkName="End Date" options="mandatory" option="date"/>
+				<ui:text name="endDate" value="<%=leaveDetail.getValue(\"endDate\")%>" className="Ct hor" style="width:100px" checkName="End Date" options="mandatory" option="date"/>
 				<ui:icon id="icnEndDate" className="fa-calendar hor"/>
 			</td>
 		</tr>
 		<tr>
 			<th class="thEdit rt mandatory">Duration</th>
-			<td class="tdEdit"><ui:text name="duration" status="spinner" checkName="Leave Duration" options="mandatory"/></td>
+			<td class="tdEdit"><ui:text name="duration" value="<%=leaveDetail.getValue(\"duration\")%>" status="spinner" checkName="Leave Duration" options="mandatory"/></td>
 			<th class="thEdit rt mandatory">Units</th>
 			<td class="tdEdit">
-				<ui:ccselect codeType="LEAVE_DURATION" name="durationUnits" checkName="Duration Units" options="mandatory"/>
+				<ui:select name="durationUnits" checkName="Duration Units" options="mandatory">
+<%
+				for (int i=0; i<durationUnitLookup.getRowCnt(); i++) {
+					String selected = CommonUtil.equals(leaveDetail.getValue("durationUnit"), durationUnitLookup.getValue(i, "code")) ? "selected" : "";
+%>
+					<option value="<%=durationUnitLookup.getValue(i, "code")%>" <%=selected%>><%=durationUnitLookup.getValue(i, "meaning")%></option>
+<%
+				}
+%>
+				</ui:select>
 			</td>
 		</tr>
 		<tr>
 			<th class="thEdit rt">Reason</th>
-			<td class="tdEdit" colspan="3"><ui:txa name="reason" style="height:60px;"/></td>
+			<td class="tdEdit" colspan="3"><ui:txa name="reason" value="<%=leaveDetail.getValue(\"reason\")%>" style="height:60px;"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit rt">Submitted Date</th>
-			<td class="tdEdit"><ui:text name="submittedDate" value="<%=defaultDateTime%>" status="display"/></td>
-			<th class="thEdit rt"></th>
-			<td class="tdEdit"></td>
+			<td class="tdEdit"><ui:text name="submittedDate" value="<%=leaveDetail.getValue(\"submittedDate\")%>" status="display"/></td>
+			<th class="thEdit rt">Approver</th>
+			<td class="tdEdit"><ui:text name="approver" value="<%=leaveDetail.getValue(\"approveRejectPersonFullName\")%>" status="display"/></td>
+		</tr>
+		<tr>
+			<th class="thEdit rt">Rejected Reason</th>
+			<td class="tdEdit" colspan="3"><ui:txa name="rejectedReason" value="<%=leaveDetail.getValue(\"approveRejectComments\")%>" status="display" style="height:60px;"/></td>
 		</tr>
 	</table>
 </div>
