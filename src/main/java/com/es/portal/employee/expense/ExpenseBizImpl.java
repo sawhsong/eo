@@ -21,12 +21,8 @@ public class ExpenseBizImpl extends BaseBiz implements ExpenseBiz {
 	public ParamEntity getDefault(ParamEntity paramEntity) throws Exception {
 		HttpSession session = paramEntity.getSession();
 		String personId = CommonUtil.nvl((String)session.getAttribute("PersonIdForAdminTool"), (String)session.getAttribute("PersonId"));
-		DataSet assignmentList = new DataSet();
 
 		try {
-			assignmentList = wsClient.getLeaveAssignmentListDataSet(paramEntity, personId);
-
-			paramEntity.setObject("assignmentList", assignmentList);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);

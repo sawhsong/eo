@@ -11,10 +11,10 @@
 		</action>
 
 		<action name="expense/*" class="com.es.portal.employee.expense.ExpenseAction" method="{1}">
-			<result name="expenseList" type="debugDispatcherResult">/com/es/portal/employee/leave/MyExpenseList.jsp</result>
-			<result name="expenseDetail" type="debugDispatcherResult">/com/es/portal/employee/leave/ExpenseDetail.jsp</result>
-			<result name="updateExpense" type="debugDispatcherResult">/com/es/portal/employee/leave/UpdateExpense.jsp</result>
-			<result name="newExpense" type="debugDispatcherResult">/com/es/portal/employee/leave/NewExpense.jsp</result>
+			<result name="expenseList" type="debugDispatcherResult">/com/es/portal/employee/expense/MyExpenseList.jsp</result>
+			<result name="expenseDetail" type="debugDispatcherResult">/com/es/portal/employee/expense/ExpenseDetail.jsp</result>
+			<result name="updateExpense" type="debugDispatcherResult">/com/es/portal/employee/expense/UpdateExpense.jsp</result>
+			<result name="newExpense" type="debugDispatcherResult">/com/es/portal/employee/expense/NewExpense.jsp</result>
 		</action>
 	</package>
 </struts>

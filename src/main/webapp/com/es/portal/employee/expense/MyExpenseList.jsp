@@ -8,7 +8,6 @@
 ************************************************************************************************/%>
 <%
 	ParamEntity pe = (ParamEntity)request.getAttribute("paramEntity");
-	DataSet dsAssignment = (DataSet)pe.getObject("assignmentList");
 %>
 <%/************************************************************************************************
 * HTML
@@ -49,7 +48,7 @@
 	<div id="divButtonAreaLeft"></div>
 	<div id="divButtonAreaRight">
 		<ui:buttonGroup id="buttonGroup">
-			<ui:button id="btnNew" caption="New Leave" iconClass="fa-plane"/>
+			<ui:button id="btnNew" caption="New Claim" iconClass="fa-money"/>
 			<ui:button id="btnSearch" caption="Search" iconClass="fa-search"/>
 		</ui:buttonGroup>
 	</div>
@@ -57,25 +56,15 @@
 <div id="divAdminToolArea"><%@ include file="/com/es/portal/common/include/bodyAdminToolArea.jsp"%></div>
 <div id="divSearchCriteriaArea" class="areaContainer">
 	<table class="tblSearch">
-		<caption>Please select an assignment to filter leave list</caption>
+		<caption>Search Criteria</caption>
 		<colgroup>
 			<col width="30%"/>
 			<col width="*"/>
 		</colgroup>
 		<tr>
 			<td class="tdSearch">
-				<label for="assignment" class="lblEn hor">Assignment</label>
+				<label for="assignment" class="lblEn hor">Search</label>
 				<div style="float:left;padding-right:4px;">
-					<ui:select name="assignment">
-						<ui:seloption value="" text="==Select=="/>
-<%
-					for (int i=0; i<dsAssignment.getRowCnt(); i++) {
-%>
-						<ui:seloption value="<%=dsAssignment.getValue(i, \"assignmentId\")%>" text="<%=dsAssignment.getValue(i, \"assignmentName\")%>"/>
-<%
-					}
-%>
-					</ui:select>
 				</div>
 			</td>
 		</tr>
@@ -95,31 +84,35 @@
 	<table id="tblGrid" class="tblGrid sort autosort">
 		<colgroup>
 			<col width="*"/>
-			<col width="12%"/>
-			<col width="17%"/>
-			<col width="12%"/>
+			<col width="9%"/>
+			<col width="9%"/>
+			<col width="9%"/>
+			<col width="9%"/>
+			<col width="9%"/>
+			<col width="9%"/>
 			<col width="8%"/>
 			<col width="8%"/>
-			<col width="12%"/>
 			<col width="8%"/>
 			<col width="8%"/>
 		</colgroup>
 		<thead>
 			<tr>
-				<th class="thGrid sortable:alphanumeric">Type</th>
-				<th class="thGrid sortable:alphanumeric">Category</th>
-				<th class="thGrid sortable:alphanumeric">Assignment Name</th>
-				<th class="thGrid">Duration</th>
-				<th class="thGrid sortable:date">Start Date</th>
-				<th class="thGrid sortable:date">End Date</th>
-				<th class="thGrid sortable:alphanumeric">Status</th>
+				<th class="thGrid">Staff Name</th>
+				<th class="thGrid">Department</th>
+				<th class="thGrid">Expense Type</th>
+				<th class="thGrid">Date of Claim</th>
+				<th class="thGrid">Amount</th>
+				<th class="thGrid">GST</th>
+				<th class="thGrid">Status</th>
+				<th class="thGrid">Approved By</th>
+				<th class="thGrid">Document Attached ?</th>
 				<th class="thGrid">Date Submitted</th>
-				<th class="thGrid">Date Processed</th>
+				<th class="thGrid">Date Processed(by Finance)</th>
 			</tr>
 		</thead>
 		<tbody id="tblGridBody">
 			<tr>
-				<td class="tdGrid Ct" colspan="9"><mc:msg key="I002"/></td>
+				<td class="tdGrid Ct" colspan="11"><mc:msg key="I002"/></td>
 			</tr>
 		</tbody>
 	</table>
