@@ -9,12 +9,12 @@ $(function() {
 	 */
 	$("#btnNew").click(function() {
 		popup = commonJs.openPopup({
-			popupId:"NewLeave",
-			url:"/employee/leave/newLeave",
+			popupId:"NewExpenseClaim",
+			url:"/employee/expense/newExpenseClaim",
 			paramData:{
-				leaveRequestId:"-1"
+				expenseClaimId:"-1"
 			},
-			header:"New Leave",
+			header:"New Expense Claim",
 			width:860,
 			height:460
 		});
@@ -42,10 +42,9 @@ $(function() {
 
 		setTimeout(function() {
 			commonJs.ajaxSubmit({
-				url:"/employee/leave/getLeaveList",
+				url:"/employee/expense/getExpenseClaimList",
 				dataType:"json",
 				data:{
-					assignmentId:$("#assignment").val()
 				},
 				success:function(data, textStatus) {
 					var result = commonJs.parseAjaxResult(data, textStatus, "json");
@@ -69,26 +68,38 @@ $(function() {
 			for (var i=0; i<ds.getRowCnt(); i++) {
 				var gridTr = new UiGridTr();
 
-				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "leaveTypeDesc")));
-				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "leaveCategoryDesc")));
-
 				var uiAnc = new UiAnchor();
-				uiAnc.setText(ds.getValue(i, "assignmentName")).setScript("getLeaveDetail('"+ds.getValue(i, "leaveRequestId")+"')");
+				uiAnc.setText(ds.getValue(i, "personFullName")).setScript("getDetail('"+ds.getValue(i, "expenseClaimId")+"')");
 				gridTr.addChild(new UiGridTd().addClassName("Lt").addChild(uiAnc));
 
-				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "duration")+" "+ds.getValue(i, "durationUnitDesc")));
-				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "startDate")));
-				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "endDate")));
+				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "personFullName")));
+				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "departmentDesc")));
+				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "expenseTypeDesc")));
+				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "dateOfClaim")));
+				gridTr.addChild(new UiGridTd().addClassName("Rt").setText(commonJs.getNumberMask(dataSet.getValue(i, "amount"), "#,##0.00")));
+				gridTr.addChild(new UiGridTd().addClassName("Rt").setText(commonJs.getNumberMask(dataSet.getValue(i, "gst"), "#,##0.00")));
 				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "statusDesc")));
+				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "approveRejectPersonName")));
+
+				var gridTd = new UiGridTd();
+				gridTd.addClassName("Ct");
+				if (ds.getValue(i, "attachmentCount") > 0) {
+					var iconAttachFile = new UiIcon();
+					iconAttachFile.setId("icnAttachedFile").setName("icnAttachedFile").addClassName("glyphicon-paperclip").addAttribute("expenseClaimId:"+ds.getValue(i, "expenseClaimId"))
+						.setScript("getAttachedFile(this)");
+					gridTd.addChild(iconAttachFile);
+				}
+				gridTr.addChild(gridTd);
+
 				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "submittedDate")));
-				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "approveRejectDate")));
+				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "processedDate")));
 
 				html += gridTr.toHtmlString();
 			}
 		} else {
 			var gridTr = new UiGridTr();
 
-			gridTr.addChild(new UiGridTd().addClassName("Ct").setAttribute("colspan:9").setText(com.message.I001));
+			gridTr.addChild(new UiGridTd().addClassName("Ct").setAttribute("colspan:11").setText(com.message.I001));
 			html += gridTr.toHtmlString();
 		}
 
@@ -116,6 +127,6 @@ $(function() {
 	 * load event (document / window)
 	 */
 	$(window).load(function() {
-//		doSearch();
+		doSearch();
 	});
 });

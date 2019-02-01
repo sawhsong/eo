@@ -188,7 +188,9 @@ $(function() {
 	};
 
 	setWindowSize = function(rowCnt) {
-		if (rowCnt > 0) {
+		var informLenth = $("#tblInformBody tr").length;
+
+		if (rowCnt > 0 && informLenth != rowCnt) {
 			parent.popup.resizeTo(0, ((rowCnt-1) * 27));
 		}
 	};
@@ -204,6 +206,9 @@ $(function() {
 		});
 		$("#duration").number(true, 1);
 
-		loadAccrual();
+		setTimeout(function() {
+			setWindowSize(2);
+			loadAccrual();
+		}, 300);
 	});
 });

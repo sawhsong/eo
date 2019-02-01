@@ -56,7 +56,6 @@ public class LoginInterceptor implements Interceptor {
 		}
 
 		if (action instanceof ServiceResourceAction) {
-			returnValue = invocation.getProxy().getMethod();
 		} else if (action instanceof LoginAction) {
 			if (CommonUtil.equalsIgnoreCase(invocation.getProxy().getMethod(), "getUserProfile")) {
 				userId = (String)sessionMap.get("LoginId");

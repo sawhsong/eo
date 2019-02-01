@@ -19,9 +19,6 @@ public class ExpenseBizImpl extends BaseBiz implements ExpenseBiz {
 	private WebServiceClientBizService wsClient;
 
 	public ParamEntity getDefault(ParamEntity paramEntity) throws Exception {
-		HttpSession session = paramEntity.getSession();
-		String personId = CommonUtil.nvl((String)session.getAttribute("PersonIdForAdminTool"), (String)session.getAttribute("PersonId"));
-
 		try {
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
@@ -30,17 +27,15 @@ public class ExpenseBizImpl extends BaseBiz implements ExpenseBiz {
 		return paramEntity;
 	}
 
-	public ParamEntity getLeaveList(ParamEntity paramEntity) throws Exception {
+	public ParamEntity getExpenseClaimList(ParamEntity paramEntity) throws Exception {
 		HttpSession session = paramEntity.getSession();
-		DataSet dsRequest = paramEntity.getRequestDataSet();
-		DataSet leaveList = new DataSet();
+		DataSet expenseList = new DataSet();
 		String personId = CommonUtil.nvl((String)session.getAttribute("PersonIdForAdminTool"), (String)session.getAttribute("PersonId"));
-		String assignmentId = CommonUtil.nvl(dsRequest.getValue("assignmentId"), "-1");
 
 		try {
-			leaveList = wsClient.getLeaveListDataSet(paramEntity, personId, assignmentId);
+			expenseList = wsClient.getExpenseClaimListDataSet(paramEntity, personId);
 
-			paramEntity.setAjaxResponseDataSet(leaveList);
+			paramEntity.setAjaxResponseDataSet(expenseList);
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
@@ -48,30 +43,22 @@ public class ExpenseBizImpl extends BaseBiz implements ExpenseBiz {
 		return paramEntity;
 	}
 
-	public ParamEntity getLeaveDetail(ParamEntity paramEntity) throws Exception {
-		HttpSession session = paramEntity.getSession();
+	public ParamEntity getDetail(ParamEntity paramEntity) throws Exception {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
-		DataSet leaveDetail = new DataSet(), assignmentList = new DataSet();
-		String personId = CommonUtil.nvl((String)session.getAttribute("PersonIdForAdminTool"), (String)session.getAttribute("PersonId"));
-		String leaveRequestId = dsRequest.getValue("leaveRequestId");
-		String header[] = new String[] {"leaveRequestId", "assignmentId", "assignmentNumber", "assignmentName", "leaveType", "leaveTypeDesc", "leaveCategory", "leaveCategoryDesc",
-				"startDate", "endDate", "duration", "durationUnit", "durationUnitDesc", "reason", "status", "statusDesc", "submittedDate", "approveRejectDate",
-				"approveRejectPersonFullName", "approveRejectComments"};
+		DataSet expenseClaimDetail = new DataSet();
+		String expenseClaimId = dsRequest.getValue("expenseClaimId");
+		String header[] = new String[] {"expenseClaimId", "personId", "personFullName", "department", "departmentDesc", "expenseType", "expenseTypeDesc", "dateOfClaim",
+				"bsb", "accountName", "accountNumber", "amount", "gst", "description", "submittedDate", "processedDate", "status", "statusDesc",
+				"approveRejectPersonId", "approveRejectPersonName", "approveRejectDate", "approveRejectComments", "attachmentCount"};
 
 		try {
-			leaveDetail.addName(header);
+			expenseClaimDetail.addName(header);
 
-			assignmentList = wsClient.getLeaveAssignmentListDataSet(paramEntity, personId);
+			wsClient.getExpenseClaimDetailService(paramEntity, expenseClaimId);
+			paramEntity.setDataSetValueFromJsonResultset(expenseClaimDetail);
 
-			wsClient.getLeaveDetailService(paramEntity, leaveRequestId);
-			paramEntity.setDataSetValueFromJsonResultset(leaveDetail);
-
-			paramEntity.setObject("assignmentList", assignmentList);
-			paramEntity.setObject("leaveTypeLookup", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("leaveTypeList")));
-			paramEntity.setObject("leaveCategoryLookup", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("leaveCategoryList")));
-			paramEntity.setObject("durationUnitLookup", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("leaveDurationUnitList")));
-			paramEntity.setObject("leaveDetail", leaveDetail);
-			paramEntity.setObject("accrualList", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("accrualList")));
+			paramEntity.setObject("expenseClaimDetail", expenseClaimDetail);
+			paramEntity.setObject("attachmentList", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("attachmentList")));
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);

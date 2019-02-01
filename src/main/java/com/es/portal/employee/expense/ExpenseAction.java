@@ -18,22 +18,27 @@ public class ExpenseAction extends BaseAction {
 		return "expenseList";
 	}
 
-	public String getLeaveList() throws Exception {
+	public String getExpenseClaimList() throws Exception {
 		try {
-			biz.getLeaveList(paramEntity);
+			biz.getExpenseClaimList(paramEntity);
 		} catch (Exception ex) {
 		}
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";
 	}
 
-	public String getLeaveDetail() throws Exception {
-		biz.getLeaveDetail(paramEntity);
+	public String getDetail() throws Exception {
+		biz.getDetail(paramEntity);
 		return "leaveDetail";
 	}
 
+	public String newExpenseClaim() throws Exception {
+		biz.getDetail(paramEntity);
+		return "newLeave";
+	}
+
 	public String getUpdateLeaveRequest() throws Exception {
-		biz.getLeaveDetail(paramEntity);
+		biz.getDetail(paramEntity);
 		return "updateLeave";
 	}
 
@@ -53,10 +58,5 @@ public class ExpenseAction extends BaseAction {
 		}
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";
-	}
-
-	public String newLeave() throws Exception {
-		biz.getLeaveDetail(paramEntity);
-		return "newLeave";
 	}
 }

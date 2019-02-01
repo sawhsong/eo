@@ -63,7 +63,7 @@
 		</colgroup>
 		<tr>
 			<td class="tdSearch">
-				<label for="assignment" class="lblEn hor">Search</label>
+				<label for="assignment" class="lblEn hor"></label>
 				<div style="float:left;padding-right:4px;">
 				</div>
 			</td>
@@ -105,9 +105,9 @@
 				<th class="thGrid">GST</th>
 				<th class="thGrid">Status</th>
 				<th class="thGrid">Approved By</th>
-				<th class="thGrid">Document Attached ?</th>
+				<th class="thGrid">Attachment</th>
 				<th class="thGrid">Date Submitted</th>
-				<th class="thGrid">Date Processed(by Finance)</th>
+				<th class="thGrid">Date Processed</th>
 			</tr>
 		</thead>
 		<tbody id="tblGridBody">

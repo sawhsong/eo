@@ -187,7 +187,9 @@ $(function() {
 	};
 
 	setWindowSize = function(rowCnt) {
-		if (rowCnt > 0) {
+		var informLenth = $("#tblInformBody tr").length;
+
+		if (rowCnt > 0 && informLenth != rowCnt) {
 			parent.popup.resizeTo(0, ((rowCnt-1) * 27));
 		}
 	};

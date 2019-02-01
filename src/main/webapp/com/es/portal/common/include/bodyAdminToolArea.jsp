@@ -141,7 +141,7 @@ if (CommonUtil.equalsIgnoreCase(securityRoleAdminToolArea, "administrator") && i
 								<ui:text name="loginIdAsAdminTool" className="hor" value="${sessionScope.LoginIdForAdminTool}" style="width:180px"/>
 							</div>
 							<div class="horGap20"></div>
-							<label for="loginIdAsAdminTool" class="lblEn hor">Person ID</label>
+							<label for="personIdAsAdminTool" class="lblEn hor">Person ID</label>
 							<div style="float:left;padding-right:4px;">
 								<ui:text name="personIdAsAdminTool" className="hor" value="${sessionScope.PersonIdForAdminTool}" style="width:180px"/>
 							</div>

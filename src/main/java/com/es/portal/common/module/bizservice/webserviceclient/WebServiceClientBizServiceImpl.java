@@ -369,6 +369,52 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		return CommonUtil.removeString(result, "\"");
 	}
 
+	public String approveRejectLeaveRequest(DataSet requestDataSet) throws Exception {
+		DataSet post = new DataSet();
+		String serviceUrl = "", result = "";
+		String leaveRequestId = requestDataSet.getValue("leaveRequestId");
+		String mode = requestDataSet.getValue("mode");
+		String header[] = new String[] {"leaveId", "approverId", "comments", "approved", "approvRejectIpAddress"};
+
+		serviceUrl = "leave/"+leaveRequestId+"/approve";
+
+		post.addName(header);
+		post.addRow();
+		post.setValue(post.getRowCnt()-1, "leaveId", leaveRequestId);
+		post.setValue(post.getRowCnt()-1, "approverId", requestDataSet.getValue("approverId"));
+		post.setValue(post.getRowCnt()-1, "comments", requestDataSet.getValue("approveRejectComments"));
+		post.setValue(post.getRowCnt()-1, "approved", (CommonUtil.equalsIgnoreCase(mode, "approve")) ? "Y" : "N");
+		post.setValue(post.getRowCnt()-1, "approvRejectIpAddress", requestDataSet.getValue("approveRejectIpAddress"));
+
+		result = RestServiceSupport.post(providerUrl, serviceUrl, acceptTypeHeader, post);
+		return CommonUtil.removeString(result, "\"");
+	}
+
+	/*
+	 * Employee - Expense
+	 */
+	public DataSet getExpenseClaimListDataSet(ParamEntity paramEntity, String personId) throws Exception {
+		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
+		DataSet leaveList = new DataSet();
+		String serviceUrl = "expense/"+personId+"/list";
+		String result = "";
+
+		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
+		paramEntity.setObjectFromJsonString(result);
+		leaveList = JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("expenseList"));
+
+		return leaveList;
+	}
+
+	public void getExpenseClaimDetailService(ParamEntity paramEntity, String expenseClaimId) throws Exception {
+		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
+		String serviceUrl = "expense/"+expenseClaimId+"/details";
+		String result = "";
+
+		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
+		paramEntity.setObjectFromJsonString(result);
+	}
+
 	/*
 	 * Login - User Profile
 	 */

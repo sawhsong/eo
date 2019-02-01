@@ -4,8 +4,12 @@
 	<package name="serviceresource" extends="default" namespace="/serviceresource" strict-method-invocation="false">
 		<default-interceptor-ref name="ZebraDefaultStack"/>
 		<action name="pages/*" class="com.es.portal.serviceresource.ServiceResourceAction" method="{1}">
-			<result name="disclaimer" type="debugDispatcherResult">/com/es/portal/serviceresource/Disclaimer.jsp</result>
-			<result name="privacy" type="debugDispatcherResult">/com/es/portal/serviceresource/Privacy.jsp</result>
+			<result name="disclaimer" type="debugDispatcherResult">/com/es/portal/serviceresource/main/Disclaimer.jsp</result>
+			<result name="privacy" type="debugDispatcherResult">/com/es/portal/serviceresource/main/Privacy.jsp</result>
+		</action>
+
+		<action name="employee/leave/*" class="com.es.portal.serviceresource.ServiceResourceAction" method="{1}">
+			<result name="approveLeave" type="debugDispatcherResult">/com/es/portal/serviceresource/employee/leave/ApproveLeave.jsp</result>
 		</action>
 	</package>
 </struts>

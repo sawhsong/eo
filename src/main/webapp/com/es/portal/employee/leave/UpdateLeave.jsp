@@ -52,7 +52,7 @@ var leaveRequestId = "<%=leaveDetail.getValue("leaveRequestId")%>";
 	<div id="divButtonAreaLeft"></div>
 	<div id="divButtonAreaRight">
 		<ui:buttonGroup id="buttonGroup">
-			<ui:button id="btnSave" caption="button.com.save" iconClass="fa-save"/>
+			<ui:button id="btnSave" caption="Apply" iconClass="fa-save"/>
 			<ui:button id="btnClose" caption="button.com.close" iconClass="fa-times"/>
 		</ui:buttonGroup>
 	</div>
@@ -129,7 +129,7 @@ var leaveRequestId = "<%=leaveDetail.getValue("leaveRequestId")%>";
 			</td>
 			<th class="thEdit rt">Status</th>
 			<td class="tdEdit">
-				<ui:hidden name="status" value="<%=leaveDetail.getValue(\"status\")%>"/>
+				<ui:hidden name="status" value="SA"/>
 				<ui:text name="statusDesc" value="<%=leaveDetail.getValue(\"statusDesc\")%>" status="display"/>
 			</td>
 		</tr>
