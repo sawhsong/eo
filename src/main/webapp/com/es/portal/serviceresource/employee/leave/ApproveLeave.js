@@ -3,6 +3,8 @@
  */
 $(function() {
 	$("#btnApprove").click(function(event) {
+		if ($("#btnApprove").attr("disabled") == "disabled") {return false;}
+
 		commonJs.confirm({
 			contents:com.message.Q001,
 			buttons:[{
@@ -19,6 +21,8 @@ $(function() {
 	});
 
 	$("#btnReject").click(function(event) {
+		if ($("#btnReject").attr("disabled") == "disabled") {return false;}
+
 		if (commonJs.isEmpty($("#approveRejectComments").val())) {
 			commonJs.error("Reject Reason is a mandatory field.");
 			$("#approveRejectComments").focus();
@@ -61,26 +65,8 @@ $(function() {
 						buttons:[{
 							caption:com.caption.ok,
 							callback:function() {
-								$.blockUI({
-									message:msg,
-									css:{
-										width:"100%",
-										left:"0px",
-										top:"50%",
-										border:"0px",
-										background:"transparent",
-										cursor:"default",
-										fadeIn:100,
-										fadeOut:100,
-										"font-weight":"bold",
-										"font-size":"1.0em"
-									},
-									overlayCSS:{
-										cursor:"default",
-										backgroundColor:"#888888",
-										opacity:"0.1"
-									}
-								});
+								$("#btnApprove").attr("disabled", "disabled");
+								$("#btnReject").attr("disabled", "disabled");
 							}
 						}]
 					});
