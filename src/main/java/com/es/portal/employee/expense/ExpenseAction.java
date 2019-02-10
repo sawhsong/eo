@@ -29,13 +29,33 @@ public class ExpenseAction extends BaseAction {
 
 	public String getDetail() throws Exception {
 		biz.getDetail(paramEntity);
-		return "leaveDetail";
+		return "expenseDetail";
 	}
 
 	public String newExpenseClaim() throws Exception {
 		biz.getDetail(paramEntity);
-		return "newLeave";
+		return "newExpense";
 	}
+
+	public String saveExpenseClaim() throws Exception {
+		try {
+			biz.saveExpenseClaim(paramEntity);
+
+			if (paramEntity.isSuccess()) {
+				paramEntity.setObject("script", "parent.popup.close(); parent.doSearch();");
+			} else {
+				paramEntity.setObject("script", "history.go(-1);");
+			}
+		} catch (Exception ex) {
+			paramEntity.setObject("script", "history.go(-1);");
+		} finally {
+			paramEntity.setObject("messageCode", paramEntity.getMessageCode());
+			paramEntity.setObject("message", paramEntity.getMessage());
+		}
+		return "pageHandler";
+	}
+
+
 
 	public String getUpdateLeaveRequest() throws Exception {
 		biz.getDetail(paramEntity);

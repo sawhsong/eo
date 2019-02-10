@@ -44,6 +44,7 @@ public interface WebServiceClientBizService {
 	 */
 	public DataSet getExpenseClaimListDataSet(ParamEntity paramEntity, String personId) throws Exception;
 	public void getExpenseClaimDetailService(ParamEntity paramEntity, String expenseClaimId) throws Exception;
+	public String postExpenseClaim(DataSet requestDataSet, DataSet fileDataSet) throws Exception;
 
 	/*
 	 * Login - User Profile

@@ -10,6 +10,7 @@
 
 		<action name="employee/leave/*" class="com.es.portal.serviceresource.ServiceResourceAction" method="{1}">
 			<result name="approveLeave" type="debugDispatcherResult">/com/es/portal/serviceresource/employee/leave/ApproveLeave.jsp</result>
+			<result name="alreadyProcessed" type="debugDispatcherResult">/com/es/portal/serviceresource/employee/leave/AlreadyProcessed.jsp</result>
 		</action>
 	</package>
 </struts>

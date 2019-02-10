@@ -1,13 +1,13 @@
 <%/************************************************************************************************
 * Description
+* - 
 ************************************************************************************************/%>
 <%@ include file="/com/es/portal/shared/page/incCommon.jsp"%>
 <%/************************************************************************************************
 * Declare objects & variables
 ************************************************************************************************/%>
 <%
-	ParamEntity paramEntity = (ParamEntity)request.getAttribute("paramEntity");
-	DataSet resultDataSet = (DataSet)paramEntity.getObject("resultDataSet");
+	ParamEntity pe = (ParamEntity)request.getAttribute("paramEntity");
 %>
 <%/************************************************************************************************
 * HTML
@@ -24,14 +24,7 @@
 ************************************************************************************************/%>
 <%@ include file="/com/es/portal/shared/page/incCssJs.jsp"%>
 <style type="text/css">
-#hNotice.ui-state-default {background-color:#DFF0D8;padding-top:10px;padding-bottom:10px;}
-#hNotice.ui-accordion-header.ui-state-active {background:#DFF0D8;padding-top:10px;padding-bottom:10px;}
-#hFreeBoard.ui-state-default {background-color:#DFF0D8;padding-top:10px;padding-bottom:10px;}
-#hFreeBoard.ui-accordion-header.ui-state-active {background:#DFF0D8;padding-top:10px;padding-bottom:10px;}
-#hIncome.ui-state-default {background-color:#5BC0DE;padding-top:10px;padding-bottom:10px;color:#ffffff;}
-#hIncome.ui-accordion-header.ui-state-active {background:#5BC0DE;padding-top:10px;padding-bottom:10px;color:#ffffff;}
-#hExpense.ui-state-default {background-color:#5BC0DE;padding-top:10px;padding-bottom:10px;color:#ffffff;}
-#hExpense.ui-accordion-header.ui-state-active {background:#5BC0DE;padding-top:10px;padding-bottom:10px;color:#ffffff;}
+#divBodyCenter {padding:30px 100px 30px 100px;}
 </style>
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
@@ -42,9 +35,9 @@
 ************************************************************************************************/%>
 <body>
 <form id="fmDefault" name="fmDefault" method="post" action="">
-<div id="divHeaderHolder" class="ui-layout-north"><%@ include file="/com/es/portal/common/include/header.jsp"%></div>
+<div id="divHeaderHolder" class="ui-layout-north"><%@ include file="/com/es/portal/common/include/headerForServiceResource.jsp"%></div>
 <div id="divBodyHolder" class="ui-layout-center">
-<div id="divBodyLeft" class="ui-layout-west"><%@ include file="/com/es/portal/common/include/bodyLeft.jsp"%></div>
+<div id="divBodyLeft" class="ui-layout-west"></div>
 <div id="divBodyCenter" class="ui-layout-center">
 <div id="divFixedPanel">
 <div id="divLocationPathArea"><%@ include file="/com/es/portal/common/include/bodyLocationPathArea.jsp"%></div>
@@ -56,7 +49,6 @@
 	<div id="divButtonAreaLeft"></div>
 	<div id="divButtonAreaRight"></div>
 </div>
-<div id="divAdminToolArea"><%@ include file="/com/es/portal/common/include/bodyAdminToolArea.jsp"%></div>
 <div id="divSearchCriteriaArea"></div>
 <div id="divInformArea"></div>
 <%/************************************************************************************************
@@ -68,37 +60,15 @@
 <%/************************************************************************************************
 * Real Contents - scrollable panel(data, paging)
 ************************************************************************************************/%>
-<div id="divDataArea" class="areaContainer">
-<!-- 	<div style="margin-top:20px;"> -->
-<!-- 		<div id="divLeft" class="accordion" style="padding-left:20px;width:49%;float:left"> -->
-<!-- 			<div class="accordionGroup"> -->
-<!-- 				<h3 id="hNotice">Notice</h3> -->
-<!-- 				<div id="divNotice" class="accordionContents"> -->
-
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="accordionGroup"> -->
-<!-- 				<h3 id="hIncome">Income</h3> -->
-<!-- 				<div id="divIncome" class="accordionContents"> -->
-
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 		<div id="divRight" class="accordion" style="padding-right:20px;width:49%;float:right"> -->
-<!-- 			<div class="accordionGroup"> -->
-<!-- 				<h3 id="hFreeBoard">Free Board</h3> -->
-<!-- 				<div id="divFreeBoard" class="accordionContents"> -->
-
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="accordionGroup"> -->
-<!-- 				<h3 id="hExpense">Expense</h3> -->
-<!-- 				<div id="divExpense" class="accordionContents"> -->
-
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
+<div id="divDataArea" class="areaContainerServiceResource">
+	<table class="tblEdit">
+		<colgroup>
+			<col width="100%"/>
+		</colgroup>
+		<tr>
+			<td class="tdEdit Ct">The leave request has already been approved or rejected.</td>
+		</tr>
+	</table>
 </div>
 <div id="divPagingArea"></div>
 <%/************************************************************************************************

@@ -51,8 +51,6 @@ select 'ENTITY_SOLUTIONS_STAFF' as group_id,
        null as update_date
   from eo_menu
  where menu_id in ('HOME',
-                   'Form',
-                   'Contactus',
                    'Leave',
                    'Expense-Emp'
                   )

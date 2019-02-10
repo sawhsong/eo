@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.es.portal.common.extend.BaseAction;
 
+import zebra.data.DataSet;
+import zebra.util.CommonUtil;
+
 public class ServiceResourceAction extends BaseAction {
 	@Autowired
 	private ServiceResourceBiz biz;
@@ -31,7 +34,12 @@ public class ServiceResourceAction extends BaseAction {
 	 */
 	public String approveLeave() throws Exception {
 		biz.approveLeave(paramEntity);
-		return "approveLeave";
+		DataSet leaveDetail = (DataSet)paramEntity.getObject("leaveDetail");
+		if (CommonUtil.equalsIgnoreCase(leaveDetail.getValue("status"), "SU")) {
+			return "approveLeave";
+		} else {
+			return "alreadyProcessed";
+		}
 	}
 
 	public String approveRejectLeaveRequest() throws Exception {

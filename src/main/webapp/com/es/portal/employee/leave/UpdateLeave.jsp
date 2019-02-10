@@ -129,7 +129,7 @@ var leaveRequestId = "<%=leaveDetail.getValue("leaveRequestId")%>";
 			</td>
 			<th class="thEdit rt">Status</th>
 			<td class="tdEdit">
-				<ui:hidden name="status" value="SA"/>
+				<ui:hidden name="status" value="<%=leaveDetail.getValue(\"status\")%>"/>
 				<ui:text name="statusDesc" value="<%=leaveDetail.getValue(\"statusDesc\")%>" status="display"/>
 			</td>
 		</tr>

@@ -44,9 +44,12 @@ public class ExpenseBizImpl extends BaseBiz implements ExpenseBiz {
 	}
 
 	public ParamEntity getDetail(ParamEntity paramEntity) throws Exception {
+		HttpSession session = paramEntity.getSession();
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		DataSet expenseClaimDetail = new DataSet();
 		String expenseClaimId = dsRequest.getValue("expenseClaimId");
+		String personId = CommonUtil.nvl((String)session.getAttribute("PersonIdForAdminTool"), (String)session.getAttribute("PersonId"));
+		String personName = CommonUtil.nvl((String)session.getAttribute("UserFullNameForAdminTool"), (String)session.getAttribute("UserFullName"));
 		String header[] = new String[] {"expenseClaimId", "personId", "personFullName", "department", "departmentDesc", "expenseType", "expenseTypeDesc", "dateOfClaim",
 				"bsb", "accountName", "accountNumber", "amount", "gst", "description", "submittedDate", "processedDate", "status", "statusDesc",
 				"approveRejectPersonId", "approveRejectPersonName", "approveRejectDate", "approveRejectComments", "attachmentCount"};
@@ -57,9 +60,31 @@ public class ExpenseBizImpl extends BaseBiz implements ExpenseBiz {
 			wsClient.getExpenseClaimDetailService(paramEntity, expenseClaimId);
 			paramEntity.setDataSetValueFromJsonResultset(expenseClaimDetail);
 
+			paramEntity.setObject("personId", personId);
+			paramEntity.setObject("personName", personName);
 			paramEntity.setObject("expenseClaimDetail", expenseClaimDetail);
 			paramEntity.setObject("attachmentList", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("attachmentList")));
 			paramEntity.setSuccess(true);
+		} catch (Exception ex) {
+			throw new FrameworkException(paramEntity, ex);
+		}
+		return paramEntity;
+	}
+
+	public ParamEntity saveExpenseClaim(ParamEntity paramEntity) throws Exception {
+		DataSet dsRequest = paramEntity.getRequestDataSet();
+		DataSet dsFile = paramEntity.getRequestFileDataSet();
+		String result = "";
+
+		try {
+			result = wsClient.postExpenseClaim(dsRequest, dsFile);
+
+//			if (!CommonUtil.startsWith(result, "2")) {
+//				throw new FrameworkException("E801", getMessage("E801", paramEntity));
+//			}
+
+			paramEntity.setSuccess(true);
+			paramEntity.setMessage("I801", getMessage("I801", paramEntity));
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
 		}

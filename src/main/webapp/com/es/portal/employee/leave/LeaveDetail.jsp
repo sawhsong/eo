@@ -53,7 +53,7 @@ var mode = "<%=dsRequest.getValue("mode")%>";
 	<div id="divButtonAreaRight">
 		<ui:buttonGroup id="buttonGroup">
 <%
-		if (CommonUtil.isIn(status, "SA", "RE")) {
+		if (CommonUtil.isIn(status, "RE")) {
 %>
 			<ui:button id="btnEdit" caption="button.com.edit" iconClass="fa-edit"/>
 <%

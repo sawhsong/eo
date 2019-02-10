@@ -3,8 +3,11 @@ package zebra.wssupport;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.activation.DataHandler;
 import javax.ws.rs.core.Response;
@@ -130,6 +133,26 @@ public class RestServiceSupport {
 		}
 
 		attachmentList.add(new Attachment("paramEntity", acceptTypeHeader, paramEntity.toJsonString()));
+		for (int i=0; i<fileDataSet.getRowCnt(); i++) {
+			inputStream = new FileInputStream(fileDataSet.getValue(i, "TEMP_PATH")+"/"+fileDataSet.getValue(i, "NEW_NAME"));
+			attachmentList.add(new Attachment(fileDataSet.getValue(i, "FORM_TAG_NAME"), fileDataSet.getValue(i, "TYPE"), inputStream));
+		}
+
+		WebClient webClient = WebClient.create(providerUrl);
+		Response wsResponse = webClient.path(serviceUrl).type(contentTypeHeader).accept(new String[] {acceptTypeHeader}).post(attachmentList);
+		return (String)wsResponse.readEntity(String.class);
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static String postAttachmentEO(String providerUrl, String serviceUrl, String contentTypeHeader, String acceptTypeHeader, DataSet postDataSet, DataSet fileDataSet) throws Exception {
+		List attachmentList = new LinkedList();
+		InputStream inputStream;
+
+		if (CommonUtil.isBlank(providerUrl) || CommonUtil.isBlank(serviceUrl) || CommonUtil.isBlank(contentTypeHeader) || CommonUtil.isBlank(acceptTypeHeader) || postDataSet == null) {
+			return "";
+		}
+
+		attachmentList.add(new Attachment("postDataSet", acceptTypeHeader, postDataSet.toJsonStringForEO()));
 		for (int i=0; i<fileDataSet.getRowCnt(); i++) {
 			inputStream = new FileInputStream(fileDataSet.getValue(i, "TEMP_PATH")+"/"+fileDataSet.getValue(i, "NEW_NAME"));
 			attachmentList.add(new Attachment(fileDataSet.getValue(i, "FORM_TAG_NAME"), fileDataSet.getValue(i, "TYPE"), inputStream));

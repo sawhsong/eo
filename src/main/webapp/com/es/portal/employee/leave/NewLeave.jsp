@@ -130,8 +130,8 @@ var leaveRequestId = "-1";
 			</td>
 			<th class="thEdit rt">Status</th>
 			<td class="tdEdit">
-				<ui:hidden name="status" value="SA"/>
-				<ui:text name="statusDesc" value="In Progress" status="display"/>
+				<ui:hidden name="status" value="SU"/>
+				<ui:text name="statusDesc" value="Pending approval" status="display"/>
 			</td>
 		</tr>
 		<tr>

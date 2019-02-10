@@ -1,5 +1,7 @@
 package com.es.portal.common.module.bizservice.webserviceclient;
 
+import javax.ws.rs.core.MediaType;
+
 import com.es.portal.common.extend.BaseBiz;
 
 import net.sf.json.JSONArray;
@@ -13,7 +15,8 @@ import zebra.wssupport.RestServiceSupport;
 
 public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServiceClientBizService {
 	private String providerUrl = ConfigUtil.getProperty("webService.perci.url");
-	private String acceptTypeHeader = "application/json";
+	private String acceptTypeHeader = MediaType.APPLICATION_JSON;
+	private String contentTypeHeader = MediaType.MULTIPART_FORM_DATA;
 	private String hoursFormat = "##0.00";
 
 	/*
@@ -362,7 +365,7 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		post.setValue(post.getRowCnt()-1, "leaveCategory", requestDataSet.getValue("category"));
 		post.setValue(post.getRowCnt()-1, "duration", requestDataSet.getValue("duration"));
 		post.setValue(post.getRowCnt()-1, "durationUnit", requestDataSet.getValue("durationUnits"));
-		post.setValue(post.getRowCnt()-1, "status", requestDataSet.getValue("status"));
+		post.setValue(post.getRowCnt()-1, "status", "SU");
 		post.setValue(post.getRowCnt()-1, "reason", requestDataSet.getValue("reason"));
 
 		result = RestServiceSupport.post(providerUrl, serviceUrl, acceptTypeHeader, post);
@@ -413,6 +416,37 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 
 		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
 		paramEntity.setObjectFromJsonString(result);
+	}
+
+	public String postExpenseClaim(DataSet requestDataSet, DataSet fileDataSet) throws Exception {
+		DataSet post = new DataSet();
+		String serviceUrl = "", result = "";
+		String header[] = new String[] {"expenseClaimId", "personId", "department", "expenseType", "dateOfClaim",
+				"bsb", "accountName", "accountNumber", "amount", "gst", "description", "status",
+				"approveRejectPersonId", "approveRejectDate", "approveRejectComments"};
+
+		serviceUrl = "expense/save";
+
+		post.addName(header);
+		post.addRow();
+		post.setValue(post.getRowCnt()-1, "expenseClaimId", requestDataSet.getValue("expenseClaimId"));
+		post.setValue(post.getRowCnt()-1, "personId", requestDataSet.getValue("personId"));
+		post.setValue(post.getRowCnt()-1, "department", requestDataSet.getValue("department"));
+		post.setValue(post.getRowCnt()-1, "expenseType", requestDataSet.getValue("expenseType"));
+		post.setValue(post.getRowCnt()-1, "dateOfClaim", CommonUtil.replace(requestDataSet.getValue("dateOfClaim"), "-", ""));
+		post.setValue(post.getRowCnt()-1, "bsb", requestDataSet.getValue("bsb"));
+		post.setValue(post.getRowCnt()-1, "accountName", requestDataSet.getValue("accountName"));
+		post.setValue(post.getRowCnt()-1, "accountNumber", requestDataSet.getValue("accountNumber"));
+		post.setValue(post.getRowCnt()-1, "amount", requestDataSet.getValue("amount"));
+		post.setValue(post.getRowCnt()-1, "gst", requestDataSet.getValue("gst"));
+		post.setValue(post.getRowCnt()-1, "description", requestDataSet.getValue("description"));
+		post.setValue(post.getRowCnt()-1, "status", requestDataSet.getValue("status"));
+		post.setValue(post.getRowCnt()-1, "approveRejectPersonId", requestDataSet.getValue("approveRejectPersonId"));
+		post.setValue(post.getRowCnt()-1, "approveRejectDate", requestDataSet.getValue("approveRejectDate"));
+		post.setValue(post.getRowCnt()-1, "approveRejectComments", requestDataSet.getValue("approveRejectComments"));
+
+		result = RestServiceSupport.postAttachmentEO(providerUrl, serviceUrl, contentTypeHeader, acceptTypeHeader, post, fileDataSet);
+		return CommonUtil.removeString(result, "\"");
 	}
 
 	/*

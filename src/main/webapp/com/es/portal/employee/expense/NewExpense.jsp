@@ -8,13 +8,8 @@
 ************************************************************************************************/%>
 <%
 	ParamEntity pe = (ParamEntity)request.getAttribute("paramEntity");
-	DataSet assignmentList = (DataSet)pe.getObject("assignmentList");
-	DataSet leaveDetail = (DataSet)pe.getObject("leaveDetail");
-	DataSet accrualList = (DataSet)pe.getObject("accrualList");
-	DataSet typeLookup = (DataSet)pe.getObject("leaveTypeLookup");
-	DataSet categoryLookup = (DataSet)pe.getObject("leaveCategoryLookup");
-	DataSet durationUnitLookup = (DataSet)pe.getObject("durationUnitLookup");
 	String dateFormat = ConfigUtil.getProperty("format.date.java");
+	String personName = (String)pe.getObject("personName");
 	String timeFormat = "HH:mm:ss";
 	String defaultDate = CommonUtil.getSysdate(dateFormat);
 	String defaultDateTime = CommonUtil.getSysdate(dateFormat+" "+timeFormat);
@@ -37,7 +32,7 @@
 </style>
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
-var leaveRequestId = "-1";
+var expenseClaimId = "-1";
 </script>
 </head>
 <%/************************************************************************************************
@@ -56,50 +51,13 @@ var leaveRequestId = "-1";
 	<div id="divButtonAreaLeft"></div>
 	<div id="divButtonAreaRight">
 		<ui:buttonGroup id="buttonGroup">
-			<ui:button id="btnSave" caption="button.com.save" iconClass="fa-save"/>
+			<ui:button id="btnSave" caption="Apply" iconClass="fa-save"/>
 			<ui:button id="btnClose" caption="button.com.close" iconClass="fa-times"/>
 		</ui:buttonGroup>
 	</div>
 </div>
 <div id="divSearchCriteriaArea"></div>
-<div id="divInformArea" class="areaContainerPopup">
-	<table class="tblInform sort autosort">
-		<caption>Accruals</caption>
-		<colgroup>
-			<col width="*"/>
-			<col width="30%"/>
-			<col width="30%"/>
-		</colgroup>
-		<thead>
-			<tr>
-				<th class="thInform Ct">Accrual Name</th>
-				<th class="thInform Ct">Number of Hours</th>
-				<th class="thInform Ct">Balance</th>
-			</tr>
-		</thead>
-		<tbody id="tblInformBody">
-<%
-		if (accrualList != null && accrualList.getRowCnt() > 0) {
-			for (int i=0; i<accrualList.getRowCnt(); i++) {
-%>
-			<tr>
-				<td class="tdInform Lt"><%=accrualList.getValue(i, "displayName")%></td>
-				<td class="tdInform Rt"><%=CommonUtil.getNumberMask(accrualList.getValue(i, "noOfHours"), "#,##0.00")%></td>
-				<td class="tdInform Rt"><%=CommonUtil.getNumberMask(accrualList.getValue(i, "balance"), "#,##0.00")%></td>
-			</tr>
-<%
-			}
-		} else {
-%>
-			<tr>
-				<td class="tdInform Ct" colspan="3"><mc:msg key="I001"/></td>
-			</tr>
-<%
-		}
-%>
-		</tbody>
-	</table>
-</div>
+<div id="divInformArea"></div>
 <%/************************************************************************************************
 * End of fixed panel
 ************************************************************************************************/%>
@@ -118,88 +76,63 @@ var leaveRequestId = "-1";
 			<col width="32%"/>
 		</colgroup>
 		<tr>
-			<th class="thEdit rt mandatory">Assignment</th>
+			<th class="thEdit rt mandatory">Date</th>
 			<td class="tdEdit">
-				<ui:select name="assignment" checkName="Assignment" options="mandatory">
-<%
-				for (int i=0; i<assignmentList.getRowCnt(); i++) {
-					String selected = CommonUtil.equals(leaveDetail.getValue("assignmentId"), assignmentList.getValue(i, "assignmentId")) ? "selected" : "";
-%>
-					<option value="<%=assignmentList.getValue(i, "assignmentId")%>" <%=selected%>><%=assignmentList.getValue(i, "assignmentName")%></option>
-<%
-				}
-%>
-				</ui:select>
+				<ui:text name="dateOfClaim" value="<%=defaultDate%>" className="Ct hor" style="width:100px" checkName="Date" options="mandatory" option="date"/>
+				<ui:icon id="icnDateOfClaim" className="fa-calendar hor"/>
 			</td>
-			<th class="thEdit rt">Status</th>
+			<th class="thEdit rt mandatory">Status</th>
 			<td class="tdEdit">
 				<ui:hidden name="status" value="SA"/>
 				<ui:text name="statusDesc" value="In Progress" status="display"/>
 			</td>
 		</tr>
 		<tr>
-			<th class="thEdit rt mandatory">Type</th>
-			<td class="tdEdit">
-				<ui:select name="type" checkName="Leave Type" options="mandatory">
-<%
-				for (int i=0; i<typeLookup.getRowCnt(); i++) {
-%>
-					<option value="<%=typeLookup.getValue(i, "code")%>"><%=typeLookup.getValue(i, "meaning")%></option>
-<%
-				}
-%>
-				</ui:select>
-			</td>
-			<th class="thEdit rt mandatory">Category</th>
-			<td class="tdEdit">
-				<ui:select name="category" checkName="Leave Category" options="mandatory">
-<%
-				for (int i=0; i<categoryLookup.getRowCnt(); i++) {
-%>
-					<option value="<%=categoryLookup.getValue(i, "code")%>"><%=categoryLookup.getValue(i, "meaning")%></option>
-<%
-				}
-%>
-				</ui:select>
-			</td>
+			<th class="thEdit rt mandatory">Department</th>
+			<td class="tdEdit"><ui:ccselect name="department" codeType="INTERNAL_DEPARTMENT" checkName="Department" options="mandatory"/></td>
+			<th class="thEdit rt mandatory">Expense Type</th>
+			<td class="tdEdit"><ui:ccselect name="expenseType" codeType="EXPENSE_TYPE" checkName="Expense Type" options="mandatory"/></td>
 		</tr>
 		<tr>
-			<th class="thEdit rt mandatory">Start Date</th>
-			<td class="tdEdit">
-				<ui:text name="startDate" value="<%=defaultDate%>" className="Ct hor" style="width:100px" checkName="Start Date" options="mandatory" option="date"/>
-				<ui:icon id="icnStartDate" className="fa-calendar hor"/>
-			</td>
-			<th class="thEdit rt mandatory">End Date</th>
-			<td class="tdEdit">
-				<ui:text name="endDate" value="<%=defaultDate%>" className="Ct hor" style="width:100px" checkName="End Date" options="mandatory" option="date"/>
-				<ui:icon id="icnEndDate" className="fa-calendar hor"/>
-			</td>
+			<th class="thEdit rt mandatory">Account Name</th>
+			<td class="tdEdit" colspan="3"><ui:text name="accountName" checkName="Account Name" options="mandatory" value="test"/></td>
 		</tr>
 		<tr>
-			<th class="thEdit rt mandatory">Duration</th>
-			<td class="tdEdit"><ui:text name="duration" status="spinner" checkName="Leave Duration" options="mandatory"/></td>
-			<th class="thEdit rt mandatory">Units</th>
-			<td class="tdEdit">
-				<ui:select name="durationUnits" checkName="Duration Units" options="mandatory">
-<%
-				for (int i=0; i<durationUnitLookup.getRowCnt(); i++) {
-%>
-					<option value="<%=durationUnitLookup.getValue(i, "code")%>"><%=durationUnitLookup.getValue(i, "meaning")%></option>
-<%
-				}
-%>
-				</ui:select>
-			</td>
+			<th class="thEdit rt mandatory">BSB</th>
+			<td class="tdEdit"><ui:text name="bsb" checkName="BSB" attribute="maxlength:6" options="mandatory" value="123456"/></td>
+			<th class="thEdit rt mandatory">Account Number</th>
+			<td class="tdEdit"><ui:text name="accountNumber" checkName="Account Number" options="mandatory" value="123456789"/></td>
 		</tr>
 		<tr>
-			<th class="thEdit rt">Reason</th>
-			<td class="tdEdit" colspan="3"><ui:txa name="reason" style="height:60px;"/></td>
+			<th class="thEdit rt mandatory">Amount</th>
+			<td class="tdEdit"><ui:text name="amount" className="Rt numeric" checkName="Amount" options="mandatory" value="5000"/></td>
+			<th class="thEdit rt">GST</th>
+			<td class="tdEdit"><ui:text name="gst" className="Rt numeric" value="500"/></td>
+		</tr>
+		<tr>
+			<th class="thEdit rt">Description</th>
+			<td class="tdEdit" colspan="3"><ui:txa name="description" style="height:60px;"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit rt">Submitted Date</th>
 			<td class="tdEdit"><ui:text name="submittedDate" value="<%=defaultDateTime%>" status="display"/></td>
-			<th class="thEdit rt"></th>
-			<td class="tdEdit"></td>
+			<th class="thEdit rt">Processed Date</th>
+			<td class="tdEdit"><ui:text name="processedDate" status="display"/></td>
+		</tr>
+		<tr>
+			<th class="thEdit rt mandatory">Person Name</th>
+			<td class="tdEdit" colspan="3"><ui:text name="personName" value="<%=personName%>" checkName="Person Name" options="mandatory" status="display"/></td>
+		</tr>
+		<tr>
+			<th class="thEdit rt">
+				Attachment<br/><br/>
+				<div id="divButtonAreaRight">
+					<ui:button id="btnAddFile" caption="button.com.add" iconClass="fa-plus"/>
+				</div>
+			</th>
+			<td class="tdEdit" colspan="3">
+				<div id="divAttachedFile" style="width:100%;height:94px;overflow-y:auto;"></div>
+			</td>
 		</tr>
 	</table>
 </div>
