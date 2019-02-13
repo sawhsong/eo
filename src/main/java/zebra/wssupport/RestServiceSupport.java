@@ -3,11 +3,8 @@ package zebra.wssupport;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import javax.activation.DataHandler;
 import javax.ws.rs.core.Response;
@@ -155,7 +152,7 @@ public class RestServiceSupport {
 		attachmentList.add(new Attachment("postDataSet", acceptTypeHeader, postDataSet.toJsonStringForEO()));
 		for (int i=0; i<fileDataSet.getRowCnt(); i++) {
 			inputStream = new FileInputStream(fileDataSet.getValue(i, "TEMP_PATH")+"/"+fileDataSet.getValue(i, "NEW_NAME"));
-			attachmentList.add(new Attachment(fileDataSet.getValue(i, "FORM_TAG_NAME"), fileDataSet.getValue(i, "TYPE"), inputStream));
+			attachmentList.add(new Attachment(fileDataSet.getValue(i, "ORIGINAL_NAME"), fileDataSet.getValue(i, "TYPE"), inputStream));
 		}
 
 		WebClient webClient = WebClient.create(providerUrl);

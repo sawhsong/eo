@@ -96,7 +96,7 @@ public class DataSet {
 		for (int i=0; i<headers.size(); i++) {
 			addName((String)headers.get(i));
 		}
-		
+
 		for (Object keys : dsValues.keySet()) {
 			String key = (String)keys;
 			JSONArray values = dsValues.getJSONArray(key);

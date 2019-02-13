@@ -45,7 +45,6 @@ $(function() {
 	});
 
 	doSave = function(param) {
-		var msg = (param.mode == "reject") ? "Rejected" : "Approved";
 		commonJs.ajaxSubmit({
 			url:"/serviceresource/employee/leave/approveRejectLeaveRequest",
 			dataType:"json",
