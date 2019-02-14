@@ -24,11 +24,12 @@ public class CommonLookupManager extends BaseBiz implements CommonLookupManagerB
 	public static void loadCommonLookup() throws Exception {
 		MemoryBean.set("CommonLookup_PREFIX", getConvertedDataSet("PREFIX", wsClient.getCommonLookupDataSet("PREFIX")));
 		MemoryBean.set("CommonLookup_STATES", getConvertedDataSet("STATES", wsClient.getCommonLookupDataSet("STATES")));
+		MemoryBean.set("CommonLookup_INTERNAL_DEPARTMENT", getConvertedDataSet("INTERNAL_DEPARTMENT", wsClient.getCommonLookupDataSet("INTERNAL_DEPARTMENT")));
 		MemoryBean.set("CommonLookup_ASG_TERM_NOTICE_UNIT", getConvertedDataSet("ASG_TERM_NOTICE_UNIT", wsClient.getCommonLookupDataSet("ASG_TERM_NOTICE_UNIT")));
 		MemoryBean.set("CommonLookup_LEAVE_TYPE", getConvertedDataSet("LEAVE_TYPE", wsClient.getCommonLookupDataSet("LEAVE_TYPE")));
 		MemoryBean.set("CommonLookup_LEAVE_CATEGORY", getConvertedDataSet("LEAVE_CATEGORY", wsClient.getCommonLookupDataSet("LEAVE_CATEGORY")));
 		MemoryBean.set("CommonLookup_LEAVE_DURATION", getConvertedDataSet("LEAVE_DURATION", wsClient.getCommonLookupDataSet("LEAVE_DURATION")));
-		MemoryBean.set("CommonLookup_INTERNAL_DEPARTMENT", getConvertedDataSet("INTERNAL_DEPARTMENT", wsClient.getCommonLookupDataSet("INTERNAL_DEPARTMENT")));
+		MemoryBean.set("CommonLookup_LEAVE_DATE_TYPE", getConvertedDataSet("LEAVE_DATE_TYPE", wsClient.getCommonLookupDataSet("LEAVE_DATE_TYPE")));
 		MemoryBean.set("CommonLookup_EXPENSE_TYPE", getConvertedDataSet("EXPENSE_TYPE", wsClient.getCommonLookupDataSet("EXPENSE_TYPE")));
 
 		logger.info("[MemoryBean] - Project Common Code has been loaded.");
@@ -42,14 +43,23 @@ public class CommonLookupManager extends BaseBiz implements CommonLookupManagerB
 		return (DataSet)MemoryBean.get("CommonLookup_"+lookupType);
 	}
 
-	public static String getLookupCodeMeaning(String lookupType, String lookupCode) throws Exception {
+	public static String getLookupMeaning(String lookupType, String lookupCode) throws Exception {
 		DataSet ds = getCodeDataSetByLookupType(lookupType);
 		String str = "";
 
 		if (ds != null && ds.getRowCnt() > 0) {
 			str = ds.getValue(ds.getRowIndex("LOOKUP_CODE", lookupCode), "MEANING");
 		}
+		return str;
+	}
 
+	public static String getLookupCodeByMeaning(String lookupType, String meaning) throws Exception {
+		DataSet ds = getCodeDataSetByLookupType(lookupType);
+		String str = "";
+
+		if (ds != null && ds.getRowCnt() > 0) {
+			str = ds.getValue(ds.getRowIndex("MEANING", meaning), "LOOKUP_CODE");
+		}
 		return str;
 	}
 
@@ -64,7 +74,6 @@ public class CommonLookupManager extends BaseBiz implements CommonLookupManagerB
 				rtn.setValue(rtn.getRowCnt()-1, "MEANING", ds.getValue(i, "meaning"));
 			}
 		}
-
 		return rtn;
 	}
 }

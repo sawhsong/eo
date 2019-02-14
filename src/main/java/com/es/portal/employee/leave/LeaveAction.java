@@ -15,7 +15,7 @@ public class LeaveAction extends BaseAction {
 
 	public String myleaves() throws Exception {
 		biz.myLeaves(paramEntity);
-		return "myLeave";
+		return "leaveList";
 	}
 
 	public String getLeaveList() throws Exception {

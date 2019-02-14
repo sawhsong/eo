@@ -4,14 +4,14 @@
 	<package name="employee" extends="default" namespace="/employee" strict-method-invocation="false">
 		<default-interceptor-ref name="ZebraDefaultStack"/>
 		<action name="leave/*" class="com.es.portal.employee.leave.LeaveAction" method="{1}">
-			<result name="myLeave" type="debugDispatcherResult">/com/es/portal/employee/leave/MyLeave.jsp</result>
+			<result name="leaveList" type="debugDispatcherResult">/com/es/portal/employee/leave/LeaveList.jsp</result>
 			<result name="leaveDetail" type="debugDispatcherResult">/com/es/portal/employee/leave/LeaveDetail.jsp</result>
 			<result name="updateLeave" type="debugDispatcherResult">/com/es/portal/employee/leave/UpdateLeave.jsp</result>
 			<result name="newLeave" type="debugDispatcherResult">/com/es/portal/employee/leave/NewLeave.jsp</result>
 		</action>
 
 		<action name="expense/*" class="com.es.portal.employee.expense.ExpenseAction" method="{1}">
-			<result name="expenseList" type="debugDispatcherResult">/com/es/portal/employee/expense/MyExpenseList.jsp</result>
+			<result name="expenseList" type="debugDispatcherResult">/com/es/portal/employee/expense/ExpenseList.jsp</result>
 			<result name="expenseDetail" type="debugDispatcherResult">/com/es/portal/employee/expense/ExpenseDetail.jsp</result>
 			<result name="updateExpense" type="debugDispatcherResult">/com/es/portal/employee/expense/UpdateExpense.jsp</result>
 			<result name="newExpense" type="debugDispatcherResult">/com/es/portal/employee/expense/NewExpense.jsp</result>

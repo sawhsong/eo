@@ -61,12 +61,12 @@
 * Real Contents - scrollable panel(data, paging)
 ************************************************************************************************/%>
 <div id="divDataArea" class="areaContainerServiceResource">
-	<table class="tblEdit">
+	<table class="tblDefault">
 		<colgroup>
 			<col width="100%"/>
 		</colgroup>
 		<tr>
-			<td class="tdEdit Ct">The leave request has already been approved or rejected.</td>
+			<td class="tdDefault Ct">The leave request has already been approved or rejected.</td>
 		</tr>
 	</table>
 </div>
