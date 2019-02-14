@@ -57,7 +57,7 @@
 <div id="divAdminToolArea"><%@ include file="/com/es/portal/common/include/bodyAdminToolArea.jsp"%></div>
 <div id="divSearchCriteriaArea" class="areaContainer">
 	<table class="tblSearch">
-		<caption>Please select an assignment to filter leave list</caption>
+		<caption>Please select an assignment to filter leave request list</caption>
 		<colgroup>
 			<col width="30%"/>
 			<col width="*"/>
