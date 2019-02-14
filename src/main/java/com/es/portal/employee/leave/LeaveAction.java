@@ -59,4 +59,13 @@ public class LeaveAction extends BaseAction {
 		biz.getLeaveDetail(paramEntity);
 		return "newLeave";
 	}
+
+	public String calculateDuration() throws Exception {
+		try {
+			biz.calculateDuration(paramEntity);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
 }

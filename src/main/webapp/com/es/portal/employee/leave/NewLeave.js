@@ -1,8 +1,7 @@
 /**
  * 
  */
-var spinner;
-
+var delimiter = jsconfig.get("dataDelimiter");
 $(function() {
 	/*!
 	 * event
@@ -48,9 +47,7 @@ $(function() {
 		commonJs.openCalendar(event, "startDate", {
 			statusBar:false,
 			weekNumber:false,
-			adjustX:15,
-			adjustY:-10,
-			positionX:"right"
+			oncloseCallback:calculateDuration
 		});
 	});
 
@@ -58,12 +55,34 @@ $(function() {
 		commonJs.openCalendar(event, "endDate", {
 			statusBar:false,
 			weekNumber:false,
-			adjustX:-1,
-			adjustY:-10,
-			positionX:"left"
+			oncloseCallback:calculateDuration
 		});
 	});
 
+	$("#btnLoadDetail").click(function(event) {
+		var startDate = moment($("#startDate").val(), "DD-MM-YYYY"), endDate = moment($("#endDate").val(), "DD-MM-YYYY");
+		var dateDiff = endDate.diff(startDate, "days")+1;
+
+		commonJs.showProcMessageOnElement("divPopupWindowHolder");
+		$("#ulDetailHolder").html("");
+		setTimeout(function() {
+			for (var i=0; i<dateDiff; i++) {
+				addDetailRows();
+			}
+		}, 200);
+	});
+
+	$(document).keypress(function(event) {
+		var element = event.target;
+		var name = $(element).attr("name");
+
+		if (event.which == 13) {
+		}
+
+		if ($(element).is("#startDate") || $(element).is("#endDate")) {
+			calculateDuration();
+		}
+	});
 	/*!
 	 * process
 	 */
@@ -103,31 +122,18 @@ $(function() {
 		var isValid = true;
 		var startDate = moment($("#startDate").val(), "DD-MM-YYYY");
 		var endDate = moment($("#endDate").val(), "DD-MM-YYYY");
-		var typeCode = $("#type").val(), accrualVal;
+		var duration = $("#duration").val();
 
 		if (endDate.diff(startDate, "days") < 0) {
-			commonJs.error("Date values are invalid.");
+			commonJs.error("Date range is invalid.");
 			isValid = false;
 			return false;
 		}
 
-		if (typeCode == "A" || typeCode == "P") {
-			var duration = $("#duration").val();
-			var balance = 0;
-
-			$("#tblInformBody tr").each(function(rowIndex) {
-				$(this).find("td").each(function(colIndex) {
-					if (colIndex == 2) {
-						balance += commonJs.toNumber($(this).html());
-					}
-				});
-			});
-
-			if (duration > balance) {
-				commonJs.error("Duration value is invalid.");
-				isValid = false;
-				return false;
-			}
+		if (duration < 0) {
+			commonJs.error("Date range is invalid.");
+			isValid = false;
+			return false;
 		}
 
 		return isValid;
@@ -182,9 +188,44 @@ $(function() {
 		}
 
 		$("#tblInformBody").append($(html));
-		setWindowSize(ds.getRowCnt());
+		setWindowSize();
 
 		commonJs.hideProcMessageOnElement("divInformArea");
+	};
+
+	/*!
+	 * Add data grid rows
+	 */
+	addDetailRows = function() {
+		var elem = $("#liDummy").clone(), elemId = $(elem).attr("id");
+
+		$(elem).css("display", "block").appendTo($("#ulDetailHolder"));
+
+		$("#ulDetailHolder").find(".dummyDetail").each(function(groupIndex) {
+			$(this).attr("index", groupIndex).attr("id", elemId+delimiter+groupIndex);
+
+			$(this).find("input, select").each(function(index) {
+				var id = $(this).attr("id"), name = $(this).attr("name");
+
+				if (!commonJs.isEmpty(id)) {id = (id.indexOf(delimiter) != -1) ? id.substring(0, id.indexOf(delimiter)) : id;}
+				else {id = "";}
+
+				if (!commonJs.isEmpty(name)) {name = (name.indexOf(delimiter) != -1) ? name.substring(0, name.indexOf(delimiter)) : name;}
+				else {name = "";}
+
+				$(this).attr("id", id+delimiter+groupIndex).attr("name", name+delimiter+groupIndex);
+
+				if (commonJs.startsWith(name, "hours")) {
+					$(this).bind("focus", function() {$(this).select();});
+					$(this).bind("change", function() {calculateDurationFromDetailList();});
+				}
+
+				$(".numeric").number(true, 1);
+			});
+		});
+		calculateDurationFromDetailList();
+		setGridTable();
+		commonJs.hideProcMessageOnElement("divPopupWindowHolder");
 	};
 
 	setWindowSize = function(rowCnt) {
@@ -195,20 +236,65 @@ $(function() {
 		}
 	};
 
+	setGridTable = function() {
+		$("#tblGrid").fixedHeaderTable({
+			attachTo:$("#divDataArea")
+		});
+	};
+
+	calculateDuration = function() {
+//		var startDate = moment($("#startDate").val(), "DD-MM-YYYY"), endDate = moment($("#endDate").val(), "DD-MM-YYYY");
+//		var dateDiff = endDate.diff(startDate, "days") + 1;
+//		$("#duration").val(dateDiff * 8);
+
+		commonJs.ajaxSubmit({
+			url:"/employee/leave/calculateDuration",
+			dataType:"json",
+			data:{
+				startDate:$("#startDate").val(),
+				endDate:$("#endDate").val()
+			},
+			success:function(data, textStatus) {
+				var result = commonJs.parseAjaxResult(data, textStatus, "json");
+				if (result.isSuccess == true || result.isSuccess == "true") {
+					var ds = result.dataSet;
+					$("#duration").val(ds.getValue(0, "duration"));
+				} else {
+					commonJs.error(result.message);
+				}
+			}
+		});
+	};
+
+	calculateDurationFromDetailList = function() {
+		var totHours = 0;
+
+		$("#ulDetailHolder").find(".dummyDetail").each(function(groupIndex) {
+			$(this).find("input, select").each(function(index) {
+				var name = $(this).attr("name");
+
+				if (commonJs.startsWith(name, "hours")) {
+					totHours += commonJs.toNumber($(this).val());
+				}
+			});
+		});
+		$("#duration").val(totHours);
+	};
+
 	/*!
 	 * load event (document / window)
 	 */
 	$(window).load(function() {
 		commonJs.setFieldDateMask("startDate");
 		commonJs.setFieldDateMask("endDate");
-		spinner = $("#duration").spinner({
-			step:0.5
-		});
+
 		$("#duration").number(true, 1);
 
 		setTimeout(function() {
 			setWindowSize(2);
 			loadAccrual();
 		}, 300);
+
+		calculateDuration();
 	});
 });

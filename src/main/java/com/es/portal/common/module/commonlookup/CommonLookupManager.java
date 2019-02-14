@@ -53,18 +53,18 @@ public class CommonLookupManager extends BaseBiz implements CommonLookupManagerB
 		return str;
 	}
 
-	public static String getLookupCodeByMeaning(String lookupType, String meaning) throws Exception {
+	public static String getLookupConstants(String lookupType, String lookupCode) throws Exception {
 		DataSet ds = getCodeDataSetByLookupType(lookupType);
 		String str = "";
 
 		if (ds != null && ds.getRowCnt() > 0) {
-			str = ds.getValue(ds.getRowIndex("MEANING", meaning), "LOOKUP_CODE");
+			str = ds.getValue(ds.getRowIndex("CONSTANTS", lookupType+"_"+lookupCode), "LOOKUP_CODE");
 		}
 		return str;
 	}
 
 	private static DataSet getConvertedDataSet(String lookupType, DataSet ds) throws Exception {
-		DataSet rtn = new DataSet(new String[] {"LOOKUP_TYPE", "LOOKUP_CODE", "MEANING"});
+		DataSet rtn = new DataSet(new String[] {"LOOKUP_TYPE", "LOOKUP_CODE", "MEANING", "CONSTANTS"});
 
 		if (ds != null && ds.getRowCnt() > 0) {
 			for (int i=0; i<ds.getRowCnt(); i++) {
@@ -72,6 +72,7 @@ public class CommonLookupManager extends BaseBiz implements CommonLookupManagerB
 				rtn.setValue(rtn.getRowCnt()-1, "LOOKUP_TYPE", lookupType);
 				rtn.setValue(rtn.getRowCnt()-1, "LOOKUP_CODE", ds.getValue(i, "code"));
 				rtn.setValue(rtn.getRowCnt()-1, "MEANING", ds.getValue(i, "meaning"));
+				rtn.setValue(rtn.getRowCnt()-1, "CONSTANTS", lookupType+"_"+ds.getValue(i, "code"));
 			}
 		}
 		return rtn;

@@ -372,18 +372,34 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		return CommonUtil.removeString(result, "\"");
 	}
 
+	public DataSet getDateDetail(ParamEntity paramEntity, String startDate, String endDate) throws Exception {
+		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
+		DataSet dateDetail = new DataSet();
+		String serviceUrl = "leave/datedetails/";
+		String result = "";
+
+		queryAdvisor.addVariable("startDate", startDate);
+		queryAdvisor.addVariable("endDate", endDate);
+
+		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
+		paramEntity.setObjectFromJsonString(result);
+		dateDetail = JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("dateDetails"));
+
+		return dateDetail;
+	}
+
 	public String approveRejectLeaveRequest(DataSet requestDataSet) throws Exception {
 		DataSet post = new DataSet();
 		String serviceUrl = "", result = "";
 		String leaveRequestId = requestDataSet.getValue("leaveRequestId");
 		String mode = requestDataSet.getValue("mode");
-		String header[] = new String[] {"leaveId", "approverId", "comments", "approved", "approvRejectIpAddress"};
+		String header[] = new String[] {"leaveRequestId", "approverId", "comments", "approved", "approvRejectIpAddress"};
 
 		serviceUrl = "leave/"+leaveRequestId+"/approve";
 
 		post.addName(header);
 		post.addRow();
-		post.setValue(post.getRowCnt()-1, "leaveId", leaveRequestId);
+		post.setValue(post.getRowCnt()-1, "leaveRequestId", leaveRequestId);
 		post.setValue(post.getRowCnt()-1, "approverId", requestDataSet.getValue("approverId"));
 		post.setValue(post.getRowCnt()-1, "comments", requestDataSet.getValue("approveRejectComments"));
 		post.setValue(post.getRowCnt()-1, "approved", (CommonUtil.equalsIgnoreCase(mode, "approve")) ? "Y" : "N");

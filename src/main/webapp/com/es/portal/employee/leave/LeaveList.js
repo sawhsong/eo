@@ -15,8 +15,8 @@ $(function() {
 				leaveRequestId:"-1"
 			},
 			header:"New Leave",
-			width:860,
-			height:529
+			width:840,
+			height:940
 		});
 	});
 

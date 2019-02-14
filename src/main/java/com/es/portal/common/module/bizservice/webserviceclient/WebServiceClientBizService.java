@@ -37,6 +37,7 @@ public interface WebServiceClientBizService {
 	public DataSet getAccrualListDataSet(ParamEntity paramEntity, String assignmentId) throws Exception;
 	public void getLeaveDetailService(ParamEntity paramEntity, String leaveRequestId) throws Exception;
 	public String postLeaveRequest(String leaveRequestId, DataSet requestDataSet) throws Exception;
+	public DataSet getDateDetail(ParamEntity paramEntity, String startDate, String endDate) throws Exception;
 	public String approveRejectLeaveRequest(DataSet requestDataSet) throws Exception;
 
 	/*

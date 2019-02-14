@@ -1,3 +1,4 @@
+<%@page import="com.es.portal.common.module.commonlookup.CommonLookupManager"%>
 <%/************************************************************************************************
 * Description
 * 
@@ -15,6 +16,7 @@
 	String timeFormat = "HH:mm:ss";
 	String defaultDate = CommonUtil.getSysdate(dateFormat);
 	String defaultDateTime = CommonUtil.getSysdate(dateFormat+" "+timeFormat);
+	String durationUnit = (String)pe.getObject("durationUnit");
 %>
 <%/************************************************************************************************
 * HTML
@@ -31,6 +33,11 @@
 ************************************************************************************************/%>
 <%@ include file="/com/es/portal/shared/page/incCssJs.jsp"%>
 <style type="text/css">
+.thGrid {border-bottom:0px;}
+.tblGrid tr:not(.default):not(.active):not(.info):not(.success):not(.warning):not(.danger):hover td {background:#FFFFFF;}
+#liDummy {display:none;}
+#divDataArea.areaContainerPopup {padding-top:0px;}
+.dummyDetail {list-style:none;}
 </style>
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
@@ -60,7 +67,7 @@ var leaveRequestId = "-1";
 </div>
 <div id="divSearchCriteriaArea"></div>
 <div id="divInformArea" class="areaContainerPopup">
-	<table class="tblInform sort autosort">
+	<table id="tblInform" class="tblInform sort autosort">
 		<caption>Accruals</caption>
 		<colgroup>
 			<col width="*"/>
@@ -97,22 +104,13 @@ var leaveRequestId = "-1";
 		</tbody>
 	</table>
 </div>
-<%/************************************************************************************************
-* End of fixed panel
-************************************************************************************************/%>
-<div class="breaker"></div>
-</div>
-<div id="divScrollablePanelPopup">
-<%/************************************************************************************************
-* Real Contents - scrollable panel(data, paging)
-************************************************************************************************/%>
-<div id="divDataArea" class="areaContainerPopup">
+<div id="divMaster" class="areaContainerPopup">
 	<table class="tblEdit">
 		<colgroup>
-			<col width="18%"/>
-			<col width="32%"/>
-			<col width="18%"/>
-			<col width="32%"/>
+			<col width="15%"/>
+			<col width="40%"/>
+			<col width="15%"/>
+			<col width="30%"/>
 		</colgroup>
 		<tr>
 			<th class="thEdit rt mandatory">Assignment</th>
@@ -128,10 +126,10 @@ var leaveRequestId = "-1";
 %>
 				</ui:select>
 			</td>
-			<th class="thEdit rt">Status</th>
+			<th class="thEdit rt mandatory">Duration</th>
 			<td class="tdEdit">
-				<ui:hidden name="status" value="SU"/>
-				<ui:text name="statusDesc" value="Pending approval" status="display"/>
+				<ui:text name="duration" className="Ct hor" status="disabled" checkName="Leave Duration" options="mandatory" style="width:70px;font-weight:bold;"/>
+				<div class="horGap10" style="padding:6px 8px 6px 0px;font-weight:bold;"><%=durationUnit%></div>
 			</td>
 		</tr>
 		<tr>
@@ -145,35 +143,54 @@ var leaveRequestId = "-1";
 			</td>
 		</tr>
 		<tr>
-			<th class="thEdit rt mandatory">Start Date</th>
-			<td class="tdEdit">
+			<th class="thEdit rt mandatory">Period</th>
+			<td class="tdEdit" colspan="3">
 				<ui:text name="startDate" value="<%=defaultDate%>" className="Ct hor" style="width:100px" checkName="Start Date" options="mandatory" option="date"/>
 				<ui:icon id="icnStartDate" className="fa-calendar hor"/>
-			</td>
-			<th class="thEdit rt mandatory">End Date</th>
-			<td class="tdEdit">
+				<div class="horGap10" style="padding:6px 8px 6px 0px;">-</div>
 				<ui:text name="endDate" value="<%=defaultDate%>" className="Ct hor" style="width:100px" checkName="End Date" options="mandatory" option="date"/>
 				<ui:icon id="icnEndDate" className="fa-calendar hor"/>
-			</td>
-		</tr>
-		<tr>
-			<th class="thEdit rt mandatory">Duration</th>
-			<td class="tdEdit"><ui:text name="duration" status="spinner" checkName="Leave Duration" options="mandatory"/></td>
-			<th class="thEdit rt mandatory">Units</th>
-			<td class="tdEdit">
-				<ui:ccselect codeType="LEAVE_DURATION" name="durationUnits" checkName="Duration Units" options="mandatory"/>
+				<div class="horGap10" style="margin:-1px 0px 0px 0px;">
+					<ui:button id="btnLoadDetail" caption="Load Daily Details" iconClass="fa-list" type="warning"/>
+				</div>
 			</td>
 		</tr>
 		<tr>
 			<th class="thEdit rt">Reason</th>
 			<td class="tdEdit" colspan="3"><ui:txa name="reason" style="height:60px;"/></td>
 		</tr>
-		<tr>
-			<th class="thEdit rt">Submitted Date</th>
-			<td class="tdEdit"><ui:text name="submittedDate" value="<%=defaultDateTime%>" status="display"/></td>
-			<th class="thEdit rt"></th>
-			<td class="tdEdit"></td>
-		</tr>
+	</table>
+</div>
+<%/************************************************************************************************
+* End of fixed panel
+************************************************************************************************/%>
+<div class="breaker"></div>
+</div>
+<div id="divScrollablePanelPopup">
+<%/************************************************************************************************
+* Real Contents - scrollable panel(data, paging)
+************************************************************************************************/%>
+<div id="divDataArea" class="areaContainerPopup">
+	<table id="tblGrid" class="tblGrid">
+		<colgroup>
+			<col width="20%"/>
+			<col width="20%"/>
+			<col width="20%"/>
+			<col width="*"/>
+		</colgroup>
+		<thead>
+			<tr>
+				<th class="thGrid">Date</th>
+				<th class="thGrid">Type</th>
+				<th class="thGrid">Hours</th>
+				<th class="thGrid">Description</th>
+			</tr>
+		</thead>
+		<tbody id="tblGridBody">
+			<tr>
+				<td colspan="4" style="padding:0px;border-top:0px"><ul id="ulDetailHolder"></ul></td>
+			</tr>
+		</tbody>
 	</table>
 </div>
 <div id="divPagingArea"></div>
@@ -185,6 +202,22 @@ var leaveRequestId = "-1";
 <%/************************************************************************************************
 * Additional Elements
 ************************************************************************************************/%>
+<li id="liDummy" class="dummyDetail">
+	<table class="tblGrid" style="border:0px">
+		<colgroup>
+			<col width="20%"/>
+			<col width="20%"/>
+			<col width="20%"/>
+			<col width="*"/>
+		</colgroup>
+		<tr class="noBorderAll">
+			<td class="tdGrid Ct"><ui:text name="date" className="Ct" status="display"/></td>
+			<td class="tdGrid Ct"><ui:text name="dayOfWeek" className="Ct" status="display"/></td>
+			<td class="tdGrid Ct"><ui:text name="hours" value="8" className="Ct numeric"/></td>
+			<td class="tdGrid Lt"><ui:text name="description" className="Lt"/></td>
+		</tr>
+	</table>
+</li>
 </form>
 <%/************************************************************************************************
 * Additional Form

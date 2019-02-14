@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.es.portal.common.extend.BaseBiz;
 import com.es.portal.common.module.bizservice.webserviceclient.WebServiceClientBizService;
+import com.es.portal.common.module.commonlookup.CommonLookupManager;
 
 import net.sf.json.JSONArray;
 import zebra.data.DataSet;
@@ -71,10 +72,8 @@ public class LeaveBizImpl extends BaseBiz implements LeaveBiz {
 			paramEntity.setDataSetValueFromJsonResultset(leaveDetail);
 
 			paramEntity.setObject("assignmentList", assignmentList);
-			paramEntity.setObject("leaveTypeLookup", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("leaveTypeList")));
-			paramEntity.setObject("leaveCategoryLookup", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("leaveCategoryList")));
-			paramEntity.setObject("durationUnitLookup", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("leaveDurationUnitList")));
 			paramEntity.setObject("leaveDetail", leaveDetail);
+			paramEntity.setObject("durationUnit", CommonLookupManager.getLookupMeaning("LEAVE_DURATION", "H"));
 			paramEntity.setObject("accrualList", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("accrualList")));
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
@@ -113,6 +112,23 @@ public class LeaveBizImpl extends BaseBiz implements LeaveBiz {
 
 			paramEntity.setSuccess(true);
 			paramEntity.setMessage("I801", getMessage("I801"));
+		} catch (Exception ex) {
+			throw new FrameworkException(paramEntity, ex);
+		}
+		return paramEntity;
+	}
+
+	public ParamEntity calculateDuration(ParamEntity paramEntity) throws Exception {
+		DataSet dsRequest = paramEntity.getRequestDataSet();
+		DataSet accrualList = new DataSet();
+		String startDate = CommonUtil.removeString(dsRequest.getValue("startDate"), "-");
+		String endDate = CommonUtil.removeString(dsRequest.getValue("endDate"), "-");
+
+		try {
+			accrualList = wsClient.getDateDetail(paramEntity, startDate, endDate);
+
+			paramEntity.setAjaxResponseDataSet(accrualList);
+			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
 		}
