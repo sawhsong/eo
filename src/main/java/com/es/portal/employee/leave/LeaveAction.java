@@ -60,9 +60,9 @@ public class LeaveAction extends BaseAction {
 		return "newLeave";
 	}
 
-	public String calculateDuration() throws Exception {
+	public String getDateDetail() throws Exception {
 		try {
-			biz.calculateDuration(paramEntity);
+			biz.getDateDetail(paramEntity);
 		} catch (Exception ex) {
 		}
 		setRequestAttribute("paramEntity", paramEntity);

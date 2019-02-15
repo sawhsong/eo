@@ -45,31 +45,14 @@ $(function() {
 
 	$("#icnStartDate").click(function(event) {
 		commonJs.openCalendar(event, "startDate", {
-			statusBar:false,
-			weekNumber:false,
-			oncloseCallback:calculateDuration
+			oncloseCallback:loadDateDetail
 		});
 	});
 
 	$("#icnEndDate").click(function(event) {
 		commonJs.openCalendar(event, "endDate", {
-			statusBar:false,
-			weekNumber:false,
-			oncloseCallback:calculateDuration
+			oncloseCallback:loadDateDetail
 		});
-	});
-
-	$("#btnLoadDetail").click(function(event) {
-		var startDate = moment($("#startDate").val(), "DD-MM-YYYY"), endDate = moment($("#endDate").val(), "DD-MM-YYYY");
-		var dateDiff = endDate.diff(startDate, "days")+1;
-
-		commonJs.showProcMessageOnElement("divPopupWindowHolder");
-		$("#ulDetailHolder").html("");
-		setTimeout(function() {
-			for (var i=0; i<dateDiff; i++) {
-				addDetailRows();
-			}
-		}, 200);
 	});
 
 	$(document).keypress(function(event) {
@@ -80,18 +63,52 @@ $(function() {
 		}
 
 		if ($(element).is("#startDate") || $(element).is("#endDate")) {
-			calculateDuration();
+			loadDateDetail();
 		}
 	});
 	/*!
 	 * process
 	 */
+	loadDateDetail = function() {
+		var startDate = moment($("#startDate").val(), "DD-MM-YYYY"), endDate = moment($("#endDate").val(), "DD-MM-YYYY");
+		var dateDiff = endDate.diff(startDate, "days")+1;
+
+		if (dateDiff < 1) {return;}
+
+		commonJs.showProcMessageOnElement("divPopupWindowHolder");
+		$("#ulDetailHolder").html("");
+
+		setTimeout(function() {
+			commonJs.ajaxSubmit({
+				url:"/employee/leave/getDateDetail",
+				dataType:"json",
+				data:{
+					assignmentId:$("#assignment").val(),
+					startDate:$("#startDate").val(),
+					endDate:$("#endDate").val()
+				},
+				success:function(data, textStatus) {
+					var result = commonJs.parseAjaxResult(data, textStatus, "json");
+					if (result.isSuccess == true || result.isSuccess == "true") {
+						var ds = result.dataSet;
+						addDetailRows(ds);
+					} else {
+						commonJs.error(result.message);
+					}
+				}
+			});
+		}, 200);
+	};
+
 	doSave = function() {
+		var detailLength = $("#ulDetailHolder .dummyDetail").length;
+
 		commonJs.ajaxSubmit({
 			url:"/employee/leave/saveLeave",
 			dataType:"json",
 			formId:"fmDefault",
 			data:{
+				detailLength:detailLength,
 				leaveRequestId:leaveRequestId
 			},
 			success:function(data, textStatus) {
@@ -189,17 +206,21 @@ $(function() {
 
 		$("#tblInformBody").append($(html));
 		setWindowSize();
-
+		setGridTable();
 		commonJs.hideProcMessageOnElement("divInformArea");
 	};
 
 	/*!
 	 * Add data grid rows
 	 */
-	addDetailRows = function() {
-		var elem = $("#liDummy").clone(), elemId = $(elem).attr("id");
+	addDetailRows = function(dataSet) {
+		var elem, elemId;
 
-		$(elem).css("display", "block").appendTo($("#ulDetailHolder"));
+		for (var i=0; i<dataSet.getRowCnt(); i++) {
+			elem = $("#liDummy").clone(), elemId = $(elem).attr("id");
+
+			$(elem).css("display", "block").appendTo($("#ulDetailHolder"));
+		}
 
 		$("#ulDetailHolder").find(".dummyDetail").each(function(groupIndex) {
 			$(this).attr("index", groupIndex).attr("id", elemId+delimiter+groupIndex);
@@ -215,6 +236,35 @@ $(function() {
 
 				$(this).attr("id", id+delimiter+groupIndex).attr("name", name+delimiter+groupIndex);
 
+				id = $(this).attr("id");
+
+				if (commonJs.startsWith(id, "date")) {$("#"+id).val(dataSet.getValue(groupIndex, "calendarDate"));}
+				if (commonJs.startsWith(id, "dayOfWeek")) {
+					var type = dataSet.getValue(groupIndex, "dateType");
+					if (type == "PH") {
+						$("#"+id).val(dataSet.getValue(groupIndex, "dateTypeDesc"));
+					} else {
+						$("#"+id).val(dataSet.getValue(groupIndex, "dayName"));
+					}
+				}
+				if (commonJs.startsWith(id, "hours")) {$("#"+id).val(dataSet.getValue(groupIndex, "hours"));}
+				if (commonJs.startsWith(id, "description")) {$("#"+id).val(dataSet.getValue(groupIndex, "description"));}
+
+				var dateType = dataSet.getValue(groupIndex, "dateType");
+				if (dateType == "WE" || dateType == "PH") {
+					if (commonJs.startsWith(id, "date") || commonJs.startsWith(id, "dayOfWeek")) {
+						$("#"+id).css("color", "#f07031");
+					}
+
+					if (commonJs.startsWith(id, "hours") || commonJs.startsWith(id, "description")) {
+						$("#"+id).css("color", "#f07031");
+						$("#"+id).css("background", "#feedeb");
+						$("#"+id).attr("disabled", "diabled");
+						$("#"+id).removeClass("txtEn");
+						$("#"+id).addClass("txtDis");
+					}
+				}
+
 				if (commonJs.startsWith(name, "hours")) {
 					$(this).bind("focus", function() {$(this).select();});
 					$(this).bind("change", function() {calculateDurationFromDetailList();});
@@ -223,6 +273,7 @@ $(function() {
 				$(".numeric").number(true, 1);
 			});
 		});
+
 		calculateDurationFromDetailList();
 		setGridTable();
 		commonJs.hideProcMessageOnElement("divPopupWindowHolder");
@@ -239,30 +290,6 @@ $(function() {
 	setGridTable = function() {
 		$("#tblGrid").fixedHeaderTable({
 			attachTo:$("#divDataArea")
-		});
-	};
-
-	calculateDuration = function() {
-//		var startDate = moment($("#startDate").val(), "DD-MM-YYYY"), endDate = moment($("#endDate").val(), "DD-MM-YYYY");
-//		var dateDiff = endDate.diff(startDate, "days") + 1;
-//		$("#duration").val(dateDiff * 8);
-
-		commonJs.ajaxSubmit({
-			url:"/employee/leave/calculateDuration",
-			dataType:"json",
-			data:{
-				startDate:$("#startDate").val(),
-				endDate:$("#endDate").val()
-			},
-			success:function(data, textStatus) {
-				var result = commonJs.parseAjaxResult(data, textStatus, "json");
-				if (result.isSuccess == true || result.isSuccess == "true") {
-					var ds = result.dataSet;
-					$("#duration").val(ds.getValue(0, "duration"));
-				} else {
-					commonJs.error(result.message);
-				}
-			}
 		});
 	};
 
@@ -291,10 +318,15 @@ $(function() {
 		$("#duration").number(true, 1);
 
 		setTimeout(function() {
-			setWindowSize(2);
 			loadAccrual();
-		}, 300);
+		}, 200);
 
-		calculateDuration();
+		setTimeout(function() {
+			setWindowSize(2);
+		}, 400);
+
+		setTimeout(function() {
+			loadDateDetail();
+		}, 2000);
 	});
 });

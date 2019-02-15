@@ -150,9 +150,6 @@ var leaveRequestId = "-1";
 				<div class="horGap10" style="padding:6px 8px 6px 0px;">-</div>
 				<ui:text name="endDate" value="<%=defaultDate%>" className="Ct hor" style="width:100px" checkName="End Date" options="mandatory" option="date"/>
 				<ui:icon id="icnEndDate" className="fa-calendar hor"/>
-				<div class="horGap10" style="margin:-1px 0px 0px 0px;">
-					<ui:button id="btnLoadDetail" caption="Load Daily Details" iconClass="fa-list" type="warning"/>
-				</div>
 			</td>
 		</tr>
 		<tr>
@@ -212,8 +209,8 @@ var leaveRequestId = "-1";
 		</colgroup>
 		<tr class="noBorderAll">
 			<td class="tdGrid Ct"><ui:text name="date" className="Ct" status="display"/></td>
-			<td class="tdGrid Ct"><ui:text name="dayOfWeek" className="Ct" status="display"/></td>
-			<td class="tdGrid Ct"><ui:text name="hours" value="8" className="Ct numeric"/></td>
+			<td class="tdGrid Ct"><ui:text name="dayOfWeek" className="Lt" status="display"/></td>
+			<td class="tdGrid Ct"><ui:text name="hours" className="Ct numeric"/></td>
 			<td class="tdGrid Lt"><ui:text name="description" className="Lt"/></td>
 		</tr>
 	</table>

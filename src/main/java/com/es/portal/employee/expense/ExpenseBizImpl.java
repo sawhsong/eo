@@ -113,7 +113,7 @@ public class ExpenseBizImpl extends BaseBiz implements ExpenseBiz {
 		String result = "";
 
 		try {
-			result = wsClient.postLeaveRequest(leaveRequestId, dsRequest);
+//			result = wsClient.postLeaveRequest(leaveRequestId, dsRequest);
 
 			if (!CommonUtil.startsWith(result, "2")) {
 				throw new FrameworkException("E801", getMessage("E801", paramEntity));

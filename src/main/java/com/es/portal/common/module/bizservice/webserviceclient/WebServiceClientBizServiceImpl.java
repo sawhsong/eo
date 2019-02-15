@@ -348,36 +348,55 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		paramEntity.setObjectFromJsonString(result);
 	}
 
-	public String postLeaveRequest(String leaveRequestId, DataSet requestDataSet) throws Exception {
-		DataSet post = new DataSet();
+	public String postLeaveRequest(DataSet requestDataSet, DataSet dateDetail) throws Exception {
+		DataSet postM = new DataSet(), postD = new DataSet();
 		String serviceUrl = "", result = "";
-		String header[] = new String[] {"leaveRequestId", "assignmentId", "startDate", "endDate", "leaveType", "leaveCategory", "duration", "durationUnit", "status", "reason"};
+		String delimiter = ConfigUtil.getProperty("delimiter.data");
+		int detailLength = CommonUtil.toInt(requestDataSet.getValue("detailLength"));
+		String leaveRequestId = requestDataSet.getValue("leaveRequestId");
+		String headerM[] = new String[] {"leaveRequestId", "assignmentId", "startDate", "endDate", "leaveType", "leaveCategory", "duration", "durationUnit", "status", "reason", "dateDetails"};
+		String headerD[] = new String[] {"detailId", "leaveRequestId", "leaveDate", "dateType", "hours", "description"};
 
 		serviceUrl = "leave/apply";
 
-		post.addName(header);
-		post.addRow();
-		post.setValue(post.getRowCnt()-1, "leaveRequestId", leaveRequestId);
-		post.setValue(post.getRowCnt()-1, "assignmentId", requestDataSet.getValue("assignment"));
-		post.setValue(post.getRowCnt()-1, "startDate", CommonUtil.replace(requestDataSet.getValue("startDate"), "-", ""));
-		post.setValue(post.getRowCnt()-1, "endDate", CommonUtil.replace(requestDataSet.getValue("endDate"), "-", ""));
-		post.setValue(post.getRowCnt()-1, "leaveType", requestDataSet.getValue("type"));
-		post.setValue(post.getRowCnt()-1, "leaveCategory", requestDataSet.getValue("category"));
-		post.setValue(post.getRowCnt()-1, "duration", requestDataSet.getValue("duration"));
-		post.setValue(post.getRowCnt()-1, "durationUnit", requestDataSet.getValue("durationUnits"));
-		post.setValue(post.getRowCnt()-1, "status", "SU");
-		post.setValue(post.getRowCnt()-1, "reason", requestDataSet.getValue("reason"));
+		postM.addName(headerM);
+		postM.addRow();
+		postM.setValue(postM.getRowCnt()-1, "leaveRequestId", leaveRequestId);
+		postM.setValue(postM.getRowCnt()-1, "assignmentId", requestDataSet.getValue("assignment"));
+		postM.setValue(postM.getRowCnt()-1, "startDate", CommonUtil.replace(requestDataSet.getValue("startDate"), "-", ""));
+		postM.setValue(postM.getRowCnt()-1, "endDate", CommonUtil.replace(requestDataSet.getValue("endDate"), "-", ""));
+		postM.setValue(postM.getRowCnt()-1, "leaveType", requestDataSet.getValue("type"));
+		postM.setValue(postM.getRowCnt()-1, "leaveCategory", requestDataSet.getValue("category"));
+		postM.setValue(postM.getRowCnt()-1, "duration", requestDataSet.getValue("duration"));
+		postM.setValue(postM.getRowCnt()-1, "durationUnit", CommonUtil.nvl(requestDataSet.getValue("durationUnits"), "H"));
+		postM.setValue(postM.getRowCnt()-1, "status", "SU");
+		postM.setValue(postM.getRowCnt()-1, "reason", requestDataSet.getValue("reason"));
 
-		result = RestServiceSupport.post(providerUrl, serviceUrl, acceptTypeHeader, post);
+		postD.addName(headerD);
+		for (int i=0; i<detailLength; i++) {
+			postD.addRow();
+
+			postD.setValue(postD.getRowCnt()-1, "detailId", "-1");
+			postD.setValue(postD.getRowCnt()-1, "leaveRequestId", leaveRequestId);
+			postD.setValue(postD.getRowCnt()-1, "leaveDate", CommonUtil.replace(requestDataSet.getValue("date"+delimiter+i), "-", ""));
+			postD.setValue(postD.getRowCnt()-1, "dateType", "WD");
+			postD.setValue(postD.getRowCnt()-1, "hours", requestDataSet.getValue("hours"+delimiter+i));
+			postD.setValue(postD.getRowCnt()-1, "description", requestDataSet.getValue("description"+delimiter+i));
+		}
+
+		postM.setValue(postM.getRowCnt()-1, "dateDetails", "["+postD.toJsonStringForEO()+"]");
+
+		result = RestServiceSupport.post(providerUrl, serviceUrl, acceptTypeHeader, postM);
 		return CommonUtil.removeString(result, "\"");
 	}
 
-	public DataSet getDateDetail(ParamEntity paramEntity, String startDate, String endDate) throws Exception {
+	public DataSet getDateDetail(ParamEntity paramEntity, String assignmentId, String startDate, String endDate) throws Exception {
 		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
 		DataSet dateDetail = new DataSet();
 		String serviceUrl = "leave/datedetails/";
 		String result = "";
 
+		queryAdvisor.addVariable("assignmentId", assignmentId);
 		queryAdvisor.addVariable("startDate", startDate);
 		queryAdvisor.addVariable("endDate", endDate);
 
