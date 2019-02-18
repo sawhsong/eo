@@ -16,7 +16,7 @@ $(function() {
 			},
 			header:"New Leave",
 			width:840,
-			height:940
+			height:800
 		});
 	});
 
