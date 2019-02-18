@@ -16,7 +16,7 @@ $(function() {
 			},
 			header:"New Leave",
 			width:840,
-			height:800
+			height:880
 		});
 	});
 
@@ -107,8 +107,8 @@ $(function() {
 				leaveRequestId:leaveRequestId
 			},
 			header:"Leave Detail",
-			width:860,
-			height:529
+			width:840,
+			height:880
 		});
 	};
 

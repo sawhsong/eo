@@ -61,20 +61,21 @@ public class LeaveBizImpl extends BaseBiz implements LeaveBiz {
 		String leaveRequestId = dsRequest.getValue("leaveRequestId");
 		String header[] = new String[] {"leaveRequestId", "assignmentId", "assignmentNumber", "assignmentName", "leaveType", "leaveTypeDesc", "leaveCategory", "leaveCategoryDesc",
 				"startDate", "endDate", "duration", "durationUnit", "durationUnitDesc", "reason", "status", "statusDesc", "submittedDate", "approveRejectDate",
-				"approveRejectPersonFullName", "approveRejectComments"};
+				"approveRejectPersonId", "approveRejectPersonFullName", "approveRejectComments"};
 
 		try {
 			leaveDetail.addName(header);
 
 			assignmentList = wsClient.getLeaveAssignmentListDataSet(paramEntity, personId);
 
-			wsClient.getLeaveDetailService(paramEntity, leaveRequestId);
+			wsClient.getLeaveDetail(paramEntity, leaveRequestId);
 			paramEntity.setDataSetValueFromJsonResultset(leaveDetail);
 
 			paramEntity.setObject("assignmentList", assignmentList);
 			paramEntity.setObject("leaveDetail", leaveDetail);
 			paramEntity.setObject("durationUnit", CommonLookupManager.getLookupMeaning("LEAVE_DURATION", "H"));
 			paramEntity.setObject("accrualList", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("accrualList")));
+			paramEntity.setObject("dateDetails", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("dateDetails")));
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
@@ -100,16 +101,10 @@ public class LeaveBizImpl extends BaseBiz implements LeaveBiz {
 
 	public ParamEntity saveLeave(ParamEntity paramEntity) throws Exception {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
-		DataSet dateDetail = new DataSet();
-		String assignmentId = dsRequest.getValue("assignmentId");
-		String startDate = CommonUtil.removeString(dsRequest.getValue("startDate"), "-");
-		String endDate = CommonUtil.removeString(dsRequest.getValue("endDate"), "-");
 		String result = "";
 
 		try {
-			dateDetail = wsClient.getDateDetail(paramEntity, assignmentId, startDate, endDate);
-
-			result = wsClient.postLeaveRequest(dsRequest, dateDetail);
+			result = wsClient.postLeaveRequest(dsRequest);
 
 			if (!CommonUtil.startsWith(result, "2")) {
 				throw new FrameworkException("E801", getMessage("E801", paramEntity));
@@ -126,12 +121,13 @@ public class LeaveBizImpl extends BaseBiz implements LeaveBiz {
 	public ParamEntity getDateDetail(ParamEntity paramEntity) throws Exception {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		DataSet dateDetail = new DataSet();
+		String leaveRequestId = dsRequest.getValue("leaveRequestId");
 		String assignmentId = dsRequest.getValue("assignmentId");
 		String startDate = CommonUtil.removeString(dsRequest.getValue("startDate"), "-");
 		String endDate = CommonUtil.removeString(dsRequest.getValue("endDate"), "-");
 
 		try {
-			dateDetail = wsClient.getDateDetail(paramEntity, assignmentId, startDate, endDate);
+			dateDetail = wsClient.getDateDetail(paramEntity, leaveRequestId, assignmentId, startDate, endDate);
 
 			paramEntity.setAjaxResponseDataSet(dateDetail);
 			paramEntity.setSuccess(true);

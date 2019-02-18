@@ -339,7 +339,7 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		return accrualList;
 	}
 
-	public void getLeaveDetailService(ParamEntity paramEntity, String leaveRequestId) throws Exception {
+	public void getLeaveDetail(ParamEntity paramEntity, String leaveRequestId) throws Exception {
 		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
 		String serviceUrl = "leave/"+leaveRequestId+"/details";
 		String result = "";
@@ -348,7 +348,7 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		paramEntity.setObjectFromJsonString(result);
 	}
 
-	public String postLeaveRequest(DataSet requestDataSet, DataSet dateDetail) throws Exception {
+	public String postLeaveRequest(DataSet requestDataSet) throws Exception {
 		DataSet postM = new DataSet(), postD = new DataSet();
 		String serviceUrl = "", result = "";
 		String delimiter = ConfigUtil.getProperty("delimiter.data");
@@ -363,8 +363,8 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		postM.addRow();
 		postM.setValue(postM.getRowCnt()-1, "leaveRequestId", leaveRequestId);
 		postM.setValue(postM.getRowCnt()-1, "assignmentId", requestDataSet.getValue("assignment"));
-		postM.setValue(postM.getRowCnt()-1, "startDate", CommonUtil.replace(requestDataSet.getValue("startDate"), "-", ""));
-		postM.setValue(postM.getRowCnt()-1, "endDate", CommonUtil.replace(requestDataSet.getValue("endDate"), "-", ""));
+		postM.setValue(postM.getRowCnt()-1, "startDate", CommonUtil.removeString(requestDataSet.getValue("startDate"), "-"));
+		postM.setValue(postM.getRowCnt()-1, "endDate", CommonUtil.removeString(requestDataSet.getValue("endDate"), "-"));
 		postM.setValue(postM.getRowCnt()-1, "leaveType", requestDataSet.getValue("type"));
 		postM.setValue(postM.getRowCnt()-1, "leaveCategory", requestDataSet.getValue("category"));
 		postM.setValue(postM.getRowCnt()-1, "duration", requestDataSet.getValue("duration"));
@@ -376,10 +376,9 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		for (int i=0; i<detailLength; i++) {
 			postD.addRow();
 
-			postD.setValue(postD.getRowCnt()-1, "detailId", "-1");
 			postD.setValue(postD.getRowCnt()-1, "leaveRequestId", leaveRequestId);
-			postD.setValue(postD.getRowCnt()-1, "leaveDate", CommonUtil.replace(requestDataSet.getValue("date"+delimiter+i), "-", ""));
-			postD.setValue(postD.getRowCnt()-1, "dateType", "WD");
+			postD.setValue(postD.getRowCnt()-1, "leaveDate", CommonUtil.removeString(requestDataSet.getValue("date"+delimiter+i), "-"));
+			postD.setValue(postD.getRowCnt()-1, "dateType", requestDataSet.getValue("dateType"+delimiter+i));
 			postD.setValue(postD.getRowCnt()-1, "hours", requestDataSet.getValue("hours"+delimiter+i));
 			postD.setValue(postD.getRowCnt()-1, "description", requestDataSet.getValue("description"+delimiter+i));
 		}
@@ -390,12 +389,13 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		return CommonUtil.removeString(result, "\"");
 	}
 
-	public DataSet getDateDetail(ParamEntity paramEntity, String assignmentId, String startDate, String endDate) throws Exception {
+	public DataSet getDateDetail(ParamEntity paramEntity, String leaveRequestId, String assignmentId, String startDate, String endDate) throws Exception {
 		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
 		DataSet dateDetail = new DataSet();
 		String serviceUrl = "leave/datedetails/";
 		String result = "";
 
+		queryAdvisor.addVariable("leaveRequestId", leaveRequestId);
 		queryAdvisor.addVariable("assignmentId", assignmentId);
 		queryAdvisor.addVariable("startDate", startDate);
 		queryAdvisor.addVariable("endDate", endDate);

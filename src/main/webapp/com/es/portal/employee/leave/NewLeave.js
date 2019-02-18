@@ -83,6 +83,7 @@ $(function() {
 				url:"/employee/leave/getDateDetail",
 				dataType:"json",
 				data:{
+					leaveRequestId:leaveRequestId,
 					assignmentId:$("#assignment").val(),
 					startDate:$("#startDate").val(),
 					endDate:$("#endDate").val()
@@ -227,6 +228,7 @@ $(function() {
 
 			$(this).find("input, select").each(function(index) {
 				var id = $(this).attr("id"), name = $(this).attr("name");
+				var dateType = "";
 
 				if (!commonJs.isEmpty(id)) {id = (id.indexOf(delimiter) != -1) ? id.substring(0, id.indexOf(delimiter)) : id;}
 				else {id = "";}
@@ -238,10 +240,12 @@ $(function() {
 
 				id = $(this).attr("id");
 
+				dateType = dataSet.getValue(groupIndex, "dateType");
+
 				if (commonJs.startsWith(id, "date")) {$("#"+id).val(dataSet.getValue(groupIndex, "calendarDate"));}
+				if (commonJs.startsWith(id, "dateType")) {$("#"+id).val(dataSet.getValue(groupIndex, "dateType"));}
 				if (commonJs.startsWith(id, "dayOfWeek")) {
-					var type = dataSet.getValue(groupIndex, "dateType");
-					if (type == "PH") {
+					if (dateType == "PH") {
 						$("#"+id).val(dataSet.getValue(groupIndex, "dateTypeDesc"));
 					} else {
 						$("#"+id).val(dataSet.getValue(groupIndex, "dayName"));
@@ -250,7 +254,6 @@ $(function() {
 				if (commonJs.startsWith(id, "hours")) {$("#"+id).val(dataSet.getValue(groupIndex, "hours"));}
 				if (commonJs.startsWith(id, "description")) {$("#"+id).val(dataSet.getValue(groupIndex, "description"));}
 
-				var dateType = dataSet.getValue(groupIndex, "dateType");
 				if (dateType == "WE" || dateType == "PH") {
 					if (commonJs.startsWith(id, "date") || commonJs.startsWith(id, "dayOfWeek")) {
 						$("#"+id).css("color", "#f07031");

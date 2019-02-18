@@ -208,7 +208,10 @@ var leaveRequestId = "-1";
 			<col width="*"/>
 		</colgroup>
 		<tr class="noBorderAll">
-			<td class="tdGrid Ct"><ui:text name="date" className="Ct" status="display"/></td>
+			<td class="tdGrid Ct">
+				<ui:text name="date" className="Ct" status="display"/>
+				<ui:hidden name="dateType"/>
+			</td>
 			<td class="tdGrid Ct"><ui:text name="dayOfWeek" className="Lt" status="display"/></td>
 			<td class="tdGrid Ct"><ui:text name="hours" className="Ct numeric"/></td>
 			<td class="tdGrid Lt"><ui:text name="description" className="Lt"/></td>

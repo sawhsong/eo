@@ -35,9 +35,9 @@ public interface WebServiceClientBizService {
 	public DataSet getLeaveAssignmentListDataSet(ParamEntity paramEntity, String personId) throws Exception;
 	public DataSet getLeaveListDataSet(ParamEntity paramEntity, String personId, String assignmentId) throws Exception;
 	public DataSet getAccrualListDataSet(ParamEntity paramEntity, String assignmentId) throws Exception;
-	public void getLeaveDetailService(ParamEntity paramEntity, String leaveRequestId) throws Exception;
-	public String postLeaveRequest(DataSet requestDataSet, DataSet dateDetail) throws Exception;
-	public DataSet getDateDetail(ParamEntity paramEntity, String assignmentId, String startDate, String endDate) throws Exception;
+	public void getLeaveDetail(ParamEntity paramEntity, String leaveRequestId) throws Exception;
+	public String postLeaveRequest(DataSet requestDataSet) throws Exception;
+	public DataSet getDateDetail(ParamEntity paramEntity, String leaveRequestId, String assignmentId, String startDate, String endDate) throws Exception;
 	public String approveRejectLeaveRequest(DataSet requestDataSet) throws Exception;
 
 	/*
