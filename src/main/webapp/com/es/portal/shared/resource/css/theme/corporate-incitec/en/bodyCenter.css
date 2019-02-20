@@ -22,7 +22,7 @@
 /* Each 'Area' in Body Center must set this class('areaContainer') when it has its contents */
 .areaContainer {padding:4px 8px 2px 8px;}
 .areaContainerPopup {padding:4px 5px 2px 5px;}
-.areaContainerServiceResource {padding:10px 150px 10px 150px;}
+.areaContainerServiceResource {padding:5px 150px 5px 150px;}
 
 /**
  * Layout

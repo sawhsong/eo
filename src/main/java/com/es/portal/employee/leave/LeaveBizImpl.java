@@ -123,8 +123,8 @@ public class LeaveBizImpl extends BaseBiz implements LeaveBiz {
 		DataSet dateDetail = new DataSet();
 		String leaveRequestId = dsRequest.getValue("leaveRequestId");
 		String assignmentId = dsRequest.getValue("assignmentId");
-		String startDate = CommonUtil.removeString(dsRequest.getValue("startDate"), "-");
-		String endDate = CommonUtil.removeString(dsRequest.getValue("endDate"), "-");
+		String startDate = CommonUtil.removeString(dsRequest.getValue("startDate"), "-", "/");
+		String endDate = CommonUtil.removeString(dsRequest.getValue("endDate"), "-", "/");
 
 		try {
 			dateDetail = wsClient.getDateDetail(paramEntity, leaveRequestId, assignmentId, startDate, endDate);

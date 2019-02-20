@@ -28,10 +28,16 @@
 ************************************************************************************************/%>
 <%@ include file="/com/es/portal/shared/page/incCssJs.jsp"%>
 <style type="text/css">
+.thGrid {border-bottom:0px;}
+.tblGrid tr:not(.default):not(.active):not(.info):not(.success):not(.warning):not(.danger):hover td {background:#FFFFFF;}
+#liDummy {display:none;}
+#divDataArea.areaContainerPopup {padding-top:0px;}
+.dummyDetail {list-style:none;}
 </style>
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
 var leaveRequestId = "<%=leaveDetail.getValue("leaveRequestId")%>";
+var assignmentId = "<%=leaveDetail.getValue("assignmentId")%>";
 var accrualListCnt = <%=accrualList.getRowCnt()%>;
 var mode = "<%=dsRequest.getValue("mode")%>";
 </script>
@@ -79,7 +85,7 @@ var mode = "<%=dsRequest.getValue("mode")%>";
 				<th class="thInform Ct">Balance</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="tblInformBody">
 <%
 		if (accrualList != null && accrualList.getRowCnt() > 0) {
 			for (int i=0; i<accrualList.getRowCnt(); i++) {
@@ -102,6 +108,55 @@ var mode = "<%=dsRequest.getValue("mode")%>";
 		</tbody>
 	</table>
 </div>
+<div id="divMaster" class="areaContainerPopup">
+	<table class="tblEdit">
+		<colgroup>
+			<col width="15%"/>
+			<col width="40%"/>
+			<col width="15%"/>
+			<col width="30%"/>
+		</colgroup>
+		<tr>
+			<th class="thEdit rt">Assignment</th>
+			<td class="tdEdit"><ui:text name="assignment" value="<%=leaveDetail.getValue(\"assignmentName\")%>" status="display"/></td>
+			<th class="thEdit rt">Duration</th>
+			<td class="tdEdit">
+				<ui:text name="duration" className="Lt hor" value="<%=leaveDetail.getValue(\"duration\")%>" style="width:50px;font-weight:bold;" status="display"/>
+				<ui:text name="durationUnits" className="Lt hor" value="<%=leaveDetail.getValue(\"durationUnitDesc\")%>" style="width:50px;font-weight:bold;" status="display"/>
+			</td>
+		</tr>
+		<tr>
+			<th class="thEdit rt">Type</th>
+			<td class="tdEdit"><ui:text name="type" value="<%=leaveDetail.getValue(\"leaveTypeDesc\")%>" status="display"/></td>
+			<th class="thEdit rt">Category</th>
+			<td class="tdEdit"><ui:text name="category" value="<%=leaveDetail.getValue(\"leaveCategoryDesc\")%>" status="display"/></td>
+		</tr>
+		<tr>
+			<th class="thEdit rt">Period</th>
+			<td class="tdEdit">
+				<ui:text name="startDate" className="Lt hor" value="<%=leaveDetail.getValue(\"startDate\")%>" style="width:78px" status="display"/>
+				<div class="horGap10" style="padding:6px 8px 6px 0px;">-</div>
+				<ui:text name="endDate" className="Lt hor" value="<%=leaveDetail.getValue(\"endDate\")%>" style="width:78px" status="display"/>
+			</td>
+			<th class="thEdit rt">Status</th>
+			<td class="tdEdit"><ui:text name="status" value="<%=leaveDetail.getValue(\"statusDesc\")%>" status="display"/></td>
+		</tr>
+		<tr>
+			<th class="thEdit rt">Reason</th>
+			<td class="tdEdit" colspan="3"><ui:txa name="reason" value="<%=leaveDetail.getValue(\"reason\")%>" status="display" style="height:40px;"/></td>
+		</tr>
+		<tr>
+			<th class="thEdit rt">Submitted Date</th>
+			<td class="tdEdit"><ui:text name="submittedDate" value="<%=leaveDetail.getValue(\"submittedDate\")%>" status="display"/></td>
+			<th class="thEdit rt">Approver</th>
+			<td class="tdEdit"><ui:text name="approver" value="<%=leaveDetail.getValue(\"approveRejectPersonFullName\")%>" status="display"/></td>
+		</tr>
+		<tr>
+			<th class="thEdit rt">Rejected Reason</th>
+			<td class="tdEdit" colspan="3"><ui:txa name="approveRejectComments" value="<%=leaveDetail.getValue(\"approveRejectComments\")%>" status="display" style="height:40px;"/></td>
+		</tr>
+	</table>
+</div>
 <%/************************************************************************************************
 * End of fixed panel
 ************************************************************************************************/%>
@@ -112,51 +167,26 @@ var mode = "<%=dsRequest.getValue("mode")%>";
 * Real Contents - scrollable panel(data, paging)
 ************************************************************************************************/%>
 <div id="divDataArea" class="areaContainerPopup">
-	<table class="tblEdit">
+	<table id="tblGrid" class="tblGrid">
 		<colgroup>
-			<col width="18%"/>
-			<col width="32%"/>
-			<col width="18%"/>
-			<col width="32%"/>
+			<col width="20%"/>
+			<col width="20%"/>
+			<col width="20%"/>
+			<col width="*"/>
 		</colgroup>
-		<tr>
-			<th class="thEdit rt">Assignment Name</th>
-			<td class="tdEdit"><ui:text name="assignmentName" value="<%=leaveDetail.getValue(\"assignmentName\")%>" status="display"/></td>
-			<th class="thEdit rt">Status</th>
-			<td class="tdEdit"><ui:text name="status" value="<%=leaveDetail.getValue(\"statusDesc\")%>" status="display"/></td>
-		</tr>
-		<tr>
-			<th class="thEdit rt">Type</th>
-			<td class="tdEdit"><ui:text name="type" value="<%=leaveDetail.getValue(\"leaveTypeDesc\")%>" status="display"/></td>
-			<th class="thEdit rt">Category</th>
-			<td class="tdEdit"><ui:text name="category" value="<%=leaveDetail.getValue(\"leaveCategoryDesc\")%>" status="display"/></td>
-		</tr>
-		<tr>
-			<th class="thEdit rt">Start Date</th>
-			<td class="tdEdit"><ui:text name="startDate" value="<%=leaveDetail.getValue(\"startDate\")%>" status="display"/></td>
-			<th class="thEdit rt">End Date</th>
-			<td class="tdEdit"><ui:text name="endDate" value="<%=leaveDetail.getValue(\"endDate\")%>" status="display"/></td>
-		</tr>
-		<tr>
-			<th class="thEdit rt">Duration</th>
-			<td class="tdEdit"><ui:text name="duration" value="<%=leaveDetail.getValue(\"duration\")%>" status="display"/></td>
-			<th class="thEdit rt">Units</th>
-			<td class="tdEdit"><ui:text name="durationUnits" value="<%=leaveDetail.getValue(\"durationUnitDesc\")%>" status="display"/></td>
-		</tr>
-		<tr>
-			<th class="thEdit rt">Reason</th>
-			<td class="tdEdit" colspan="3"><ui:txa name="reason" value="<%=leaveDetail.getValue(\"reason\")%>" status="display" style="height:60px;"/></td>
-		</tr>
-		<tr>
-			<th class="thEdit rt">Submitted Date</th>
-			<td class="tdEdit"><ui:text name="submittedDate" value="<%=leaveDetail.getValue(\"submittedDate\")%>" status="display"/></td>
-			<th class="thEdit rt">Approver</th>
-			<td class="tdEdit"><ui:text name="approver" value="<%=leaveDetail.getValue(\"approveRejectPersonFullName\")%>" status="display"/></td>
-		</tr>
-		<tr>
-			<th class="thEdit rt">Rejected Reason</th>
-			<td class="tdEdit" colspan="3"><ui:txa name="approveRejectComments" value="<%=leaveDetail.getValue(\"approveRejectComments\")%>" status="display" style="height:60px;"/></td>
-		</tr>
+		<thead>
+			<tr>
+				<th class="thGrid">Date</th>
+				<th class="thGrid">Type</th>
+				<th class="thGrid">Hours</th>
+				<th class="thGrid">Description</th>
+			</tr>
+		</thead>
+		<tbody id="tblGridBody">
+			<tr>
+				<td colspan="4" style="padding:0px;border-top:0px"><ul id="ulDetailHolder"></ul></td>
+			</tr>
+		</tbody>
 	</table>
 </div>
 <div id="divPagingArea"></div>
@@ -168,6 +198,25 @@ var mode = "<%=dsRequest.getValue("mode")%>";
 <%/************************************************************************************************
 * Additional Elements
 ************************************************************************************************/%>
+<li id="liDummy" class="dummyDetail">
+	<table class="tblGrid" style="border:0px">
+		<colgroup>
+			<col width="20%"/>
+			<col width="20%"/>
+			<col width="20%"/>
+			<col width="*"/>
+		</colgroup>
+		<tr class="noBorderAll">
+			<td class="tdGrid Ct">
+				<ui:text name="date" className="Ct" status="display"/>
+				<ui:hidden name="dateType"/>
+			</td>
+			<td class="tdGrid Ct"><ui:text name="dayOfWeek" className="Lt" status="display"/></td>
+			<td class="tdGrid Ct"><ui:text name="hours" className="Ct numeric" status="display"/></td>
+			<td class="tdGrid Lt"><ui:text name="description" className="Lt" status="display"/></td>
+		</tr>
+	</table>
+</li>
 </form>
 <%/************************************************************************************************
 * Additional Form

@@ -13,4 +13,5 @@ public interface ServiceResourceBiz {
 	 */
 	public ParamEntity approveLeave(ParamEntity paramEntity) throws Exception;
 	public ParamEntity approveRejectLeaveRequest(ParamEntity paramEntity) throws Exception;
+	public ParamEntity getDateDetail(ParamEntity paramEntity) throws Exception;
 }

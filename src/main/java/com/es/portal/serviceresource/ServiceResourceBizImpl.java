@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.es.portal.common.extend.BaseBiz;
 import com.es.portal.common.module.bizservice.webserviceclient.WebServiceClientBizService;
+import com.es.portal.common.module.commonlookup.CommonLookupManager;
 
 import net.sf.json.JSONArray;
 import zebra.data.DataSet;
@@ -54,13 +55,15 @@ public class ServiceResourceBizImpl extends BaseBiz implements ServiceResourceBi
 
 			leaveDetail.addName(header);
 
-			wsClient.getLeaveDetailService(paramEntity, leaveRequestId);
+			wsClient.getLeaveDetail(paramEntity, leaveRequestId);
 
 			paramEntity.setDataSetValueFromJsonResultset(leaveDetail);
 			leaveDetail.setValue("approveRejectPersonId", approverId);
 
 			paramEntity.setObject("leaveDetail", leaveDetail);
+			paramEntity.setObject("durationUnit", CommonLookupManager.getLookupMeaning("LEAVE_DURATION", "H"));
 			paramEntity.setObject("accrualList", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("accrualList")));
+			paramEntity.setObject("dateDetails", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("dateDetails")));
 			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
@@ -83,6 +86,25 @@ public class ServiceResourceBizImpl extends BaseBiz implements ServiceResourceBi
 
 			paramEntity.setSuccess(true);
 			paramEntity.setMessage("I801", getMessage("I801"));
+		} catch (Exception ex) {
+			throw new FrameworkException(paramEntity, ex);
+		}
+		return paramEntity;
+	}
+
+	public ParamEntity getDateDetail(ParamEntity paramEntity) throws Exception {
+		DataSet dsRequest = paramEntity.getRequestDataSet();
+		DataSet dateDetail = new DataSet();
+		String leaveRequestId = dsRequest.getValue("leaveRequestId");
+		String assignmentId = dsRequest.getValue("assignmentId");
+		String startDate = CommonUtil.removeString(dsRequest.getValue("startDate"), "-", "/");
+		String endDate = CommonUtil.removeString(dsRequest.getValue("endDate"), "-", "/");
+
+		try {
+			dateDetail = wsClient.getDateDetail(paramEntity, leaveRequestId, assignmentId, startDate, endDate);
+
+			paramEntity.setAjaxResponseDataSet(dateDetail);
+			paramEntity.setSuccess(true);
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
 		}

@@ -11,9 +11,7 @@
 	DataSet assignmentList = (DataSet)pe.getObject("assignmentList");
 	DataSet leaveDetail = (DataSet)pe.getObject("leaveDetail");
 	DataSet accrualList = (DataSet)pe.getObject("accrualList");
-	DataSet typeLookup = (DataSet)pe.getObject("leaveTypeLookup");
-	DataSet categoryLookup = (DataSet)pe.getObject("leaveCategoryLookup");
-	DataSet durationUnitLookup = (DataSet)pe.getObject("durationUnitLookup");
+	String durationUnit = (String)pe.getObject("durationUnit");
 %>
 <%/************************************************************************************************
 * HTML
@@ -30,6 +28,11 @@
 ************************************************************************************************/%>
 <%@ include file="/com/es/portal/shared/page/incCssJs.jsp"%>
 <style type="text/css">
+.thGrid {border-bottom:0px;}
+.tblGrid tr:not(.default):not(.active):not(.info):not(.success):not(.warning):not(.danger):hover td {background:#FFFFFF;}
+#liDummy {display:none;}
+#divDataArea.areaContainerPopup {padding-top:0px;}
+.dummyDetail {list-style:none;}
 </style>
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
@@ -74,44 +77,17 @@ var leaveRequestId = "<%=leaveDetail.getValue("leaveRequestId")%>";
 			</tr>
 		</thead>
 		<tbody id="tblInformBody">
-<%
-		if (accrualList != null && accrualList.getRowCnt() > 0) {
-			for (int i=0; i<accrualList.getRowCnt(); i++) {
-%>
-			<tr>
-				<td class="tdInform Lt"><%=accrualList.getValue(i, "displayName")%></td>
-				<td class="tdInform Rt"><%=CommonUtil.getNumberMask(accrualList.getValue(i, "noOfHours"), "#,##0.00")%></td>
-				<td class="tdInform Rt"><%=CommonUtil.getNumberMask(accrualList.getValue(i, "balance"), "#,##0.00")%></td>
-			</tr>
-<%
-			}
-		} else {
-%>
-			<tr>
-				<td class="tdInform Ct" colspan="3"><mc:msg key="I001"/></td>
-			</tr>
-<%
-		}
-%>
+
 		</tbody>
 	</table>
 </div>
-<%/************************************************************************************************
-* End of fixed panel
-************************************************************************************************/%>
-<div class="breaker"></div>
-</div>
-<div id="divScrollablePanelPopup">
-<%/************************************************************************************************
-* Real Contents - scrollable panel(data, paging)
-************************************************************************************************/%>
-<div id="divDataArea" class="areaContainerPopup">
+<div id="divMaster" class="areaContainerPopup">
 	<table class="tblEdit">
 		<colgroup>
-			<col width="16%"/>
-			<col width="36%"/>
 			<col width="15%"/>
-			<col width="33%"/>
+			<col width="40%"/>
+			<col width="15%"/>
+			<col width="30%"/>
 		</colgroup>
 		<tr>
 			<th class="thEdit rt mandatory">Assignment</th>
@@ -127,6 +103,31 @@ var leaveRequestId = "<%=leaveDetail.getValue("leaveRequestId")%>";
 %>
 				</ui:select>
 			</td>
+			<th class="thEdit rt mandatory">Duration</th>
+			<td class="tdEdit">
+				<ui:text name="duration" value="<%=leaveDetail.getValue(\"duration\")%>" className="Ct hor" status="disabled" checkName="Leave Duration" options="mandatory" style="width:70px;font-weight:bold;"/>
+				<div class="horGap10" style="padding:6px 8px 6px 0px;font-weight:bold;"><%=durationUnit%></div>
+			</td>
+		</tr>
+		<tr>
+			<th class="thEdit rt mandatory">Type</th>
+			<td class="tdEdit">
+				<ui:ccselect codeType="LEAVE_TYPE" name="type" selectedValue="<%=leaveDetail.getValue(\"leaveType\")%>" checkName="Leave Type" options="mandatory"/>
+			</td>
+			<th class="thEdit rt mandatory">Category</th>
+			<td class="tdEdit">
+				<ui:ccselect codeType="LEAVE_CATEGORY" name="category" selectedValue="<%=leaveDetail.getValue(\"leaveCategory\")%>" checkName="Leave Category" options="mandatory"/>
+			</td>
+		</tr>
+		<tr>
+			<th class="thEdit rt mandatory">Period</th>
+			<td class="tdEdit">
+				<ui:text name="startDate" value="<%=leaveDetail.getValue(\"startDate\")%>" className="Ct hor" style="width:100px" checkName="Start Date" options="mandatory" option="date"/>
+				<ui:icon id="icnStartDate" className="fa-calendar hor"/>
+				<div class="horGap10" style="padding:6px 8px 6px 0px;">-</div>
+				<ui:text name="endDate" value="<%=leaveDetail.getValue(\"endDate\")%>" className="Ct hor" style="width:100px" checkName="End Date" options="mandatory" option="date"/>
+				<ui:icon id="icnEndDate" className="fa-calendar hor"/>
+			</td>
 			<th class="thEdit rt">Status</th>
 			<td class="tdEdit">
 				<ui:hidden name="status" value="<%=leaveDetail.getValue(\"status\")%>"/>
@@ -134,65 +135,8 @@ var leaveRequestId = "<%=leaveDetail.getValue("leaveRequestId")%>";
 			</td>
 		</tr>
 		<tr>
-			<th class="thEdit rt mandatory">Type</th>
-			<td class="tdEdit">
-				<ui:select name="type" checkName="Leave Type" options="mandatory">
-<%
-				for (int i=0; i<typeLookup.getRowCnt(); i++) {
-					String selected = CommonUtil.equals(leaveDetail.getValue("leaveType"), typeLookup.getValue(i, "code")) ? "selected" : "";
-%>
-					<option value="<%=typeLookup.getValue(i, "code")%>" <%=selected%>><%=typeLookup.getValue(i, "meaning")%></option>
-<%
-				}
-%>
-				</ui:select>
-			</td>
-			<th class="thEdit rt mandatory">Category</th>
-			<td class="tdEdit">
-				<ui:select name="category" checkName="Leave Category" options="mandatory">
-<%
-				for (int i=0; i<categoryLookup.getRowCnt(); i++) {
-					String selected = CommonUtil.equals(leaveDetail.getValue("leaveCategory"), categoryLookup.getValue(i, "code")) ? "selected" : "";
-%>
-					<option value="<%=categoryLookup.getValue(i, "code")%>" <%=selected%>><%=categoryLookup.getValue(i, "meaning")%></option>
-<%
-				}
-%>
-				</ui:select>
-			</td>
-		</tr>
-		<tr>
-			<th class="thEdit rt mandatory">Start Date</th>
-			<td class="tdEdit">
-				<ui:text name="startDate" value="<%=leaveDetail.getValue(\"startDate\")%>" className="Ct hor" style="width:100px" checkName="Start Date" options="mandatory" option="date"/>
-				<ui:icon id="icnStartDate" className="fa-calendar hor"/>
-			</td>
-			<th class="thEdit rt mandatory">End Date</th>
-			<td class="tdEdit">
-				<ui:text name="endDate" value="<%=leaveDetail.getValue(\"endDate\")%>" className="Ct hor" style="width:100px" checkName="End Date" options="mandatory" option="date"/>
-				<ui:icon id="icnEndDate" className="fa-calendar hor"/>
-			</td>
-		</tr>
-		<tr>
-			<th class="thEdit rt mandatory">Duration</th>
-			<td class="tdEdit"><ui:text name="duration" value="<%=leaveDetail.getValue(\"duration\")%>" status="spinner" checkName="Leave Duration" options="mandatory"/></td>
-			<th class="thEdit rt mandatory">Units</th>
-			<td class="tdEdit">
-				<ui:select name="durationUnits" checkName="Duration Units" options="mandatory">
-<%
-				for (int i=0; i<durationUnitLookup.getRowCnt(); i++) {
-					String selected = CommonUtil.equals(leaveDetail.getValue("durationUnit"), durationUnitLookup.getValue(i, "code")) ? "selected" : "";
-%>
-					<option value="<%=durationUnitLookup.getValue(i, "code")%>" <%=selected%>><%=durationUnitLookup.getValue(i, "meaning")%></option>
-<%
-				}
-%>
-				</ui:select>
-			</td>
-		</tr>
-		<tr>
 			<th class="thEdit rt">Reason</th>
-			<td class="tdEdit" colspan="3"><ui:txa name="reason" value="<%=leaveDetail.getValue(\"reason\")%>" style="height:60px;"/></td>
+			<td class="tdEdit" colspan="3"><ui:txa name="reason" value="<%=leaveDetail.getValue(\"reason\")%>" style="height:40px;"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit rt">Submitted Date</th>
@@ -202,8 +146,40 @@ var leaveRequestId = "<%=leaveDetail.getValue("leaveRequestId")%>";
 		</tr>
 		<tr>
 			<th class="thEdit rt">Rejected Reason</th>
-			<td class="tdEdit" colspan="3"><ui:txa name="rejectedReason" value="<%=leaveDetail.getValue(\"approveRejectComments\")%>" status="display" style="height:60px;"/></td>
+			<td class="tdEdit" colspan="3"><ui:txa name="rejectedReason" value="<%=leaveDetail.getValue(\"approveRejectComments\")%>" status="display" style="height:40px;"/></td>
 		</tr>
+	</table>
+</div>
+<%/************************************************************************************************
+* End of fixed panel
+************************************************************************************************/%>
+<div class="breaker"></div>
+</div>
+<div id="divScrollablePanelPopup">
+<%/************************************************************************************************
+* Real Contents - scrollable panel(data, paging)
+************************************************************************************************/%>
+<div id="divDataArea" class="areaContainerPopup">
+	<table id="tblGrid" class="tblGrid">
+		<colgroup>
+			<col width="20%"/>
+			<col width="20%"/>
+			<col width="20%"/>
+			<col width="*"/>
+		</colgroup>
+		<thead>
+			<tr>
+				<th class="thGrid">Date</th>
+				<th class="thGrid">Type</th>
+				<th class="thGrid">Hours</th>
+				<th class="thGrid">Description</th>
+			</tr>
+		</thead>
+		<tbody id="tblGridBody">
+			<tr>
+				<td colspan="4" style="padding:0px;border-top:0px"><ul id="ulDetailHolder"></ul></td>
+			</tr>
+		</tbody>
 	</table>
 </div>
 <div id="divPagingArea"></div>
@@ -215,6 +191,25 @@ var leaveRequestId = "<%=leaveDetail.getValue("leaveRequestId")%>";
 <%/************************************************************************************************
 * Additional Elements
 ************************************************************************************************/%>
+<li id="liDummy" class="dummyDetail">
+	<table class="tblGrid" style="border:0px">
+		<colgroup>
+			<col width="20%"/>
+			<col width="20%"/>
+			<col width="20%"/>
+			<col width="*"/>
+		</colgroup>
+		<tr class="noBorderAll">
+			<td class="tdGrid Ct">
+				<ui:text name="date" className="Ct" status="display"/>
+				<ui:hidden name="dateType"/>
+			</td>
+			<td class="tdGrid Ct"><ui:text name="dayOfWeek" className="Lt" status="display"/></td>
+			<td class="tdGrid Ct"><ui:text name="hours" className="Ct numeric"/></td>
+			<td class="tdGrid Lt"><ui:text name="description" className="Lt"/></td>
+		</tr>
+	</table>
+</li>
 </form>
 <%/************************************************************************************************
 * Additional Form

@@ -67,7 +67,7 @@ var leaveRequestId = "-1";
 </div>
 <div id="divSearchCriteriaArea"></div>
 <div id="divInformArea" class="areaContainerPopup">
-	<table id="tblInform" class="tblInform sort autosort">
+	<table class="tblInform sort autosort">
 		<caption>Accruals</caption>
 		<colgroup>
 			<col width="*"/>
@@ -154,7 +154,7 @@ var leaveRequestId = "-1";
 		</tr>
 		<tr>
 			<th class="thEdit rt">Reason</th>
-			<td class="tdEdit" colspan="3"><ui:txa name="reason" style="height:60px;"/></td>
+			<td class="tdEdit" colspan="3"><ui:txa name="reason" style="height:40px;"/></td>
 		</tr>
 	</table>
 </div>

@@ -224,7 +224,11 @@ $(window).load(function() {
 	if ("Y" == jsconfig.get("autoSetSearchCriteria")) {$.nony._setAutoSearchCriteria(jsconfig.get("searchCriteriaDataSetString"));}
 	if (jsconfig.get("useScrollablePanel")) {$.nony._doResizeScrollablePanel();}
 	if (jsconfig.get("useJqTooltip")) {$.nony._jqTooltip();}
-	if (jsconfig.get("useJqSelectmenu")) {$.nony._jqSelectmenu();}
+	if (jsconfig.get("useJqSelectmenu")) {
+		setTimeout(function() {
+			$.nony._jqSelectmenu();
+		}, 100);
+	}
 
 //	$.nony._customiseUserEvent();
 });

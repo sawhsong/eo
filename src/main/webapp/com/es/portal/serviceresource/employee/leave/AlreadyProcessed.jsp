@@ -65,7 +65,7 @@
 		<colgroup>
 			<col width="100%"/>
 		</colgroup>
-		<tr>
+		<tr class="noBorderHor noStripe">
 			<td class="tdDefault Ct">The leave request has already been approved or rejected.</td>
 		</tr>
 	</table>

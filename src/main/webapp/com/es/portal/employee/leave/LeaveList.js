@@ -2,6 +2,7 @@
  * 
  */
 var popup = null;
+jsconfig.put("scrollablePanelHeightAdjust", 8);
 
 $(function() {
 	/*!
