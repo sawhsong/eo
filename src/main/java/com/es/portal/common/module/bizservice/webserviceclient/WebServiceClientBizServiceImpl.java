@@ -468,14 +468,14 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		post.setValue(post.getRowCnt()-1, "personId", requestDataSet.getValue("personId"));
 		post.setValue(post.getRowCnt()-1, "department", requestDataSet.getValue("department"));
 		post.setValue(post.getRowCnt()-1, "expenseType", requestDataSet.getValue("expenseType"));
-		post.setValue(post.getRowCnt()-1, "dateOfClaim", CommonUtil.replace(requestDataSet.getValue("dateOfClaim"), "-", ""));
+		post.setValue(post.getRowCnt()-1, "dateOfClaim", CommonUtil.removeString(requestDataSet.getValue("dateOfClaim"), "-", "/"));
 		post.setValue(post.getRowCnt()-1, "bsb", requestDataSet.getValue("bsb"));
 		post.setValue(post.getRowCnt()-1, "accountName", requestDataSet.getValue("accountName"));
 		post.setValue(post.getRowCnt()-1, "accountNumber", requestDataSet.getValue("accountNumber"));
 		post.setValue(post.getRowCnt()-1, "amount", requestDataSet.getValue("amount"));
 		post.setValue(post.getRowCnt()-1, "gst", requestDataSet.getValue("gst"));
 		post.setValue(post.getRowCnt()-1, "description", requestDataSet.getValue("description"));
-		post.setValue(post.getRowCnt()-1, "status", requestDataSet.getValue("status"));
+		post.setValue(post.getRowCnt()-1, "status", "SU");
 		post.setValue(post.getRowCnt()-1, "approveRejectPersonId", requestDataSet.getValue("approveRejectPersonId"));
 		post.setValue(post.getRowCnt()-1, "approveRejectDate", requestDataSet.getValue("approveRejectDate"));
 		post.setValue(post.getRowCnt()-1, "approveRejectComments", requestDataSet.getValue("approveRejectComments"));

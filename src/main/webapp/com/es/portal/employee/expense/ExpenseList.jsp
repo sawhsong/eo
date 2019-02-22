@@ -83,17 +83,17 @@
 <div id="divDataArea" class="areaContainer">
 	<table id="tblGrid" class="tblGrid sort autosort">
 		<colgroup>
+			<col width="12%"/>
+			<col width="14%"/>
 			<col width="*"/>
-			<col width="9%"/>
-			<col width="9%"/>
-			<col width="9%"/>
-			<col width="9%"/>
-			<col width="9%"/>
-			<col width="9%"/>
+			<col width="7%"/>
+			<col width="7%"/>
+			<col width="5%"/>
 			<col width="8%"/>
-			<col width="8%"/>
-			<col width="8%"/>
-			<col width="8%"/>
+			<col width="11%"/>
+			<col width="6%"/>
+			<col width="7%"/>
+			<col width="7%"/>
 		</colgroup>
 		<thead>
 			<tr>

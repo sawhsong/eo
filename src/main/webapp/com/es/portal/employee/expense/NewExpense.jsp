@@ -81,11 +81,8 @@ var expenseClaimId = "-1";
 				<ui:text name="dateOfClaim" value="<%=defaultDate%>" className="Ct hor" style="width:100px" checkName="Date" options="mandatory" option="date"/>
 				<ui:icon id="icnDateOfClaim" className="fa-calendar hor"/>
 			</td>
-			<th class="thEdit rt mandatory">Status</th>
-			<td class="tdEdit">
-				<ui:hidden name="status" value="SA"/>
-				<ui:text name="statusDesc" value="In Progress" status="display"/>
-			</td>
+			<th class="thEdit rt mandatory">Person Name</th>
+			<td class="tdEdit" colspan="3"><ui:text name="personName" value="<%=personName%>" checkName="Person Name" options="mandatory" status="display"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit rt mandatory">Department</th>
@@ -111,17 +108,13 @@ var expenseClaimId = "-1";
 		</tr>
 		<tr>
 			<th class="thEdit rt">Description</th>
-			<td class="tdEdit" colspan="3"><ui:txa name="description" style="height:60px;"/></td>
+			<td class="tdEdit" colspan="3"><ui:txa name="description" style="height:100px;"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit rt">Submitted Date</th>
 			<td class="tdEdit"><ui:text name="submittedDate" value="<%=defaultDateTime%>" status="display"/></td>
 			<th class="thEdit rt">Processed Date</th>
 			<td class="tdEdit"><ui:text name="processedDate" status="display"/></td>
-		</tr>
-		<tr>
-			<th class="thEdit rt mandatory">Person Name</th>
-			<td class="tdEdit" colspan="3"><ui:text name="personName" value="<%=personName%>" checkName="Person Name" options="mandatory" status="display"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit rt">
@@ -131,7 +124,7 @@ var expenseClaimId = "-1";
 				</div>
 			</th>
 			<td class="tdEdit" colspan="3">
-				<div id="divAttachedFile" style="width:100%;height:94px;overflow-y:auto;"></div>
+				<div id="divAttachedFile" style="width:100%;height:100px;overflow-y:auto;"></div>
 			</td>
 		</tr>
 	</table>

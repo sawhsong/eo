@@ -16,15 +16,11 @@ $(function() {
 			},
 			header:"New Expense Claim",
 			width:860,
-			height:554
+			height:560
 		});
 	});
 
 	$("#btnSearch").click(function() {
-		doSearch();
-	});
-
-	$("#assignment").change(function() {
 		doSearch();
 	});
 
@@ -72,12 +68,11 @@ $(function() {
 				uiAnc.setText(ds.getValue(i, "personFullName")).setScript("getDetail('"+ds.getValue(i, "expenseClaimId")+"')");
 				gridTr.addChild(new UiGridTd().addClassName("Lt").addChild(uiAnc));
 
-				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "personFullName")));
 				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "departmentDesc")));
 				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "expenseTypeDesc")));
 				gridTr.addChild(new UiGridTd().addClassName("Ct").setText(ds.getValue(i, "dateOfClaim")));
-				gridTr.addChild(new UiGridTd().addClassName("Rt").setText(commonJs.getNumberMask(dataSet.getValue(i, "amount"), "#,##0.00")));
-				gridTr.addChild(new UiGridTd().addClassName("Rt").setText(commonJs.getNumberMask(dataSet.getValue(i, "gst"), "#,##0.00")));
+				gridTr.addChild(new UiGridTd().addClassName("Rt").setText(commonJs.getNumberMask(ds.getValue(i, "amount"), "#,##0.00")));
+				gridTr.addChild(new UiGridTd().addClassName("Rt").setText(commonJs.getNumberMask(ds.getValue(i, "gst"), "#,##0.00")));
 				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "statusDesc")));
 				gridTr.addChild(new UiGridTd().addClassName("Lt").setText(ds.getValue(i, "approveRejectPersonName")));
 

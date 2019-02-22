@@ -72,16 +72,19 @@ public class ExpenseBizImpl extends BaseBiz implements ExpenseBiz {
 	}
 
 	public ParamEntity saveExpenseClaim(ParamEntity paramEntity) throws Exception {
+		HttpSession session = paramEntity.getSession();
 		DataSet dsRequest = paramEntity.getRequestDataSet();
 		DataSet dsFile = paramEntity.getRequestFileDataSet();
+		String personId = CommonUtil.nvl((String)session.getAttribute("PersonIdForAdminTool"), (String)session.getAttribute("PersonId"));
 		String result = "";
 
 		try {
+			dsRequest.addColumn("personId", personId);
 			result = wsClient.postExpenseClaim(dsRequest, dsFile);
 
-//			if (!CommonUtil.startsWith(result, "2")) {
-//				throw new FrameworkException("E801", getMessage("E801", paramEntity));
-//			}
+			if (!CommonUtil.startsWith(result, "2")) {
+				throw new FrameworkException("E801", getMessage("E801", paramEntity));
+			}
 
 			paramEntity.setSuccess(true);
 			paramEntity.setMessage("I801", getMessage("I801", paramEntity));
