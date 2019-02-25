@@ -70,5 +70,16 @@
 				<param name="contentLength">${contentLength}</param>
 			</result>
 		</action>
+
+		<!--/* EO File Download for RESTWebService */-->
+		<action name="restServiceDownloadEO" class="com.es.portal.common.module.actionsupport.RestServiceDownloadAction">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">4096</param>
+				<param name="contentDisposition">${contentDisposition}</param>
+				<param name="contentLength">${contentLength}</param>
+			</result>
+		</action>
 	</package>
 </struts>

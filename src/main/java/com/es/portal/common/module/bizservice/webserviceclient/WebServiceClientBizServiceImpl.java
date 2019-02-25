@@ -484,6 +484,19 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		return CommonUtil.removeString(result, "\"");
 	}
 
+	public DataSet getAttachedFile(ParamEntity paramEntity, String expenseClaimId) throws Exception {
+		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
+		String serviceUrl = "expense/attachmentlist";
+		String result = "";
+
+		queryAdvisor.addVariable("expenseClaimId", expenseClaimId);
+
+		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
+		paramEntity.setObjectFromJsonString(result);
+
+		return JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("attachmentList"));
+	}
+
 	/*
 	 * Login - User Profile
 	 */

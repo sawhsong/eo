@@ -94,36 +94,23 @@ public class ExpenseBizImpl extends BaseBiz implements ExpenseBiz {
 		return paramEntity;
 	}
 
-	public ParamEntity loadAccrual(ParamEntity paramEntity) throws Exception {
+	public ParamEntity getAttachedFile(ParamEntity paramEntity) throws Exception {
 		DataSet dsRequest = paramEntity.getRequestDataSet();
-		DataSet accrualList = new DataSet();
-		String assignmentId = dsRequest.getValue("assignmentId");
+		DataSet attachmentList;
+		String expenseClaimId = "";
 
 		try {
-			accrualList = wsClient.getAccrualListDataSet(paramEntity, assignmentId);
+			expenseClaimId = dsRequest.getValue("expenseClaimId");
+			attachmentList = wsClient.getAttachedFile(paramEntity, expenseClaimId);
 
-			paramEntity.setAjaxResponseDataSet(accrualList);
-			paramEntity.setSuccess(true);
-		} catch (Exception ex) {
-			throw new FrameworkException(paramEntity, ex);
-		}
-		return paramEntity;
-	}
-
-	public ParamEntity saveLeave(ParamEntity paramEntity) throws Exception {
-		DataSet dsRequest = paramEntity.getRequestDataSet();
-		String leaveRequestId = dsRequest.getValue("leaveRequestId");
-		String result = "";
-
-		try {
-//			result = wsClient.postLeaveRequest(leaveRequestId, dsRequest);
-
-			if (!CommonUtil.startsWith(result, "2")) {
-				throw new FrameworkException("E801", getMessage("E801", paramEntity));
+			if (attachmentList != null && attachmentList.getRowCnt() > 0) {
+				for (int i=0; i<attachmentList.getRowCnt(); i++) {
+					attachmentList.setValue(i, "fileIcon", CommonUtil.getIconNameByFileType(attachmentList.getValue(i, "fileIcon")));
+				}
 			}
 
+			paramEntity.setAjaxResponseDataSet(attachmentList);
 			paramEntity.setSuccess(true);
-			paramEntity.setMessage("I801", getMessage("I801"));
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
 		}

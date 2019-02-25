@@ -7,7 +7,5 @@ public interface ExpenseBiz {
 	public ParamEntity getExpenseClaimList(ParamEntity paramEntity) throws Exception;
 	public ParamEntity getDetail(ParamEntity paramEntity) throws Exception;
 	public ParamEntity saveExpenseClaim(ParamEntity paramEntity) throws Exception;
-
-	public ParamEntity loadAccrual(ParamEntity paramEntity) throws Exception;
-	public ParamEntity saveLeave(ParamEntity paramEntity) throws Exception;
+	public ParamEntity getAttachedFile(ParamEntity paramEntity) throws Exception;
 }

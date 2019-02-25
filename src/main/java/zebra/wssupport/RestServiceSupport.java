@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.activation.DataHandler;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.client.WebClient;
@@ -75,7 +76,7 @@ public class RestServiceSupport {
 		DataSet queryParam = queryAdvisor.getVariableDataSet();
 		WebClient webClient = WebClient.create(providerUrl);
 		webClient.path(serviceUrl);
-		if (queryParam.getRowCnt() > 1) {
+		if (queryParam.getRowCnt() > 0) {
 			for (int i=0; i<queryParam.getRowCnt(); i++) {
 				webClient.query(queryParam.getValue(i, 0), queryParam.getValue(i, 1));
 			}
@@ -139,7 +140,9 @@ public class RestServiceSupport {
 		Response wsResponse = webClient.path(serviceUrl).type(contentTypeHeader).accept(new String[] {acceptTypeHeader}).post(attachmentList);
 		return (String)wsResponse.readEntity(String.class);
 	}
-
+	/*!
+	 * EntityOnline - Begin
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static String postAttachmentEO(String providerUrl, String serviceUrl, String contentTypeHeader, String acceptTypeHeader, DataSet postDataSet, DataSet fileDataSet) throws Exception {
 		List attachmentList = new LinkedList();
@@ -159,6 +162,23 @@ public class RestServiceSupport {
 		Response wsResponse = webClient.path(serviceUrl).type(contentTypeHeader).accept(new String[] {acceptTypeHeader}).post(attachmentList);
 		return (String)wsResponse.readEntity(String.class);
 	}
+
+	public static InputStream getFileDownload(String providerUrl, String serviceUrl, QueryAdvisor queryAdvisor) throws Exception {
+		DataSet queryParam = queryAdvisor.getVariableDataSet();
+		WebClient webClient = WebClient.create(providerUrl);
+
+		webClient.path(serviceUrl);
+		if (queryParam.getRowCnt() > 0) {
+			for (int i=0; i<queryParam.getRowCnt(); i++) {
+				webClient.query(queryParam.getValue(i, 0), queryParam.getValue(i, 1));
+			}
+		}
+		Response wsResponse = webClient.accept(new String[] {MediaType.MULTIPART_FORM_DATA}).get();
+		return (InputStream)wsResponse.readEntity(InputStream.class);
+	}
+	/*!
+	 * EntityOnline - End
+	 */
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static List getAttachmentList(DataSet fileDataSet) throws Exception {

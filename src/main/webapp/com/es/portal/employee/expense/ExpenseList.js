@@ -2,6 +2,7 @@
  * 
  */
 var popup = null;
+var attchedFileContextMenu = [];
 
 $(function() {
 	/*!
@@ -16,7 +17,7 @@ $(function() {
 			},
 			header:"New Expense Claim",
 			width:860,
-			height:560
+			height:540
 		});
 	});
 
@@ -101,7 +102,77 @@ $(function() {
 		$("#tblGridBody").append($(html));
 		setGridTable();
 
+		$("[name=icnAttachedFile]").each(function(index) {
+			$(this).contextMenu(attchedFileContextMenu);
+		});
+
 		commonJs.hideProcMessageOnElement("divScrollablePanel");
+	};
+
+	getAttachedFile = function(img) {
+		commonJs.ajaxSubmit({
+			url:"/employee/expense/getAttachedFile",
+			dataType:"json",
+			data:{
+				expenseClaimId:$(img).attr("expenseClaimId")
+			},
+			blind:false,
+			success:function(data, textStatus) {
+				var result = commonJs.parseAjaxResult(data, textStatus, "json");
+
+				if (result.isSuccess == true || result.isSuccess == "true") {
+					var dataSet = result.dataSet;
+					attchedFileContextMenu = [];
+
+					for (var i=0; i<dataSet.getRowCnt(); i++) {
+						var documentId = dataSet.getValue(i, "documentId");
+						var documentName = dataSet.getValue(i, "documentName");
+						var fileIcon = dataSet.getValue(i, "fileIcon");
+						var fileSize = dataSet.getValue(i, "fileSize")/1024;
+
+						attchedFileContextMenu.push({
+							name:documentName+" ("+commonJs.getNumberMask(fileSize, "0,0")+") KB",
+							img:fileIcon,
+							documentId:documentId,
+							documentName:documentName,
+							fun:function() {
+								var index = $(this).index();
+
+								downloadFile({
+									documentId:attchedFileContextMenu[index].documentId,
+									documentName:attchedFileContextMenu[index].documentName
+								});
+							}
+						});
+					}
+
+					$(img).contextMenu(attchedFileContextMenu, {
+						classPrefix:com.constants.ctxClassPrefixGrid,
+						displayAround:"trigger",
+						position:"bottom",
+						horAdjust:0,
+						verAdjust:2
+					});
+				}
+			}
+		});
+	};
+
+	downloadFile = function(param) {
+		popupNotice = commonJs.openPopup({
+			popupId:"DownloadFile",
+			url:"/restServiceDownloadEO",
+			paramData:{
+				documentId:param.documentId,
+				documentName:param.documentName,
+				webServiceUrl:"/expense/downloadattachment"
+			},
+			header:framework.header.fileDownload,
+			blind:false,
+			width:300,
+			height:150
+		});
+		popupNotice.close();
 	};
 
 	getLeaveDetail = function(leaveRequestId) {

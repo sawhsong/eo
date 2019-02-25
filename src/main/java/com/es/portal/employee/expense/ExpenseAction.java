@@ -55,28 +55,21 @@ public class ExpenseAction extends BaseAction {
 		return "pageHandler";
 	}
 
+	public String getAttachedFile() throws Exception {
+		try {
+			biz.getAttachedFile(paramEntity);
+		} catch (Exception ex) {
+		}
+		setRequestAttribute("paramEntity", paramEntity);
+		return "ajaxResponse";
+	}
+
+
+
 
 
 	public String getUpdateLeaveRequest() throws Exception {
 		biz.getDetail(paramEntity);
 		return "updateLeave";
-	}
-
-	public String loadAccrual() throws Exception {
-		try {
-			biz.loadAccrual(paramEntity);
-		} catch (Exception ex) {
-		}
-		setRequestAttribute("paramEntity", paramEntity);
-		return "ajaxResponse";
-	}
-
-	public String saveLeave() throws Exception {
-		try {
-			biz.saveLeave(paramEntity);
-		} catch (Exception ex) {
-		}
-		setRequestAttribute("paramEntity", paramEntity);
-		return "ajaxResponse";
 	}
 }
