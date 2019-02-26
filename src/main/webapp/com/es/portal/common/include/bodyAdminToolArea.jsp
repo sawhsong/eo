@@ -74,8 +74,8 @@ $(function() {
 	$(window).load(function() {
 		commonJs.setAutoComplete($("#loginIdAsAdminTool"), {
 			method:"getSysUsersByLoginId",
-			label:"user_name",
-			value:"user_name",
+			label:"USER_NAME",
+			value:"USER_NAME",
 			minLength:2,
 			focus:function(event, ui) {
 				$("#personIdAsAdminTool").val("");
@@ -97,8 +97,8 @@ $(function() {
 
 		commonJs.setAutoComplete($("#personIdAsAdminTool"), {
 			method:"getSysUsersByPersonId",
-			label:"person_id",
-			value:"person_id",
+			label:"PERSON_ID",
+			value:"PERSON_ID",
 			minLength:2,
 			focus:function(event, ui) {
 				$("#loginIdAsAdminTool").val("");

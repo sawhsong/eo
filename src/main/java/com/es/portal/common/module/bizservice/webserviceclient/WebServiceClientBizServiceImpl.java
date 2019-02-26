@@ -1,5 +1,6 @@
 package com.es.portal.common.module.bizservice.webserviceclient;
 
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
 
 import com.es.portal.common.extend.BaseBiz;
@@ -32,6 +33,34 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		lookupDataSet = JsonUtil.getDataSetFromJsonArrayString(result);
 
 		return lookupDataSet;
+	}
+
+	public DataSet getPersonByName(String loggedInUserEmpOrgId, String fullName) throws Exception {
+		QueryAdvisor queryAdvisor = new QueryAdvisor();
+		DataSet personList = new DataSet();
+		String serviceUrl = "entity/personByName/"+loggedInUserEmpOrgId;
+		String result = "";
+
+		queryAdvisor.addVariable("fullName", fullName);
+
+		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
+		personList = JsonUtil.getDataSetFromJsonArrayString(result);
+
+		return personList;
+	}
+
+	public DataSet getPersonByNumber(String loggedInUserEmpOrgId, String personNumber) throws Exception {
+		QueryAdvisor queryAdvisor = new QueryAdvisor();
+		DataSet personList = new DataSet();
+		String serviceUrl = "entity/personByNumber/"+loggedInUserEmpOrgId;
+		String result = "";
+
+		queryAdvisor.addVariable("personNumber", personNumber);
+
+		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
+		personList = JsonUtil.getDataSetFromJsonArrayString(result);
+
+		return personList;
 	}
 
 	/*
@@ -426,6 +455,29 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 
 		result = RestServiceSupport.post(providerUrl, serviceUrl, acceptTypeHeader, post);
 		return CommonUtil.removeString(result, "\"");
+	}
+
+	public DataSet getLeaveListAdmDataSet(ParamEntity paramEntity) throws Exception {
+		HttpSession session = paramEntity.getSession();
+		DataSet dsRequest = paramEntity.getRequestDataSet();
+		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
+		DataSet leaveList = new DataSet();
+		String loggedInUserEmpOrgId = CommonUtil.nvl((String)session.getAttribute("EmpOrgIdForAdminTool"), (String)session.getAttribute("EmploymentOrgId"));
+		String serviceUrl = "leave/leaveadm/list/"+loggedInUserEmpOrgId;
+		String result = "";
+
+		queryAdvisor.addVariable("fromDate", CommonUtil.removeString(dsRequest.getValue("fromDate"), "-", "/"));
+		queryAdvisor.addVariable("toDate", CommonUtil.removeString(dsRequest.getValue("toDate"), "-", "/"));
+		queryAdvisor.addVariable("status", dsRequest.getValue("leaveStatus"));
+		queryAdvisor.addVariable("type", dsRequest.getValue("leaveType"));
+		queryAdvisor.addVariable("category", dsRequest.getValue("leaveCategory"));
+		queryAdvisor.addVariable("personId", dsRequest.getValue("personId"));
+
+		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
+		paramEntity.setObjectFromJsonString(result);
+		leaveList = JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("leaveList"));
+
+		return leaveList;
 	}
 
 	/*

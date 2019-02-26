@@ -8,6 +8,8 @@ public interface WebServiceClientBizService {
 	 * Common Services
 	 */
 	public DataSet getCommonLookupDataSet(String lookupType) throws Exception;
+	public DataSet getPersonByName(String loggedInUserEmpOrgId, String fullName) throws Exception;
+	public DataSet getPersonByNumber(String loggedInUserEmpOrgId, String personNumber) throws Exception;
 
 	/*
 	 * Ipro - Timesheet
@@ -39,6 +41,7 @@ public interface WebServiceClientBizService {
 	public String postLeaveRequest(DataSet requestDataSet) throws Exception;
 	public DataSet getDateDetail(ParamEntity paramEntity, String leaveRequestId, String assignmentId, String startDate, String endDate) throws Exception;
 	public String approveRejectLeaveRequest(DataSet requestDataSet) throws Exception;
+	public DataSet getLeaveListAdmDataSet(ParamEntity paramEntity) throws Exception;
 
 	/*
 	 * Employee - Expense

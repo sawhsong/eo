@@ -754,8 +754,8 @@ var nony = {
 							for (var i=0; i<ds.getRowCnt(); i++) {
 								var item = {};
 
-								item.label = ds.getValue(i, param.label.toUpperCase());
-								item.value = ds.getValue(i, param.value.toUpperCase());
+								item.label = ds.getValue(i, param.label);
+								item.value = ds.getValue(i, param.value);
 
 								dataSource.push(item);
 							}

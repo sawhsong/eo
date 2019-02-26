@@ -31,6 +31,8 @@ public class CommonLookupManager extends BaseBiz implements CommonLookupManagerB
 		MemoryBean.set("CommonLookup_LEAVE_DURATION", getConvertedDataSet("LEAVE_DURATION", wsClient.getCommonLookupDataSet("LEAVE_DURATION")));
 		MemoryBean.set("CommonLookup_LEAVE_DATE_TYPE", getConvertedDataSet("LEAVE_DATE_TYPE", wsClient.getCommonLookupDataSet("LEAVE_DATE_TYPE")));
 		MemoryBean.set("CommonLookup_EXPENSE_TYPE", getConvertedDataSet("EXPENSE_TYPE", wsClient.getCommonLookupDataSet("EXPENSE_TYPE")));
+		MemoryBean.set("CommonLookup_LEAVE_STATUS", getConvertedDataSet("LEAVE_STATUS", wsClient.getCommonLookupDataSet("LEAVE_STATUS")));
+		MemoryBean.set("CommonLookup_EXPENSE_STATUS", getConvertedDataSet("EXPENSE_STATUS", wsClient.getCommonLookupDataSet("EXPENSE_STATUS")));
 
 		logger.info("[MemoryBean] - Project Common Code has been loaded.");
 	}
