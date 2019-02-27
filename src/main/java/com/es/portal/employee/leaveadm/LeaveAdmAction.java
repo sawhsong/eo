@@ -27,45 +27,18 @@ public class LeaveAdmAction extends BaseAction {
 		return "ajaxResponse";
 	}
 
-	public String getLeaveDetail() throws Exception {
-		biz.getLeaveDetail(paramEntity);
-		return "leaveDetail";
-	}
-
-	public String getUpdateLeaveRequest() throws Exception {
-		biz.getLeaveDetail(paramEntity);
-		return "updateLeave";
-	}
-
-	public String loadAccrual() throws Exception {
+	public String doAction() throws Exception {
 		try {
-			biz.loadAccrual(paramEntity);
+			biz.doAction(paramEntity);
 		} catch (Exception ex) {
 		}
 		setRequestAttribute("paramEntity", paramEntity);
 		return "ajaxResponse";
 	}
 
-	public String saveLeave() throws Exception {
-		try {
-			biz.saveLeave(paramEntity);
-		} catch (Exception ex) {
-		}
+	public String exeExport() throws Exception {
+		biz.exeExport(paramEntity);
 		setRequestAttribute("paramEntity", paramEntity);
-		return "ajaxResponse";
-	}
-
-	public String newLeave() throws Exception {
-		biz.getLeaveDetail(paramEntity);
-		return "newLeave";
-	}
-
-	public String getDateDetail() throws Exception {
-		try {
-			biz.getDateDetail(paramEntity);
-		} catch (Exception ex) {
-		}
-		setRequestAttribute("paramEntity", paramEntity);
-		return "ajaxResponse";
+		return "export";
 	}
 }

@@ -1,19 +1,17 @@
 package com.es.portal.employee.leaveadm;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.es.portal.common.extend.BaseBiz;
 import com.es.portal.common.module.bizservice.webserviceclient.WebServiceClientBizService;
-import com.es.portal.common.module.commonlookup.CommonLookupManager;
 
-import net.sf.json.JSONArray;
 import zebra.data.DataSet;
 import zebra.data.ParamEntity;
 import zebra.exception.FrameworkException;
+import zebra.export.ExportHelper;
 import zebra.util.CommonUtil;
-import zebra.util.JsonUtil;
+import zebra.util.ConfigUtil;
+import zebra.util.ExportUtil;
 
 public class LeaveAdmBizImpl extends BaseBiz implements LeaveAdmBiz {
 	@Autowired
@@ -42,84 +40,47 @@ public class LeaveAdmBizImpl extends BaseBiz implements LeaveAdmBiz {
 		return paramEntity;
 	}
 
-	public ParamEntity getLeaveDetail(ParamEntity paramEntity) throws Exception {
-		HttpSession session = paramEntity.getSession();
-		DataSet dsRequest = paramEntity.getRequestDataSet();
-		DataSet leaveDetail = new DataSet(), assignmentList = new DataSet();
-		String personId = CommonUtil.nvl((String)session.getAttribute("PersonIdForAdminTool"), (String)session.getAttribute("PersonId"));
-		String leaveRequestId = dsRequest.getValue("leaveRequestId");
-		String header[] = new String[] {"leaveRequestId", "assignmentId", "assignmentNumber", "assignmentName", "leaveType", "leaveTypeDesc", "leaveCategory", "leaveCategoryDesc",
-				"startDate", "endDate", "duration", "durationUnit", "durationUnitDesc", "reason", "status", "statusDesc", "submittedDate", "approveRejectDate",
-				"approveRejectPersonId", "approveRejectPersonFullName", "approveRejectComments"};
+	public ParamEntity doAction(ParamEntity paramEntity) throws Exception {
+		int result = -1;
 
 		try {
-			leaveDetail.addName(header);
+			result = wsClient.doLeaveAdmAction(paramEntity);
 
-			assignmentList = wsClient.getLeaveAssignmentListDataSet(paramEntity, personId);
-
-			wsClient.getLeaveDetail(paramEntity, leaveRequestId);
-			paramEntity.setDataSetValueFromJsonResultset(leaveDetail);
-
-			paramEntity.setObject("assignmentList", assignmentList);
-			paramEntity.setObject("leaveDetail", leaveDetail);
-			paramEntity.setObject("durationUnit", CommonLookupManager.getLookupMeaning("LEAVE_DURATION", "H"));
-			paramEntity.setObject("accrualList", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("accrualList")));
-			paramEntity.setObject("dateDetails", JsonUtil.getDataSetFromJsonArray((JSONArray)paramEntity.getObject("dateDetails")));
-			paramEntity.setSuccess(true);
-		} catch (Exception ex) {
-			throw new FrameworkException(paramEntity, ex);
-		}
-		return paramEntity;
-	}
-
-	public ParamEntity loadAccrual(ParamEntity paramEntity) throws Exception {
-		DataSet dsRequest = paramEntity.getRequestDataSet();
-		DataSet accrualList = new DataSet();
-		String assignmentId = dsRequest.getValue("assignmentId");
-
-		try {
-			accrualList = wsClient.getAccrualListDataSet(paramEntity, assignmentId);
-
-			paramEntity.setAjaxResponseDataSet(accrualList);
-			paramEntity.setSuccess(true);
-		} catch (Exception ex) {
-			throw new FrameworkException(paramEntity, ex);
-		}
-		return paramEntity;
-	}
-
-	public ParamEntity saveLeave(ParamEntity paramEntity) throws Exception {
-		DataSet dsRequest = paramEntity.getRequestDataSet();
-		String result = "";
-
-		try {
-			result = wsClient.postLeaveRequest(dsRequest);
-
-			if (!CommonUtil.startsWith(result, "2")) {
+			if (result <= 0) {
 				throw new FrameworkException("E801", getMessage("E801", paramEntity));
 			}
 
 			paramEntity.setSuccess(true);
-			paramEntity.setMessage("I801", getMessage("I801"));
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
 		}
 		return paramEntity;
 	}
 
-	public ParamEntity getDateDetail(ParamEntity paramEntity) throws Exception {
-		DataSet dsRequest = paramEntity.getRequestDataSet();
-		DataSet dateDetail = new DataSet();
-		String leaveRequestId = dsRequest.getValue("leaveRequestId");
-		String assignmentId = dsRequest.getValue("assignmentId");
-		String startDate = CommonUtil.removeString(dsRequest.getValue("startDate"), "-", "/");
-		String endDate = CommonUtil.removeString(dsRequest.getValue("endDate"), "-", "/");
+	public ParamEntity exeExport(ParamEntity paramEntity) throws Exception {
+		DataSet leaveRequestList = new DataSet();
+		ExportHelper exportHelper;
+		String columnHeader[], fileHeader[];
+		String pageTitle, fileName;
 
 		try {
-			dateDetail = wsClient.getDateDetail(paramEntity, leaveRequestId, assignmentId, startDate, endDate);
+			pageTitle = "Leave Request List";
+			fileName = "LeaveRequestList-"+CommonUtil.getSysdate(ConfigUtil.getProperty("format.date.java"));
+			columnHeader = new String[]{"fullName", "leaveTypeDesc", "leaveCategory", "assignmentName", "duration", "durationUnitDesc", "startDate", "endDate", "statusDesc", "submittedDate", "approveRejectDate"};
+			fileHeader = new String[]{"Name", "Type", "Category", "Assignment Name", "Duration", "Duration Unit", "Start Date", "End Date", "Status", "Date Submitted", "Date Processed"};
 
-			paramEntity.setAjaxResponseDataSet(dateDetail);
+			leaveRequestList = wsClient.getLeaveListAdmDataSet(paramEntity);
+
+			exportHelper = ExportUtil.getExportHelper("Excel");
+			exportHelper.setPageTitle(pageTitle);
+			exportHelper.setFileName(fileName);
+			exportHelper.setColumnHeader(columnHeader);
+			exportHelper.setFileHeader(fileHeader);
+			exportHelper.setSourceDataSet(leaveRequestList);
+
 			paramEntity.setSuccess(true);
+			paramEntity.setFileToExport(exportHelper.createFile());
+			paramEntity.setFileNameToExport(exportHelper.getFileName());
 		} catch (Exception ex) {
 			throw new FrameworkException(paramEntity, ex);
 		}

@@ -2,6 +2,7 @@
  * 
  */
 var popup = null;
+var searchResultDataCount;
 
 $(function() {
 	/*!
@@ -26,6 +27,10 @@ $(function() {
 		commonJs.openCalendar(event, "toDate");
 	});
 
+	$("#btnDelete").click(function(event) {
+		doAction({mode:"Delete"});
+	});
+
 	$("#icnCheck").click(function(event) {
 		commonJs.toggleCheckboxes("chkForAction");
 	});
@@ -34,23 +39,23 @@ $(function() {
 		var ctxMenu = [{
 			name:"Mark as Payrolled",
 			img:"fa-money",
-			fun:function() {alert("Update status to Payrolled");}
+			fun:function() {doAction({mode:"Payrol"});}
 		}, {
 			name:"Unlock Request",
 			img:"fa-unlock-alt",
-			fun:function() {alert("Update status to PendingAproval");}
+			fun:function() {doAction({mode:"Unlock"});}
 		}, {
 			name:"Approve Request",
 			img:"fa-check",
-			fun:function() {alert("Update status to Approved");}
+			fun:function() {doAction({mode:"Approve"});}
 		}, {
 			name:"Reject Request",
 			img:"fa-reply-all",
-			fun:function() {alert("Update status to Rejected");}
+			fun:function() {doAction({mode:"Reject"});}
 		}, {
 			name:"Export",
 			img:"fa-download",
-			fun:function() {alert("Export the list displayed");}
+			fun:function() {doExport();}
 		}];
 
 		$("#btnAction").contextMenu(ctxMenu, {
@@ -149,6 +154,84 @@ $(function() {
 			header:"Leave Detail",
 			width:840,
 			height:880
+		});
+	};
+
+	doAction = function(param) {
+		if (commonJs.getCountChecked("chkForAction") <= 0) {
+			commonJs.warn("There is no data to proceed.");
+			return;
+		}
+
+		commonJs.confirm({
+			contents:"Are you sure to proceed?",
+			buttons:[{
+				caption:com.caption.yes,
+				callback:function() {
+					commonJs.ajaxSubmit({
+						url:"/employee/leaveadm/doAction",
+						formId:"fmDefault",
+						dataType:"json",
+						data:{
+							mode:param.mode
+						},
+						success:function(data, textStatus) {
+							var result = commonJs.parseAjaxResult(data, textStatus, "json");
+							if (result.isSuccess == true || result.isSuccess == "true") {
+								commonJs.openDialog({
+									type:com.message.I000,
+									contents:"Job has been successfully completed.",
+									blind:true,
+									width:300,
+									buttons:[{
+										caption:com.caption.ok,
+										callback:function() {
+											doSearch();
+										}
+									}]
+								});
+							} else {
+								commonJs.error(result.message);
+							}
+						}
+					});
+				}
+			}, {
+				caption:com.caption.no,
+				callback:function() {
+				}
+			}]
+		});
+	};
+
+	doExport = function() {
+		if (searchResultDataCount <= 0) {
+			commonJs.warn("There is no data to download.");
+			return;
+		}
+
+		commonJs.confirm({
+			contents:com.message.Q003,
+			buttons:[{
+				caption:com.caption.yes,
+				callback:function() {
+					popup = commonJs.openPopup({
+						popupId:"exportFile",
+						url:"/employee/leaveadm/exeExport",
+						paramData:{},
+						header:"Download as File",
+						blind:false,
+						width:200,
+						height:100
+					});
+					setTimeout(function() {popup.close();}, 8000);
+				}
+			}, {
+				caption:com.caption.no,
+				callback:function() {
+				}
+			}],
+			blind:true
 		});
 	};
 

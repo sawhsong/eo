@@ -42,6 +42,8 @@ public interface WebServiceClientBizService {
 	public DataSet getDateDetail(ParamEntity paramEntity, String leaveRequestId, String assignmentId, String startDate, String endDate) throws Exception;
 	public String approveRejectLeaveRequest(DataSet requestDataSet) throws Exception;
 	public DataSet getLeaveListAdmDataSet(ParamEntity paramEntity) throws Exception;
+	public int doLeaveAdmAction(ParamEntity paramEntity) throws Exception;
+	public String getPersonIdFromLeaveRequestId(ParamEntity paramEntity, String leaveRequestId) throws Exception;
 
 	/*
 	 * Employee - Expense

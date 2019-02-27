@@ -66,6 +66,9 @@ public class LeaveBizImpl extends BaseBiz implements LeaveBiz {
 		try {
 			leaveDetail.addName(header);
 
+			if (!CommonUtil.isIn(leaveRequestId, "", "-1")) {
+				personId = wsClient.getPersonIdFromLeaveRequestId(paramEntity, leaveRequestId);
+			}
 			assignmentList = wsClient.getLeaveAssignmentListDataSet(paramEntity, personId);
 
 			wsClient.getLeaveDetail(paramEntity, leaveRequestId);

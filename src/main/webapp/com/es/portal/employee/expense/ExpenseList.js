@@ -17,7 +17,7 @@ $(function() {
 			},
 			header:"New Expense Claim",
 			width:860,
-			height:540
+			height:560
 		});
 	});
 

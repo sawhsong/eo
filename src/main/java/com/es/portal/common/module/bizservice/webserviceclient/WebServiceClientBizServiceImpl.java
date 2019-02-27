@@ -480,6 +480,46 @@ public class WebServiceClientBizServiceImpl extends BaseBiz implements WebServic
 		return leaveList;
 	}
 
+	public int doLeaveAdmAction(ParamEntity paramEntity) throws Exception {
+		DataSet dsRequest = paramEntity.getRequestDataSet();
+		String serviceUrl = "leave/leaveadm/leaveadmaction/";
+		String mode = dsRequest.getValue("mode");
+		String chkForAction = dsRequest.getValue("chkForAction");
+		String leaveRequestIds[] = CommonUtil.splitWithTrim(chkForAction, ConfigUtil.getProperty("delimiter.record"));
+		DataSet postTemp = new DataSet(new String[] {"leaveRequestId", "mode"});
+		DataSet post = new DataSet(new String[] {"leaveAdmActionList"});
+		String result = "";
+		int rtn = -1;
+
+		for (int i=0; i<leaveRequestIds.length; i++) {
+			postTemp.addRow();
+			postTemp.setValue(postTemp.getRowCnt()-1, "leaveRequestId", leaveRequestIds[i]);
+			postTemp.setValue(postTemp.getRowCnt()-1, "mode", mode);
+		}
+
+		post.addRow();
+		post.setValue(post.getRowCnt()-1, "leaveAdmActionList", "["+postTemp.toJsonStringForEO()+"]");
+
+		result = RestServiceSupport.post(providerUrl, serviceUrl, acceptTypeHeader, post);
+		result = CommonUtil.removeString(result, "\"");
+
+		if (CommonUtil.startsWith(result, "2")) {
+			rtn = 1;
+		}
+		return rtn;
+	}
+
+	public String getPersonIdFromLeaveRequestId(ParamEntity paramEntity, String leaveRequestId) throws Exception {
+		QueryAdvisor queryAdvisor = paramEntity.getQueryAdvisor();
+		String serviceUrl = "leave/personId/"+leaveRequestId;
+		String result = "", personId = "";
+
+		result = RestServiceSupport.get(providerUrl, serviceUrl, acceptTypeHeader, queryAdvisor);
+		personId = CommonUtil.removeString(result, "\"");
+
+		return personId;
+	}
+
 	/*
 	 * Employee - Expense
 	 */

@@ -118,7 +118,7 @@ select 'GENERAL_CORPORATE_USER' as group_id,
 ;
 
 insert into eo_menu_auth_link (
-select 'ENTITY_SOLUTIONS_LEAVE_ADM' as group_id,
+select 'LEAVE_ADM_USER' as group_id,
        eo_menu.menu_id,
        (select user_id from sys_users where user_name = 'admdustin') as insert_user_id,
        sysdate as insert_date,
