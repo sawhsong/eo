@@ -92,19 +92,19 @@ var expenseClaimId = "-1";
 		</tr>
 		<tr>
 			<th class="thEdit rt mandatory">Account Name</th>
-			<td class="tdEdit" colspan="3"><ui:text name="accountName" checkName="Account Name" options="mandatory" value="test"/></td>
+			<td class="tdEdit" colspan="3"><ui:text name="accountName" checkName="Account Name" options="mandatory"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit rt mandatory">BSB</th>
-			<td class="tdEdit"><ui:text name="bsb" checkName="BSB" attribute="maxlength:6" options="mandatory" value="123456"/></td>
+			<td class="tdEdit"><ui:text name="bsb" checkName="BSB" attribute="maxlength:6" options="mandatory"/></td>
 			<th class="thEdit rt mandatory">Account Number</th>
-			<td class="tdEdit"><ui:text name="accountNumber" checkName="Account Number" options="mandatory" value="123456789"/></td>
+			<td class="tdEdit"><ui:text name="accountNumber" checkName="Account Number" options="mandatory"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit rt mandatory">Amount</th>
-			<td class="tdEdit"><ui:text name="amount" className="Rt numeric" checkName="Amount" options="mandatory" value="5000"/></td>
+			<td class="tdEdit"><ui:text name="amount" className="Rt numeric" checkName="Amount" options="mandatory"/></td>
 			<th class="thEdit rt">GST</th>
-			<td class="tdEdit"><ui:text name="gst" className="Rt numeric" value="500"/></td>
+			<td class="tdEdit"><ui:text name="gst" className="Rt numeric"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit rt">Description</th>

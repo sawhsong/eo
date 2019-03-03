@@ -32,6 +32,6 @@ $(function() {
 	 * load event (document / window)
 	 */
 	$(window).load(function() {
-		setWindowSize();
+//		setWindowSize();
 	});
 });

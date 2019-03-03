@@ -45,5 +45,5 @@ set define off;
 delete eo_menu;
 
 insert into eo_menu (menu_id, parent_menu_id, menu_name, menu_url, menu_icon, sort_order, description, is_active, insert_user_id, insert_date, update_user_id, update_date)
-values ('LeaveManagement', null, 'Leave Admin', '/employee/leaveadm/leavelist', 'LVE', '030000', 'Leave Management for Administrator(Employee)', 'Y', '0', to_date('2018-12-05', 'yyyy-dd-mm'), null, null);
+values ('ZamplePerson', null, 'Example', '/example/getDefault', 'SYS', '990000', 'Sample Code', 'Y', '0', to_date('2018-12-05', 'yyyy-dd-mm'), null, null);
 

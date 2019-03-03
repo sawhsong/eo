@@ -9,9 +9,8 @@
 <%
 	ParamEntity pe = (ParamEntity)request.getAttribute("paramEntity");
 	DataSet dsRequest = pe.getRequestDataSet();
-	DataSet leaveDetail = (DataSet)pe.getObject("leaveDetail");
-	DataSet accrualList = (DataSet)pe.getObject("accrualList");
-	String status = leaveDetail.getValue("status");
+	DataSet detail = (DataSet)pe.getObject("expenseClaimDetail");
+	String status = detail.getValue("status");
 %>
 <%/************************************************************************************************
 * HTML
@@ -31,9 +30,7 @@
 </style>
 <script type="text/javascript" src="<mc:cp key="viewPageJsName"/>"></script>
 <script type="text/javascript">
-var leaveRequestId = "<%=leaveDetail.getValue("leaveRequestId")%>";
-var accrualListCnt = <%=accrualList.getRowCnt()%>;
-var mode = "<%=dsRequest.getValue("mode")%>";
+var expenseClaimId = "<%=detail.getValue("expenseClaimId")%>";
 </script>
 </head>
 <%/************************************************************************************************
@@ -53,7 +50,7 @@ var mode = "<%=dsRequest.getValue("mode")%>";
 	<div id="divButtonAreaRight">
 		<ui:buttonGroup id="buttonGroup">
 <%
-		if (CommonUtil.isIn(status, "SA", "RE")) {
+		if (CommonUtil.isIn(status, "RE")) {
 %>
 			<ui:button id="btnEdit" caption="button.com.edit" iconClass="fa-edit"/>
 <%
@@ -64,44 +61,7 @@ var mode = "<%=dsRequest.getValue("mode")%>";
 	</div>
 </div>
 <div id="divSearchCriteriaArea"></div>
-<div id="divInformArea" class="areaContainerPopup">
-	<table class="tblInform sort autosort">
-		<caption>Accruals</caption>
-		<colgroup>
-			<col width="*"/>
-			<col width="30%"/>
-			<col width="30%"/>
-		</colgroup>
-		<thead>
-			<tr>
-				<th class="thInform Ct">Accrual Name</th>
-				<th class="thInform Ct">Number of Hours</th>
-				<th class="thInform Ct">Balance</th>
-			</tr>
-		</thead>
-		<tbody>
-<%
-		if (accrualList != null && accrualList.getRowCnt() > 0) {
-			for (int i=0; i<accrualList.getRowCnt(); i++) {
-%>
-			<tr>
-				<td class="tdInform Lt"><%=accrualList.getValue(i, "displayName")%></td>
-				<td class="tdInform Rt"><%=CommonUtil.getNumberMask(accrualList.getValue(i, "noOfHours"), "#,##0.00")%></td>
-				<td class="tdInform Rt"><%=CommonUtil.getNumberMask(accrualList.getValue(i, "balance"), "#,##0.00")%></td>
-			</tr>
-<%
-			}
-		} else {
-%>
-			<tr>
-				<td class="tdInform Ct" colspan="3"><mc:msg key="I001"/></td>
-			</tr>
-<%
-		}
-%>
-		</tbody>
-	</table>
-</div>
+<div id="divInformArea"></div>
 <%/************************************************************************************************
 * End of fixed panel
 ************************************************************************************************/%>
@@ -120,42 +80,55 @@ var mode = "<%=dsRequest.getValue("mode")%>";
 			<col width="32%"/>
 		</colgroup>
 		<tr>
-			<th class="thEdit rt">Assignment Name</th>
-			<td class="tdEdit"><ui:text name="assignmentName" value="<%=leaveDetail.getValue(\"assignmentName\")%>" status="display"/></td>
-			<th class="thEdit rt">Status</th>
-			<td class="tdEdit"><ui:text name="status" value="<%=leaveDetail.getValue(\"statusDesc\")%>" status="display"/></td>
+			<th class="thEdit rt mandatory">Date</th>
+			<td class="tdEdit">
+				<ui:text name="dateOfClaim" value="<%=detail.getValue(\"dateOfClaim\")%>" className="Lt" style="width:100px" checkName="Date" options="mandatory" option="date" status="display"/>
+			</td>
+			<th class="thEdit rt mandatory">Person Name</th>
+			<td class="tdEdit" colspan="3"><ui:text name="personName" value="<%=detail.getValue(\"personFullName\")%>" checkName="Person Name" options="mandatory" status="display"/></td>
 		</tr>
 		<tr>
-			<th class="thEdit rt">Type</th>
-			<td class="tdEdit"><ui:text name="type" value="<%=leaveDetail.getValue(\"leaveTypeDesc\")%>" status="display"/></td>
-			<th class="thEdit rt">Category</th>
-			<td class="tdEdit"><ui:text name="category" value="<%=leaveDetail.getValue(\"leaveCategoryDesc\")%>" status="display"/></td>
+			<th class="thEdit rt mandatory">Department</th>
+			<td class="tdEdit"><ui:ccselect name="department" codeType="INTERNAL_DEPARTMENT" checkName="Department" options="mandatory"/></td>
+			<th class="thEdit rt mandatory">Expense Type</th>
+			<td class="tdEdit"><ui:ccselect name="expenseType" codeType="EXPENSE_TYPE" checkName="Expense Type" options="mandatory"/></td>
 		</tr>
 		<tr>
-			<th class="thEdit rt">Start Date</th>
-			<td class="tdEdit"><ui:text name="startDate" value="<%=leaveDetail.getValue(\"startDate\")%>" status="display"/></td>
-			<th class="thEdit rt">End Date</th>
-			<td class="tdEdit"><ui:text name="endDate" value="<%=leaveDetail.getValue(\"endDate\")%>" status="display"/></td>
+			<th class="thEdit rt mandatory">Account Name</th>
+			<td class="tdEdit" colspan="3"><ui:text name="accountName" checkName="Account Name" options="mandatory"/></td>
 		</tr>
 		<tr>
-			<th class="thEdit rt">Duration</th>
-			<td class="tdEdit"><ui:text name="duration" value="<%=leaveDetail.getValue(\"duration\")%>" status="display"/></td>
-			<th class="thEdit rt">Units</th>
-			<td class="tdEdit"><ui:text name="durationUnits" value="<%=leaveDetail.getValue(\"durationUnitDesc\")%>" status="display"/></td>
+			<th class="thEdit rt mandatory">BSB</th>
+			<td class="tdEdit"><ui:text name="bsb" checkName="BSB" attribute="maxlength:6" options="mandatory"/></td>
+			<th class="thEdit rt mandatory">Account Number</th>
+			<td class="tdEdit"><ui:text name="accountNumber" checkName="Account Number" options="mandatory"/></td>
 		</tr>
 		<tr>
-			<th class="thEdit rt">Reason</th>
-			<td class="tdEdit" colspan="3"><ui:txa name="reason" value="<%=leaveDetail.getValue(\"reason\")%>" status="display" style="height:60px;"/></td>
+			<th class="thEdit rt mandatory">Amount</th>
+			<td class="tdEdit"><ui:text name="amount" className="Rt numeric" checkName="Amount" options="mandatory"/></td>
+			<th class="thEdit rt">GST</th>
+			<td class="tdEdit"><ui:text name="gst" className="Rt numeric"/></td>
+		</tr>
+		<tr>
+			<th class="thEdit rt">Description</th>
+			<td class="tdEdit" colspan="3"><ui:txa name="description" style="height:100px;"/></td>
 		</tr>
 		<tr>
 			<th class="thEdit rt">Submitted Date</th>
-			<td class="tdEdit"><ui:text name="submittedDate" value="<%=leaveDetail.getValue(\"submittedDate\")%>" status="display"/></td>
-			<th class="thEdit rt">Approver</th>
-			<td class="tdEdit"><ui:text name="approver" value="<%=leaveDetail.getValue(\"approveRejectPersonFullName\")%>" status="display"/></td>
+			<td class="tdEdit"><ui:text name="submittedDate" value="" status="display"/></td>
+			<th class="thEdit rt">Processed Date</th>
+			<td class="tdEdit"><ui:text name="processedDate" status="display"/></td>
 		</tr>
 		<tr>
-			<th class="thEdit rt">Rejected Reason</th>
-			<td class="tdEdit" colspan="3"><ui:txa name="approveRejectComments" value="<%=leaveDetail.getValue(\"approveRejectComments\")%>" status="display" style="height:60px;"/></td>
+			<th class="thEdit rt">
+				Attachment<br/><br/>
+				<div id="divButtonAreaRight">
+					<ui:button id="btnAddFile" caption="button.com.add" iconClass="fa-plus"/>
+				</div>
+			</th>
+			<td class="tdEdit" colspan="3">
+				<div id="divAttachedFile" style="width:100%;height:100px;overflow-y:auto;"></div>
+			</td>
 		</tr>
 	</table>
 </div>

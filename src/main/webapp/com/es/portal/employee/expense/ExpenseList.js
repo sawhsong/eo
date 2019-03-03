@@ -52,7 +52,7 @@ $(function() {
 					}
 				}
 			});
-		}, 200);
+		}, 300);
 	};
 
 	renderGridTable = function(result) {
@@ -175,17 +175,17 @@ $(function() {
 		popupNotice.close();
 	};
 
-	getLeaveDetail = function(leaveRequestId) {
+	getDetail = function(expenseClaimId) {
 		popup = commonJs.openPopup({
-			popupId:"leaveDetail",
-			url:"/employee/leave/getLeaveDetail",
+			popupId:"expenseDetail",
+			url:"/employee/expense/getDetail",
 			paramData:{
 				mode:"detail",
-				leaveRequestId:leaveRequestId
+				expenseClaimId:expenseClaimId
 			},
-			header:"Leave Detail",
+			header:"Expense Detail",
 			width:860,
-			height:529
+			height:560
 		});
 	};
 
