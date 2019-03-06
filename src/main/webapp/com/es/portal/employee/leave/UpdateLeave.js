@@ -288,8 +288,7 @@ $(function() {
 
 	setWindowSize = function(rowCnt) {
 		var informLenth = $("#tblInformBody tr").length;
-console.log("informLenth : "+informLenth);
-console.log("rowCnt : "+rowCnt);
+
 		if (rowCnt > 0 && informLenth != rowCnt) {
 			parent.popup.resizeTo(0, ((rowCnt-1) * 27));
 		}
