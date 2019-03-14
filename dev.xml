@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="EO Web Sources" default="0.All" basedir=".">
-	<property file="copyWebSource.properties"/>
+	<property file="dev.properties"/>
 
 	<target name="0.All"
 		depends="1.project app,
