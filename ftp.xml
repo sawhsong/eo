@@ -1,38 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ZZZ - Create Deployment Set" default="ftp" basedir=".">
+<project name="ZZZ - Copy war to Server" default="ftp" basedir=".">
 	<property file="ftp.properties"/>
 
-	<target name="copy" description="Copy war">
-		<mkdir dir="${det.war}"/>
-		<copy todir="${det.war}">
-			<fileset file="${src.war}/${war.fileName}"/>
-		</copy>
-	</target>
-
-	<target name="ftp" depends="copy" description="upload through ftp">
-<!--
-		<ftp server="${server.ip}"
-			 userid="${server.id}"
-			 password="${server.pw}"
-			 remotedir="${server.dir.root}/${server.dir.buildset}"
-			 action="mkdir"
-			 ignoreNoncriticalErrors="true">
-		</ftp>
-		<ftp server="${server.ip}"
-			 userid="${server.id}"
-			 password="${server.pw}"
-			 remotedir="${server.dir.root}/${server.dir.buildset}"
-			 binary="true"
-			 depends="no"
-			 verbose="true"
-			 ignoreNoncriticalErrors="true">
-			<fileset file="${det.war}/${war.fileName}" casesensitive="no"/>
-		</ftp>
--->
+	<target name="ftp" description="upload through ftp">
 		<scp todir="${server.id}:${server.pw}@${server.ip}:${server.dir.root}/${server.dir.buildset}"
 			file="${src.war}/${war.fileName}"
 			trust="true"
 		/>
-
 	</target>
 </project>
