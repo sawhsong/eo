@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Server port="8007" shutdown="SHUTDOWN">
+	<Listener className="org.apache.catalina.startup.VersionLoggerListener"/>
+	<Listener SSLEngine="on" className="org.apache.catalina.core.AprLifecycleListener"/>
+	<Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener"/>
+	<Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener"/>
+	<Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener"/>
+
+	<GlobalNamingResources>
+		<Resource auth="Container" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" name="UserDatabase" pathname="conf/tomcat-users.xml" type="org.apache.catalina.UserDatabase"/>
+	</GlobalNamingResources>
+
+	<Service name="Catalina">
+<!--		<Connector port="8893" protocol="HTTP/1.1" redirectPort="8445" connectionTimeout="200000" acceptCount="50" processorCache="50" keepAliveTimeout="20000" maxKeepAliveRequests="-1" maxThreads="500" acceptorThreadCount="2" maxConnections="-1" acceptCount="50" processorCache="50" keepAliveTimeout="20000" maxKeepAliveRequests="-1" maxThreads="500" acceptorThreadCount="2" maxConnections="-1"/>-->
+		<Connector port="8893" protocol="HTTP/1.1" redirectPort="8445" connectionTimeout="20000"/>
+		<Connector port="8013" protocol="AJP/1.3" redirectPort="8445"/>
+
+		<Engine defaultHost="localhost" name="Catalina">
+			<Realm className="org.apache.catalina.realm.LockOutRealm">
+				<Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
+			</Realm>
+
+			<Host appBase="webapps" autoDeploy="true" name="localhost" unpackWARs="true">
+<!--				<Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%a %h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>-->
+
+				<Context docBase="/home/perci_test/apache-tomcat-9.0.14/entityonline" path="" reloadable="true">
+					<Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%a %h %l %u %t &quot;%r&quot; %s %b" prefix="entityonline_access_log" suffix=".txt"/>
+<!--					<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" maxIdle="30" maxTotal="100" name="jdbc/perciJndi" username="PERCI_0219" password="welcome1" type="javax.sql.DataSource" url="jdbc:oracle:thin:@10.14.35.41:1521:TEST"/>-->
+<!--					<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" maxIdle="30" maxTotal="100" name="jdbc/perciJndi" username="PERCI" password="WELCOME1" type="javax.sql.DataSource" url="jdbc:oracle:thin:@entipx-ora2:1521:PROD"/>-->
+				</Context>
+
+				<Context docBase="/home/perci_test/apache-tomcat-9.0.14/perci" path="/perci" reloadable="true">
+					<Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%a %h %l %u %t &quot;%r&quot; %s %b" prefix="perci_access_log" suffix=".txt"/>
+<!--					<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" maxIdle="30" maxTotal="100" name="jdbc/EntitySolDb" username="PERCI_0322" password="welcome1" type="javax.sql.DataSource" url="jdbc:oracle:thin:@10.14.35.41:1521:TEST"/>-->
+					<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" maxIdle="30" maxTotal="100" name="jdbc/EntitySolDb" username="PERCI" password="i9MisfCeVzI" type="javax.sql.DataSource" url="jdbc:oracle:thin:@192.168.1.2:1521/pdb1.616281599.oraclecloud.internal"/>
+<!--					<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" maxIdle="30" maxTotal="100" name="jdbc/EntitySolDb" username="PERCI" password="i9MisfCeVzI" type="javax.sql.DataSource" url="jdbc:oracle:thin:@//EntityDCSProd1:1521/PDB1.616281599.oraclecloud.internal"/>-->
+				</Context>
+			</Host>
+		</Engine>
+	</Service>
+</Server>

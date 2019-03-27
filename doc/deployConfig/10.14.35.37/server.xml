@@ -25,7 +25,7 @@
 
 				<Context docBase="/home/enteo_test/apache-tomcat-9.0.14/entityonline" path="" reloadable="true">
 					<Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%a %h %l %u %t &quot;%r&quot; %s %b" prefix="entityonline_access_log" suffix=".txt"/>
-<!--					<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" maxIdle="30" maxTotal="100" name="jdbc/perciJndi" username="PERCI_0228" password="welcome1" type="javax.sql.DataSource" url="jdbc:oracle:thin:@10.14.35.41:1521:TEST"/>-->
+<!--					<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" maxIdle="30" maxTotal="100" name="jdbc/perciJndi" username="PERCI_0219" password="welcome1" type="javax.sql.DataSource" url="jdbc:oracle:thin:@10.14.35.41:1521:TEST"/>-->
 <!--					<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" maxIdle="30" maxTotal="100" name="jdbc/perciJndi" username="PERCI" password="WELCOME1" type="javax.sql.DataSource" url="jdbc:oracle:thin:@entipx-ora2:1521:PROD"/>-->
 				</Context>
 

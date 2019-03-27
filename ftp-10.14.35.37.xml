@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ZZZ - Upload Deployment Set - 10.14.35.37" default="all" basedir=".">
+	<property file="ftp-10.14.35.37.properties"/>
+
+	<target name="all"
+		depends="0-init,
+				 1-zip,
+				 2-ftp"
+		description="Run All Targets"
+	/>
+
+	<target name="0-init">
+		<delete dir="${det.war}/${name.keyDir}"/>
+		<sshexec host="${server.ip}"
+			username="${server.id}"
+			password="${server.pw}"
+			trust="true"
+			command="rm -rf ${server.dir.root}/${server.dir.buildset}/${name.keyDir}/*"
+		/>
+	</target>
+
+	<target name="1-zip">
+		<mkdir dir="${det.war}/${name.keyDir}"/>
+		<zip destfile="${det.war}/${name.warFile}" basedir="${src.war}" excludes="**/CVS/**, **/cvs/**"/>
+	</target>
+
+	<target name="2-ftp">
+		<scp todir="${server.id}:${server.pw}@${server.ip}:${server.dir.root}/${server.dir.buildset}"
+			file="${det.war}/${name.warFile}"
+			trust="true"
+		/>
+
+		<scp todir="${server.id}:${server.pw}@${server.ip}:${server.dir.root}/${server.dir.buildset}/${name.keyDir}" trust="true">
+			<fileset dir="${src.war}" excludes="**/CVS/**, **/cvs/**"/>
+		</scp>
+	</target>
+
+	<target name="9-direct">
+		<scp todir="${server.id}:${server.pw}@${server.ip}:${server.dir.root}/${server.dir.serverApp}" trust="true">
+			<fileset dir="${src.war}" excludes="**/CVS/**, **/cvs/**"/>
+		</scp>
+	</target>
+</project>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="build EO" default="distribution" basedir=".">
+	<property file="buildEO.properties"/>
+
+	<target name="clear">
+		<delete dir="${file.war.det}"/>
+		<delete dir="${dir.server.app}"/>
+	</target>
+
+	<target name="unzip" depends="clear">
+		<unzip src="${file.war.src}" dest="${file.war.det}"/>
+		<delete file="${dir.prop.det}/config.properties"/>
+		<delete file="${dir.prop.det}/log4j2.xml"/>
+	</target>
+
+	<target name="copyProperties" depends="unzip">
+		<copy todir="${dir.prop.det}">
+			<fileset file="${dir.prop.src}/config.properties"/>
+			<fileset file="${dir.prop.src}/log4j2.xml"/>
+		</copy>
+	</target>
+
+	<target name="distribution" depends="copyProperties">
+		<copy todir="${dir.server.app}">
+			<fileset dir="${file.war.det}" casesensitive="yes"/>
+		</copy>
+	</target>
+</project>
