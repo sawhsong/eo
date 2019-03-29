@@ -4,7 +4,7 @@
 
 	<target name="all"
 		depends="0-init,
-				 1-zip,
+				 1-properties,
 				 2-ftp"
 		description="Run All Targets"
 	/>
@@ -17,10 +17,13 @@
 			trust="true"
 			command="rm -rf ${server.dir.root}/${server.dir.buildset}/${name.keyDir}/*"
 		/>
+		<mkdir dir="${det.war}/${name.keyDir}"/>
+		<copy todir="${det.war}/${name.keyDir}">
+			<fileset dir="${src.dir}"/>
+		</copy>
 	</target>
 
-	<target name="1-zip">
-		<mkdir dir="${det.war}/${name.keyDir}"/>
+	<target name="1-properties">
 		<zip destfile="${det.war}/${name.warFile}" basedir="${src.war}" excludes="**/CVS/**, **/cvs/**"/>
 	</target>
 
