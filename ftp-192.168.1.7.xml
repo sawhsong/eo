@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ZZZ - Upload Deployment Set to BuildSet - 129.154.120.219" default="all" basedir=".">
-	<property file="ftp-129.154.120.219.properties"/>
+<project name="ZZZ - Upload Deployment Set to BuildSet - 192.168.1.7" default="all" basedir=".">
+	<property file="ftp-192.168.1.7.properties"/>
 
 	<target name="all"
 		depends="0-init,
@@ -53,9 +53,7 @@
 			trust="true"
 			command="
 				export JAVA_HOME=${server.dir.jdkHome};
-				bash ${server.cmd.shutdown};
-				rm -rf ${server.dir.root}/${server.dir.serverApp}/*
-			"
+				bash ${server.cmd.shutdown}"
 		/>
 
 		<!-- 0 -->

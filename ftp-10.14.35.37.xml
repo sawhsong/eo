@@ -52,9 +52,7 @@
 			trust="true"
 			command="
 				export JAVA_HOME=${server.dir.jdkHome};
-				bash ${server.cmd.shutdown};
-				rm -rf ${server.dir.root}/${server.dir.serverApp}/*
-			"
+				bash ${server.cmd.shutdown}"
 		/>
 
 		<!-- 0 -->
