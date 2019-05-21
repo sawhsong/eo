@@ -35,6 +35,7 @@ public interface WebServiceClientBizService {
 	 * Employee - Leave
 	 */
 	public DataSet getLeaveAssignmentListDataSet(ParamEntity paramEntity, String personId) throws Exception;
+	public DataSet getLeaveAssignmentListForApproverDataSet(ParamEntity paramEntity, String personId) throws Exception;
 	public DataSet getLeaveListDataSet(ParamEntity paramEntity, String personId, String assignmentId) throws Exception;
 	public DataSet getAccrualListDataSet(ParamEntity paramEntity, String assignmentId) throws Exception;
 	public void getLeaveDetail(ParamEntity paramEntity, String leaveRequestId) throws Exception;

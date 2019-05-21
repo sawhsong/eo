@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="build EP" default="copyProperties" basedir=".">
+	<property file="buildEP.properties"/>
+
+	<target name="clear">
+		<delete dir="${dir.server.app}"/>
+	</target>
+
+	<target name="unzip" depends="clear">
+		<unzip src="${file.war.src}" dest="${dir.server.app}"/>
+		<delete file="${dir.server.app}/${dir.class}/config.properties"/>
+		<delete file="${dir.server.app}/${dir.class}/log4j2.xml"/>
+	</target>
+
+	<target name="copyProperties" depends="unzip">
+		<copy todir="${dir.server.app}/${dir.class}">
+			<fileset file="${dir.prop.det}/config.properties"/>
+			<fileset file="${dir.prop.det}/log4j2.xml"/>
+		</copy>
+	</target>
+</project>

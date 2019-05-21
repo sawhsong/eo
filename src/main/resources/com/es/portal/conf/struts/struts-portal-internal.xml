@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="internal" extends="default" namespace="/" strict-method-invocation="false">
+		<default-interceptor-ref name="ZebraDefaultStack"/>
+		<action name="leave/*" class="com.es.portal.app.leave.LeaveAction" method="{1}">
+			<result name="leaveList" type="debugDispatcherResult">/com/es/portal/app/leave/LeaveList.jsp</result>
+			<result name="leaveDetail" type="debugDispatcherResult">/com/es/portal/app/leave/LeaveDetail.jsp</result>
+			<result name="updateLeave" type="debugDispatcherResult">/com/es/portal/app/leave/UpdateLeave.jsp</result>
+			<result name="newLeave" type="debugDispatcherResult">/com/es/portal/app/leave/NewLeave.jsp</result>
+		</action>
+
+		<action name="leaveadm/*" class="com.es.portal.app.leaveadm.LeaveAdmAction" method="{1}">
+			<result name="leaveList" type="debugDispatcherResult">/com/es/portal/app/leaveadm/LeaveAdmList.jsp</result>
+			<result name="leaveDetail" type="debugDispatcherResult">/com/es/portal/app/leaveadm/LeaveAdmDetail.jsp</result>
+			<result name="updateLeave" type="debugDispatcherResult">/com/es/portal/app/leaveadm/UpdateLeaveAdm.jsp</result>
+		</action>
+
+		<action name="expense/*" class="com.es.portal.app.expense.ExpenseAction" method="{1}">
+			<result name="expenseList" type="debugDispatcherResult">/com/es/portal/app/expense/ExpenseList.jsp</result>
+			<result name="expenseDetail" type="debugDispatcherResult">/com/es/portal/app/expense/ExpenseDetail.jsp</result>
+			<result name="updateExpense" type="debugDispatcherResult">/com/es/portal/app/expense/UpdateExpense.jsp</result>
+			<result name="newExpense" type="debugDispatcherResult">/com/es/portal/app/expense/NewExpense.jsp</result>
+		</action>
+	</package>
+</struts>

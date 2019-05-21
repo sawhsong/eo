@@ -5,9 +5,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<bean id="loginAction" name="loginAction" class="${name.package.project}.login.LoginAction"/>
-	<bean id="loginBiz" name="loginBiz" class="${name.package.project}.login.LoginBizImpl" parent="baseBiz"/>
-	<bean id="loginMessageSender" class="${name.package.project}.login.LoginMessageSender">
+	<bean id="loginAction" name="loginAction" class="${name.package.projectApp}.login.LoginAction"/>
+	<bean id="loginBiz" name="loginBiz" class="${name.package.projectApp}.login.LoginBizImpl" parent="baseBiz"/>
+	<bean id="loginMessageSender" class="${name.package.projectApp}.login.LoginMessageSender">
 		<property name="javaMailSender" ref="javaMailSender" />
 		<property name="messageSourceAccessor" ref="messageSourceAccessor" />
 	</bean>

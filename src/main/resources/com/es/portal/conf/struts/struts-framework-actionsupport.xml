@@ -72,7 +72,7 @@
 		</action>
 
 		<!--/* EO File Download for RESTWebService */-->
-		<action name="restServiceDownloadEO" class="com.es.portal.common.module.actionsupport.RestServiceDownloadAction">
+		<action name="restServiceDownloadEP" class="com.es.portal.common.module.actionsupport.RestServiceDownloadAction">
 			<result name="success" type="stream">
 				<param name="contentType">application/octet-stream</param>
 				<param name="inputName">inputStream</param>

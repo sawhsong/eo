@@ -3,14 +3,14 @@
 <struts>
 	<package name="serviceresource" extends="default" namespace="/serviceresource" strict-method-invocation="false">
 		<default-interceptor-ref name="ZebraDefaultStack"/>
-		<action name="pages/*" class="com.es.portal.serviceresource.ServiceResourceAction" method="{1}">
-			<result name="disclaimer" type="debugDispatcherResult">/com/es/portal/serviceresource/main/Disclaimer.jsp</result>
-			<result name="privacy" type="debugDispatcherResult">/com/es/portal/serviceresource/main/Privacy.jsp</result>
+		<action name="pages/*" class="com.es.portal.app.serviceresource.ServiceResourceAction" method="{1}">
+			<result name="disclaimer" type="debugDispatcherResult">/com/es/portal/app/serviceresource/main/Disclaimer.jsp</result>
+			<result name="privacy" type="debugDispatcherResult">/com/es/portal/app/serviceresource/main/Privacy.jsp</result>
 		</action>
 
-		<action name="employee/leave/*" class="com.es.portal.serviceresource.ServiceResourceAction" method="{1}">
-			<result name="approveLeave" type="debugDispatcherResult">/com/es/portal/serviceresource/employee/leave/ApproveLeave.jsp</result>
-			<result name="alreadyProcessed" type="debugDispatcherResult">/com/es/portal/serviceresource/employee/leave/AlreadyProcessed.jsp</result>
+		<action name="employee/leave/*" class="com.es.portal.app.serviceresource.ServiceResourceAction" method="{1}">
+			<result name="approveLeave" type="debugDispatcherResult">/com/es/portal/app/serviceresource/employee/leave/ApproveLeave.jsp</result>
+			<result name="alreadyProcessed" type="debugDispatcherResult">/com/es/portal/app/serviceresource/employee/leave/AlreadyProcessed.jsp</result>
 		</action>
 	</package>
 </struts>

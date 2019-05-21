@@ -52,67 +52,7 @@ select 'ENTITY_SOLUTIONS_STAFF' as group_id,
   from eo_menu
  where menu_id in ('HOME',
                    'Leave',
-                   'Expense-Emp'
-                  )
-)
-;
-
-insert into eo_menu_auth_link (
-select 'PREMIUM_IPRO_PORTAL_USER' as group_id,
-       eo_menu.menu_id,
-       (select user_id from sys_users where user_name = 'admdustin') as insert_user_id,
-       sysdate as insert_date,
-       null as update_user_id,
-       null as update_date
-  from eo_menu
- where menu_id in ('HOME',
-                   'Form',
-                   'Contactus',
-                   'Taskflow',
-                   'Document',
-                   'Payslip',
-                   'Timesheet-IPro',
-                   'Expense-IPro',
-                   'Service'
-                  )
-)
-;
-
-insert into eo_menu_auth_link (
-select 'TEMPORARY_IPRO_PORTAL_USER' as group_id,
-       eo_menu.menu_id,
-       (select user_id from sys_users where user_name = 'admdustin') as insert_user_id,
-       sysdate as insert_date,
-       null as update_user_id,
-       null as update_date
-  from eo_menu
- where menu_id in ('HOME',
-                   'Form',
-                   'Contactus',
-                   'Taskflow',
-                   'Document',
-                   'Payslip',
-                   'Timesheet-IPro',
-                   'Service'
-                  )
-)
-;
-
-insert into eo_menu_auth_link (
-select 'GENERAL_CORPORATE_USER' as group_id,
-       eo_menu.menu_id,
-       (select user_id from sys_users where user_name = 'admdustin') as insert_user_id,
-       sysdate as insert_date,
-       null as update_user_id,
-       null as update_date
-  from eo_menu
- where menu_id in ('HOME',
-                   'Form',
-                   'Contactus',
-                   'IPro',
-                   'Invoice',
-                   'Contract',
-                   'Timesheet-Corp'
+                   'Expense'
                   )
 )
 ;
@@ -127,7 +67,7 @@ select 'LEAVE_ADM_USER' as group_id,
   from eo_menu
  where menu_id in ('HOME',
                    'Leave',
-                   'Expense-Emp',
+                   'Expense',
                    'LeaveManagement'
                   )
 )

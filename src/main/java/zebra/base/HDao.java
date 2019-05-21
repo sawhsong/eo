@@ -424,6 +424,7 @@ public class HDao extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	private DataSet selectAsDataSet(QueryAdvisor queryAdvisor, Dto dto) throws Exception {
 		DataSet dataSet;
 
@@ -431,17 +432,23 @@ public class HDao extends HibernateDaoSupport {
 		setWhereClauseVariables(queryAdvisor);
 		setOrderByClauseVariables(queryAdvisor);
 
-		dataSet = new DataSet(query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE).list());
-		queryAdvisor.setTotalResultRows(dataSet.getRowCnt());
-
 		if (queryAdvisor.isPagination()) {
+			Query countQuery = session.createSQLQuery(getCountQuery(query.getQueryString()));
+
+			dataSet = new DataSet(countQuery.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE).list());
+			queryAdvisor.setTotalResultRows(CommonUtil.toInt(dataSet.getValue(0, 0)));
+
 			setPagination(queryAdvisor);
 			dataSet = new DataSet(query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE).list());
+		} else {
+			dataSet = new DataSet(query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE).list());
+			queryAdvisor.setTotalResultRows(dataSet.getRowCnt());
 		}
 
 		return dataSet;
 	}
 
+	@SuppressWarnings("rawtypes")
 	private DataSet selectAsDataSet(QueryAdvisor queryAdvisor) throws Exception {
 		DataSet dataSet;
 
@@ -450,12 +457,17 @@ public class HDao extends HibernateDaoSupport {
 		setWhereClauseVariables(queryAdvisor);
 		setOrderByClauseVariables(queryAdvisor);
 
-		dataSet = new DataSet(query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE).list());
-		queryAdvisor.setTotalResultRows(dataSet.getRowCnt());
-
 		if (queryAdvisor.isPagination()) {
+			Query countQuery = session.createSQLQuery(getCountQuery(query.getQueryString()));
+
+			dataSet = new DataSet(countQuery.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE).list());
+			queryAdvisor.setTotalResultRows(CommonUtil.toInt(dataSet.getValue(0, 0)));
+
 			setPagination(queryAdvisor);
 			dataSet = new DataSet(query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE).list());
+		} else {
+			dataSet = new DataSet(query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE).list());
+			queryAdvisor.setTotalResultRows(dataSet.getRowCnt());
 		}
 
 		return dataSet;
@@ -572,6 +584,16 @@ public class HDao extends HibernateDaoSupport {
 	private void setMaxResults(int value) throws Exception {
 		checkQueryObject();
 		query.setMaxResults(value);
+	}
+
+	private String getCountQuery(String queryString) throws Exception {
+		String rtn = "";
+
+		rtn += "select count(*) from (";
+		rtn += queryString;
+		rtn += ")";
+
+		return rtn;
 	}
 
 	private String getCamelCaseClassName(String className) {

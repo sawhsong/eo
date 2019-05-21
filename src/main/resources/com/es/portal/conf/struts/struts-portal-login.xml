@@ -3,12 +3,12 @@
 <struts>
 	<package name="login" extends="default" namespace="/" strict-method-invocation="false">
 		<default-interceptor-ref name="ZebraDefaultStack"/>
-		<action name="login/*" class="com.es.portal.login.LoginAction" method="{1}">
-			<result name="loginPage" type="debugDispatcherResult">/com/es/portal/login/login.jsp</result>
-			<result name="forgottenUserId" type="debugDispatcherResult">/com/es/portal/login/forgottenUserIdPop.jsp</result>
-			<result name="forgottenPassword" type="debugDispatcherResult">/com/es/portal/login/forgottenPasswordPop.jsp</result>
-			<result name="userProfile" type="debugDispatcherResult">/com/es/portal/login/userProfilePop.jsp</result>
-			<result name="updateUserProfile" type="debugDispatcherResult">/com/es/portal/login/updateUserProfilePop.jsp</result>
+		<action name="login/*" class="com.es.portal.app.login.LoginAction" method="{1}">
+			<result name="loginPage" type="debugDispatcherResult">/com/es/portal/app/login/login.jsp</result>
+			<result name="forgottenUserId" type="debugDispatcherResult">/com/es/portal/app/login/forgottenUserIdPop.jsp</result>
+			<result name="forgottenPassword" type="debugDispatcherResult">/com/es/portal/app/login/forgottenPasswordPop.jsp</result>
+			<result name="userProfile" type="debugDispatcherResult">/com/es/portal/app/login/userProfilePop.jsp</result>
+			<result name="updateUserProfile" type="debugDispatcherResult">/com/es/portal/app/login/updateUserProfilePop.jsp</result>
 		</action>
 	</package>
 </struts>

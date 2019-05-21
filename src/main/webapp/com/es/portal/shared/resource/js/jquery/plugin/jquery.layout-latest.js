@@ -1,7 +1,7 @@
 /**
  * @preserve
  * jquery.layout 1.4.4
- * $Date: 2014-11-29 08:00:00 (Sat, 29 November 2014) $
+ * $Date: 2019/06/03 04:02:44 $
  * $Rev: 1.0404 $
  *
  * Copyright (c) 2014 Kevin Dalman (http://jquery-dev.com)
@@ -5135,7 +5135,7 @@ $.fn.layout = function (opts) {
 
 /**
  * jquery.layout.state 1.2
- * $Date: 2014-08-30 08:00:00 (Sat, 30 Aug 2014) $
+ * $Date: 2019/06/03 04:02:44 $
  *
  * Copyright (c) 2014 
  *   Kevin Dalman (http://allpro.net)
@@ -5610,7 +5610,7 @@ $.layout.onUnload.push( $.layout.state._unload );
 
 /**
  * @preserve jquery.layout.buttons 1.0
- * $Date: 2011-07-16 08:00:00 (Sat, 16 July 2011) $
+ * $Date: 2019/06/03 04:02:44 $
  *
  * Copyright (c) 2011 
  *   Kevin Dalman (http://allpro.net)
@@ -5879,7 +5879,7 @@ $.layout.onLoad.push(  $.layout.buttons._load );
 
 /**
  * jquery.layout.browserZoom 1.0
- * $Date: 2011-12-29 08:00:00 (Thu, 29 Dec 2011) $
+ * $Date: 2019/06/03 04:02:44 $
  *
  * Copyright (c) 2012 
  *   Kevin Dalman (http://allpro.net)

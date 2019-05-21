@@ -781,6 +781,12 @@ public class HpPersonD extends BaseDto implements Serializable {
 		}
 	}
 
+	public void setValues(DataSet dataSet, int rowIndex) throws Exception {
+		for (int i=0; i<dataSet.getColumnCnt(); i++) {
+			setValue(dataSet.getName(i), dataSet.getValue(rowIndex, i));
+		}
+	}
+
 	private void setValueFromAccessor(String columnName, String value) throws Exception {
 		dataSet.setValue(dataSet.getRowCnt()-1, columnName, value);
 	}

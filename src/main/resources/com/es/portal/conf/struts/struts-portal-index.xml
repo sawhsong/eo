@@ -3,13 +3,13 @@
 <struts>
 	<package name="index" extends="default" namespace="/index" strict-method-invocation="false">
 		<default-interceptor-ref name="ZebraDefaultStack"/>
-		<action name="main/*" class="com.es.portal.index.IndexAction" method="{1}">
-			<result name="success" type="debugDispatcherResult">/com/es/portal/index/IndexDefault.jsp</result>
-			<result name="dashboard" type="debugDispatcherResult">/com/es/portal/index/IndexDashboard.jsp</result>
+		<action name="main/*" class="com.es.portal.app.index.IndexAction" method="{1}">
+			<result name="success" type="debugDispatcherResult">/com/es/portal/app/index/IndexDefault.jsp</result>
+			<result name="dashboard" type="debugDispatcherResult">/com/es/portal/app/index/IndexDashboard.jsp</result>
 		</action>
-		<action name="contact/*" class="com.es.portal.index.IndexAction" method="{1}">
-			<result name="contactus" type="debugDispatcherResult">/com/es/portal/index/ContactUs.jsp</result>
-			<result name="contactuspop" type="debugDispatcherResult">/com/es/portal/index/ContactUsPop.jsp</result>
+		<action name="contact/*" class="com.es.portal.app.index.IndexAction" method="{1}">
+			<result name="contactus" type="debugDispatcherResult">/com/es/portal/app/index/ContactUs.jsp</result>
+			<result name="contactuspop" type="debugDispatcherResult">/com/es/portal/app/index/ContactUsPop.jsp</result>
 		</action>
 	</package>
 </struts>

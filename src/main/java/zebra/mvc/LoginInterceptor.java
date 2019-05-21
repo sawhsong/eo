@@ -11,8 +11,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
-import com.es.portal.login.LoginAction;
-import com.es.portal.serviceresource.ServiceResourceAction;
+import com.es.portal.app.login.LoginAction;
+import com.es.portal.app.serviceresource.ServiceResourceAction;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;

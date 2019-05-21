@@ -293,7 +293,7 @@ public class DataSet {
 				}
 			}
 		}
-		dto.setValues(this);
+		dto.setValues(this, row);
 
 		return dto;
 	}

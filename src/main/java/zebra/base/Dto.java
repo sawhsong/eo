@@ -100,7 +100,14 @@ public abstract class Dto {
 	/*!
 	 * Override
 	 */
+	/*
+	 * dataSet has only 1 row - DAO.selectAllToDto()
+	 */
 	public abstract void setValues(DataSet dataSet) throws Exception;
+	/*
+	 * dataSet has multiple rows - DataSet.getRowAsDto()
+	 */
+	public abstract void setValues(DataSet dataSet, int rowIndex) throws Exception;
 	public abstract String toXmlString();
 	public abstract String toJsonString();
 }

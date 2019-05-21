@@ -5,6 +5,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<bean id="indexAction" name="indexAction" class="${name.package.project}.index.IndexAction"/>
-	<bean id="indexBiz" name="indexBiz" class="${name.package.project}.index.IndexBizImpl" parent="baseBiz"/>
+	<bean id="indexAction" name="indexAction" class="${name.package.projectApp}.index.IndexAction"/>
+	<bean id="indexBiz" name="indexBiz" class="${name.package.projectApp}.index.IndexBizImpl" parent="baseBiz"/>
 </beans>

@@ -6,7 +6,5 @@
     <include file="com/es/portal/conf/struts/struts-portal-login.xml"/>
     <include file="com/es/portal/conf/struts/struts-portal-index.xml"/>
     <include file="com/es/portal/conf/struts/struts-portal-serviceresource.xml"/>
-    <include file="com/es/portal/conf/struts/struts-portal-ipro.xml"/>
-    <include file="com/es/portal/conf/struts/struts-portal-corporate.xml"/>
-    <include file="com/es/portal/conf/struts/struts-portal-employee.xml"/>
+    <include file="com/es/portal/conf/struts/struts-portal-internal.xml"/>
 </struts>
