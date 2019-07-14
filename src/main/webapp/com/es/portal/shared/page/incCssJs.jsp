@@ -46,6 +46,7 @@
 <script type="text/javascript" src="<mc:cp key="jsCommon"/>/UiGridTd.js"></script>
 <script type="text/javascript" src="<mc:cp key="jsCommon"/>/UiGridTr.js"></script>
 <script type="text/javascript" src="<mc:cp key="jsCommon"/>/UiIcon.js"></script>
+<script type="text/javascript" src="<mc:cp key="jsCommon"/>/UiRadio.js"></script>
 
 <script type="text/javascript" src="<mc:cp key="jsCommon"/>/contextMenu.js"></script>
 <script type="text/javascript" src="<mc:cp key="jsCommon"/>/commonJs.js"></script>
