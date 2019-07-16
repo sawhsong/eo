@@ -342,6 +342,15 @@
 			else if ($.nony.browser.FireFox) {$fixedTable.width($table.width()+1);}
 			else {$fixedTable.width($table.width()+1);}
 
+			/*!
+			 * If (table width != '100%' or table width > attachTo width) then do not apply fixedHeader
+			 * this needs to be implemented
+			 */
+			if ($table.width() > $(options.attachTo).width()) {
+				$(options.attachTo).css({"border-left":"1px solid", "border-color":borderColor});
+				return;
+			}
+
 			$table.before($fixedTable);
 			$fixedTable.append($header).show();
 
@@ -380,6 +389,11 @@
 				} else {
 					$fixedTable.show();
 				}
+			});
+
+			var left = $table.offset().left;
+			$(options.attachTo).bind("scroll", function() {
+				$fixedTable.css("left", left - $(options.attachTo).scrollLeft());
 			});
 		});
 	};
