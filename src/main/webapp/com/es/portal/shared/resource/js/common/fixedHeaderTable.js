@@ -35,6 +35,7 @@
 			var $scrollablePanel, attachToHeight = 0, isScrollbar = false, heightAdjustment = 0,
 				isPopup = $.nony.isPopup(), tableId = $(this).attr("id");
 			var systemGeneratedTableForFixedHeaderId = jsconfig.get("systemGeneratedTableForFixedHeaderId"+tableId) || "systemGeneratedTableForFixedHeader"+tableId;
+			var divSystemGeneratedFixedTableHeaderWrapperId = jsconfig.get("divSystemGeneratedFixedTableHeaderWrapperId");
 
 			$(options.attachTo).css("overflow", "auto");
 
@@ -343,13 +344,11 @@
 			else {$fixedTable.width($table.width()+1);}
 
 			/*!
-			 * If (table width != '100%' or table width > attachTo width) then do not apply fixedHeader
-			 * this needs to be implemented
+			 * If (table width != '100%' or table width > attachTo width)
 			 */
-			if ($table.width() > $(options.attachTo).width()) {
-				$(options.attachTo).css({"border-left":"1px solid", "border-color":borderColor});
-				return;
-			}
+//			if ($table.width() > $(options.attachTo).width()) {
+//				return;
+//			}
 
 			$table.before($fixedTable);
 			$fixedTable.append($header).show();
@@ -391,10 +390,78 @@
 				}
 			});
 
-			var left = $table.offset().left;
-			$(options.attachTo).bind("scroll", function() {
-				$fixedTable.css("left", left - $(options.attachTo).scrollLeft());
-			});
+			/*!
+			 * If (table width != '100%' or table width > attachTo width)
+			 * -> this case : another attachTo div should be created inside 'divDataArea'
+			 */
+			if ($table.width() > $(options.attachTo).width()) {
+				var borderColor = $table.find("tbody>tr>td:first-child").css("border-color");
+				var wrapperWidth = 0, leftPos = 0, scrollWidth = 0, scrollHeight = 0;
+
+				if ($.nony.browser.Chrome) {
+					scrollWidth = 18;
+					scrollHeight = 18;
+				} else if ($.nony.browser.FireFox) {
+					scrollWidth = 19;
+					scrollHeight = 19;
+				} else {
+					scrollWidth = 19;
+					scrollHeight = 19;
+				}
+
+				if ($("#"+divSystemGeneratedFixedTableHeaderWrapperId).length > 0) {
+					$("#"+divSystemGeneratedFixedTableHeaderWrapperId).remove();
+					if ($(options.attachTo).height() > $table.height()) {
+						$(options.attachTo).height($(this).height() + (heightAdjustment - 4) + scrollHeight);
+					}
+				}
+
+				$(options.attachTo).css({"border-left":"0px solid", "border-color":borderColor});
+
+				// is scroll bar displayed?
+				if ($(options.attachTo).height() <= $table.height()) {
+					wrapperWidth = $(options.attachTo).width()-scrollWidth;
+				} else {
+					wrapperWidth = $(options.attachTo).width();
+				}
+
+				if (isPopup) {
+					if ($.nony.browser.Chrome) {leftPos = $fixedTable.offset().left+0;}
+					else if ($.nony.browser.FireFox) {leftPos = $fixedTable.offset().left+0;}
+					else {leftPos = $fixedTable.offset().left+0;}
+				} else {
+					if ($.nony.browser.Chrome) {leftPos = $fixedTable.offset().left+0;}
+					else if ($.nony.browser.FireFox) {leftPos = $fixedTable.offset().left+0;}
+					else {leftPos = $fixedTable.offset().left+0;}
+				}
+
+				var $wrapper = $("<div id=\"divSystemGeneratedFixedTableHeaderWrapper"+tableId+"\"></div>").css({
+					"width":wrapperWidth,
+					"height":$header.height()+1,
+					"left":leftPos,
+					"top":$fixedTable.offset().top,
+					"position":"fixed",
+					"table-layout":"fixed",
+					"margin-top":"0px",
+//					"border":"1px solid red",
+					"overflow":"hidden"
+				});
+				$fixedTable.css("table-layout", "").css("position", "relative");
+				$fixedTable.detach().appendTo($wrapper);
+				$table.before($wrapper);
+
+				jsconfig.put("divSystemGeneratedFixedTableHeaderWrapperId", "divSystemGeneratedFixedTableHeaderWrapper"+tableId);
+
+				var left = $table.offset().left;
+				$(options.attachTo).bind("scroll", function() {
+					$wrapper.scrollLeft($(options.attachTo).scrollLeft());
+//					$fixedTable.css("left", left - $(options.attachTo).scrollLeft());
+				});
+
+				$(options.attachTo).scrollLeft("0");
+			}
+
+			$(options.attachTo).scrollTop("0");
 		});
 	};
 })(jQuery);
