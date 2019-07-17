@@ -233,7 +233,7 @@ $(window).load(function() {
 	if (jsconfig.get("useJqSelectmenu")) {
 		setTimeout(function() {
 			$.nony._jqSelectmenu();
-		}, 100);
+		}, $.nony.nvl(jsconfig.get("jqSelectmenuInterval"), 0));
 	}
 
 //	$.nony._customiseUserEvent();
