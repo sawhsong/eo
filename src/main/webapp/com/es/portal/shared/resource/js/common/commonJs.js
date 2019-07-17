@@ -175,6 +175,9 @@ var commonJs = {
 				west__size:0,
 				onresize_end:function() {
 //					$(window).trigger("resize");
+//					try {
+//						doSearch();
+//					} catch(e) {}
 				}
 			};
 		} else {
@@ -195,6 +198,9 @@ var commonJs = {
 				west__minSize:0,
 				onresize_end:function() {
 					$(window).trigger("resize");
+//					try {
+//						doSearch();
+//					} catch(e) {}
 				}
 			};
 		}
