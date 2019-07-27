@@ -576,6 +576,13 @@ var nony = {
 			horAdjust:0
 		});
 	},
+	copyToClipboard : function(value) {
+		var $temp = $("<input>");
+		$("body").append($temp);
+		$temp.val(value).select();
+		document.execCommand("copy");
+		$temp.remove();
+	},
 	/*!
 	 * jQuery UI
 	 */
