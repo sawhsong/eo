@@ -23,6 +23,7 @@ var commonJs = {
 	 */
 	ajax : function(params) {$.nony.ajax.ajax(params);},
 	ajaxSubmit : function(params) {$.nony.ajax.ajaxSubmit(params);},
+	ajaxSubmitMultipart : function(params) {$.nony.ajax.ajaxSubmitMultipart(params);},
 	parseAjaxResult : function(data, textStatus, dataType) {return $.nony.ajax.parseAjaxResult(data, textStatus, dataType);},
 	getFormDataFromSerializedArray : function(formSerializedArray) {return $.nony.ajax.getFormDataFromSerializedArray(formSerializedArray);},
 	/*!

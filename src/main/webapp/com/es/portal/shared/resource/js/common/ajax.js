@@ -131,6 +131,118 @@
 			$.nony.ajax.ajax(params);
 		},
 		/*!
+		 * Ajax Submit with Files - form enctype:multipart/form-data -> support
+		 */
+		ajaxSubmitMultipart : function(params) {
+			if ($.nony.isEmpty(params.formId)) {
+				throw new Error("Form Id" + com.message.required);
+				return;
+			}
+
+			if (!$.nony.isEmpty(params.formId)) {
+				if (typeof(params.formId) == "object") {
+					throw new Error("Form Id" + com.message.invalid);
+					return;
+				}
+			}
+
+			if ($.nony.isEmpty(params.url)) {
+				throw new Error("URL" + com.message.required);
+				return;
+			}
+
+			$("#"+params.formId).attr("enctype", "multipart/form-data");
+			var formData = new FormData($("#"+params.formId)[0]);
+
+			if (params.data != null) {
+				for (var keys in params.data) {
+					formData.append(keys, params.data[keys]);
+				}
+			}
+
+			params.dataType = params.dataType || "json";
+			params.type = "POST";
+			params.data = formData;
+			params.contentType = false,
+			params.processData = false,
+			params.blind = (params.blind == true) ? true : false;
+			params.blindMessage = params.blindMessage || com.message.loading;
+
+			if (params.blind) {
+				if (($(".nonyPopWinBase").length + $(".nonyDialogBase").length) == 0) {
+					$.nony.showProcMessage(com.message.loading);
+				}
+			}
+
+			$(document).ajaxStart(function(event, xhr, options) {
+			});
+
+			$(document).ajaxStop(function() {
+			});
+
+			params.headers = {"ajaxDataTypeForFramework":params.dataType};
+			params.error = function(xhr, textStatus, errorThrown) {
+				var data, contentsString = "";
+
+				console.log("request.status : "+xhr.status);
+				console.log("request.responseText : "+xhr.responseText);
+				console.log("textStatus : "+textStatus);
+				console.log("errorThrown : "+errorThrown);
+
+				try {
+					if (xhr.responseText == "SessionTimedOut" || xhr.responseXML == "SessionTimedOut") {
+						commonJs.openDialog({
+							contents:com.message.sessionTimeOut,
+							buttons:[{
+								caption:com.caption.ok,
+								callback:function() {
+									location.replace("/index/index");
+								}
+							}],
+							width:330,
+							blind:true
+						});
+
+						return;
+					}
+				} catch(e) {}
+
+				if (params.dataType == "xml") {
+					data = xhr.responseXML;
+				} else if (params.dataType == "json") {
+					data = xhr.responseText;
+				} else {
+					data = xhr.responseText;
+				}
+
+//				contentsString += textStatus + "</br>";
+//				contentsString += errorThrown + "</br>";
+//				contentsString += data.message + "</br>";
+
+				$.nony.openDialog({
+					type:"Error",
+					contents:data,
+					width:"400",
+					height:"400",
+					buttons:[{
+						caption:com.caption.ok,
+						callback:function() {
+						}
+					}]
+				});
+			};
+
+			params.complete = function(xhr, textStatus) {
+				if (params.blind) {
+					if (($(".nonyPopWinBase").length + $(".nonyDialogBase").length) == 0) {
+						$.nony.hideProcMessage();
+					}
+				}
+			};
+
+			$.nony.ajax.ajax(params);
+		},
+		/*!
 		 * Utilities
 		 */
 		parseAjaxResult : function(data, textStatus, dataType) {
