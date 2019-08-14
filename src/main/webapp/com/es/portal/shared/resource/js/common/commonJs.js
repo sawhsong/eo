@@ -138,7 +138,6 @@ var commonJs = {
 	 */
 	doSearch : function(params) {$.nony.doSearch(params);},
 	doSimpleProcess : function(params) {$.nony.doSimpleProcess(params);},
-	doSimpleProcessNoForm : function(params) {$.nony.doSimpleProcessNoForm(params);},
 	doProcess : function(params) {$.nony.doProcess(params);},
 	doProcessWithFile : function(params) {$.nony.doProcessWithFile(params);},
 	doSave : function(params) {$.nony.doSave(params);},
