@@ -1283,7 +1283,11 @@ var nony = {
 							var result = commonJs.parseAjaxResult(data, textStatus, params.dataType||"json");
 
 							if (result.isSuccess == true || result.isSuccess == "true") {
-								if (params.showPostMessage == true) {
+								if (params.showPostMessage == false) {
+									setTimeout(function() {
+										params.callback();
+									}, 400);
+								} else {
 									commonJs.openDialog({
 										type:com.message.I000,
 										contents:result.message,
@@ -1298,10 +1302,6 @@ var nony = {
 											}
 										}]
 									});
-								} else {
-									setTimeout(function() {
-										params.callback();
-									}, 400);
 								}
 							} else {
 								commonJs.error(result.message);
@@ -1331,7 +1331,11 @@ var nony = {
 							var result = commonJs.parseAjaxResult(data, textStatus, params.dataType||"json");
 
 							if (result.isSuccess == true || result.isSuccess == "true") {
-								if (params.showPostMessage == true) {
+								if (params.showPostMessage == false) {
+									setTimeout(function() {
+										params.callback();
+									}, 400);
+								} else {
 									commonJs.openDialog({
 										type:com.message.I000,
 										contents:result.message,
@@ -1346,10 +1350,6 @@ var nony = {
 											}
 										}]
 									});
-								} else {
-									setTimeout(function() {
-										params.callback();
-									}, 400);
 								}
 							} else {
 								commonJs.error(result.message);
@@ -1379,7 +1379,11 @@ var nony = {
 							var result = commonJs.parseAjaxResult(data, textStatus, params.dataType||"json");
 
 							if (result.isSuccess == true || result.isSuccess == "true") {
-								if (params.showPostMessage == true) {
+								if (params.showPostMessage == false) {
+									setTimeout(function() {
+										params.callback();
+									}, 400);
+								} else {
 									commonJs.openDialog({
 										type:com.message.I000,
 										contents:result.message,
@@ -1394,10 +1398,6 @@ var nony = {
 											}
 										}]
 									});
-								} else {
-									setTimeout(function() {
-										params.callback();
-									}, 400);
 								}
 							} else {
 								commonJs.error(result.message);
@@ -1427,7 +1427,11 @@ var nony = {
 							var result = commonJs.parseAjaxResult(data, textStatus, params.dataType||"json");
 
 							if (result.isSuccess == true || result.isSuccess == "true") {
-								if (params.showPostMessage == true) {
+								if (params.showPostMessage == false) {
+									setTimeout(function() {
+										params.callback();
+									}, 400);
+								} else {
 									commonJs.openDialog({
 										type:com.message.I000,
 										contents:result.message,
@@ -1442,10 +1446,6 @@ var nony = {
 											}
 										}]
 									});
-								} else {
-									setTimeout(function() {
-										params.callback();
-									}, 400);
 								}
 							} else {
 								commonJs.error(result.message);
@@ -1475,7 +1475,11 @@ var nony = {
 							var result = commonJs.parseAjaxResult(data, textStatus, params.dataType||"json");
 
 							if (result.isSuccess == true || result.isSuccess == "true") {
-								if (params.showPostMessage == true) {
+								if (params.showPostMessage == false) {
+									setTimeout(function() {
+										params.callback();
+									}, 400);
+								} else {
 									commonJs.openDialog({
 										type:com.message.I000,
 										contents:result.message,
@@ -1490,10 +1494,6 @@ var nony = {
 											}
 										}]
 									});
-								} else {
-									setTimeout(function() {
-										params.callback();
-									}, 400);
 								}
 							} else {
 								commonJs.error(result.message);
