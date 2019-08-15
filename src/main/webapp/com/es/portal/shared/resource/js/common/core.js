@@ -1285,7 +1285,7 @@ var nony = {
 							if (result.isSuccess == true || result.isSuccess == "true") {
 								if (params.showPostMessage == false) {
 									setTimeout(function() {
-										params.callback();
+										params.callback(result);
 									}, 400);
 								} else {
 									commonJs.openDialog({
@@ -1297,7 +1297,7 @@ var nony = {
 											caption:com.caption.ok,
 											callback:function() {
 												setTimeout(function() {
-													params.callback();
+													params.callback(result);
 												}, 400);
 											}
 										}]
@@ -1333,7 +1333,7 @@ var nony = {
 							if (result.isSuccess == true || result.isSuccess == "true") {
 								if (params.showPostMessage == false) {
 									setTimeout(function() {
-										params.callback();
+										params.callback(result);
 									}, 400);
 								} else {
 									commonJs.openDialog({
@@ -1345,7 +1345,7 @@ var nony = {
 											caption:com.caption.ok,
 											callback:function() {
 												setTimeout(function() {
-													params.callback();
+													params.callback(result);
 												}, 400);
 											}
 										}]
@@ -1381,7 +1381,7 @@ var nony = {
 							if (result.isSuccess == true || result.isSuccess == "true") {
 								if (params.showPostMessage == false) {
 									setTimeout(function() {
-										params.callback();
+										params.callback(result);
 									}, 400);
 								} else {
 									commonJs.openDialog({
@@ -1393,7 +1393,7 @@ var nony = {
 											caption:com.caption.ok,
 											callback:function() {
 												setTimeout(function() {
-													params.callback();
+													params.callback(result);
 												}, 400);
 											}
 										}]
@@ -1429,7 +1429,7 @@ var nony = {
 							if (result.isSuccess == true || result.isSuccess == "true") {
 								if (params.showPostMessage == false) {
 									setTimeout(function() {
-										params.callback();
+										params.callback(result);
 									}, 400);
 								} else {
 									commonJs.openDialog({
@@ -1441,7 +1441,7 @@ var nony = {
 											caption:com.caption.ok,
 											callback:function() {
 												setTimeout(function() {
-													params.callback();
+													params.callback(result);
 												}, 400);
 											}
 										}]
@@ -1477,7 +1477,7 @@ var nony = {
 							if (result.isSuccess == true || result.isSuccess == "true") {
 								if (params.showPostMessage == false) {
 									setTimeout(function() {
-										params.callback();
+										params.callback(result);
 									}, 400);
 								} else {
 									commonJs.openDialog({
@@ -1489,7 +1489,7 @@ var nony = {
 											caption:com.caption.ok,
 											callback:function() {
 												setTimeout(function() {
-													params.callback();
+													params.callback(result);
 												}, 400);
 											}
 										}]
