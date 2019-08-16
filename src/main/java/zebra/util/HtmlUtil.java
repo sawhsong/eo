@@ -5,7 +5,7 @@ public class HtmlUtil {
 		if (CommonUtil.isBlank(text)) {
 			text = "";
 		} else {
-//			text = CommonUtil.replace(text, "&", "&amp;");
+			text = CommonUtil.replace(text, "&", "&amp;");
 //			text = CommonUtil.replace(text, "#", "&#35;");
 //			text = CommonUtil.replace(text, "<", "&lt;");
 //			text = CommonUtil.replace(text, ">", "&gt;");
@@ -24,7 +24,7 @@ public class HtmlUtil {
 		if (CommonUtil.isBlank(text)) {
 			text = "";
 		} else {
-//			text = CommonUtil.replace(text, "&amp;", "&");
+			text = CommonUtil.replace(text, "&amp;", "&");
 //			text = CommonUtil.replace(text, "&#35;", "#");
 //			text = CommonUtil.replace(text, "&lt;", "<");
 //			text = CommonUtil.replace(text, "&gt;", ">");
