@@ -1374,12 +1374,21 @@ var nony = {
 			}
 		}
 
+		var fixedScrollablePanelHeight = $.nony.nvl(jsconfig.get("fixedScrollablePanelHeight"), 0);
 		if (isPopup) {
-			heightCorrection = jsconfig.get("scrollablePanelHeightAdjust") || 2;
-			$("#divScrollablePanelPopup").height((heightWindow - (heightHeader + heightFooter + heightSum + heightCorrection))+"px");
+			if (fixedScrollablePanelHeight > 0) {
+				$("#divScrollablePanelPopup").height(fixedScrollablePanelHeight);
+			} else {
+				heightCorrection = jsconfig.get("scrollablePanelHeightAdjust") || 2;
+				$("#divScrollablePanelPopup").height((heightWindow - (heightHeader + heightFooter + heightSum + heightCorrection))+"px");
+			}
 		} else {
-			heightCorrection = jsconfig.get("scrollablePanelHeightAdjust") || 2;
-			$("#divScrollablePanel").height((heightWindow - (heightHeader + heightFooter + heightSum + heightCorrection))+"px");
+			if (fixedScrollablePanelHeight > 0) {
+				$("#divScrollablePanel").height(fixedScrollablePanelHeight);
+			} else {
+				heightCorrection = jsconfig.get("scrollablePanelHeightAdjust") || 2;
+				$("#divScrollablePanel").height((heightWindow - (heightHeader + heightFooter + heightSum + heightCorrection))+"px");
+			}
 		}
 
 		if (!jsconfig.get("isResizeScrollablePanelFuntionRegisteredInResizeEvent")) {
