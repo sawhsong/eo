@@ -38,6 +38,7 @@
 			<tx:method name="select*" read-only="true"/>
 			<tx:method name="save*" propagation="REQUIRED" timeout="600" rollback-for="Exception"/>
 			<tx:method name="exe*" propagation="REQUIRED" timeout="600" rollback-for="Exception"/>
+			<tx:method name="do*" propagation="REQUIRED" timeout="600" rollback-for="Exception"/>
 			<tx:method name="insert*" propagation="REQUIRED" timeout="600" rollback-for="Exception"/>
 			<tx:method name="update*" propagation="REQUIRED" timeout="600" rollback-for="Exception"/>
 			<tx:method name="delete*" propagation="REQUIRED" timeout="600" rollback-for="Exception"/>
