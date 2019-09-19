@@ -90,8 +90,8 @@ DataSet.prototype = {
 	getName : function(idx) {return this.Name[idx];},
 	getNames : function() {return this.Name;},
 	getValue : function(row, col) {
-		if (nony.isNumber(col)) {return $.nony.nvl(this.Value[row][col]);}
-		else {return $.nony.nvl(this.Value[row][this.NameIdx[col]]);}
+		if (nony.isNumber(col)) {return $.nony.nvl($.nony.htmlToString(this.Value[row][col]));}
+		else {return $.nony.nvl($.nony.htmlToString(this.Value[row][this.NameIdx[col]]));}
 	},
 	setValue : function(row, col, val) {
 		if (nony.isNumber(col)) {this.Value[row][col] = val;}

@@ -48,7 +48,7 @@
 			if (!$.nony.isEmpty(params.formId)) {
 				var arrTemp = $("#"+params.formId).serializeArray();
 				$.each(arrTemp, function(i, data) {
-					paramData += ($.nony.isEmpty(paramData)) ? data.name+"="+data.value : "&"+data.name+"="+data.value;
+					paramData += ($.nony.isEmpty(paramData)) ? data.name+"="+encodeURIComponent(data.value) : "&"+data.name+"="+encodeURIComponent(data.value);
 				});
 			}
 
@@ -57,7 +57,7 @@
 					var items = [];
 					items[keys] = params.data[keys];
 
-					paramData += ($.nony.isEmpty(paramData)) ? keys+"="+items[keys] : "&"+keys+"="+items[keys];
+					paramData += ($.nony.isEmpty(paramData)) ? keys+"="+encodeURIComponent(items[keys]) : "&"+keys+"="+encodeURIComponent(items[keys]);
 				}
 			}
 
