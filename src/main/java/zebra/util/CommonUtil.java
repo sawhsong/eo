@@ -260,6 +260,14 @@ public class CommonUtil extends StringUtils {
 		return false;
 	}
 
+	public static boolean contains(String value, String... values) {
+		if (isBlank(value)) {return false;}
+		for (String s : values) {
+			if (contains(value, s)) {return true;}
+		}
+		return false;
+	}
+
 	public static String removeString(String value, String... values) {
 		if (isBlank(value)) {return value;}
 		String val = value;
