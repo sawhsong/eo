@@ -75,6 +75,7 @@ var commonJs = {
 	removeArrayItem : function(array, name) {return $.nony.removeArrayItem(array, name);},
 	getIconNameByFileType : function(fileType) {return $.nony.getIconNameByFileType(fileType);},
 	copyToClipboard : function(value) {$.nony.copyToClipboard(value);},
+	downloadContentAsFile : function(fileName, value) {$.nony.downloadContentAsFile(fileName, value);},
 	/*!
 	 * popup / dialog / calendar
 	 */
