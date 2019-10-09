@@ -44,6 +44,7 @@ var commonJs = {
 	upperCase : function(val) {return $.nony.upperCase(val);},
 	lowerCase : function(val) {return $.nony.lowerCase(val);},
 	replace : function(src, from, to) {return $.nony.replace(src, from, to);},
+	removeString : function(src, val) {return $.nony.removeString(src, val);},
 	lpad : function(src, len, pad) {return $.nony.lpad(src, len, pad);},
 	rpad : function(src, len, pad) {return $.nony.rpad(src, len, pad);},
 	startsWith : function(src, prefix) {return $.nony.startsWith(src, prefix);},

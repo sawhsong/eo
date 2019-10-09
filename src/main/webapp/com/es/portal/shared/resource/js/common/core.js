@@ -589,6 +589,19 @@ var nony = {
 		}
 		return newStr;
 	},
+	removeString : function(src, val) {
+		var str = "";
+
+		if ($.nony.isEmpty(src) || val == null) {
+			return src;
+		}
+
+		str = src.trim();
+		for (var i=0; i<val.length; i++) {
+			str = $.nony.replace(str, val[i], "");
+		}
+		return str;
+	},
 	lpad : function(src, len, pad) {
 		var result = ""+src;
 		var templen = len - result.length;
