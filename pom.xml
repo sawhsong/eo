@@ -15,7 +15,7 @@
 		<webapp.lib>${basedir}/src/main/webapp/WEB-INF/lib</webapp.lib>
 		<version.userdefined>1.0</version.userdefined>
 		<version.poi>3.17</version.poi>
-		<version.springframework>5.0.8.RELEASE</version.springframework>
+		<version.springframework>5.0.11.RELEASE</version.springframework>
 		<version.struts2>2.5.16</version.struts2>
 		<versoin.cxf>3.2.6</versoin.cxf>
 	</properties>
